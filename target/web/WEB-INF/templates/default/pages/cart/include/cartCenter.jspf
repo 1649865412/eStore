@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
+<%@ taglib prefix="cart" tagdir="/WEB-INF/tags/cart"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<div class="shoppingcat-coupon">
+	<div class="left" style="margin:10px 20px 0 10px;"><a href="${referer}">继续购物</a></div>
+	<div class="right update" style="margin:2px 10px 0 10px;"><c:if test="${shoppingcart.buyNowItemsCount>0}">
+		<input type="button" class="box-btn" value="更新购物车" onclick="$cm.updateCartItem();return false;" />
+		</c:if></div>
+	<div class="blank6"></div>
+	<div class="coupon">
+		
+	</div>	
+	<div class="subtotal">
+	   <table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td align="right" >
+					小计
+					:
+				</td>
+				<td align="right" width="100">
+					<system:CurrencyForRate value="${shoppingcart.subtotal}" />
+				</td>
+			</tr>
+			<c:if test="${shoppingcart.cartDiscountAmount > 0}">
+				<tr>
+					<td align="right">
+						<fmt:message key="shoppingcart.discount" />
+						:
+					</td>
+					<td align="right">
+						-<system:CurrencyForRate value="${shoppingcart.cartDiscountAmount}" />
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td align="right" class="cRed f18px">
+					<fmt:message key="shoppingcart.total" />
+					:
+				</td>
+				<td align="right" class="cRed f18px">
+					<system:CurrencyForRate value="${shoppingcart.total}" />
+					<br/><system:otherCurrency value="${shoppingcart.total}"/>
+				</td>
+			</tr>
+			<c:if test="${shoppingcart.cartDiscountAmount > 0 || shoppingcart.itemsTotalDiscountAmount > 0}">
+				<tr>
+					<td colspan="2" align="right">
+						<div class="promo"><fmt:message key="shoppingcart.saveMoneyTotal" />&nbsp;<system:CurrencyForRate value="${shoppingcart.cartDiscountAmount + shoppingcart.itemsTotalDiscountAmount}" /></div>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td colspan="2" align="right">
+
+		
+		
+	</td>
+			</tr>
+		</table>
+	</div>		
+</div>

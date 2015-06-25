@@ -1,0 +1,111 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/common/taglibs.jsp"%>
+<%@page import="com.cartmatic.estore.common.model.customer.CustomerRegister"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+
+<form id="customerRegisterForm" action="register.html" method="post">
+	<div class="reg_right">
+          <div class="reg_entry col">
+            <h4 class="title">注册成为新会员</h4>
+            <%--<div class="log_reg_waring">
+              <p class="helper">此处用于写一些登陆注意项，或者是需要最新提醒用户的文字咨询或活动资讯之类的.如需要多项请用下方。则此处为标题</p>
+              <ul class="chart_waring">
+                <li> 如遇到多项提醒文字请使用此处</li>
+                <li> commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </li>
+              </ul>
+            </div><!--log_reg_waring-->--%>
+            
+            <br/>
+            <h3 class="log_reg_title">会员注册:</h3>
+            <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+              <spring:bind path="customer.email">
+				<input type="text" id="email" name="email" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="邮箱" >
+			</spring:bind>
+            </div>
+            <div class="mark margin-bottom-sm">
+           		<div for="email" generated="true" class="red" style="display: none;">邮箱不能为空</div>
+           </div>
+            <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+              <input type="password" name="password" id="password" size = "41" maxlength= "120" " class="form-control" placeholder="输入用户密码">
+            </div>
+            <div class="mark margin-bottom-sm">
+            	<div for="password" generated="true" class="red mark margin-bottom-sm" style="display: none;">密码不能为空</div>
+            </div>
+             <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+              <input type="password" name="rePassword" id="rePassword"  size = "41" maxlength= "120" class="form-control" placeholder="确认用户密码">
+            </div>
+            <div class="mark margin-bottom-sm">
+            	<div for="rePassword" generated="true" class="red mark margin-bottom-sm" style="display: none;">请确认用户密码</div>
+            </div>
+            <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i></span>
+              <input type="hidden" name="type" value="register"/>
+			  <input type="text" name="validateCode" class="form-control" id="validateCode" placeholder="输入验证码">
+            </div>
+            <div class="mark margin-bottom-sm">
+            	<div for="validateCode" generated="true" class="red mark margin-bottom-sm" style="display: none;">验证码不能为空</div>
+            </div>
+            
+            <div>
+              <a href="javascript:;" onClick="return refreshImage('register',this)">
+                   <img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=register" title="点击改变" />
+               </a>
+            </div>
+            <div class="clear"></div>
+            <p class="lost_password">
+              	<content:showContentItem contentCode="privacyNotice" var="privacyNotice"></content:showContentItem>
+				<input id="lprivacy_conditions" type="checkbox" checked="checked" onclick="if(this.checked)$('#privacy_conditions').val(1);else $('#privacy_conditions').val('');" />
+				<label for="lprivacy_conditions">
+					我已阅读并接受<a href=http://www.sifangstreet.com/customer_service/_11.html target="_blank" class="red u">${appConfig.store.name}服务条款</a>。
+				</label>
+				<input type="hidden" name="privacy_conditions" value="1" id="privacy_conditions">
+            </p>
+            <p>
+              <button name="login" class="btn btn-gold" type="submit">
+                <i class="fa fa-upload padding_right10"></i>
+                立即注册
+              </button>
+              <input type="hidden" name="doAction" value="save" />
+            </p>
+            
+          </div><!--reg_entry-->
+        </div><!--login_right-->
+        
+        <c:if test="${isCheckout}">
+			<input type="hidden" name="checkout" value="true"/>
+		</c:if>
+</form>
+
+<script type="text/javascript">
+$("#customerRegisterForm").validate({rules:{
+			email:{required:true,email:true},
+			password:{required:true,minlength:5},
+			rePassword:{required:true,equalTo:"#password"},
+			validateCode:{required:true},
+			privacy_conditions:"required"
+		},
+	messages:{
+			email:{
+				required:"邮箱不能为空",
+				email:'邮箱格式错误'
+				},
+			password:{
+					required:"密码不能为空",
+					minlength:"密码必须最小为5位字符"
+				},
+			rePassword:{
+				required:"确认密码不能为空",
+				equalTo:"两次密码输入不一致"
+			},
+			validateCode:{
+				required:"验证码不能为空"
+			},
+			privacy_conditions: "抱歉,您必须同意${appConfig.store.name}的服务条款后,才能提交注册。"
+		}
+	});
+</script>
+

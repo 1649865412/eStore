@@ -1,0 +1,103 @@
+@charset "utf-8";
+/* CSS Document */
+.top_about{
+	float:left;
+	width:100%;
+}
+.about_us{
+	overflow: hidden;
+	padding-bottom: 50px;
+	font-size: 17px;
+	line-height: 1.8em;
+	letter-spacing: .3px;
+	color:#3A4046;
+}
+
+.about_bold{
+	font-weight:800; 
+	font-size:19px; 
+	text-transform:uppercase; 
+	letter-spacing:1px;
+}
+
+.remote_nav {
+	display: block;
+	float:left;
+	margin-top: 15px;
+	width:20%;
+	letter-spacing: 1px;
+}
+
+.remote_nav ul li{
+    font-size:14px;
+	line-height: 1.2;
+	margin-bottom: 8px;
+}
+
+.remote_nav ul a {
+    font-size:14px;
+	color:#3A4046;
+	cursor:pointer;
+    display:block;  
+    text-decoration:none;
+    padding:0px;
+    margin: 0px 2px;
+    position:relative;
+    top:1px;
+}
+
+.remote_nav ul a:active {
+    outline:none;
+	color:#d4bc8c;
+	font-weight:bold;
+}
+.remote_nav ul li.remote_active a{
+	outline:none;
+	color:#d4bc8c;
+	font-weight:bold;
+}
+/* when mouse enters the tab move the background image */
+.remote_nav ul a:hover {
+    color:#d4bc8c;
+	font-weight:bold;
+
+}
+
+/* active tab uses a class name "current". its highlight is also done by moving the background image. */
+.remote_nav ul a.current, .remote_nav ul a.current:hover, .remote_nav ul li.current a {
+    background-position: -420px -62px;
+    color:#d4bc8c !important;
+	font-weight:bold;
+
+}
+
+.bottom_about{
+	float:left;
+	width:100%;
+}
+.down_right{
+	float:left;
+	margin-left:50px;
+	margin-top:15px;
+	margin-bottom:40px;
+	width:75%;
+	line-height:1.7;
+	
+}
+.down_right h1, .down_right h2, .down_right h3{
+	font-weight:bold;
+	color:#3A4046;
+	letter-spacing: 1px;
+}
+.down_right p{
+	color: #5D656C;
+	letter-spacing: 1px;
+}
+
+hr {
+border: solid #ddd;
+border-width: 1px 0 0;
+clear: both;
+margin: 10px 0 30px;
+height: 0;
+}

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Application context containing authentication, channel
+  - security and web URI beans.
+  -
+  - Only used by "filter" artifact.
+  -
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:s="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<s:authentication-manager alias="authenticationManager">
+    	<s:authentication-provider ref='daoAuthenticationProvider'/>
+    	<s:authentication-provider ref='daoAuthenticationProvider_plaintext'/>
+    	<s:authentication-provider ref='anonymousAuthenticationProvider'/>
+    	<s:authentication-provider ref='rememberMeAuthenticationProvider'/>
+  	</s:authentication-manager>
+
+<!-- Automatically receives AuthenticationEvent messages -->
+    <!-- <bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/> -->
+    <bean id="webInvocationPrivilegeEvaluator" class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+    	<constructor-arg ref="filterInvocationInterceptor"/>
+    </bean>
+	
+	<bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+         <property name="userDetailsService" ref="appUserDao"/>
+         <property name="userCache" ref="userCache"/>
+         <property name="passwordEncoder" ref="passwordEncoder"/>
+    </bean>
+    
+    <bean id="daoAuthenticationProvider_plaintext" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+         <property name="userDetailsService" ref="appUserDao"/>
+         <property name="userCache" ref="userCache"/>
+         <property name="passwordEncoder" ref="plaintextPasswordEncoder"/>
+    </bean>
+    
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+	<bean id="plaintextPasswordEncoder" class="org.springframework.security.authentication.encoding.PlaintextPasswordEncoder"/>
+    <bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
+        <property name="cache">
+            <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+                <property name="cacheManager" ref="cacheManager" />
+                <property name="cacheName" value="userCache"/>
+            </bean>
+        </property>
+    </bean>
+ 
+    <bean id="anonymousAuthenticationProvider" class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
+        <property name="key" value="anonymous"/>
+    </bean>
+
+    <bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <property name="key" value="Cartmatic-eCommerce"/>
+    </bean>
+     
+    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices"> 
+        <property name="userDetailsService" ref="appUserDao"/>
+        <property name="key" value="Cartmatic-eCommerce"/>
+        <property name="parameter" value="rememberMe"/>
+        <property name="cookieName" value="RememberMe"/>
+    </bean>
+    
+    <!-- filters -->
+    <bean id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter"/>
+    <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+    	<constructor-arg >
+    		<bean class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+				<property name="useReferer" value="true"/>
+			</bean>
+    	</constructor-arg>
+		<constructor-arg>
+			<list>
+				<ref bean="rememberMeServices"/>
+				<bean class="com.cartmatic.estore.core.listener.LogoutHandler" autowire="byName"/>
+			</list>
+		</constructor-arg>
+		<property name="filterProcessesUrl" value="/j_acegi_logout"/>
+	</bean>	
+	 
+	<bean id="usernamePasswordAuthenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationFailureHandler">
+        	<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" >
+        		<constructor-arg value="/loginError.html"/>
+        	</bean>
+        </property>
+        <property name="authenticationSuccessHandler">
+        	<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler" >
+        		<constructor-arg value="/postLogin.html"/>  
+        		<property name="alwaysUseDefaultTargetUrl" value="true"/>
+        	</bean>
+        </property>
+        <property name="filterProcessesUrl" value="/j_security_check"/>
+        <property name="rememberMeServices" ref="rememberMeServices"/>
+    </bean>    
+    <bean id="securityContextHolderAwareRequestFilter" class="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter"/>
+    <!-- defaultTargetUrl MUST be the same with what's in authenticationProcessingFilter -->
+    <bean id="rememberMeProcessingFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="rememberMeServices" ref="rememberMeServices"/>
+    </bean>
+     
+    <bean id="anonymousProcessingFilter" class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+        <property name="key" value="anonymous"/>
+        <property name="userAttribute" value="anonymous,ROLE_ANONYMOUS"/>
+    </bean>
+     
+    <bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+    	<property name="authenticationEntryPoint">
+    		<bean class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+    			<property name="loginFormUrl" value="/signup.html" />
+    			<property name="forceHttps" value="false" />
+    		</bean>
+    	</property>
+    	<property name="accessDeniedHandler">
+    		<bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+    			
+    		</bean>
+    	</property>
+    </bean>
+    
+	<bean id="filterInvocationInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="securityMetadataSource">
+    		<s:filter-security-metadata-source>
+      			<s:intercept-url pattern="/**/myaccount/*.html*" access="customer"/>
+      			<s:intercept-url pattern="/**/myaccount/**/*.html*" access="customer"/>
+      			<s:intercept-url pattern="/**/system/payment/inc_common_response.html*" access="NO_ONE_CAN_VISITED"/>
+      			<s:intercept-url pattern="/**/login.html*" access="ROLE_ANONYMOUS,customer,admin"/>
+      			<s:intercept-url pattern="/**/loginError.html*" access="ROLE_ANONYMOUS"/>
+      			<s:intercept-url pattern="/**/postLogin.html*" access="customer,admin"/>
+      			<s:intercept-url pattern="/**/admin/*.html*" access="admin"/>
+      			<s:intercept-url pattern="/**/*.html*" access="admin,customer,ROLE_ANONYMOUS"/>
+    		</s:filter-security-metadata-source>
+  		</property>
+    </bean>    
+	
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <property name="allowIfAllAbstainDecisions" value="false"/>
+        <property name="decisionVoters">
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter">
+                    <property name="rolePrefix" value=""/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- SSL Switching: to use this, configure it in the filterChainProxy bean -->
+    <bean id="channelEntryPortMap" class="org.springframework.security.web.PortMapperImpl">
+    	<property name="portMappings">
+        	<map>
+            	<entry key="80" value="443" />
+            	<entry key="6060" value="6443" />
+                <entry key="7070" value="7443" />
+                <entry key="8080" value="8443" />
+            </map>
+		</property>
+    </bean>
+        
+    <bean id="channelProcessingFilter" class="org.springframework.security.web.access.channel.ChannelProcessingFilter">
+        <property name="channelDecisionManager" ref="channelDecisionManager"/>
+        <property name="securityMetadataSource">
+            <s:filter-security-metadata-source>
+                <s:intercept-url pattern="/myaccount/*.html*" access="REQUIRES_SECURE_CHANNEL"/>
+                <s:intercept-url pattern="/myaccount/**/*.html*" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/loginError.html*" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/postLogin.html*" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/admin/**" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/checkout/**" access="REQUIRES_SECURE_CHANNEL" />
+    			<s:intercept-url pattern="/signup.html*" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/register.html*" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/j_security_check*" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/system/payment/**" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/system/region/**" access="REQUIRES_SECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/*.html*" access="REQUIRES_INSECURE_CHANNEL"/>
+    			<s:intercept-url pattern="/**/*.html*" access="REQUIRES_INSECURE_CHANNEL"/>
+            </s:filter-security-metadata-source>
+        </property>
+    </bean>
+
+    <bean id="channelDecisionManager" class="org.springframework.security.web.access.channel.ChannelDecisionManagerImpl">
+        <property name="channelProcessors">
+            <list>
+                <bean class="org.springframework.security.web.access.channel.SecureChannelProcessor">
+                	<property name="entryPoint">
+                		<bean class="org.springframework.security.web.access.channel.RetryWithHttpsEntryPoint">
+    						<property name="PortMapper" ref="channelEntryPortMap"/>    	
+    					</bean>
+    				</property>
+                </bean>
+                <bean class="org.springframework.security.web.access.channel.InsecureChannelProcessor">
+                	<property name="entryPoint">
+                		<bean class="org.springframework.security.web.access.channel.RetryWithHttpEntryPoint">
+    						<property name="PortMapper" ref="channelEntryPortMap"/>    	
+    					</bean>
+    				</property>
+                </bean>
+            </list>
+        </property>
+    </bean>    
+    
+	<bean id="securityFilter" class="org.springframework.security.web.FilterChainProxy">
+  		<s:filter-chain-map path-type="ant">
+     		<s:filter-chain pattern="/**" filters="
+     			
+     			securityContextPersistenceFilter,
+           		logoutFilter,
+           		usernamePasswordAuthenticationFilter,
+           		securityContextHolderAwareRequestFilter,
+           		rememberMeProcessingFilter,
+           		anonymousProcessingFilter,
+           		exceptionTranslationFilter,
+           		filterInvocationInterceptor" />
+  		</s:filter-chain-map>
+	</bean>
+</beans>

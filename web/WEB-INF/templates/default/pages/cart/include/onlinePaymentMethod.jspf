@@ -1,0 +1,435 @@
+<%@ include file="/common/taglibs.jsp"%>
+<style>
+<!--
+li.select {
+	border: 2px solid #e4393c;
+}
+-->
+</style>
+<%--<div class="area">
+	<h2><fmt:message key="checkout.labelSelectPayment"/></h2>
+	<div class="clear"></div>
+	<div class="area-left"  id="paymentMethodList">
+	
+	<c:forEach items="${paymentMethodList}" var="paymentMethod" varStatus="s">
+	
+			<li style="float:left; margin-right:26px;margin-top: 20px;">
+					<div class="left" style="margin:10px 10px 0 0;">
+						<input class="paymentMethod" type="radio" name="paymentMethodId" value="${paymentMethod.paymentMethodId}" id="paymentMethodId_${paymentMethod.paymentMethodId}"<c:if test="${s.index==0 }">checked</c:if>/>
+						<input type="hidden" value="${paymentMethod.paymentMethodCode }" />
+					</div>
+					<div class="left"><label for="paymentMethodId_${paymentMethod.paymentMethodId}">
+						<img alt="${paymentMethod.paymentMethodName}" src="${resPath}/images/${paymentMethod.paymentMethodIcon}" border="0" />
+					</label>
+                    </div>
+                    <input type="hidden" id="payProtocol_${paymentMethod.paymentMethodId}" value="${paymentMethod.protocol }">
+			</li>
+			
+	</c:forEach>
+	
+	
+	</div>
+	
+		<div class="area-right">
+		<div><fmt:message key="shoppingcart.total" />:<system:CurrencyForRate value="${salesOrder.totalAmount }" /><br/>
+		<fmt:message key="salesOrder.payTotal" />:<system:CurrencyForRate value="${salesOrder.paidAmount }" /><br/>
+		<strong><fmt:message key="salesOrder.shouldPay" />:<system:CurrencyForRate value="${salesOrder.shouldPay}" /></strong><br/></div>
+	</div>
+	
+	<script>
+	</script>
+	
+</div>
+	
+	--%>
+			<br/>
+			<div class="maincontent" id="designer_main">
+			     <div class="chart_bottom">
+			       <div class="checkout_info">
+			         <div class="checkout_title margin_bottom20">
+			           <p><i class="fa fa-check fa-2x margin_LR10"></i><span>订单信息</span></p>
+			         </div><!--checkout_title-->
+			         <div class="current_infowtool">
+			           <div class="width_all">
+			             <div class="current_info_col">
+			               <div class="current_info_t">订单号:</div>
+			               <div class="current_info_c colourBlack text_bold">${salesOrder.orderNo}</div>
+			             </div>
+			             <div class="current_info_col">
+			               <div class="current_info_t">应付款：</div>
+			               <div class="current_info_c colour_trash text_bold"><system:CurrencyForRate value="${salesOrder.shouldPay}" /></div>
+			             </div>
+			           </div><!--current_info-->
+			         </div><!--current_infowtool-->
+			       </div><!--checkout_info-->
+			       
+			       
+			       <div class="checkout_info">
+			         <div class="checkout_title margin_bottom20">
+			           <p><i class="fa fa-credit-card fa-2x margin_LR10"></i><span>在线支付</span></p>
+			         </div><!--checkout_title-->
+			          <div class="current_infowtool">
+			           <div class="width_all">
+			             <div class="current_info_col hot_trends margin_left30">
+			               <ul class="tabs" id="product_tabs">
+			                <li><a href="#">网银支付&nbsp;|</a></li>
+			                <li><a href="#">信用卡支付&nbsp;|</a></li>
+			                <li><a href="#">第三方平台支付</a></li>
+			              </ul> 
+			             </div><!--current_info_col-->
+			              <!-- tab "panes" -->
+			              <div class="boards current_info_col">
+			                <!-- b1 -->
+			                <div class="board" id="b1">
+			                  <div class="control-group">
+			                    <div class="controls">
+			                      <div id="current_bank">
+			                      		<c:forEach items="${paymentMethodList}" var="paymentMethod" varStatus="status">
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'boc'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.id }" value="${paymentMethod.id }" >
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.id }">
+					                             	<span id="bank-boc" class="bank-logo"></span>
+					                             	<div class="add_more"></div>
+					                           	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'abc'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.id }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.id }">
+					                             	<span id="bank-abc" class="bank-logo"></span>	
+					                             		<%--<div class="add_more_tab">0元抢Selvä面膜</div>--%>
+					                             		<div class="add_more"></div>
+					                             		</label>
+					                           
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'cmb'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.id }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.id }">
+					                             	<span id="bank-cmb" class="bank-logo"></span>
+					                             	<%--<div class="add_more_tab">折上再9折特价品除外</div>--%>
+					                             	<div class="add_more"></div>
+					                             	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'cmbc'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.paymentMethodCode }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.paymentMethodCode }">
+					                             	<span id="bank-cmbc" class="bank-logo"></span>
+					                             		<div class="add_more"></div>
+					                           	</label>
+			                      			</c:if>
+			                      		</c:forEach>
+			                      		
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio2" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-ccb" class="bank-logo"></span>
+			                             	<div class="add_more"></div>
+			                           </label>
+			                          <%--<input type="radio" name="paymentMethodId" id="inlineRadio5" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-cmbc" class="bank-logo"></span>
+			                           </label>--%>
+			                            
+			                      </div><!--current_bank-->
+			                      <div class="checkout_list margin_bottom20" id="more_bank">
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio6" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-cib" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio7" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-icbc" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio8" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-bcom" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio9" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-hxb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio10" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-gdb" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio11" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-spdb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio12" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-sdb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio13" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-citic" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio14" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-post" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio15" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-ceb" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio16" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-bob" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio17" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-pab" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio18" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-cbhb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio19" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-hzb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio20" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-srcb" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio21" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-shb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio22" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-wzcb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio23" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-jsb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio24" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-nbcb" class="bank-logo"></span>
+			                            
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio25" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-gzns" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                      </div><!--more_bank-->
+			                    </div><!--controls-->
+			                  </div><!--control-group-->
+			                  <div class="control-group margin_top20">
+			                    <div class="controls">
+			                      <button id="button_morebank" name="button_morebank" class="btn btn-gold" type="button">
+			                        <i class="fa fa-plus padding_right10"></i>
+			                        更多银行
+			                      </button>
+			                      <button class="btn btn-gold" type="button" onclick="doGotoPaymentGateway();">
+			                        前往支付
+			                      </button>
+			                    </div><!--controls-->
+			                  </div><!--control-group-->
+			                </div><!--b1-->
+			                <!-- b2 -->
+			                <div class="board" id="b2">
+			                 <div class="control-group">
+			                    <div class="controls">
+			                      <div id="current_cbank">
+			                      		<c:forEach items="${paymentMethodList}" var="paymentMethod" varStatus="status">
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'boc'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.paymentMethodCode }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.paymentMethodCode }">
+					                             	<span id="bank-boc" class="bank-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'abc'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.paymentMethodCode }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.paymentMethodCode }">
+					                             	<span id="bank-abc" class="bank-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'cmb'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.paymentMethodCode }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.paymentMethodCode }">
+					                             	<span id="bank-cmb" class="bank-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'cmbc'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.paymentMethodCode }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.paymentMethodCode }">
+					                             	<span id="bank-cmbc" class="bank-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      		</c:forEach>
+			                      		
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio2" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-ccb" class="bank-logo"></span>
+			                           </label>
+			                          <%--<input type="radio" name="paymentMethodId" id="inlineRadio5" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-cmbc" class="bank-logo"></span>
+			                           </label>--%>
+			                            
+			                      </div><!--current_cbank-->
+			                      <div class="checkout_list margin_bottom20" id="more_cbank">
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio6" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-cib" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio7" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-icbc" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio8" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-bcom" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio9" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-hxb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio10" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-gdb" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio11" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-spdb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio12" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-sdb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio13" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-citic" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio14" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-post" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio15" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-ceb" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio16" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-bob" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio17" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-pab" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio18" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-cbhb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio19" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-hzb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio20" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-srcb" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                        <div class="width_all margin_top20">
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio21" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-shb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio22" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-wzcb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio23" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-jsb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio24" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-nbcb" class="bank-logo"></span>
+			                           </label>
+			                          <input type="radio" name="paymentMethodId" id="inlineRadio25" value="27">
+			                           <label class="radio-inline">
+			                             <span id="bank-gzns" class="bank-logo"></span>
+			                           </label>
+			                        </div><!--width_all-->
+			                      </div><!--more_bank-->
+			                    </div><!--controls-->
+			                  </div><!--control-group-->
+			                  <div class="control-group margin_top20">
+			                    <div class="controls">
+			                      <button id="button_morecbank" name="button_morecbank" class="btn btn-gold" type="button">
+			                        <i class="fa fa-plus padding_right10"></i>
+			                        更多银行
+			                      </button>
+			                      <button class="btn btn-gold" type="button" onclick="doGotoPaymentGateway();">
+			                        前往支付
+			                      </button>
+			                    </div><!--controls-->
+			                  </div><!--control-group-->
+			                </div><!--b2-->
+			                <div class="board" id="b3">
+			                  <div class="control-group">
+			                      <div class="controls">
+			                        <div id="3party_pay">
+			                         	<c:forEach items="${paymentMethodList}" var="paymentMethod" varStatus="status">
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'unionpay'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.id }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.id }">
+					                             	<span id="pay-unionpay" class="pay-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'alipay'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.id }" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.id }">
+					                             	<span id="pay-alipay" class="pay-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      			<c:if test="${paymentMethod.paymentMethodCode == 'cmb'}">
+				                      			<input type="radio" name="paymentMethodId" id="paymentMethod_${paymentMethod.paymentMethodCode }_c" value="${paymentMethod.id }">
+					                           	<label class="radio-inline" for="paymentMethod_${paymentMethod.paymentMethodCode }_c">
+					                             	<span id="pay-yiwangtong" class="pay-logo"></span>
+					                           	</label>
+			                      			</c:if>
+			                      		</c:forEach>
+			                      		<!-- 
+			                            <input type="radio" name="paymentMethodId" id="inlineRadio26" value="option26">
+			                             <label class="radio-inline">
+			                               <span id="pay-unionpay" class="pay-logo"></span>
+			                             </label>
+			                            <input type="radio" name="paymentMethodId" id="inlineRadio27" value="option27">
+			                             <label class="radio-inline">
+			                               <span id="pay-alipay" class="pay-logo">
+			                             </label>
+			                            <input type="radio" name="paymentMethodId" id="inlineRadio28" value="option28">
+			                             <label class="radio-inline">
+			                               <span id="pay-yiwangtong" class="pay-logo">
+			                             </label>
+			                             -->
+			                        </div><!--3party_pay--><br/><br/>
+			                        <button class="btn btn-gold" type="button" onclick="doGotoPaymentGateway();">
+				                        前往支付
+				                      </button>
+			                      </div><!--controls-->
+			                  </div><!--control-group-->
+			                </div><!--b3-->
+			              </div><!--boards current_info_col-->
+			           </div><!--width_all-->
+			          </div><!--current_infowtool-->
+			       </div><!--checkout_info-->
+			       
+			     </div><!--chart_bottom-->
+			    </div><!--end of maincontent-->
+	

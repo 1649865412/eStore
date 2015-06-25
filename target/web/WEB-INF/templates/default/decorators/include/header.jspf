@@ -1,0 +1,150 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+
+<div class="header">
+<div class="mid-header">
+<div class="wrap1000">
+    <div class="left">
+       <div class="sifang-icon">
+              <div class="left">地区 |</div>
+			 <div class="left icon-padding"> <a href="http://weibo.com/sifangstreet"><img  class="icon-small" src="${resPath}/images/icon/sina.png"/></a></div>
+			 <div class="left icon-padding_right">
+                <ul>
+					<li><a href="#"><img class="icon-small" src="${resPath}/images/icon/weixin.png" /></a>
+						<ul>
+							<li><img src="${resPath}/images/weixin.jpg" /></li>
+						  </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="left"> |客服热线:400-661-5677</div>
+         
+       </div><!--end of sifang-icon-->
+         <div class="customer_service_2">       
+       <%--<!--百度商桥与百度统计，内嵌链接  -->       
+    <div id="BDBridgeFixedWrap"></div>
+      --%></div>
+   </div><!--end of left-->	
+		<a rel="nofollow" href=${ctxPath}/index.html>   <div class="logo">	</div></a> 
+	<div class="right">	
+				<div class="search">
+			<ul class="tabs">	
+				<li id="loginPromptHolder"></li>
+				<li id="loginPromptHolderTemplateLogout">
+					<a rel="nofollow" href="/myaccount/account.html" onclick="window.location.href='/myaccount/account.html'">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a rel="nofollow" href="/signup.html" onclick="window.location.href='/signup.html'">注册</a>&nbsp;&nbsp;|
+				</li>
+				<li id="loginPromptHolderTemplateLogin" style="display: none;">您好, 
+					<a href="${ctxPath}/myaccount/account.html" rel="nofollow" onclick="window.location.href='${ctxPath}/myaccount/account.html'">{0}</a>&nbsp;&nbsp;
+					(<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;|
+				</li>
+				<li>
+					<a rel="nofollow" href="${ctxPath}/myaccount/account.html" onclick="window.location.href='${ctxPath}/myaccount/account.html'">我的账号</a>&nbsp;&nbsp;|
+				</li>
+				<li>
+					<a rel="nofollow" href="${ctxPath}/myaccount/order/list.html" onclick="window.location.href='${ctxPath}/myaccount/order/list.html'">订单状态</a>
+				</li>
+			</ul>
+			<span id="minicartDivTemplate" style="display: none;">{0} 件(s)&nbsp;&nbsp;{1}</span>
+			<div class="blank6"></div>
+			<div class="right"><span id="minicartDiv">0 件(s)&nbsp;&nbsp;￥0.00</span>&nbsp;&nbsp;&nbsp;<a href="${ctxPath}/cart/shoppingcart.html" rel="nofollow">购物车</a></div>
+			<script type="text/javascript">
+			$mnc.refresh();
+			fillLoginPrompt();
+			</script>
+			</div><!--end of search-->
+		    <div class="clear"></div>
+			<div class="search-input">
+				<form action="${ctxPath}/search-prod.html"  method="get" id="searchForm" onsubmit="return fnCheckSearchForm(this);">
+					<div class="left"><input value="${param.q}" style="width:142px;height:23px;" name="q" class="box-input" type="text" title="Search for" autocomplete="off" /></div>
+					<div class="right"><input type="image" src="${resPath}/images/icon/btn_go.gif" /></div>
+				</form>
+			</div><!--end of search-input-->
+	</div><!--end of right-->
+	<div class="clear"></div>
+	<div class="blank2"></div>
+	<div class="nav-search">
+		<div class="nav-search-wrap"><%@ include file="../../pages/menu/defaultTopMenu.jsp"%></div>
+	</div><!--end of nav-search-->
+</div><!--end of wrap1000-->
+</div><!--end of mid-header-->
+</div><!--end of header-->
+
+<!--侧边栏-->
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/sidebar_s.js"></script>
+<link rel="stylesheet" type="text/css" href="${resPath}/styles/sidebar_s.css">
+<!-- Include the awesome icon css -->
+<link href="${resPath}/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+<!--end of 侧边栏-->
+
+
+<!--侧边栏-->
+<div class="fixedBox">
+  <ul class="fixedBoxList">
+    <li style="display: block;" id="cartboxs" class="fixeBoxLi cart_bd">
+      <i class="fa fa-weixin fa-3x"></i> 
+      <br/>微信
+      <div class="cartBox">
+      <div class="bjfff"></div>
+        <img src="${resPath}/images/weixin.jpg"/>
+      </div>
+    </li>
+    <li class="fixeBoxLi Service"> 
+      <i class="fa fa-comments-o fa-3x"></i>
+      <br/> 在线客服
+      <div class="ServiceBox">
+        <div class="bjfff"></div>
+        <div class="ServiceBox_hover">
+          <div class="ServiceBox_hover_img"><%--
+            <!--百度商桥与百度统计，内嵌链接  -->       
+	         <div id="BDBridgeFixedWrap" ></div>
+          --%>
+          <!-- WPA Button Begin -->
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script>
+<!-- WPA Button End -->
+          
+          </div>
+          <%--           
+          <div class="ServiceBox_hover_detail"> 
+            <strong>在线客服</strong>
+            <p class="p1" >9:30-18:30</p>
+           </div>
+        --%></div>
+        
+      </div>
+    </li>
+    <li class="fixeBoxLi cart_bd"> 
+    <i class="fa fa-phone fa-3x"></i> 
+      <br/>客服电话
+      <div class="cartBox">
+      <div class="bjfff"></div>
+      <div class="ServiceBox_hover_img">
+        <h2 class="margin_TD10">400-661-5677</h2>
+        </div>
+      </div> 
+    </li>
+    <li class="fixeBoxLi Service"> 
+    <i class="fa fa-envelope fa-3x"></i> 
+      <br/>电子邮件
+      <div class="ServiceBox" style="width: 250px;left: -250px;">
+      <div class="bjfff"></div>
+      <div class="ServiceBox_hover_img">
+        <h2 class="margin_TD10">cs@sifangstreet.com</h2>
+        </div>
+      </div> 
+    </li>
+    <li class="fixeBoxLi"> 
+    <a href="/cart/shoppingcart.html"><i class="fa fa-shopping-cart fa-3x"></i>
+    <br/>购物车
+    </a>
+    </li>
+    <li class="fixeBoxLi BackToTop"> 
+    <a href="#"><i class="fa fa-chevron-up fa-3x"></i>
+    <br/>返回顶部
+    </a>
+    </li>
+  </ul>
+</div>
+<!--end of 侧边栏-->
+

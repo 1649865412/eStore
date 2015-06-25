@@ -1,0 +1,4 @@
+		<c:if test="${not empty appConfig.rssURL}"><link href="${appConfig.rssURL}" title="${appConfig.store.name} RSS FEED" type="application/rss+xml" rel="alternate"/></c:if>
+		<link rel="icon" href="${resPath}/images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${resPath}/images/mindo.ico" type="image/x-icon" />
+		<%--<link href="${resPath}/styles/global.css" rel="stylesheet" type="text/css" />--%>

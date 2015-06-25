@@ -1,0 +1,7 @@
+<ul class="step">
+	<li class="${1==Current_Checkout_Paging_Model.currentStep?'selected1':'cat1'}"><a href="${ctxPath}/cart/shoppingcart.html" title="Your Shopping Cart"><span>Your Shopping Cart</span></a></li>
+	<li class="${2==Current_Checkout_Paging_Model.currentStep?'selected2':'cat2'}"><span>Account Login</span></li>
+	<li class="${3==Current_Checkout_Paging_Model.currentStep?'selected3':'cat3'}"><span>Address Book</span></li>
+	<li class="${4==Current_Checkout_Paging_Model.currentStep?'selected4':'cat4'}"><span>Review</span></li>	
+	<li class="${5==Current_Checkout_Paging_Model.currentStep?'selected5':'cat5'}"><span>&nbsp;&nbsp;&nbsp;Order Complete</span></li>
+</ul>

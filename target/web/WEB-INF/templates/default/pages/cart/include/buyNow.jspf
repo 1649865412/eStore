@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
+<%@ taglib prefix="cart" tagdir="/WEB-INF/tags/cart"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/checkout/cartManager.js"></script>
+
+<!--product_quantity-->
+ <script>
+</script>
+<!--placeholder for IE 8-->
+<script type="text/javascript">   
+	var _placeholderSupport = function() {
+		var t = document.createElement("input");
+		t.type = "text";
+		return (typeof t.placeholder !== "undefined");
+	};
+	
+	window.onload = function() {
+		var arrInputs = document.getElementsByTagName("input");
+		for (var i = 0; i < arrInputs.length; i++) {
+			var curInput = arrInputs[i];
+			if (!curInput.type || curInput.type == "" || curInput.type == "text")
+				HandlePlaceholder(curInput);
+		}
+	};
+	 
+	function HandlePlaceholder(oTextbox) {
+		if (!_placeholderSupport) {
+			var curPlaceholder = oTextbox.getAttribute("placeholder");
+			if (curPlaceholder && curPlaceholder.length > 0) {
+				oTextbox.value = curPlaceholder;
+				oTextbox.setAttribute("old_color", oTextbox.style.color);
+				oTextbox.style.color = "#c0c0c0";
+				oTextbox.onfocus = function() {
+					this.style.color = this.getAttribute("old_color");
+					if (this.value === curPlaceholder)
+						this.value = "";
+				};
+				oTextbox.onblur = function() {
+					if (this.value === "") {
+						this.style.color = "#c0c0c0";
+						this.value = curPlaceholder;
+					}
+				}
+			}
+		}
+	}
+</script>  
+
+<div class="maincontent" id="designer_main">
+
+     <div class="chart_top">
+       <div class="chart_t_left">
+         <p class="chart_title">购物车</p>
+       </div><!--chart_t_left-->
+       <div class="chart_t_right">
+         <img src="${resPath }/images/cart/step1.png"/>
+       </div><!--chart_t_right-->
+     </div><!--chart_top-->
+     
+     
+     <div class="chart_bottom">
+       <table class="chart_table" cellspacing="0" cellpadding="0">
+         <thead>
+         	<tr>
+            <th width="16%">
+              商品图像
+            </th>
+            <th colspan="2" width="23.5%">
+              商品名称
+            </th>
+            <th width="16.5%">
+              编码
+            </th>
+            <th width="8.5%">
+              数量
+            </th>
+            <th width="11.8%">
+              单价
+            </th>
+            <th width="11.8%">
+              优惠
+            </th>
+            <th width="11.9%">
+              总价
+            </th>
+            </tr>
+         </thead><!--thead-->
+         <tbody>
+         
+         
+            <c:choose>
+				<c:when test="${shoppingcart==null || shoppingcart.buyNowItemsCount==0}">
+				    <tr>
+						<td colspan="6">
+							<br/>&nbsp;<fmt:message key="shoppingcart.message.isEmpty" />
+						</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+		            <%--<tr class="cut_bg">
+		              <td class="chart_cut border_with">
+		                <img src="${resPath }/images/cart/bell.gif"/>
+		                <span class="cut_title">满减</span>
+		              </td>
+		              <td colspan="5" class="border_with align_left">
+		                6月23日-7月23日 全场购满￥4000立减￥500
+		              </td>
+		              <td class="cut_howmuch border_with">
+		                已减￥500.00
+		              </td>
+		              <td class="border_with"></td>
+		            </tr>
+
+		            --%><%-- 商品开始 --%>
+					<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus">
+						<c:if test="${item.isSaved==0 and empty item.parent}">
+							 <tr>
+					              <td rowspan="3" class="chart_img border_with">
+					                <product:productImg sku="${item.productSku}" size="e" width="165" height="165"/>
+					              </td>
+					              <td class="align_left"><product:productName product="${item.productSku.product}"/></td>
+					              <td class="colour_trash align_left">
+					                <a href="#" onclick="javascript:$cm.deleteItem('${item.shoppingcartItemId}');"><i class="fa fa-trash-o fa-2x"></i>&nbsp;</a>
+									<input type="hidden" name="buyNowItemId" value="${item.shoppingcartItemId}"/>
+									<input type="hidden" name="${item.shoppingcartItemId}_sku" value="${item.productSku.productSkuCode}"/>
+					              </td>
+					              <td>${item.productSku.productSkuCode}</td>
+					              <td class="product_quantity">
+					                <div class="form">
+						               <input  name="" type="button" value="-"  onclick="substractQuantity(this)"/>
+						               <input name="${item.shoppingcartItemId}_quantity"  type="text"  value="${item.quantity}" />
+						               <input name="" type="button" value="+"  onclick="addQuantity(this)"/>
+						             </div>
+					              
+					              </td>
+					              <td>
+					                <system:CurrencyForRate value="${item.price}" />
+					              </td>
+					              <td>
+					              	<system:CurrencyForRate value="${item.price - item.discountPrice}"/>
+					              </td>
+					              <td>
+					                <system:CurrencyForRate value="${item.discountPrice}"/>
+					              </td>
+					            </tr>
+					            <tr>
+					              <td class="size_colour align_left">
+										<product:showSkuOptions productSkuId="${item.productSku.productSkuId}"></product:showSkuOptions>
+					              </td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					            </tr>
+					           
+					            <tr class="border_last">
+					              <td  class="colour_trash padding_last align_left">
+					              <c:if test="${item.maxOrderQuantity <= 2 }">
+						               <i class="fa fa-exclamation-triangle fa-lg"></i>
+						               库存紧张，请尽快购买
+					               </c:if>
+					              </td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					              <td></td>
+					            </tr>
+						</c:if>
+					</c:forEach>
+				  <%-- 商品结束 --%>
+				</c:otherwise>
+			</c:choose> 
+           
+         </tbody>     
+         
+         <tfoot>
+            <tr class="chart_tfoot_first">
+              <td colspan="5" rowspan="6" class="chart_td_waring">
+                <ul class="chart_waring">
+                  <li>在您选择送货目的地后，商品的价格可能会有所更改。在完成付款程序前，请在订单总结页面检查总金额。</li>
+                  <li>一旦订购过程完成后，您将无法在此订单中添加新的商品。</li>
+                  <li>积分兑换，每20积分可兑换1元，但每次需兑换100积分的倍数。</li>
+                </ul>
+              </td>
+              <td class="chart_howmany">共计有<span class="colour_trash padding_td text_bold">${shoppingcart.buyNowItemsCount }</span>件商品</td>
+              <td class="chart_subtotal">小计：</td>
+              <td class="align_right padding_right30 padding_bottom15">￥${shoppingcart.subtotal }</td>
+            </tr>
+             <td colspan="2" class="chart_howmany" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会员优惠：</td>
+              <td class="align_right padding_right30">
+	              -${appConfig.defaultCurrencySymbol}
+	              <span id="cart_dis_member">${shoppingcart.cartDiscountAmount == null ? 0.00 : shoppingcart.cartDiscountAmount}</span>
+              </td>
+             <tr>
+              <td colspan="2">
+                <!-- Text input-->
+                <div class="control-group">
+                  <div class="controls">
+                    <input name="giftCertificateNo" id="giftCertificateNo" type="text" placeholder="输入礼品卡/礼券"  onblur="fnUseGift('${shoppingcart.giftCertificateNos == null ? '' : fn:substringBefore(shoppingcart.giftCertificateNos,':') }',1);"  onfocus="showGiftList();" value="${fn:substringBefore(shoppingcart.giftCertificateNos,':') }" autocomplete="off" <c:if test="${shoppingcart.usedCouponNo != null }">disabled</c:if>/>
+                    <c:if test="${not empty gcList}">
+						<div id="giftList"  style="position: absolute; background-color: white;display: none;width: 150px;height: 85px;border:1px solid #C1F248;overflow: auto;line-height: 25px;">
+							<c:forEach var="gc" items="${gcList}">
+									<ul>
+										<a onclick="fnUseGift('${gc.giftCertificateNo}',2);" style="cursor: pointer;">
+										${gc.giftCertificateNo}&nbsp;余额 <system:CurrencyForRate value="${gc.remainedAmt}" />
+										</a>
+									</ul>
+								</c:forEach>
+						</div>
+					</c:if>
+                  </div>
+                </div>
+              </td>
+              <td class="align_right padding_right30" >
+	              -${appConfig.defaultCurrencySymbol}
+	              <span id="giftPay">${shoppingcart.giftCertificateNos == null ? '0.00' : fn:substringAfter(shoppingcart.giftCertificateNos,':')}</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <!-- Text input-->
+                <div class="control-group">
+                  <div class="controls"><!-- ${shoppingcart.usedCouponNo}  ${shoppingcart.cartDiscountAmount} -->
+                    <input id="couponNo_input_id" name="couponNo_input_name"  type="text" placeholder="输入优惠劵"  onblur="fnUseCoupon(${shoppingcart.usedCouponNo });"  value="${shoppingcart.usedCouponNo }" autocomplete="off"  <c:if test="${shoppingcart.giftCertificateNos != null }">disabled</c:if>/>
+                  </div>
+                </div>
+              </td>
+              <td class="align_right padding_right30">
+	              -${appConfig.defaultCurrencySymbol}
+	              <span id="cartDiscountAmount">0.00</span>
+              </td>
+            </tr>            
+            
+            
+            
+            <tr>
+              <td colspan="2"> 
+                <!-- Select Basic -->
+                <div class="control-group">
+                  <div class="controls">
+                    <select id="selectbasic" name="selectbasic" onchange="fnSelectChangeGift(this.value);">
+                      <option class="select_title" value="0">您本次可使用积分</option>
+                      <c:forEach begin="100" end="${shopPoint.total}" step="100" var="point">
+						<option value="${point}" <c:if test="${shoppingcart.shopPoint==point }">selected</c:if>>${point}</option>
+					 </c:forEach>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              <td class="align_right padding_right30">
+	              -${appConfig.defaultCurrencySymbol}
+	              <span id="shopPointMoney">${shoppingcart.shopPoint == null ? '0.00' : shoppingcart.shopPoint * appConfig.shopPointUseGiftPercent }</span>
+              </td>
+            </tr>
+
+            <tr class="chart_last_total">
+              <td class="chart_total_no colour_trash align_right">（不含运费）</td>
+              <td class="colour_trash text_bold">共计：</td>
+              <td class="align_right padding_right30 colour_trash text_bold" >
+              ${appConfig.defaultCurrencySymbol}&nbsp;<span id="cart_sum">${shoppingcart.subtotal}</span>
+              </td>
+            </tr>
+         </tfoot>       
+         
+       </table>
+       
+       <div class="chart_button">
+           <!-- Button -->
+            <div class="control-button">
+              <div class="controls">
+              	<a href="javascript:void(0);" onclick="javascript:window.location.href='${ctxPath }/index.html';">
+	                <button id="singlebutton" name="singlebutton" class="btn btn-dgray" type="button">
+	                <i class="fa fa-chevron-left padding_right10"></i>
+	                继续购物
+	                </button>
+                </a>
+                <div class="right">
+                <a href="javascript:void(0);" onclick="$cm.updateCartItem();">
+	                <button id="button1id" name="button1id" class="btn btn-black" type="button">
+	                <i class="fa fa-refresh padding_right10"></i>
+	                更新购物车
+	                </button>
+                </a>
+                <a href="javascript:void(0);" onclick="javascript:window.location.href='${ctxPath}/checkout/login.html';">
+	                <button id="button2id" name="button2id" class="btn btn-gold" type="button">
+	                去结算
+	                <i class="fa fa-chevron-right padding_left10"></i>
+	                </button>
+                </a>
+                </div>
+              </div><!--controls-->
+            </div><!--control-button-->
+       </div><!--chart_button-->
+       
+     </div><!--chart_bottom-->
+    </div><!--end of maincontent-->
+    
+    <input type="hidden" id="cart_sum_prev" value="${shoppingcart.subtotal}" />
+    <%--<input type="hidden" id="cart_dis_member" value="${shoppingcart.usedCouponNo==null && shoppingcart.cartDiscountAmount > 0 ? shoppingcart.cartDiscountAmount : 0}" />--%>
+    
+   
+<script>
+
+	  $(document).ready(function () {
+		  debugger;
+		  if(!${useAbled}){
+				$("#couponNo_input_id").attr("disabled",true);
+				$("#giftCertificateNo").attr("disabled",true);
+			}
+			fnUpdatePrice();
+	  });
+</script>

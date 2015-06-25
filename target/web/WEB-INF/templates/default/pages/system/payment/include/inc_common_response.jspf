@@ -1,0 +1,178 @@
+<%@page import="com.cartmatic.estore.common.model.system.PaymentMethod"%>
+<%@page import="com.cartmatic.estore.system.service.PaymentMethodManager"%>
+<%@page import="com.cartmatic.estore.Constants"%><%
+	/********************************************************************************\
+
+	In parameter: 
+				orderNO                                       --- must be input
+				pyamentGatewayId                              --- must be filled
+				successFlag 1=success,0=fail,-1=wait;         --- must be input
+ 				
+ 				amount                                       --- not necessary, default as 0
+				flowNo                                        --- not necessary
+				errorCode                                     --- not necessary
+				errorMessage                                  --- not necessary
+	Description:
+				Because this page insert a payment history record,then will affect the order status,so it must be secure 
+				for the merchant,make sure no one can visited this page directly,only for
+				jsp page include use,for example:
+
+	Author:     chenshangxuan
+
+	Version:    1.0
+        
+	\**********************************************************************************/
+%>
+<%@ page language="java"
+	import="java.math.BigDecimal,
+			org.springframework.web.context.WebApplicationContext,
+			com.cartmatic.estore.system.service.PaymentHistoryManager,
+			com.cartmatic.estore.common.model.system.PaymentHistory,
+			com.cartmatic.estore.common.service.OrderService,java.util.*,
+			com.cartmatic.estore.webapp.util.RequestUtil,
+			org.springframework.web.context.support.WebApplicationContextUtils"
+
+	pageEncoding="UTF-8"%>
+	
+<%
+	//below two data is must input
+	Object _successFlagObj=request.getAttribute("successFlag");
+	Object _orderNoObj=request.getAttribute("orderNo");
+	Object _paymentMethodIdObj=request.getAttribute("paymentMethodId");
+	//below data is not neccessary
+	Object _flowNoObj=request.getAttribute("flowNo");
+	Object _errorCodeObj=request.getAttribute("errorCode");
+	Object _errorMessageObj=request.getAttribute("errorMessage");
+	Object _amountObj=request.getAttribute("amount");
+	try{
+		if(_successFlagObj != null && _orderNoObj != null)
+		{
+			String _successFlag=_successFlagObj.toString();
+			String _orderNo=_orderNoObj.toString();		
+			BigDecimal _amount=new BigDecimal(0);
+			
+			if(_amountObj!=null){
+				try{//may be invalid data
+				    _amount=new BigDecimal(_amountObj.toString());
+				}catch(Exception ex){ex.printStackTrace();}
+			}
+			
+			String _receiveData=RequestUtil.getRequestMap(request).toString();	
+			String _remoteIp=request.getRemoteAddr();
+	 
+			WebApplicationContext _webAppContext=WebApplicationContextUtils.getWebApplicationContext(pageContext.getServletContext());
+			PaymentHistoryManager _paymentHistoryManager=(PaymentHistoryManager)_webAppContext.getBean("paymentHistoryManager");
+
+			PaymentHistory _ph=new PaymentHistory();
+			
+			_ph.setOrderNo(_orderNo);
+			_ph.setAmount(_amount);
+			try
+			{
+				_ph.setPaymentMethodId(new Integer(_paymentMethodIdObj.toString()));
+			}
+			catch(Exception ex)
+			{
+		    	ex.printStackTrace();
+			}
+			_ph.setCreateTime(new Date());
+			_ph.setIsBrowsed(PaymentHistory.UNBROWSED);
+			_ph.setRemoteIp(_remoteIp);
+			_ph.setReceiveData(_receiveData);
+			
+			//检查当前的收到的数据是否已经存在于支付历史表里,防止多次收到同一次的支付数据
+			//通过订单号码＋网关+支付金额+标志进行检查
+			boolean isRepeate = false;
+			//TODO  to support more status,now only support three status
+			if(_successFlag.equals("1")){
+				_ph.setFlag(Constants.PaymentHistory_FLAG_SUCCESS);
+				isRepeate = _paymentHistoryManager.getIsExistPaymentHistory(_ph.getOrderNo(), _ph.getPaymentMethodId(),_ph.getAmount(),_ph.getFlag());
+				if(null!=_errorMessageObj&&!"".equals(_errorMessageObj)){
+					_ph.setErrorMessage(_errorMessageObj.toString());
+				}else{
+					_ph.setErrorMessage("Transaction has success!");
+				}
+				//如果为支付网关的重复发送的数据，则告诉后台任务，不要扫描该记录
+				if(isRepeate){
+					_ph.setIsBrowsed(PaymentHistory.BROWSED);
+				}
+				//如果不是重复的，则更新订单
+				if(!isRepeate){
+				   	OrderService _orderService = (OrderService)_webAppContext.getBean("orderService");
+				   	//设置salesOrder对象.用于GA统计订单数据
+				   	request.setAttribute("salesOrder", _orderService.getSalesOrderByOrderNo(_orderNo));
+				   	PaymentMethod _paymentMethod=(PaymentMethod)request.getAttribute("paymentMethod");
+				   	if(_paymentMethod==null){
+				   		PaymentMethodManager _paymentMethodManager=(PaymentMethodManager)_webAppContext.getBean("paymentMethodManager");
+				   		_paymentMethod=_paymentMethodManager.getById(_ph.getPaymentMethodId());
+				   	}
+				    _orderService.doCreatePayment(_orderNo, _amount, _paymentMethod.getPaymentMethodName(), request.getRemoteAddr());
+				 	//如果不重复才发邮件
+					_orderService.sendPaymentResult(_ph, _orderNo);
+				 	//向民生银行的商户通知输出true
+					Object code = request.getAttribute("paymentMethodCode");
+					if(code != null && code.toString().equals("cmbc")){
+						//out.print("true");
+						response.getOutputStream().print("true");
+						out.clear();
+						out = pageContext.pushBody();
+					}
+				}
+			}else if(_successFlag.equals("-1")){//pending status 		    
+				_ph.setFlag(com.cartmatic.estore.Constants.PaymentHistory_FLAG_WAIT);
+				isRepeate = _paymentHistoryManager.getIsExistPaymentHistory(_ph.getOrderNo(), _ph.getPaymentMethodId(),_ph.getAmount(),_ph.getFlag());
+				_ph.setErrorMessage("Transaction has commit! but the money has not yet transfer to merchant account, please wait.");
+				if(isRepeate)_ph.setIsBrowsed(PaymentHistory.BROWSED);
+			}else{//failing status
+				_ph.setFlag(com.cartmatic.estore.Constants.PaymentHistory_FLAG_FAILURE);
+				isRepeate = _paymentHistoryManager.getIsExistPaymentHistory(_ph.getOrderNo(), _ph.getPaymentMethodId(),_ph.getAmount(),_ph.getFlag());
+				if(null!=_errorMessageObj&&!"".equals(_errorMessageObj)){
+					_ph.setErrorMessage(_errorMessageObj.toString());
+				}else{
+					_ph.setErrorMessage("Transaction has fail!");
+				}
+				//支付失败的记录，后台任务不扫描
+				_ph.setIsBrowsed(PaymentHistory.BROWSED);
+			}
+			if(_flowNoObj!=null){
+				_ph.setFlowNo(_flowNoObj.toString());
+			}
+			if(_errorCodeObj!=null){
+				_ph.setErrorCode(_errorCodeObj.toString());
+			}
+			//add new record
+			_paymentHistoryManager.save(_ph);
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+		throw e;
+	}
+%>
+<%--注意前台下单只有一个运输项,因此只取第一个运输项的数据，注意数字产品调整--%>
+<c:if test="${appConfig.store.isTrackOrder and not empty salesOrder}">
+		<cartmatic:collectionToList var="orderShipmentList" itmes="${salesOrder.orderShipments}"></cartmatic:collectionToList>
+		<c:set var="ga_trackeer" scope="request">
+			pageTracker._addTrans(
+			    "${salesOrder.orderNo}", <%--Order ID--%>
+			    "${salesOrder.customerTitle}${emptySpace}${salesOrder.customerFirstname}",    <%-- Affiliation--%>
+			    "${orderShipmentList[0].total}",               <%--Total--%>
+			    "0",              <%-- Tax--%>
+			    "${orderShipmentList[0].shippingCost}",   <%-- Shipping--%>
+			    "${orderShipmentList[0].orderAddress.city}",        <%-- City--%>
+			    "${orderShipmentList[0].orderAddress.state}",       <%-- State--%>
+			    "${orderShipmentList[0].orderAddress.country}"      <%-- Country--%>
+			  );
+			<c:forEach items="${orderShipmentList[0].orderSkus}" var="os_item" >
+			  pageTracker._addItem(
+			    "${salesOrder.orderNo}",           <%-- Order ID --%>
+			    "${os_item.productSkuCode}",  <%-- SKU --%>
+			    "${os_item.productName}",  <%-- Product Name --%> 
+			    "N/A",                             <%-- Category --%>
+			    "${empty os_item.discountPrice?os_item.price:os_item.discountPrice}",        <%-- Price --%>
+			    "${os_item.quantity}"                 <%-- Quantity --%>
+			  );
+			</c:forEach>
+		  pageTracker._trackTrans();
+		</c:set>
+</c:if>
+

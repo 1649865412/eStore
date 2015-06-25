@@ -1,0 +1,224 @@
+
+.fixedBox{
+	position: absolute;
+	background: #fff;
+	border: 1px solid rgb(214,214,214);
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+	position: fixed;
+	right: 8px;
+	top: 200px;
+	width: 70px;
+	z-index: 9999;
+}
+.fixedBox ul.fixedBoxList{
+	padding: 4px 0px 5px;
+}
+.fixedBox ul.fixedBoxList li.fixeBoxLi.fixeBoxLi{
+	height: 55px;
+	margin: 1px auto 0px;
+	padding: 10px 1px 1px;
+	position: relative;
+	text-align: center;
+	width: 60px;
+}
+.fixedBox ul.fixedBoxList li.hover.cart_bd.fixeBoxLi{
+	background: rgb(255,255,255);
+	border: 1px solid rgb(214,214,214);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+	padding: 9px 0px 0px;
+}
+.fixedBox ul.fixedBoxList li.hover.Service.fixeBoxLi{
+	background: rgb(255,255,255);
+	border: 1px solid rgb(214,214,214);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+	padding: 9px 0px 0px;
+}
+.fixedBox ul.fixedBoxList li.hover.BackToTop.fixeBoxLi{
+	background: rgb(241,241,241);
+	border: 0px currentColor;
+	height: 55px;
+	margin: 1px auto 0px;
+	padding: 10px 1px 1px;
+	position: relative;
+	text-align: center;
+	width: 60px;
+}
+
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox{
+	background: rgb(255,255,255);
+	border: 1px solid rgb(214,214,214);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+	display: none;
+	left: -160px;
+	position: absolute;
+	top: -1px;
+	width: 160px;
+	z-index: 9999;
+}
+.fixedBox ul.fixedBoxList li.hover.cart_bd .cartBox{
+	display: block;
+}
+.fixedBox ul.fixedBoxList li.hover .bjfff{
+	background: rgb(255,255,255);
+	height: 64px;
+	position: absolute;
+	right: -5px;
+	top: 0px;
+	width: 10px;
+}
+.cartBox .cartBoxList{
+	height: 296px;
+	overflow-y: auto;
+	position: relative;
+	z-index: 1000000;
+}
+.cartBox .cartBoxC ul{
+	margin: 0px auto;
+	width: 256px;
+}
+.cartBox .cartBoxC ul li{
+	border-bottom-color: rgb(220,223,228);
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	height: 62px;
+	padding-top: 11px;
+}
+.cartBox .cartBoxC ul li .p-img{
+	border: 1px solid rgb(220,223,228);
+	float: left;
+	height: 48px;
+	overflow: hidden;
+	width: 48px;
+}
+ .cartBox .cartBoxC ul li .p-img img{
+	height: 48px;
+	width: 48px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxC ul li .p-name{
+	float: left;
+	height: 38px;
+	line-height: 19px;
+	overflow: hidden;
+	padding-left: 8px;
+	text-align: left;
+	width: 105px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxC ul li .p-name a{
+	color: rgb(102,102,102);
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxC ul li .p-detail{
+	float: right;
+	text-align: left;
+	width: 72px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxC ul li .p-detail span.p-price{
+	display: block;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxC ul li .p-detail span.p-price strong{
+	color: red;
+	font-weight: normal;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxC ul li .p-detail a.delete{
+	color: rgb(153,153,153);
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .message{
+	background: url("../images/Service4.jpg") no-repeat 15px;
+	height: 92px;
+	line-height: 92px;
+	padding-left: 80px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxFoot{
+	height: 48px;
+	line-height: 48px;
+	margin: 0px auto;
+	text-align: left;
+	width: 256px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxFoot span{
+	color: rgb(153,153,153);
+	float: left;
+	line-height: 48px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxFoot em{
+	float: left;
+	line-height: 48px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxFoot strong{
+	color: red;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 48px;
+}
+.fixedBox ul.fixedBoxList li.cart_bd .cartBox .cartBoxFoot a#btn-payforgoods{
+	background: rgb(255,102,51);
+	border: 1px solid rgb(228,109,29);
+	border-radius: 2px;
+	box-shadow: inset 1px 1px 0px #f8ccb0,inset -1px -1px 0px #f8ccb0;
+	color: rgb(255,255,255);
+	cursor: pointer;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffac75',endColorstr='#FF822F',GradientType='0');
+	float: right;
+	height: 24px;
+	line-height: 24px;
+	margin-top: 11px;
+	moz-border-radius: 2px;
+	text-align: center;
+	width: 80px;
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox{
+	background: rgb(255,255,255);
+	border: 1px solid rgb(214,214,214);
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+	display: none;
+	left: -150px;
+	position: absolute;
+	top: -1px;
+	width: 150px;
+	z-index: 999;
+}
+.fixedBox ul.fixedBoxList li.hover.Service .ServiceBox{
+	display: block;
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox ServiceBox_hover{
+	border-bottom-color: rgb(214,214,214);
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	height: 85px;
+	margin: 0px auto;
+	padding-top: 10px;
+	width: 250px;
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox .ServiceBox_hover .ServiceBox_hover_img{
+	
+	float: left;
+	height: 50px;
+	padding: 1px;
+	width: 100px;
+	margin-top:25px;
+
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox .ServiceBox_hover .ServiceBox_hover_detail{
+	float: left;
+	text-align: left;
+	width: 100px;
+	margin:25px 20px;
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox .ServiceBox_hover .ServiceBox_hover_detail strong{
+	color: rgb(51,51,51);
+	font-weight: bold;
+	height: 20px;
+	line-height: 20px;
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox .ServiceBox_hover .ServiceBox_hover_detail p.p1{
+	color: rgb(102,102,102);
+	height: 18px;
+	line-height: 18px;
+	overflow: hidden;
+}
+.fixedBox ul.fixedBoxList li.Service .ServiceBox .ServiceBox_hover .ServiceBox_hover_detail p.p2{
+	height: 22px;
+	padding-top: 10px;
+}
+
+	

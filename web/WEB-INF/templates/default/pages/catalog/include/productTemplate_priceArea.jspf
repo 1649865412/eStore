@@ -1,0 +1,82 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@page import="com.cartmatic.estore.common.helper.CatalogHelper"%>
+<%@page import="com.cartmatic.estore.common.model.catalog.Product"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="java.net.URLEncoder"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
+<%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
+
+<%--
+永远只会见到两个价. ”市场价”和”售价”或”售价”和”特价”
+.price{color:#000; text-decoration:line-through;}实际的售价
+.ourPrice{color:#f26522; font-weight:bold;}加中划线
+.wholesalePrice{color:#000;}批发价
+
+* 1.市场价、售价
+* 2.售价、特价
+* 3.售价、折扣价
+* 4.售价
+--%>
+
+<c:choose>
+	<c:when test="${product.defaultProductSku.priceViewType==2}">
+		<c:set var="defaultProductSkuPrice" value="${product.defaultProductSku.salePrice}"/>
+	</c:when>
+	<c:when test="${product.defaultProductSku.priceViewType==3}">
+		<c:set var="defaultProductSkuPrice" value="${product.defaultProductSku.discountPrice}"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="defaultProductSkuPrice" value="${product.defaultProductSku.price}"/>
+	</c:otherwise>
+</c:choose>
+
+<c:choose>
+	<c:when test="${product.defaultProductSku.priceViewType==2||product.defaultProductSku.priceViewType==3}">
+		<!-- 
+		<div class="left">
+			<fmt:message key="productDetail.ourPrice" />:&nbsp;
+			<span id="priceSpan" class="ourPrice"><system:CurrencyForRate value="${product.defaultProductSku.price}" /></span>
+		</div>
+		 -->
+		<p class="sale_price">
+			<span id="salesPriceSpan" class="price"><system:CurrencyForRate value="${defaultProductSkuPrice}" /></span>
+			<span id="priceSpan" class="ourPrice"><system:CurrencyForRate value="${product.defaultProductSku.price}" /></span>
+		</p>
+		<!-- 
+		<div class="clear"></div><br/>
+		<div class="left">
+			<fmt:message key="productDetail.discountPrice" />: &nbsp;<span id="salesPriceSpan" class="price"><system:CurrencyForRate value="${defaultProductSkuPrice}" /></span>
+			<fmt:message key="productDetail.saved"/>:&nbsp;<system:CurrencyForRate value="${product.defaultProductSku.price-defaultProductSkuPrice}" />
+		</div>
+		<div class="clear"></div><br/>
+		-->
+	</c:when>
+	<c:otherwise>
+		<!-- 
+		<div class="left">
+			<fmt:message key="productDetail.ourPrice" />:&nbsp;<span id="priceSpan" class="price"><system:CurrencyForRate value="${defaultProductSkuPrice}" /></span>
+		</div>
+		<div class="clear"></div><br/>
+		-->
+		<p class="sale_price">
+			<span id="priceSpan" class="price"><system:CurrencyForRate value="${defaultProductSkuPrice}" /></span>
+		</p>
+	</c:otherwise>
+</c:choose>
+
+<input type="hidden" id="defaultProductSkuPrice" value="${defaultProductSkuPrice}" />
+<input type="hidden" id="priceViewType" value="${product.defaultProductSku.priceViewType}" />
+
+<%
+String url=request.getAttribute("OriginalRequestURL").toString();
+if(StringUtils.isNotBlank(url)){
+	url=URLEncoder.encode(url,"UTF-8");
+	pageContext.setAttribute("encoder_URL",url);
+}
+String pageTitle=pageContext.getAttribute("pageTitle").toString();
+if(StringUtils.isNotBlank(pageTitle)){
+	pageTitle=URLEncoder.encode(pageTitle,"UTF-8");
+	pageContext.setAttribute("encoder_pageTitle",pageTitle);
+}
+%>

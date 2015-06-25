@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
+<%@ taglib prefix="cart" tagdir="/WEB-INF/tags/cart"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+<div class="left">
+	<img src="${resPath}/images/icon/cart.jpg"/ >
+</div>
+<div class="clear"></div>
+<table border="0" cellspacing="0" cellpadding="0" class="table-cart" align="center">
+	<tr>
+		<th >
+			<fmt:message key="shoppingcartItem.product" />
+		</th>
+		<th width="150">
+			&nbsp;
+		</th>
+		<th width="260">商品编码</th>
+		<th width="150">单价</th>
+		<th width="150">
+			<fmt:message key="shoppingcartItem.quantity" />
+		</th>
+		<th width="150">
+			<fmt:message key="shoppingcartItem.subtotal" />
+		</th>
+	</tr>
+<c:choose>
+	<c:when test="${shoppingcart==null || shoppingcart.buyNowItemsCount==0}">
+	    <tr>
+			<td colspan="6">
+				&nbsp;<fmt:message key="shoppingcart.message.isEmpty" />
+			</td>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		<%-- 商品开始 --%>
+		<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus">
+			<c:if test="${item.isSaved==0 and empty item.parent}">
+					<tr >					  		
+							<td>
+							   	<div class="box-product-cart">
+					            	<div class="left">
+					            		<product:productImg sku="${item.productSku}" size="e" width="165" height="165"/>
+					          		</div>
+					              	<div class="right">
+					              		<product:productName product="${item.productSku.product}"/><br/>
+					              		<c:if test="${not empty item.accessories}">
+										<span class="blue">
+											<product:showSkuOptions productSkuId="${item.productSku.productSkuId}"/>
+											<product:showAccessories accessories="${item.accessories}"/>
+										</span>
+										<br/>
+										</c:if>
+										<system:otherCurrency value="${item.discountPrice}"/>
+										<span style="color:#A0A0A4; font-size:11px ">
+										<product:showSkuOptions productSkuId="${item.productSku.productSkuId}"></product:showSkuOptions>
+										<%--<product:inventoryMsg buyCount="${item.quantity}" productSku="${item.productSku}"></product:inventoryMsg> --%>
+										</span>
+					                 </div>
+					             </div>				
+							</td>
+							<td valign="top" align="center" class="save">
+					    		<a href="#" onclick="javascript:$cm.deleteItem('${item.shoppingcartItemId}');">删除</a>
+								<input type="hidden" name="buyNowItemId" value="${item.shoppingcartItemId}"/>
+								<input type="hidden" name="${item.shoppingcartItemId}_sku" value="${item.productSku.productSkuCode}"/>
+							</td>
+							<td valign="top" >${item.productSku.productSkuCode}</td>
+							<td valign="top" class="price">
+								<c:choose>
+									<c:when test="${item.discountPrice!=item.price}">
+										<span class="ourPrice"><system:CurrencyForRate value="${item.price}" /></span>
+										<span class="red fB" title="<fmt:message key="productDetail.discountPrice" />">
+											<system:CurrencyForRate value="${item.discountPrice}" />
+										</span>
+									</c:when>
+									<c:otherwise><system:CurrencyForRate value="${item.discountPrice}"/></c:otherwise>
+								</c:choose>
+							</td>
+						  	<td valign="top" >
+						   		<input type="text" class="box-input" size="3" name="${item.shoppingcartItemId}_quantity" value="${item.quantity}" onkeyup="$cm.updateCartItem();"/>
+							</td>		    
+							<td valign="top" >
+							   	<span class="red fB priceSum"> 
+							 		<system:CurrencyForRate value="${item.total}"/>
+								</span>
+								<system:otherCurrency value="${item.total}"/>
+								<br/>
+								<c:if test="${item.itemDiscountAmount>0}">
+									(<fmt:message key="minicart.money.shen" /><span > <system:CurrencyForRate value="${item.itemDiscountAmount}"/></span>) 
+								</c:if>
+					      	</td>
+					 	</tr>
+					<c:if test="${not empty item.shoppingcartItems}"><%-- 子产品 --%>
+						<c:forEach var="child" items="${item.shoppingcartItems}">
+						<tr class="child">
+					  		<td>
+					  			<img style="cursor: pointer" alt="<fmt:message key='shoppingcart.delete'/>" onclick="javascript:$cm.deleteItem('${child.shoppingcartItemId}');" src="${resPath}/images/btn/btn_del.gif"  />
+					  		</td>			    
+					  		<td>
+								<h3><product:productName product="${child.productSku.product}"/></h3>
+								<fmt:message key="productDetail.productNo" />:${child.productSku.productSkuCode}
+								<br/>
+								<span style="color:#A0A0A4; font-size:11px ">
+								<product:showSkuOptions productSkuId="${child.productSku.productSkuId}"></product:showSkuOptions>
+								<%--<product:inventoryMsg buyCount="${child.quantity}" productSku="${child.productSku}"></product:inventoryMsg> --%>
+								</span>
+							</td>
+					   		<td><%-- 商品价格 --%>
+					   			<c:choose>
+									<c:when test="${child.discountPrice!=child.price}">
+										<span class="ourPrice"><system:CurrencyForRate value="${child.price}" /></span>
+										<span class="price" title="<fmt:message key="productDetail.discountPrice" />">
+											<system:CurrencyForRate value="${child.discountPrice}" />
+										</span>
+									</c:when>
+									<c:otherwise><system:CurrencyForRate value="${child.discountPrice}"/></c:otherwise>
+								</c:choose>
+					 		</td>
+							 <td><%-- 商品价格结束 --%>
+							${child.quantity }
+							 </td>
+							<td class="totaltxt"><%-- 小计开始 --%>
+							    <span class="red f14px"> 
+							  		<system:CurrencyForRate value="${child.total }"/>
+								</span>
+								<br/>
+								<c:if test="${child.itemDiscountAmount>0}">
+								   (<fmt:message key="minicart.money.shen" /><span ><system:CurrencyForRate value="${child.itemDiscountAmount}"/></span>) 
+								</c:if>
+					    	</td>
+					    	<%-- 小计结束 --%>
+						</tr>
+						</c:forEach>
+					</c:if>
+			</c:if>
+		</c:forEach>
+	  <%-- 商品结束 --%>
+	</c:otherwise>
+</c:choose> 
+<tr>
+	<td colspan="6">
+			请输入优惠卷:
+			<c:if test="${shoppingcart.isUsedCoupon==0}">
+				<input type="text" class="box-input" id="couponNo_input_id"
+					name="couponNo_input_name" class="box-input" />
+			</c:if>
+			<c:if test="${shoppingcart.isUsedCoupon==1}">
+				<fmt:message key="checkout.message.applyCouponSuccess" />
+				<br />
+				<b>${shoppingcart.usedCouponNo}</b>
+			</c:if>
+
+			<c:if test="${shoppingcart.isUsedCoupon==0}">
+				<input type="button" value="确认" class="box-btn" onclick="$cm.useCoupon();">
+			</c:if>
+			<c:if test="${shoppingcart.isUsedCoupon==1}">
+				<a href="javascript:void(0)" onclick="$cm.notUseCoupon();">
+				<font color="red">【点击可以使用其他优惠券】</font>
+				</a>
+			</c:if>
+			<br/>
+		【温馨提示：若是礼品卡，礼品卡在支付流程的第二步左下角输入】
+		<div class="right f18px" style="margin:10px 20px 0 10px;width:220px;color:#000;">
+			<c:if test="${shoppingcart.cartDiscountAmount > 0}">
+			<div class="left" style="width:110px;text-align:right;padding-right:6px;"><fmt:message key="shoppingcart.discount" />:</div>
+			<div class="left cRed cartDiscount">-<system:CurrencyForRate value="${shoppingcart.cartDiscountAmount}" /></div>
+			</c:if>
+			<div class="blank6"></div>
+			<div class="left" style="width:110px;text-align:right;padding-right:6px;color:#000;">购物车小计:</div>
+			<div class="left cRed cartTotal" ><system:CurrencyForRate value="${shoppingcart.total}" /></div>
+		</div>
+	</td>
+</tr>
+</table>
+<div class="left" style="margin:10px 20px 0 0;"><a href="${ctxPath}/index.html"><img src="${resPath}/images/btn/btn_shop.jpg" /></a></div>
+<div class="right" style="margin:10px 0 0 10px;">
+	<c:if test="${shoppingcart.buyNowItemsCount>0 and not isOutOfStock}">
+		<a href="${ctxPath}/checkout/login.html"><img src="${resPath}/images/btn/btn_gotopay.jpg"/></a>
+	</c:if>
+</div>
+<div class="right" style="margin:10px 20px 0 10px;">
+	<c:if test="${shoppingcart.buyNowItemsCount>0}">
+		<a href="javascript:void(0);" onclick="$cm.updateCartItem();"><img src="${resPath}/images/btn/btn_gotopay3.jpg"/></a>
+	</c:if>
+</div>
+<div class="clear"></div>
+
+<script type="text/javascript">
+<!--
+function doSum(obj){
+	/*
+	var $quantity = $(obj);
+	var quantity = $quantity.val();
+	var $price = $quantity.parents("tr").find(".price");
+	var $trSum = $quantity.parents("tr").find(".priceSum");
+	var $trLast = $quantity.parents("table:last");
+	
+	var $trLastTotal = $trLast.find(".cartTotal");
+	var $trLastDiscount = $trLast.find(".cartDiscount");
+	
+	var priceStr = $price.text();
+	var price = priceStr.substring(priceStr.indexOf("${appConfig.defaultCurrencySymbol}") + 1,priceStr.length);
+	
+	var sum = quantity * parseFloat(price);
+	$trSum.text("${appConfig.defaultCurrencySymbol}" + sum.toFixed(2));
+
+	var cartTotalStr = $trLastTotal.text();
+	var cartTotal = cartTotalStr.substring(cartTotalStr.indexOf("${appConfig.defaultCurrencySymbol}") + 1,cartTotalStr.length);
+
+	cartTotal = (quantity - 1) * price + parseFloat(cartTotal);
+	$trLastTotal.text("${appConfig.defaultCurrencySymbol}" + cartTotal.toFixed(2));
+	*/
+}
+//-->
+</script>

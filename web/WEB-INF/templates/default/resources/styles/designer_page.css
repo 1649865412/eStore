@@ -1,0 +1,181 @@
+.sort_top{
+	float:left;
+	line-height:100%;
+	display: block;
+	height:314px;
+	width:1000px;
+	
+}
+.sort_top img{
+	height:314px;
+}
+.sort_top .bx-wrapper{
+	max-height:314px;
+	max-width:1000px;
+	height:314px;
+	width:1000px;
+	position: relative;
+}
+
+.top_slider {
+	display: block;
+	max-height:314px;
+	max-width:1000px;
+	height:314px;
+	width:1000px;
+    float:left;
+   
+}
+/* ------ filtrey
+-----------------------------------------------*/
+
+.filters {
+float:left;
+clear:both;
+width:1000px;
+margin:10px 0 50px 0;
+
+
+}
+
+.filters .filter {
+float:left;
+clear:both;
+width:1000px;
+padding:10px;
+margin-bottom:20px;
+background:#000;
+font-size:20px;
+color:#fff;
+
+}
+
+.filters .filter a {
+float:left;
+display:block;
+padding:5px;
+margin-right:5px;
+font-size:20px;
+text-transform:uppercase;
+outline:none;
+color:#fff;
+}
+
+.filters .filter .active {
+background:#eee;
+color:#111;
+}
+
+.filters .container {
+float:left;
+clear:both;
+width:100%;
+position:relative;
+}
+
+.filters .container ul,
+.filters .container ul li {
+display:block;
+list-style:none;
+padding:0;
+margin:0;
+}
+
+.filters .container ul li {
+float:left;
+margin:0 8px 8px 0;
+font-size:0;
+line-height:0;
+}
+
+.filters .container a {
+display:block;
+float:left;
+width:192px;
+height:192px;
+}
+
+a {
+color:#000;
+text-decoration:none;
+}
+
+/*galleryImage*/
+
+.galleryImage { background-color:black; width:192px; height:192px; overflow:hidden; float:left; text-align:center;}
+.infor    { margin-left:2px; font-family:arial; margin-top:5px;}
+
+.infor p { color:#fff; font-size:12px;line-height:140%; text-decoration:underline; }
+
+
+/*fancybox*/
+.fancybox-inner{
+	width: 347px; 
+	height: 105px;
+	
+}
+.desginer_detail{
+	display:none;
+	width:970px;
+	border:#d4bc8c 15px solid;
+	height:480px;
+	line-height:140%;
+
+}
+
+.fancy_left{
+	width:400px;
+	float:left;
+	height:480px;
+	background-color:#e9e9e9;
+}
+.fancy_l_up img{
+	width:400px;
+	height:292px;
+	margin-bottom:3px;
+}
+.fancy_l_down{
+	height:180px;
+	margin:0 5px;
+	line-height:200%;
+}
+.fancy_l_down p{
+	font-size:12px;
+	margin:2px 0;
+}
+.fancy_l_down span{
+	font-weight:bold;
+	color:#666;
+	font-size:14px;
+}
+.fancy_right{
+	width:540px;
+    height:480px;
+    margin-left:30px;
+	float:left;
+}
+
+.fancy_right .designer_shoe{
+	width:540px;
+}
+.fancy_right .shoe_show{
+  float: left;
+  width:180px;
+  height:230px;
+  line-height:180%;
+}
+
+.fancy_right .shoe_show img{
+  width:127px;
+  height:127px;
+  margin:16.5px;
+}
+.date-info{
+  display: inline-block;
+  font-size: 14px;
+  float: right;
+  color: #ef7d36;
+  padding-right:15px;
+  font-weight:bold;
+  text-decoration:underline;
+}

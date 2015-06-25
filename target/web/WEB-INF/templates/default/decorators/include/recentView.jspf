@@ -1,0 +1,8 @@
+<%@ include file="/common/taglibs.jsp"%>
+<%--//This page control use recent view or not, and the layout. But the data is processed in recentView.html request, which will use cookie and can be staticalized.--%>
+<c:if test="${applicationScope.appConfig.isRecentViewEnabled}">
+<div id="boxRecentView">
+</div>
+<%-- My History end --%>
+<iframe rel="nofollow" src="${ctxPath}/recentView/recentView.html?decorator=blank" id="iframeSaveRecentView" style="display: none;"></iframe>
+</c:if>

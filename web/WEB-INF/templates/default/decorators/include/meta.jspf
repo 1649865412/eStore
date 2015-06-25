@@ -1,0 +1,8 @@
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<c:if test="${empty OriginalQueryString && not empty OriginalRequestURI}">
+		<link rel="canonical" href="${appConfig.store.siteUrl}<c:out value="${OriginalRequestURI}"/>"/>
+</c:if> 
+		<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+		<system:meta confValue="${appConfig.store.extraMeta1}"/>
+		<system:meta confValue="${appConfig.store.extraMeta2}"/>
+		<system:meta confValue="${appConfig.store.extraMeta3}"/>

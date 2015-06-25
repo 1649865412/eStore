@@ -1,0 +1,536 @@
+@charset "utf-8";
+
+/*上部*/
+.detail_top{
+	height:550px;
+	margin-top:10px;
+}
+/*左部*/
+.detail_t_left{
+	float:left;
+	width:240px;
+    float:left;
+
+}
+.detail_l_out {
+	position: relative;
+	max-width: 240px;
+	height: 244px;
+	margin:0;
+	border-left: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+}
+.header-2 {
+	position: relative;
+	border-top: 2px solid #ccc;
+	background-color: white;
+}
+
+.header-2:after {
+	content: '';
+	position: absolute;
+	border-right: 4px solid transparent;
+	border-bottom: none;
+	border-top: 4px solid #ccc;
+	border-left: 4px solid transparent;
+	left: 50%;
+	top: 0;
+	z-index: 50;
+	margin-left: -4px;
+}
+.header-2 h3 {
+	margin: 0;
+	padding: 15px 0;
+	text-align: center;
+	font-size: 20px;
+}
+.header-2 a:hover{
+	text-decoration:underline;
+	color:#d4bc8c;
+}
+.header-2 h4 {
+	padding:16px 15px 0 15px;
+	font-size:14px;
+	font-weight:bold;
+}
+
+.designer_pic img{
+	width:238px;
+}
+/*品牌故事hover*/
+.designer_pic .rsp {
+    width: 238px;
+    height: 152px;
+    overflow: hidden;
+    position: absolute;
+    background: #000;
+    top: 44px;
+    left: 0px;
+}
+.designer_pic .text{
+	position:absolute;
+	width:238px;
+	height:152px;
+	left:-238px;
+	top:44px;
+	overflow:hidden;
+}
+.designer_pic .text p{
+	width:210px;
+	height:auto;
+	color:#fff;
+	font-size:12px;
+	line-height:140%;
+	padding:10px 15px 10px 15px;
+
+}
+/*品牌故事*/
+.designer_story p{
+	font-size:14px;
+	font-weight:bold;
+	padding:15px 0 15px 15px;
+}
+.designer_story p span{
+	margin-left:5px;
+	color:#ccc;
+}
+/*产品亮点*/
+.detail_l_bottom{
+	margin-top:10px;
+}
+.detail_point{
+	padding:15px;
+	font-size:12px;
+	color:#444;
+	line-height:180%;
+}
+/*中间图*/
+.detail_mid{
+	margin:0 20px;
+	width:400px;
+	border:1px solid #C0C0C0;
+	float:left;
+}
+
+.detail_thumb_big{
+	height:400px;
+}
+.detail_mid .slider2{
+	
+}
+.detail_mid .detail_thumb{
+	border-top:1px solid #C0C0C0;
+	width:400px;
+	float:left;
+}
+.elevatezoom-gallery{
+	filter: alpha(opacity=40);
+    -moz-opacity:0.4;
+	opacity: 0.4;
+}
+.detail_mid .slider2 .active{
+	opacity:1;
+}
+
+
+/*左边购物信息*/
+.detail_t_right{
+	float:left;
+	width:315px;
+	color:#aaa;
+}
+.detail_title{
+	font-size:18px;
+	font-weight:bold;
+	color:#000;
+	line-height:140%;
+}
+/*价格*/
+.detail_t_right p.sale_price{
+    margin:30px 0;
+}
+.detail_t_right p.sale_price span.price{
+	color:#d4bc8c;
+	font-size:18px;
+	font-weight:100;
+}
+.detail_t_right p.sale_price span.ourPrice{
+	color:#aaa;
+	font-size:12px;
+	text-decoration:line-through;
+	margin-left:5px;
+}
+/*品牌信息*/
+.detail_information{
+	border:#C0C0C0 solid;
+	border-width:1px 0;
+	max-width:250px;
+}
+.product_designer{
+	margin-top:10px;
+}
+.designer_name{
+	color:#d4bc8c;
+	margin-left:8px;
+}
+.product_brand{
+	margin:10px 0;
+}
+.product_brand span{
+	margin-left:12px;
+}
+.product_barcode{
+	margin-bottom:10px;
+}
+.product_barcode span{
+	margin-left:8px;
+}
+/*颜色*/
+.product_color{
+	margin:30px 0;
+	width:315px;
+	float:left;
+	height: 22px;
+}
+.product_color span{
+	display: block;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 8px;
+}
+.product_color span.chose{
+	border:2px solid #c0c0c0;
+	width: 18px;
+    height: 18px;
+}
+.product_color span.chose span{
+    width: 18px;
+    height: 18px;
+}
+/*尺码*/
+.product_size{
+	float:left;
+	width:315px;
+	height: 84px;
+}
+.size_ruler{
+	margin-left:8px;
+}
+ul.size{
+	margin:25px 0;
+	display:block;
+}
+ul.size li{
+	display:inline;
+	margin-right:10px;
+}
+ul.size li a{
+	color:#aaa;
+}
+ul.size li a.current{
+	border-bottom:1px solid #000;
+	padding-bottom:5px;
+	color:#000;
+}
+/*数量*/
+.product_quantity{
+	float:left;
+	width:315px;
+}
+
+.product_quantity form input {
+	background: none repeat scroll 0 0 transparent;
+	border:1px solid #c0c0c0;
+	color: #aaa;
+	float: left;
+	padding:5px;
+	width: 20px;
+	text-align: center;
+
+}
+.product_quantity form input[type="button"] {
+	color: #aaa;
+	float: left;
+	font-size: 12px;
+	height: auto;
+	padding:5px;
+	width: 25px;
+
+}
+.product_stock{
+	float:left;
+	margin:10px 20px;
+}
+.fa_storck{
+	margin-right:8px;
+}
+.fa_storck ~ span{
+	color:#d4bc8c;
+	margin:0 5px;
+	font-weight:bold;
+}
+
+/*送货*/
+.product_delivery{
+	margin:20px 0;
+	float:left;
+	width:315px;
+
+}
+/*购物按钮*/
+.product_chose{
+	float:left;
+	margin-bottom:15px;
+}
+.product_chose a {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	display: inline-block;
+	font-size: 1em;
+	padding: 10px 0;
+	background: #d4bc8c;
+	color: #FFF;
+	width:315px;
+	text-align:center;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.product_chose a:hover{
+	background:#000;
+}
+/*新增秒杀按钮*/
+.btn{
+	width:315px;
+	font-weight:bold;
+	line-height:20px;
+
+}
+.margin_b{
+	margin-bottom:15px;
+}
+.detail_start{
+	background-color:#ee86a1;
+    border:2px solid #ee86a1;
+}
+.detail_start:hover{
+	background-color:#fff;
+	border:2px solid #ee86a1;
+	color:#ee86a1;
+}
+.detail_sold{
+	background-color:#ccc;
+    border:2px solid #ccc;
+    cursor:auto;
+}
+
+.detail_will_start{
+	background-color:#ffcc66;
+    border:2px solid #ffcc66;
+    cursor:auto;
+}
+
+/*社交栏*/
+.product_social .fa_storck{
+	color:#d4bc8c;
+	float:left;
+}
+#love_count{
+	display:none;
+}
+#love_count span{
+	color:#d4bc8c;
+	margin:0 5px;
+	font-weight:bold;
+}
+.product_love{
+	float:left;
+	margin:8px 0;
+	width:131px;
+}
+.product_love a{
+	color:#999;
+	text-decoration: none;
+}
+.social_part{
+	float:left;
+}
+
+/*下部*/
+.detail_bottom{
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0;
+	float:left;
+	min-height:1050px;
+}
+/*左部*/
+.detail_b_left{
+	width:240px;
+	min-height:1050px;
+	height:auto;
+	float:left;
+	border-right:1px solid #c0c0c0;
+	
+}
+
+/*侧边导航栏*/
+.sidebar {
+  width: 250px;
+  position: absolute;
+}
+.sidebar ul {
+  margin-top: 5px;
+}
+.sidebar li {
+  list-style: none;
+  padding: 7px;
+  position: relative;
+}
+.sidebar a {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+  font-size:14px;
+}
+
+.sidebar a:hover {
+  color: #999;
+}
+
+.sidebar .sub-menu {
+  position: absolute;
+  top: 20px;
+  padding: 0px;
+  width: 220px;
+  height: 100px;
+  display: none;
+  border:1px solid #ddd;
+  background:#fff;
+  z-index: 888;
+}
+.sidebar .sub-menu li a {
+  margin-left: 20px;
+  font-size: 13px;
+}
+.sidebar .sub-menu i {
+  left: 180px;
+}
+.sidebar ul li:hover ul {
+  display: block;
+}
+.sidebar .push {
+  margin-right: 10px;
+}
+
+.sidebar .sub-menu .sub_active{
+	width:5px;
+	height:5px;
+	background:#000;
+	display:none;
+	position: absolute;
+	left:-20px;
+	top:7px;
+
+}
+	
+.sidebar .sub-menu li a.active_href{
+	color:#999;
+	font-weight:bold;
+}
+
+/*侧边栏内容*/
+.p_side{
+	float:left;
+	margin-top:25px;
+}
+.p_img{
+	margin-bottom:30px;
+	width:240px;
+}
+.p_s_sth .Item_images_s img{
+	margin:0 45px;
+	width: 150px;
+	height: 150px;
+}
+.p_s_sth .Item_name_s{
+	text-align:center;
+}
+
+/*右部*/
+
+.detail_b_right{
+	float:left;
+	width:738px;
+	min-height:1050px;
+	border-left:1px solid #c0c0c0;
+	padding-left:20px!important;
+	color: #595959;
+
+}
+
+.detail_bottom .hot_trends{
+	padding:0;
+}
+.detail_bottom .tabs_postion{
+	margin: 15px 0 0 0;
+}
+.detail_b_right .boards{
+	float:left;
+}
+/*设计图*/
+.detail_r_design{
+	width:369px;
+	float:left;
+}
+.detail_b_right img{
+	width:327px;
+	height:327px;
+	margin:21px;
+	float:left;
+}
+.detail_r_text{
+	width:369px;
+	float:left;
+	height:369px;
+	position:relative;
+}
+.detail_r_text p{
+	text-align:left;
+	line-height:180%;
+	position:absolute;
+	bottom:20px;
+	margin-left:20px;
+
+}
+.detail_r_detailpic .detail_r_pic{
+	float:left;
+	padding-bottom:40px;
+}
+.detail_r_detailpic .detail_r_pic img{
+	margin-top:40px;
+}
+/*详情*/
+.product_description ul{
+	width:230px;
+	margin:15px 8px 30px 0;
+	float:left;
+
+}
+.product_description ul li{
+	margin:15px 5px 15px 0;
+}
+.product_description p{
+	width:500px;
+	float:left;
+	margin-top:15px;
+
+}
+.product_description img{
+	width:100%;
+	height:100%;
+	margin:0;

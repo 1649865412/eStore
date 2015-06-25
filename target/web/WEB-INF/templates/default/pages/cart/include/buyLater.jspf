@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
+<%@ taglib prefix="cart" tagdir="/WEB-INF/tags/cart"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<div class="left"><strong class="f18px">收藏夹</strong></div>
+<div class="blank24"></div>
+<table border="0" cellspacing="0" cellpadding="0" class="table-cart" align="center">
+	<tr>
+    	 
+		<th width="420"><fmt:message key="shoppingcartItem.product" /></th>
+		<th width="220">&nbsp;</th>  
+		<th>Item No.</th>
+    	<th width="220"><fmt:message key="shoppingcartItem.priceInfo" /></th>
+  	</tr>
+<c:choose>
+	<c:when test="${shoppingcart==null || shoppingcart.buyLaterItemsCount==0}">
+	    <tr>
+			<td colspan="4">
+				&nbsp;
+				<fmt:message key="shoppingcart.buyLater.isEmpty" />
+			</td>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		<%-- 商品信息开始 --%>
+		<c:forEach items="${shoppingcart.favoriteItems}" var="item" varStatus="varStatus">
+			<c:if test="${empty item.parent}">
+			  	<tr>
+					<td >
+						<div class="box-product-cart">
+			                <div class="left">
+				                <c:if test="${empty item.parent}">
+				              	 	<product:productImg sku="${item.productSku}" noLink="true" size="b" width="130" height="130" />
+				                </c:if>
+			                </div>
+			                <div class="right">
+			                	<product:productName product="${item.productSku.product}"/> <br/>
+								<span style="color:#A0A0A4; font-size:11px ">
+								<product:showSkuOptions productSkuId="${item.productSku.productSkuId}"></product:showSkuOptions>
+								<product:showAccessories accessories="${item.accessories}"/>
+								</span>
+			                </div>
+			            </div>		  	
+					</td>	
+					<td valign="top" class="save">
+						<c:if test="${empty item.parent}">
+			         	<a href="javascript:$cm.moveToC('${item.shoppingcartItemId}');">
+							<fmt:message key="btn.txt.addtocart.on" /></a>
+				  		</c:if>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+				  		<a href="javascript:$cm.deleteItem('${item.shoppingcartItemId}');">Delete</a>
+					</td>
+					<td valign="top">${item.productSku.productSkuCode}</td>
+			    	<td valign="top">
+			       		<span class="red f14px"><system:CurrencyForRate value="${item.discountPrice}"/></span>
+			       		<system:otherCurrency value="${item.discountPrice}"/>
+				   		<br/>
+				   		<c:if test="${item.discountPrice!=item.price}">
+							(<fmt:message key="minicart.money.yuan" />						
+							<span class="listPrice">
+								<system:CurrencyForRate value="${item.price}"/>
+							</span>)
+						</c:if>
+			    	</td>     
+			  	</tr> 
+			 </c:if>
+		</c:forEach>
+	 <%-- 商品信息结束 --%>
+	</c:otherwise>
+</c:choose> 
+</table>

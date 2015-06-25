@@ -1,0 +1,206 @@
+<c:if test="${empty salesOrder}">
+Sorry! Sales Order not found.
+</c:if>
+<c:if test="${not empty salesOrder}">
+<%--trackingNo begin--%>
+<c:forEach items="${salesOrder.orderShipments}" var="ship" varStatus="varStatus">
+	<c:if test="${ship.status == 60}">
+		<strong>快递号：</strong><br/>
+		您订购的商品在<fmt:formatDate pattern="MM/dd/yyyy" value="${ship.deliverTime}"/>已经发货，物流跟踪号：<b>${ship.trackingNo}</b><br/>
+	</c:if>
+</c:forEach>
+<%--trackingNo end--%>
+<div class="blank24"></div>
+<div class="left halfwidth" style="margin-right:20px;">
+	<h4>订单信息: </h4>
+	<div style="padding-left:8px;">
+		订单编号：${salesOrder.orderNo}<br/>
+		订单日期：${salesOrder.createTime}<br/>
+		支付状态：<fmt:message key="salesOrder.paymentStatus_${salesOrder.paymentStatus}" /><br/>
+		订单状态：<c:choose>
+						<c:when test="${salesOrder.isOnHold==1 and salesOrder.isHoldByCustomer==1}">
+							<fmt:message key="salesOrder.orderStatus.toCancel" />
+						</c:when>
+						<c:when test="${salesOrder.paymentStatus == 10 && salesOrder.orderStatus==10}">
+							<%-- The Pending is displayed on orderStatus when paymentStatus is unpaid. --%>
+							待处理
+						</c:when>
+						<c:otherwise>
+							<fmt:message key="salesOrder.orderStatus_${salesOrder.orderStatus}" />
+						</c:otherwise>
+					</c:choose>
+						
+	</div>
+</div>
+<div class="right halfwidth">
+<h4>收货人信息: </h4>
+	<div style="padding-left:8px;">
+		<c:forEach items="${salesOrder.orderShipments}" var="ship" varStatus="varStatus" end="0">	
+			<c:if test="${not ship.isAllDigitalItem}">
+				姓    名：${ship.orderAddress.firstname }
+				<br />
+				地    址：${ship.orderAddress.state } ${ship.orderAddress.city } ${ship.orderAddress.address1 }
+				<br />					
+				邮    编：${ship.orderAddress.postalcode}
+				<br/>				
+			</c:if>
+		</c:forEach>
+	</div>
+</div>
+<div class="blank10"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-review-total">
+					<c:forEach items="${salesOrder.orderShipments}" var="ship" varStatus="varStatus">
+					<c:if test="${not varStatus.first}">
+						<tr>
+							<td colspan="4"></td>
+						</tr>
+					</c:if>
+					<tr>
+						<th width="68%">
+							<c:choose>
+								<c:when test="${fn:length(salesOrder.orderShipments)>1}">${ship.shipmentNo}</c:when>
+								<c:otherwise><fmt:message key="orderItem.productName" /></c:otherwise>
+							</c:choose>
+						</th>
+						<th width="10%">
+							<fmt:message key="orderItem.price" />
+						</th>
+						<th width="10%">
+							<fmt:message key="orderItem.quantity" />
+						</th>
+						<th width="12%">
+							<fmt:message key="orderItem.total" />
+						</th>
+					</tr>
+					<c:forEach items="${ship.orderSkus}" var="sku">
+						<tr>
+							<td style="padding-left:10px;">
+								<c:choose>
+									<c:when test="${sku.itemType==1}">
+										<a href="<product:productUrl product="${sku.productSku.product}" />">${sku.productName }</a><br />
+										<fmt:message key="productDetail.productNo" />:${sku.productSkuCode }<br />
+										<product:orderSkuOption orderSku="${sku}" />
+										<product:showAccessories accessories="${sku.accessories}"/>
+									</c:when>
+									<c:otherwise>
+										<fmt:message key="shoppingcart.gcName" />
+										<c:set var="op" value="${fn:split(sku.displaySkuOptions,'###')}" />
+										<br />
+										<fmt:message key="shoppingcart.gcRecipient" />:${op[0]}<br />
+										<fmt:message key="shoppingcart.gcRecipientEmail" />:${op[1]}
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td align="center">
+								<system:CurrencyForRate value="${sku.discountPrice }" />
+								<br />
+								<c:if test="${sku.discountPrice!=sku.price}">
+							(<fmt:message key="minicart.money.yuan" />
+									<span class="listPrice"><system:CurrencyForRate value="${sku.price}" />
+									</span>)
+						</c:if>
+							</td>
+							<td align="center">
+								${sku.quantity }
+							</td>
+							<td class="order-class">
+								<system:CurrencyForRate value="${sku.subTotalAmount}" />
+							</td>
+						</tr>
+					</c:forEach>
+					<c:set var="sum_itemSubTotal" value="${ship.itemSubTotal+sum_itemSubTotal}"/>
+					<c:set var="sum_shippingCost" value="${ship.shippingCost+sum_shippingCost}"/>
+					<c:set var="sum_wrapUnitPrice" value="${ship.wrapUnitPrice+sum_wrapUnitPrice}"/>
+					<c:set var="sum_itemTax" value="${ship.itemTax+sum_itemTax}"/>
+					<c:set var="sum_discountAmount" value="${ship.discountAmount+sum_discountAmount}"/>
+					</c:forEach>
+					<tr>
+						<th colspan="4"></th>
+					</tr>
+					<tr>
+						<td colspan="3" class="title">
+							<fmt:message key="shoppingcart.subtotal" />
+							:
+						</td>
+						<td class="order-class">
+							<system:CurrencyForRate value="${sum_itemSubTotal}" />
+						</td>
+					</tr>
+					<c:if test="${sum_shippingCost>0}">
+						<tr>
+							<td colspan="3" class="title">
+								<fmt:message key="salesOrder.shippingTotalCost" />
+								:
+							</td>
+							<td class="order-class">
+								<system:CurrencyForRate value="${sum_shippingCost}" />
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${sum_wrapUnitPrice>0}">
+						<tr>
+							<td colspan="3" class="title">
+								<fmt:message key="salesOrder.wrapTotalCost" />
+								:
+							</td>
+							<td class="order-class">
+								<system:CurrencyForRate value="${sum_wrapUnitPrice }" />
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${sum_itemTax>0}">
+					<tr><%-- ç¨æ¯æ°¸è¿é½æ¾ç¤ºçï¼åªæ¯å¤æ°ä¸º0  --%>
+						<td colspan="3" class="title">
+							<fmt:message key="salesOrder.taxAmt" />
+							:
+						</td>
+						<td class="order-class">
+							<system:CurrencyForRate value="${sum_itemTax}" />
+						</td>
+					</tr>
+					</c:if>
+					<c:if test="${sum_discountAmount>0}">
+						<tr>
+							<td colspan="3" class="title">
+								<fmt:message key="salesOrder.saveMoneyTotal" />
+								:
+							</td>
+							<td class="order-class">
+								-<system:CurrencyForRate value="${sum_discountAmount }" />
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${sum_discountAmount<0}"><%-- åå°å¢å äºè®¢åçæç»­è´¹ ,ä¹ä½¿ç¨discountAmoutè®°å½,ä½ä½¿ç¨è´æ°è®°å½.--%>
+						<tr>
+							<td colspan="3" class="title">
+								Other Fee
+								:
+							</td>
+							<td class="order-class">
+								<system:CurrencyForRate value="${-sum_discountAmount}" />
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${salesOrder.paidAmount>0}">
+					<tr>
+						<td colspan="3" class="title fB f13px">
+							<fmt:message key="salesOrder.payTotal" />
+							:
+						</td>
+						<td class="order-class fB f13px">
+							<system:CurrencyForRate value="${salesOrder.paidAmount }" />
+						</td>
+					</tr>
+					</c:if>
+					<tr>
+						<td colspan="3" class="title fB f13px red">
+							<fmt:message key="salesOrder.grossTotal" />
+							:
+						</td>
+						<td class="order-class fB f13px red">
+							<system:CurrencyForRate value="${salesOrder.shouldPay}" />
+						</td>
+					</tr>
+				</table>
+	<div class="blank10"></div>
+</c:if>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans  
+	xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="
+            http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/context   
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/mvc  
+            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd" 
+    default-lazy-init="true" default-autowire="byName">
+    
+    <!-- Enables the Spring MVC @Controller programming model -->  
+    <mvc:annotation-driven validator="beanValidator" />
+    <context:component-scan base-package="com.cartmatic.estoresf" />  
+    
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.cartmatic.estore.exception.TrialNotSupportlException">trialNotSupport</prop>
+				<prop key="java.lang.Exception">reportError</prop>
+				<prop key="java.lang.RuntimeException">reportError</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value="reportError"/>
+		<property name="defaultStatusCode" value="500"/>
+	</bean>
+	
+	<!-- Default action will decide page to render by parsing url, similiar to filenameController -->
+	
+	<bean id="baseController" class="com.cartmatic.estore.core.controller.BaseController" abstract="true">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	
+	<!-- 
+	<bean id="baseStoreFrontController" class="com.cartmatic.estore.core.controller.BaseStoreFrontController" >
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="lastSearchViewAllowed" value="false"/>
+	</bean>
+	 -->
+	
+	<bean id="baseJspController" class="com.cartmatic.estore.core.controller.BaseJspController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>	
+	<bean id="jCaptchaController" class="com.cartmatic.estore.core.controller.JCaptchaController" parent="baseController">
+		<property name="captchaService" ref="imageCaptchaService"/>
+	</bean>
+	<!-- 
+	<bean id="genericFrontController" class="com.cartmatic.estore.core.controller.GenericStoreFrontController" abstract="true">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+	 -->
+	<bean id="genericController" class="com.cartmatic.estore.core.controller.GenericController" abstract="true">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="validator" ref="beanValidator"/>
+	</bean>
+	
+	<bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="doAction" />
+		<!-- Request using get method will call the defaultAction and load the view by page name
+			parsed from URL. Controller can overide this defaultAction to provide specific processing. -->
+		<property name="defaultMethodName" value="defaultAction" />
+	</bean>
+	
+	<!-- Simple View Resolver for JSP. Note, prefix has no more usage now.-->
+	<bean id="jspViewResolver" class="com.cartmatic.estoresf.webapp.view.TemplateViewResolver">
+		<property name="requestContextAttribute" value="rc" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+    
+	<mvc:view-controller path="/index.html" view-name="index"/>
+	<mvc:view-controller path="/signup.html" view-name="signup"/>
+	<mvc:view-controller path="/404.html" view-name="404"/>
+	<mvc:view-controller path="/sitemap.html" view-name="sitemap"/>
+	<mvc:view-controller path="/contactus.html" view-name="contactus"/>
+	<mvc:view-controller path="/loginDlg.html" view-name="loginDlg"/>
+	<mvc:view-controller path="/inquiry.html" view-name="inquiry"/>
+	<mvc:view-controller path="/wholesale.html" view-name="wholesale"/>
+	<mvc:view-controller path="/admin/index.html" view-name="admin/index"/>
+	<mvc:view-controller path="/recentView/recentView.html" view-name="recentView"/>
+	<mvc:view-controller path="/paymentError.html" view-name="paymentError"/>
+	<mvc:view-controller path="/new-arrivals.html" view-name="newArrivals"/>
+	
+	<!-- 所有非法访问都转发到这页面 -->
+	<mvc:view-controller path="/myaccount/invadeError.html" view-name="customer/invadeError"/>
+				
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<!-- <property name="defaultHandler" ref="baseJspController" /> -->
+		<property name="mappings">
+			<props>
+				<!-- Start of URL mappings -->
+				<prop key="/google*.html">baseJspController</prop>
+				<prop key="/static/*.html">baseJspController</prop>
+				<prop key="/static/**/*.html">baseJspController</prop>
+				<prop key="/magazine/**/*.html">baseJspController</prop>
+				<prop key="/system/payment/*.html">baseJspController</prop>
+				<prop key="/admin/log4jMgr.html">log4jMgrController</prop>
+				<prop key="/admin/schedulerMgr.html">schedulerMgrController</prop>
+				<prop key="/postLogin.html">postLoginController</prop>
+				<prop key="/loginError.html">loginErrorController</prop>
+				<prop key="/validateCode.html">jCaptchaController</prop>
+				<prop key="/dialog/upload.html">uploadController</prop>
+				<prop key="/system/region/byType.html">regionSelectorController</prop>
+				<prop key="/system/region/byParentIdAndType.html">regionSelectorController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Reuse velocity engine for view rendering, don't change settings here -->
+	<!-- <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="velocityEngine" ref="velocityEngine" />
+	</bean> -->
+	<!-- Simple View Resolver for Velocity templates, appending ".html" to logical view names, use ".html" instead of ".vm" thus can edit templates more conveniently. -->
+	
+	<bean id="postLoginController" class="com.cartmatic.estore.webapp.action.PostLoginController" parent="baseController" autowire="byName">
+	</bean>
+	
+	<bean id="loginErrorController" class="com.cartmatic.estore.core.controller.LoginErrorController" parent="baseController" autowire="byName">
+	</bean>
+	
+	<bean id="uploadController"
+		class="com.cartmatic.estore.webapp.action.UploadController">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="multipartResolver">
+			<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+				<property name="maxUploadSize" value="20971520000" />
+			</bean>
+		</property>
+		<property name="uploadManager" ref="uploadManager" />
+		<property name="isUuidRename" value="true" />
+	</bean>
+	
+	<bean id="log4jMgrController" class="com.cartmatic.estore.core.controller.Log4jMgrController" parent="baseController" autowire="byName">
+		<property name="defaultView" value="admin/log4jMgr"/>
+		<property name="successView" value="/admin/log4jMgr.html"/>
+	</bean>
+	<bean id="schedulerMgrController" class="com.cartmatic.estore.system.scheduler.web.SchedulerMgrController" parent="baseController" autowire="byName">
+		<property name="defaultView" value="admin/schedulerMgr"/>
+		<property name="successView" value="/admin/schedulerMgr.html"/>
+    </bean>
+
+	<bean id="regionSelectorController" class="com.cartmatic.estore.system.web.action.RegionSelectorController" parent="genericController">
+		<property name="regionManager" ref="regionManager"/>
+	</bean>
+</beans>

@@ -1,0 +1,20 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+		<link href="${resPath}/styles/global.css" rel="stylesheet" type="text/css" />
+		<link href="${resPath}/styles/head_foot.css" rel="stylesheet" type="text/css" />
+		<link href="${resPath}/styles/nav.css" rel="stylesheet" type="text/css" />
+		
+<c:if test="${empty isError or isError!='true'}">
+		<div class="clew-message">
+		<div class="clew-top"><fmt:message key="account.news.message"/></div>
+		<div class="clew-content">
+			<div class="text" style="text-align:center;width:100%;background:#fff;">
+					<img alt="information"	src="${resPath}/images/msg_smile.gif" align="middle"/>
+					<div class="clear"></div>
+					Thank you for your order! Transferring to the payment gateway... ...<br/>
+					<b>Please wait!</b>		
+			</div>
+		</div>
+		</div>
+</c:if>

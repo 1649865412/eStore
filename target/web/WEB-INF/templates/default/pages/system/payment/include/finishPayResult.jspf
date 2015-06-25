@@ -1,0 +1,15 @@
+<%@ include file="/common/taglibs.jsp"%>
+<c:if test="${empty isError or isError!='true'}">
+	<c:choose>
+		<c:when test="${requestScope['successFlag']=='0'}">
+			<%@include file="failingPayment.jspf"%>
+		</c:when>
+		<c:when test="${requestScope['successFlag']=='-1'}">
+			<%@include file="pendingPayment.jspf"%>
+		</c:when>
+		<c:otherwise>
+			<%@include file="finishPayment.jspf"%>
+		</c:otherwise>
+	</c:choose>
+	<br />
+</c:if>

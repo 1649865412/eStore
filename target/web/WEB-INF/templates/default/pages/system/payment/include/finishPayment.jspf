@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<HTML>
+<HEAD>
+<TITLE><fmt:message key="payment.finish.title"/></TITLE>
+</HEAD>
+<BODY>
+	<div style="text-align: center">
+		<div class="clew-message">
+		<div class="clew-top"><fmt:message key="account.news.message"/></div>
+			<div class="clew-content">
+			<div class="text" style="width:100%;">
+					<table border="0" align="center" width="100%">
+						<tr>
+							<td rowspan="2" width="60" valign="top"><IMG height="50" alt="finish" src="${resPath}/images/msg_ok.gif" width="50" align="middle"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:green">
+									亲爱的顾客:<br/>
+									感谢购买，您的订单已经生成，我们尽快为您安排发货。<br/>
+									以下为本次订单信息，如需查看支付状态，点此进入 <a href="${ctxPath}/myaccount/account.html">订单状态</a>.<br/>
+									订单号: ${orderNo}<br/>
+									总金额: ${amount}<br/>														
+									点击此可以<a href="${ctxPath}/"><h3>继续购物...</h3></a>																
+									如果您有任何购买疑问，请致电我们客服专线：400-661-5677或发邮件至 ${appConfig.store.email}<br/>	
+									</span>
+							</td>
+						</tr>	
+					</table>
+			</div>
+		</div>
+		</div>
+	</div>
+	<br/>
+</BODY>
+</HTML>
