@@ -1,0 +1,4 @@
+<%@tag import="com.cartmatic.estore.common.helper.ConfigUtil"%><%@	tag import="com.cartmatic.estore.common.helper.CatalogHelper"%><%@
+	tag import="com.cartmatic.estore.common.model.catalog.Category"%><%@ 
+	attribute name="product" required="true" type="com.cartmatic.estore.common.model.catalog.Product"%><%@ 
+	attribute name="category" type="com.cartmatic.estore.common.model.catalog.Category" description="产品目录"%><%String url=CatalogHelper.getInstance().getProductUrl(product,ConfigUtil.getInstance().getStore().getCatalogId(),category==null?null:category.getId());out.print(application.getAttribute("ctxPath")+url);%>

@@ -1,0 +1,23 @@
+<%@ include file="/common/taglibs.jsp"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="attribute" tagdir="/WEB-INF/tags/attribute"%>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags/app"%>
+
+ <div class="left">
+                       <label>排序：</label>
+                         <select id="select_sort" class="box-input" onchange="changeSort(this.value)">
+                           	<option value="s1" <c:if test="${param.sort == 's1' or empty param.sort}">selected</c:if>><fmt:message key="productList.sort.new_arrival"/></option>
+			<option value="s2" <c:if test="${param.sort == 's2'}">selected</c:if>><fmt:message key="productList.sort.best_selling"/></option>
+			<option value="s3" <c:if test="${param.sort == 's3'}">selected</c:if>><fmt:message key="productList.sort.item_name"/></option>
+			<option value="s4" <c:if test="${param.sort == 's4'}">selected</c:if>><fmt:message key="productList.sort.price.lowToHigh"/></option>
+			<option value="s5" <c:if test="${param.sort == 's5'}">selected</c:if>><fmt:message key="productList.sort.price.highToLow"/></option>
+		</select>
+	</div>
+ <div class="left form_label">
+                      <label>查看：</label>
+                      <select id="select_sort" class="box-input" onchange="changePageSize(this.value)">
+                        <option value="20" <c:if test="${param.rows == '20' or empty param.rows}">selected</c:if>>20</option>
+		<option value="40" <c:if test="${param.rows == '40'}">selected</c:if>>40</option>
+		<option value="60" <c:if test="${param.rows == '60'}">selected</c:if>>60</option>
+                      </select>
+                   </div>

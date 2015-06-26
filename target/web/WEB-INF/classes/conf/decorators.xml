@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<decorators defaultdir="/decorators">
+	<excludes>
+		<pattern>/4*.jsp</pattern>
+		<pattern>/rss.html*</pattern>
+		<pattern>/**/product_cat_iframe.html</pattern>
+		<pattern>/view-image.html*</pattern>
+		<pattern>/google*.html</pattern>
+	</excludes>
+
+	<!-- dec 为前缀的jsp文件为装饰器专用文件。-->
+	<!-- 装饰器的匹配一般是两种方式： URL和参数 -->
+	<!-- URL 主要看每个装饰器定义的pattern -->
+	<!-- 参数  可以在url后面通过GET方式带参数： decorator=[指定的装饰器name，如printable] -->
+	<!--主页装饰器 -->
+<decorator name="mainpage" page="decMainPage.jsp">
+		<pattern>/index.html</pattern>
+	</decorator> 
+
+	<!--购物车装饰器 -->
+	<decorator name="shoppingcart" page="decShoppingCart.jsp">
+		<pattern>/cart/shoppingcart.html</pattern>
+	</decorator>
+	<!--配饰界面装饰器 -->
+	<decorator name="accessories" page="accessories.jsp">
+		<pattern>/accessories_catalog.html</pattern>
+	</decorator>
+	<!--饰品界面装饰器 -->
+	<decorator name="accessories" page="accessories.jsp">
+		<pattern>/accessories/stationery_catalog.html</pattern>
+	</decorator>
+	
+
+
+	<!-- 产品目录主页 -->
+	<decorator name="catalog_col2" page="decCatalog_col2.jsp">
+		<pattern>/*_catalog*.html*</pattern>
+		<pattern>/new-arrivals.html*</pattern>
+	</decorator>
+	
+	<!-- 产品列表页装饰器 -->
+	<decorator name="catalog_search" page="decSearch.jsp">
+		<pattern>/search-prod.html*</pattern>
+	</decorator>
+
+	<!-- cms装饰器 -->
+	<decorator name="cms" page="decCms.jsp">
+		<pattern>/Customer_Service/index.html*</pattern>
+		<pattern>/promotion*</pattern>
+		<pattern>/Customer_Service/**.html*</pattern>
+		<pattern>/contactus.html</pattern>
+		<pattern>/contactUsForm.html</pattern>
+		<pattern>/sitemap.html</pattern>
+	</decorator>
+
+	<!-- decorator for product(has mini cart) -->
+	<!---->
+		<decorator name="product" page="decProduct.jsp">
+		<pattern>/product/*.html*</pattern> </decorator>
+	
+	<decorator name="checkout" page="decCheckout.jsp">
+		<pattern>/checkout*</pattern>
+	</decorator>
+
+	<!-- decorator for customer -->
+	<decorator name="customer" page="decAccount.jsp">
+		<pattern>/myaccount/*</pattern>
+	</decorator>
+	
+	<!--
+		decorator for print(has parameter: printable=true) has css, has js
+	-->
+	<decorator name="printable" page="decPrintable.jsp" />
+
+	<!-- decorator for picture select  has css, has js-->
+	<decorator name="selecter" page="decAdmin.jsp">
+		<pattern>/admin/*</pattern>
+	</decorator>
+
+	<!-- decorator for blank no css, no js-->
+	<decorator name="blank" page="decBlank.jsp"/>		
+	<decorator name="nothing" page="decNothing.jsp"/>		
+
+	<!-- decorator for default (login, signup, error eg.) -->
+	<decorator name="default" page="decDefault.jsp">
+		<pattern>/*</pattern>
+  <!--设计师界面装饰器 -->
+	<decorator name="designer" page="designer.jsp">
+		<pattern>/designer/index.html</pattern>
+	</decorator>
+
+	</decorator>
+</decorators>

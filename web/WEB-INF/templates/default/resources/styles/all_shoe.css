@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* CSS Document */
+#moving_tab a {
+    text-decoration: none;
+    display: block;
+}
+#moving_tab a:hover {
+    text-decoration: none;
+}
+#moving_tab {
+    overflow: hidden;
+    width: 150px;
+    position: relativeborder: 1px solid #ccc;
+    margin: 0 auto;
+    line-height:140%;
+}
+#moving_tab .move_tabs {
+    position: relative;
+    height: 30px;
+    padding-top: 10px;
+    cursor: default;
+}
+#moving_tab .move_tabs .item {
+    position: relative;
+    z-index: 10;
+    float: left;
+    display: block;
+    width: 74px;
+    text-align: center;
+}
+#moving_tab .move_tabs .lava {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 74px;
+    height: 30px;
+	border: 1px solid #000;
+}
+#moving_tab .mtab_content {
+    position: relative;
+    overflow: hidden;
+}
+#moving_tab .catHotSale {
+    position: relative;
+    width: 300px;
+}
+#moving_tab .catHotSale ul {
+    float: left;
+    width: 150px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#moving_tab .catHotSale ul li {
+	margin: 5px 0;
+
+}
+#moving_tab .unmargin{
+	margin:5px 0;
+	border-bottom: 1px dotted #000;
+	padding-bottom:5px;
+
+}

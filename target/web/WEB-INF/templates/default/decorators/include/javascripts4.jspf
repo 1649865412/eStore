@@ -1,0 +1,27 @@
+<c:if test="${not empty appConfig.store.defaultAnalytics}">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '${appConfig.store.defaultAnalytics}'], ['_setDomainName', 'none'], ['_trackPageview']);  
+  <c:if test="${not empty ga_trackeer}">${ga_trackeer}</c:if>
+  <c:if test="${not empty appConfig.store.spareAnalytics}">
+  _gaq.push(['b._setAccount', '${appConfig.store.spareAnalytics}'], ['b._trackPageview']);
+  </c:if>
+  
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</c:if>
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/jquery-1.7.1.min.js" ></script>
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/jquery.bxslider.js"></script>
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/filters.js"></script>
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/zoominfo.js"></script>
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/jquery.fancybox.js"></script>
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/plugins/lazyload/jquery.lazyload.mini.js"></script>
+<script type="text/javascript" src="${ctxPath}/scripts/jsp/global.js"></script>
+
+
+
+

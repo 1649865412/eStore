@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+.transfer_table{
+	width:930px;
+}
+.transfer_table tbody tr td{
+	border-bottom:1px solid #ddd;
+}
+	
+.bank_table{
+	padding:10px 57.5px;
+}
+.bank_num{
+	text-align:left;
+	padding-left:45px;
+}
+.add_more_tab{
+	background:#ef7d36;
+	color:#fff;
+	text-align:center;
+	padding:5px;
+	margin-left:5px;
+	margin-top:5px;
+}
+
+.add_more{
+	background:transparent;
+	margin-left:5px;
+	margin-top:5px;
+	height:22px;
+}
+
+
+/*bank-logo*/
+.bank-logo{background-image:url(../images/bank-logo-20140410B.png);display:block;width:125px;height:28px;overflow:hidden}
+.pay-logo{background-image:url(../images/bank-logo-20140605A.png);display:block;width:125px;height:28px;overflow:hidden}
+#bank-bjrcb{background-position:0 0}
+#bank-bob{background-position:0 -28px}
+#bank-cbhb{background-position:0 -56px}
+#bank-bocd{background-position:0 -84px}
+#bank-fudian{background-position:0 -112px}
+#bank-icbc{background-position:0 -140px}
+#bank-ceb{background-position:0 -168px}
+#bank-gdb{background-position:0 -196px}
+#bank-hkb{background-position:0 -224px}
+#bank-hzb{background-position:0 -252px}
+#bank-hengfeng{background-position:0 -280px}
+#bank-hxb{background-position:0 -308px}
+#bank-ccb{background-position:0 -336px}
+#bank-jsb{background-position:0 -364px}
+#bank-bcom{background-position:0 -392px}
+#bank-jinghua{background-position:0 -420px}
+#bank-cmbc{background-position:0 -448px}
+#bank-njcb{background-position:0 -476px}
+#bank-nbcb{background-position:0 -504px}
+#bank-abc{background-position:0 -532px}
+#bank-pab{background-position:0 -560px}
+#bank-spdb{background-position:0 -588px}
+#bank-qdccb{background-position:0 -616px}
+#bank-srcb{background-position:0 -644px}
+#bank-shb{background-position:0 -672px}
+#bank-sdb{background-position:0 -700px}
+#bank-wzcb{background-position:0 -728px}
+#bank-cib{background-position:0 -756px}
+#bank-cmb{background-position:0 -784px}
+#bank-zjtl{background-position:0 -812px}
+#bank-boc{background-position:0 -840px}
+#bank-post{background-position:0 -868px}
+#bank-citic{background-position:0 -896px}
+#bank-cqrcb{background-position:0 -924px}
+#bank-cqcb{background-position:0 -952px}
+#bank-gzrcc{background-position:0 -980px}
+#bank-gzcb{background-position:0 -1008px}
+#bank-hsb{background-position:0 -1036px}
+#bank-czb{background-position:0 -1064px}
+#pay-alipay{background-position:0 0}
+#pay-kara{background-position:0 -28px}
+#pay-cmpay{background-position:0 -56px}
+#pay-unionpay{background-position:0 -84px}
+#pay-weixin{background-position:0 -112px}
+#pay-yiwangtong{background-position:0 -140px}
+#bank-gzns{background-position:0 -978px}

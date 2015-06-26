@@ -1,0 +1,9 @@
+		<c:if test="${not empty appConfig.rssURL}"><link href="${appConfig.rssURL}" title="${appConfig.store.name} RSS FEED" type="application/rss+xml" rel="alternate"/></c:if>
+		<link rel="icon" href="${resPath}/images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="${resPath}/images/mindo.ico" type="image/x-icon" />
+		<link href="${resPath}/styles/head_foot.css" rel="stylesheet" type="text/css" />
+		<link href="${resPath}/styles/nav.css" rel="stylesheet" type="text/css" />
+        
+         <!--[if IE]>
+	    <link rel="stylesheet" type="text/css" href="${resPath}/styles/nav-ie-only.css" />
+        <![endif]-->

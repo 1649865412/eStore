@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Document */
+.login_reg {
+	float:left;
+	margin-bottom:50px;
+}
+.login_left{
+	width:49.1%;
+	float:left;
+}
+.col{
+	background-color: #f0f0f0;
+	padding: 40px 20px;
+	height: 450px;
+
+}
+.reg_right{
+	width:49.1%;
+	float:right;
+}
+
+h4.title {
+	color: #555;
+	margin-bottom: 0.5em;
+	font-size: 1.4em;
+	line-height: 1.2;
+	font-weight: normal;
+	margin-top: 0px;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	border-bottom: 1px solid #DFDDDD;
+	padding-bottom: 13px;
+}
+
+p.helper {
+	font-family: 'AvenirLT-Roman';
+	font-size: 14px;
+	line-height: 18px;
+	color: #777772;
+	margin-bottom: 10px;
+	width: 97%;
+}
+p.helper~ul.chart_waring{
+	color:#777772;
+}
+
+h3.log_reg_title {
+	font: 14px/21px;
+	font-weight: normal;
+	font-style: normal;
+	color: #221E1A;
+	text-transform: uppercase;
+	margin: 0 0 18px;
+}
+/*input*/
+.margin-bottom-sm {
+	margin-bottom: 5px !important;
+}
+.input-group {
+	position: relative;
+	display: table;
+	border-collapse: separate;
+}
+.input-group-addon:first-child {
+	border-right: 0;
+}
+.input-group-addon {
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1;
+	color: #555;
+	text-align: center;
+	background-color: #EEE;
+	border: 1px solid #CCC;
+}
+.input-group-addon, .input-group-btn {
+	width: 1%;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.input-group-addon, .input-group-btn, .input-group .form-control {
+	display: table-cell;
+}
+.input-group {
+	position: relative;
+	display: table;
+	border-collapse: separate;
+}
+
+.form-control {
+	display: block;
+	width: 100%;
+	height: 20px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: white;
+	background-image: none;
+	border: 1px solid #CCC;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.input-group .form-control {
+	position: relative;
+	z-index: 2;
+	float: left;
+	width: 95%;
+	margin-bottom: 0;
+}
+
+
+.lost_password {
+	color: #d4bc8c;
+	margin: 15px 0 15px 0px;
+	display: block;
+}
+
+.lost_password label{
+	font-size:14px;
+}
+.lost_password label a{
+	text-decoration:underline;
+}

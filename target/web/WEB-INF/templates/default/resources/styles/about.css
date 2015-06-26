@@ -1,0 +1,300 @@
+@charset "utf-8";
+/* CSS Document */
+
+.portfolio_item_text:after {
+	content: ' ';
+	position:absolute;
+	bottom: -9px;
+	left: 50%;
+	width: 0;
+	height: 0;
+	display: block;
+	margin-left: -10px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #fff;
+	z-index: 10;
+}
+
+.portfolio_item_text:after {
+	top: 208px;
+	margin-left: -16px;
+	border-left: 16px solid transparent;
+	border-right: 16px solid transparent;
+	border-top: 16px solid #fff;
+}
+
+.about_nav {
+	position:relative;
+	top:120px;
+	left:150px;
+	display:block;
+	margin-top: 15px;
+	width:100%;
+	letter-spacing: 1px;
+}
+
+.about_nav ul {
+    list-style:none;
+    margin:0 !important;
+    padding:0;
+    color:#fff;
+	font-weight:bold;
+	float:left;
+	width:100%;
+	line-height: 1.2;
+
+}
+
+/* single tab */
+.about_nav ul li {
+    float:left;
+    text-indent:0;
+    padding:0;
+    margin:0 !important;
+    list-style-image:none !important;
+}
+
+
+/* link inside the tab. uses a background image */
+.about_nav ul a {
+    font-size:50px;
+	font-weight:bold;
+	color:#fff;
+	cursor:pointer;
+    display:block;  
+    text-align:center;
+    text-decoration:none;
+    padding:0px;
+    margin: 0px 2px;
+    position:relative;
+    top:1px;
+}
+
+.about_nav ul a:active {
+    outline:none;
+	color:#d4bc8c;
+}
+
+/* when mouse enters the tab move the background image */
+.about_nav ul a:hover {
+    color:#d4bc8c;
+}
+
+/* active tab uses a class name "current". its highlight is also done by moving the background image. */
+.about_nav ul a.current, .about_nav ul a.current:hover, .about_nav ul li.current a {
+    background-position: -420px -62px;
+    cursor:defa.hot_trends ult !important;
+    color:#d4bc8c !important;
+}
+
+.about_nav ul li.remote_active a{
+	outline:none;
+	color:#d4bc8c;
+	font-weight:bold;
+}
+
+/*下方内容*/
+.about_bg{
+	background: url(../images/about/table-chair-city.jpg) no-repeat center center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	min-height:300px;
+	width:100%;
+}
+
+.contact_bg{
+	background: url(../images/about/IMG_3642-1300x866.jpg) no-repeat center center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	min-height:300px;
+	width:100%;
+}
+
+.joinus_bg{
+	background: url(../images/about/glass-bar-cocktail.jpg) no-repeat center center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	min-height:300px;
+	width:100%;
+}
+
+.about_all h1, .about_all h2, .about_all h3{
+	color:#3A4046;
+	letter-spacing: 1px;
+}
+
+.about_all p{
+	color: #646e73;
+	letter-spacing: 1px;
+}
+
+.sec2 img{
+	width: 200px;
+	margin: 30px 0 30px 40%;
+	text-align:center;
+}
+
+/*关于我们*/
+p span.smalltop {
+	font-size: 14px;
+	display: block;
+	margin: 0 0 30px 0;
+	letter-spacing: 5px;
+	text-align:center;
+}
+
+.about_slogan{
+	font-size: 65px;
+	margin: 0 0 30px 0;
+	line-height: 50px;
+	text-align:center;
+}
+
+
+h2.about_slogan_down{
+	text-align:center;
+	margin: 0 0 30px 0;
+	color:#6b6b6b;
+}
+/*联系我们*/
+.contact_us{
+	line-height:1.8em;
+	float:left;
+}
+h2.contact_us_title_down{
+	text-align:center;
+	margin: 0 0 30px 20%;
+	width:60%;
+	line-height: 32px;
+	
+}
+ul.list_icon_items{
+	float:left;
+	width:100%;
+	list-style:none;
+    margin:0 !important;
+    padding-bottom:80px;
+	line-height:1.2;
+	text-align:center;
+}
+
+ul.list_icon_items li {
+    float:left;
+    text-indent:0;
+    padding:0;
+    margin: 2.75em 1em 0;
+    list-style-image:none !important;
+	width:30%;
+	color:#d4bc8c;
+}
+.icon_width{
+	height: 124px;
+}
+.icon_nohover{
+	color:#d4bc8c;
+	width: 124px;
+	height: 124px;
+	margin-top:20px;
+	
+}
+
+.icon_hover{
+	color:#666;
+	padding:20px;
+	width: 60px;
+	height: 60px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	text-align:center;
+	border:2px solid #666;
+	behavior: url(PIE/PIE.htc); 
+}
+
+
+ul.list_icon_items li p{
+	margin-top: 1em;
+	font-size:14px;
+}
+ul.list_icon_items li p.secondary{
+	font-size: 18px;
+	word-spacing: 1px;
+	line-height: 20px;
+	margin:0;
+	padding:0;
+}
+ul.list_icon_items li p span.pseudo-link, ul.list_icon_items li a.icon_a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #181818;
+	border-bottom: 1px solid #d4bc8c;
+}
+
+.weixin_QR{
+	background-image:url(../images/weixin.jpg);
+	width:120px;
+	height:120px;
+	display:none;
+}
+
+.grid-2 {
+	width: 120px;
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+.map_find_us{
+	background: url(../images/map.jpg) no-repeat center center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	width:100%;
+	height:540px;
+	margin-top: 1.6em;
+}
+
+.map-lower {
+	margin-top: 0;
+	background-color:#F8F8FF;
+		text-align: left;
+	font-size: 20px;
+	line-height: 30px;
+	min-height:270px;
+}
+
+.grid-9{
+	padding: 50px;
+}
+
+.grid-9 h3{
+	letter-spacing: 3px;
+	color: #c8d48c;
+}
+.dec{
+	margin-top: 1em;
+}
+.dec p{
+	color:#6b6b6b;
+	padding-top:10px;
+	font-size:14px;
+}
+
+.dec p i.fa{
+	color:#c8d48c;
+}
+/*加入我们*/
+
+h3.join_us_title_down{
+	text-align:center;
+	margin: 20px 0 30px 15%;
+	width:67%;
+	line-height: 32px;
+	
+}
+
+.down_right{
+	width: 90%;
+}

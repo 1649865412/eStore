@@ -1,0 +1,14 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="cms" tagdir="/WEB-INF/tags/catalog"%>
+<!--前端导航条组件-->
+<c:set var="pageNavigator"><decorator:getProperty property="page.heading" /></c:set>
+<a href="${ctxPath}/"><fmt:message key="menu.home" /></a><c:if test="${not empty pageNavigator}">&nbsp;&gt;&nbsp;</c:if>
+<c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/')!=-1}">
+	<a href="${ctxPath }/myaccount/account.html"><fmt:message key="user.myaccount"/></a>&nbsp;&gt;&nbsp;</span>
+</c:if>
+<decorator:getProperty property="page.heading" />
+
+
+
+           

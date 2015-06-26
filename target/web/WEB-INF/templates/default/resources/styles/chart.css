@@ -1,0 +1,301 @@
+@charset "utf-8";
+/* CSS Document */
+
+.chart_top{
+	min-height:115px;
+	margin-top:10px;
+	float:left;
+}
+.chart_bottom{
+	margin-bottom:80px;
+	float:left;
+}
+/*标题*/
+.chart_t_left{
+	float:left;
+	width:390px;
+}
+
+.chart_title{
+	font-size:25px;
+	color:#313131;
+	margin:5px 0;
+	line-height:100%;
+}
+/*进度栏*/
+.chart_t_right{
+	float:left;
+	width:610px;
+}
+.chart_t_right img{
+	float:right;
+}
+
+/*购物车*/
+
+.chart_table{
+	border:1px solid #ddd;
+	width:100%;
+	border-collapse:collapse;
+}
+table thead th{
+	border-bottom:1px solid #ddd;
+	font-size:12px;
+	padding:10px 0;
+	text-align:center;
+}
+
+.border_with{
+	border-bottom:1px solid #ddd;
+}
+table tbody tr td{
+	text-align:center;
+}
+table tbody tr.border_last td{
+	border-bottom:1px solid #ddd;
+}
+table tfoot tr td{
+	color:#999;
+}
+.align_left{
+	text-align:left;
+}
+.align_center{
+	text-align:center;
+}
+.align_right{
+	text-align:right;
+}
+.text_bold{
+	font-weight:bold;
+}
+.padding_bottom15{
+	padding-bottom:15px;
+}
+.padding_right10{
+	padding-right:10px;
+}
+.padding_right30{
+	padding-right:30px;
+}
+.padding_left10{
+	padding-left:10px;
+}
+.padding_left20{
+    padding-left:20px;
+}
+.padding_left30{
+    padding-left:30px;
+}
+.padding_top10{
+	padding-top:10px;
+}
+/*满减*/
+
+table tbody tr.cut_bg td{
+	font-weight:bold;
+}
+
+.cut_bg{
+	background-color:#f1f2f2;
+}
+	
+.chart_cut{
+	text-align:center;
+	padding:5px 0;
+}
+
+.chart_cut img{
+	width:24px;
+	height:20px;
+}
+
+.chart_cut span.cut_title{
+	font-size:15px;
+	color:#c3ab85;
+	position:relative;
+	bottom:5px;
+}
+.cut_howmuch{
+	color:#c3ab85;
+}
+
+/*购物详细*/
+.chart_img img{
+	width:116px;
+	height:116px;
+	padding:30px 22px;
+}
+/*加色，删除按钮*/
+.colour_trash{
+	color:#d4bc8c;
+}
+
+.colour_trash a{
+	color:#d4bc8c;
+}
+.colour_trash a:hover{
+	color:#000;
+}
+.padding_td{
+	padding:0 10px;
+}
+/*尺码颜色*/
+.size_colour{
+	color:#777;
+	padding:0;
+}
+.size_colour span{
+	padding-right:5px;
+}
+/*数量*/
+.product_quantity .form input {
+	background: none repeat scroll 0 0 transparent;
+	border:1px solid #c0c0c0;
+	color: #aaa;
+	float: left;
+	padding:5px;
+	width: 20px;
+	text-align: center;
+
+
+}
+.product_quantity .form input[type="button"] {
+	color: #aaa;
+	float: left;
+	font-size: 12px;
+	height: auto;
+	padding:5px;
+	width: 25px;
+
+
+}
+/*库存警告栏*/
+.border_last .padding_last{
+	padding:15px 0;
+}
+
+.border_last .fa-exclamation-triangle{
+	margin-right:10px;
+}
+/*tfoot*/
+/*告示栏*/
+.chart_tfoot_first td{
+	padding-top:25px;
+}
+
+.chart_td_waring{
+	padding-left:22px;
+	vertical-align:top;
+
+}
+ul.chart_waring,
+ul.chart_waring li{
+	list-style-type:disc;
+	margin:0 10px 10px 10px;
+}
+/*小计栏*/
+.chart_howmany{
+	padding:0 2px 15px 10px;
+}
+.chart_subtotal{
+	padding:0 0 15px 10px;
+}
+
+/*优惠表单栏*/	
+.control-group{
+	padding:2px 10px;
+}
+.control-group select,
+.control-group input[type="text"]{
+	background-color: #fff;
+	border: 1px solid #ccc;
+	display: inline-block;
+	padding: 4px 6px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	color:#999;
+	vertical-align: middle;
+	text-align:center;
+}
+
+.control-group input[type="text"]{
+	line-height: 20px;
+	height: 20px;
+
+}
+
+.select_title{
+	color:#bbb;
+}
+
+/*共计栏*/
+
+.chart_last_total td{
+	padding-top:25px;
+	padding-bottom:25px;
+	font-size:18px;
+	line-height:100%;
+}
+.chart_total_no{
+	font-size:12px !important ;
+}
+
+/*购物支付按钮*/
+.chart_button{
+	float:left;
+	margin:25px 0;
+	width:100%;
+}
+
+.btn {
+	display: inline-block;
+	padding: 4px 50px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 30px;
+	color: #fff;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.btn-dgray{
+	background-color:#666;
+	border:1px solid #666;
+}
+.btn-dgray:hover{
+	background-color:#fff;
+	border:1px solid #666;
+	color:#666;
+}
+.btn-black{
+	background-color:#000;
+    border:1px solid #000;
+}
+.btn-black:hover{
+	background-color:#fff;
+	border:1px solid #000;
+	color:#000;
+}
+.btn-gold{
+	background-color:#d4bc8c;
+	border:1px solid #d4bc8c;
+}
+.btn-gold:hover{
+	background-color:#fff;
+	border:1px solid #d4bc8c;
+	color:#d4bc8c;
+}
+
+.after_trash{
+	padding:12px;
+}
+.after_trash h2{
+	text-align:center;
+	color:#999;
+	padding-top:50px;
+}
+.after_trash_button{
+	padding-top:50px;
+}

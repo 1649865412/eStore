@@ -1,0 +1,4 @@
+		<c:if test="${not empty appConfig.rssURL}"><link href="${appConfig.rssURL}" title="${appConfig.store.name} RSS FEED" type="application/rss+xml" rel="alternate"/></c:if>
+		
+		<link href="${resPath}/styles/jquery.fancybox.css?v=2.1.5" rel="stylesheet" />
+		<link href="${resPath}/styles/designer_page.css" rel="stylesheet" />

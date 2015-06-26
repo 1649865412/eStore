@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+ 	<description>
+		<![CDATA[A tag library that defines a function.]]>
+	</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>FunctionTagLibrary</short-name>
+    <uri>/FunctionLibrary</uri>
+    <function>
+        <name>lastIndexOf</name>
+        <function-class>com.cartmatic.estore.core.taglib.CartmaticFunctions</function-class>
+        <function-signature>int lastIndexOf(java.lang.String, java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>lastSubstringBefore</name>
+        <function-class>com.cartmatic.estore.core.taglib.CartmaticFunctions</function-class>
+        <function-signature>String lastSubstringBefore(java.lang.String, java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>substring</name>
+        <function-class>com.cartmatic.estore.core.taglib.CartmaticFunctions</function-class>
+        <function-signature>String substring(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>contains</name>
+        <function-class>com.cartmatic.estore.core.taglib.CartmaticFunctions</function-class>
+        <function-signature>boolean contains(java.lang.Object, java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <name>contains4Array</name>
+        <function-class>com.cartmatic.estore.core.taglib.CartmaticFunctions</function-class>
+        <function-signature>boolean contains4Array(java.lang.Object[], java.lang.Object)</function-signature>
+    </function>
+    <function>
+        <name>contains4Code</name>
+        <function-class>com.cartmatic.estore.core.taglib.CartmaticFunctions</function-class>
+        <function-signature>boolean contains4Code(java.lang.String, java.lang.String)</function-signature>
+    </function>
+</taglib>

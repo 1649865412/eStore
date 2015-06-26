@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+
+.nav-search-wrap {
+	height:36px;
+	position:absolute;
+	z-index:1000;
+	width:1000px;
+	line-height:36px;
+	text-align:center;
+	left:30%;
+}
+.nav-search ul {
+	padding:0px;
+	margin:0px;
+	list-style-type:none;
+	text-transform:uppercase;
+	margin:auto; /*background-color:#f00;*/
+	font-weight:blod;
+	text-align:center;
+	position:relative;
+}

@@ -1,0 +1,117 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<div class="footer">
+<div class="wrap1000">
+	<div align="center"><img src="${resPath}/images/icon/icon_footer.png"/ ></div>
+		<div class="blank24"></div>
+	<div class="f-left">
+		<h4>关注我们</h4>
+		<ul>
+			<li><a href="http://weibo.com/sifangstreet"><img src="${resPath}/images/icon/sina.png"/ ></a></li>
+			<li><img src="${resPath}/images/icon/instagram.png"/ ></li>
+			<li class="weixin">
+			<a href="#"><img src="${resPath}/images/icon/line.png"/ ></a>
+				<ul>
+					<li><img src="${resPath}/images/line.jpg" /></li>
+				</ul>
+				
+			</li>
+			
+			
+			<li class="weixin">
+				<a href="#"><img src="${resPath}/images/icon/weixin.png"/ ></a>
+				<ul>
+					<li><img src="${resPath}/images/weixin.jpg" /></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="f-middle">
+		<h4>订阅四方街每周精选</h4>
+		<p>输入您的邮箱,第一时间获取更多设计师产品情报</p>
+		   <div class="blank8"></div>
+		<div class="left"><input id="userName" type="text" autocomplete="off" title="Search for"  value="称呼:"  class="box-input" name="q" style="width:142px;height:23px;" value=""></div>
+		<div class="left" style="margin:0 10px;"><input id="email" type="text" autocomplete="off" value="邮箱：" title="Search for" class="box-input" name="q" style="width:142px;height:23px;" value=""></div>
+		<div class="left"><input type="image" src="/resources/images/icon/btn_form.jpg" onclick="saveUserRss()"></div>
+		
+		<script>
+			function saveUserRss(){
+				var userName = $("#userName").val();
+				var email = $("#email").val();
+				$.post(__ctxPath+"/customer/addUserRss.html",{userName:userName,email:email},function(result){
+					if(result.status==1){
+						alert("订阅成功！");
+					}else{
+					}
+				},"json");
+			}
+		</script>
+	</div>
+	<div class="f-right">
+		<h4>客服帮助</h4>
+		<p>客服时间:周一至周五9:00-18:30<br><span class="cu_time">节假日休息</span></p>
+		<p>客服热线:400-661-5677</p>
+	</div>
+	<div class="blank24"></div>
+	<div class="foot-content">
+		<dl>
+			<dt>&nbsp;&nbsp;购物指南</dt>
+			<dd><a href="/customer_service/_11.html"> 使用条款</a> </dd>
+			<dd><a href="/customer_service/_16.html"> 会员政策 </a></dd>
+			<dd><a href="/customer_service/_8.html"> 隐私政策 </a> </dd>
+		</dl>
+		<dl>
+			<dt>&nbsp;&nbsp;支付方式</dt>
+			<dd><a href="/customer_service/_6.html"> 支付方式</a> </dd>
+			<dd><a href="/customer_service/_9.html"> 礼品卡使用指南</a> </dd>
+			<dd><a href="/customer_service/_28.html"> 常见问题</a> </dd>
+			
+		</dl>
+		<dl>
+			<dt>&nbsp;&nbsp;配送方式</dt>
+			<dd><a href="/customer_service/_13.html"> 配送方式</a> </dd>
+			
+		</dl>
+		<dl>
+			<dt>&nbsp;&nbsp;售后服务</dt>
+			<dd><a href="/customer_service/_12.html"> 售后服务</a> </dd>
+			
+		</dl>
+		<dl>
+			<dt>&nbsp;&nbsp;我的账户</dt>
+			<dd><a href="/customer_service/_22.html"> 新用户注册</a></dd>
+			<dd><a href="/customer_service/_21.html"> 购物流程</a></dd>
+			
+		</dl>
+		<dl>
+			<dt>&nbsp;&nbsp;关于我们</dt>
+			<dd><a href="/customer_service/_18.html"> 关于四方街</a> </dd>
+			<dd><a href="/customer_service/_27.html"> 联系我们</a></dd>
+			<dd><a href="/customer_service/_19.html"> 加入我们</a></dd>
+		</dl>		
+	</div>
+	<div class="footbottom">
+	<p><a href="/customer_service/_11.html">服务条款</a> | <a href="/customer_service/_8.html">隐私政策</a> | <a href="/customer_service/_20.html">商务合作</a> 
+	<p>
+		友情链接：
+		<a href="http://www.fashion.com.hk" target="_blank">时尚港</a>		
+		<a href="http://www.jianshijian.com/" target="_blank">简时间</a>
+		<a href="http://www.uuuhome.com/" target="_blank">有家会</a>		
+		<a href="http://www.huitouche.cn/" target="_blank">省省回头车</a>
+	</p>
+    
+    <p >Copyright&copy;2013-2014 SifangStreet四方街版权所有     <a href="http://www.miibeian.gov.cn/">粤ICP备13075482号-1</a> </p>
+    <p>广州市越秀区东风东路753号天誉大厦东塔3104</p>
+    <a href="http://www.anquan.org/s/www.sifangstreet.com" name="bIe7hLFwEsIGD6e0PKwvzqD2yXwpSzfTo6hyXQFEOOuySFBo9P" >安全联盟、百度</a>
+    <!-- 百度商桥 -->
+ <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5987b6886920e65d633daea3a74b6ffe' type='text/javascript'%3E%3C/script%3E"));
+</script>
+  
+	</div>		
+</div>
+
+</div>

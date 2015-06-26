@@ -1,0 +1,27 @@
+
+/*slider*/
+
+.left_ab{
+	display: block;
+    float:left;
+	height:650px;
+	width:650px;
+	margin:.11%;
+}
+.big_ab {
+	display: block;
+    float:left;
+	height:650px;
+	width:650px;
+}
+
+.left_ab .bx-wrapper{
+	height:650px;
+	width:650px;
+	max-height:650px;
+	max-width:650px;
+	position: relative;
+}
+	
+
+

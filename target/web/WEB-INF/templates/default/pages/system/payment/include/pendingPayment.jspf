@@ -1,0 +1,45 @@
+<%
+	//Description: when the payment is pending
+	//Author:csx
+	//update time:2006-12-22
+ %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title><fmt:message key="payment.pending.title"/></title>
+</head>
+<body>
+	<div style="text-align: center">
+		<div class="clew-message">
+			<div class="clew-top"><fmt:message key="account.news.message"/></div>
+			<div class="clew-content">
+			<div class="text" style="width:100%;">
+				<table border="0" align="center" width="100%">
+					<tr>
+						<td rowspan="2" width="60" valign="top">
+							<IMG height="50" alt="pending" src="${resPath}/images/msg_alert.gif" width="50" align="middle">
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<span>
+								<c:url var="mainURL" value="/"/>
+								<font color="green">
+									<fmt:message key="payment.pending.tips">
+										<fmt:param value="${mainURL}"/>
+									</fmt:message>
+								</font>
+							</span>
+							<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+						</td>
+					</tr>	
+				</table>
+			</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+</body>
+</html>

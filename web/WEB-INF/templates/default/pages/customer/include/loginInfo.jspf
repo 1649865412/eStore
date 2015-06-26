@@ -1,0 +1,104 @@
+<%@ include file="/common/taglibs.jsp"%>
+<%@ page pageEncoding="UTF-8"%>
+
+<form method="post" name="loginForm" id="loginForm" action="<c:url value="/j_security_check"/>">
+	<div class="login_left">
+          <div class="login_entry col">
+            <h4 class="title">登陆四方街</h4>
+            <%--<div class="log_reg_waring">
+              <p class="helper">此处用于写一些登陆注意项，或者是需要最新提醒用户的文字咨询或活动资讯之类的.如需要多项请用下方。则此处为标题</p>
+              <ul class="chart_waring">
+                <li> 如遇到多项提醒文字请使用此处</li>
+                <li> commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </li>
+              </ul>
+            </div><!--log_reg_waring-->--%>
+            
+            <br/>
+            <h3 class="log_reg_title">会员登陆:</h3>
+            <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+              <input class="form-control" type="text" placeholder="邮箱" name="j_username" size="41" maxlength="288"  id="j_username">
+            </div>
+            <div class="mark margin-bottom-sm">
+            	<div for="j_username" generated="true" class="red" style="display: none;">邮箱</div>
+            </div>
+            <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+              <input class="form-control" type="password" placeholder="输入用户密码" name="j_password" size="41" maxlength="120"  id="j_password">
+            </div>
+            <div class="mark margin-bottom-sm">
+            	<div for="j_password" generated="true" class="red" style="display: none;">密码不能为空</div>
+            </div>
+            <div class="input-group margin-bottom-sm">
+              <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i></span>
+              <input class="form-control" type="text" placeholder="输入验证码" name="validateCode"  id="validateCode" >
+            </div>
+            <div class="mark margin-bottom-sm">
+            	<div for="validateCode" generated="true" class="red" style="display: none;">验证码不能为空</div>
+            </div>
+            <div>
+	              <a href="javascript:;" onClick="return refreshImage('login',this)">
+	                   <img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=login" title="点击改变" />
+	               </a>
+            </div>
+            <div class="clear"></div>
+            <p> 
+            	<c:set var="forgetPasswordUrl" scope="page">${ctxPath}/forgetPassword.html</c:set>
+				<a class="lost_password" href="<c:url value="/forgetPassword.html" />" title="忘记密码">忘记密码?</a>
+	            <button name="login" class="btn btn-gold" type="submit">
+	              <i class="fa fa-sign-in padding_right10"></i>
+	              登陆
+	            </button>
+            </p>
+            <br/><br/><br/><br/><br/><br/>
+          </div><!--login_entry-->
+        </div><!--login_left-->
+</form>
+
+<script type="text/javascript">
+	<%--设置默认登录email--%>
+	var username = getLoginUserEmail(false);
+	if (username != null && username != "")
+		$("#j_username").val(username);
+	if ($("#j_username").val().length > 0) {
+		$("#j_password").focus();
+	} else {
+		$("#j_username").focus();
+	}
+	$("#loginForm").validate({rules:{
+		j_username:{required:true,email:true},
+		j_password:{required:true,minlength:5},
+		validateCode:{required:true}
+	},
+		messages:{
+			j_username:{
+				required:"Email不能为空",
+				email:'邮箱格式错误'
+				},
+			j_password:{
+					required:"密码不能为空",
+					minlength:"密码必须最小为5位字符"
+				},
+			validateCode:{
+				required:"验证码不能为空"
+			}
+		}
+	});
+
+	function refreshImage(type,obj){
+		//var image=document.getElementById("imgValidationCode");
+		var image = $(obj).children()[0];
+		var url="${ctxPath}/jCaptcha.html?type=" + type;
+		var xmlHttpReq=null;
+		if(window.ActiveXObject){
+			xmlHttpReq=new ActiveXObject("Microsoft.XMLHTTP");
+		}else if(window.XMLHttpRequest){
+			xmlHttpReq = new XMLHttpRequest();
+		}
+		xmlHttpReq.open("Post", url, true);
+		xmlHttpReq.send(null); 
+		
+		image.src="${ctxPath}/jCaptcha.html?rand="+parseInt(1000*Math.random());
+		return false;
+	}
+</script>

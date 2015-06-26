@@ -1,0 +1,10 @@
+<script type="text/javascript">
+	addOnload(function(){
+		if("https:" == document.location.protocol){
+			var aList=document.getElementsByTagName("A");
+			for(var i=0;i<aList.length;i++){
+				aList[i].href=aList[i].href.replace("https","http");
+			}
+		}
+	});
+</script>

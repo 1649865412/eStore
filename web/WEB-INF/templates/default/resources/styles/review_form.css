@@ -1,0 +1,16 @@
+.star,.star-gray  {
+	background:url(../images/layout/mall_sprites.gif) bottom no-repeat;
+}
+.star,.star-half,.star-gray {
+	height:15px;
+	width:12px;
+	display:block;
+	float:left;
+	margin-top:2px
+}
+.star {
+	background-position:-550px 2px
+}
+.star-gray {
+	background-position:-600px 2px
+}

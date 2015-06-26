@@ -1,0 +1,1 @@
+This is where we should put our shared JSP fragments, usually these files will be included by other JSPs or decorators.

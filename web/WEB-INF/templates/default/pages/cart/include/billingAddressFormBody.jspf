@@ -1,0 +1,174 @@
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+<table border="0" cellpadding="0" cellspacing="0" align="center" width="650">
+	<tr>
+		<th width="30%">
+			<fmt:message key="address.title" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.title">
+				<customer:userTitle id="b_title" name="b_title" value="${status.value}" />
+			</spring:bind>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<fmt:message key="address.firstname" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.firstname">
+				<input type="text" class="box-input" name="b_firstname" id="b_firstname" value="${status.value}" maxlength="32">
+			</spring:bind>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<strong><fmt:message key="address.lastname" />:</strong>
+			<span class="red">*</span>&nbsp;&nbsp;
+			<spring:bind path="address.lastname">
+				<input type="text" class="box-input" name="b_lastname" id="b_lastname" value="${status.value}" maxlength="32">
+			</spring:bind>
+		</td>
+	</tr>
+	<tr>
+		<th valign="top">
+			<fmt:message key="address.address" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.address">
+				<input type="text" class="box-input" name="b_address" id="b_address" value="${status.value}" maxlength="64" size="60">
+			</spring:bind>
+			<br />
+			Notice: P.O. boxes Addresses are not available for shipping right now,
+			<br />
+			so please provide street address for your order. Thank you.
+		</td>
+	</tr>
+	<tr>
+		<th valign="top">
+			<fmt:message key="address.address2" />:
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.address2">
+				<input type="text" class="box-input" name="b_address2" id="b_address2" value="${status.value}" maxlength="64" size="60">
+			</spring:bind>
+			<br />
+			Apartment, suite, unite, building, floor, etc.
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<fmt:message key="address.countryName" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<select name="b_countryId" id="b_countryId" class="box-input" onchange="stateSelector(this.value,'b_stateId');" style="width: 381px">
+			</select>
+			<spring:bind path="address.countryName">
+				<input type="hidden" name="b_coutryname_h" id="b_coutryname_h" value="${status.value}">
+			</spring:bind>
+		</td>
+	</tr>
+	<tr> 
+		<th>
+			<fmt:message key="address.stateName" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<select name="b_stateId" id="b_stateId" class="box-input" style="width: 381px">
+			</select>
+			<spring:bind path="address.stateName">
+				<input type="hidden" name="b_statename_h" id="b_statename_h" value="${status.value}">
+			</spring:bind>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<fmt:message key="address.cityName" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.cityName">
+				<input type="text" name="b_cityName" id="b_cityName" value="${status.value}">
+			</spring:bind>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<fmt:message key="address.zip" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.zip">
+				<input value="${status.value}" type="text" name="b_zip" id="b_zip" maxlength="10" class="box-input" />
+			</spring:bind>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<fmt:message key="address.telephone" />:
+			<span class="red">*</span>
+		</th>
+		<td colspan="3">
+			<spring:bind path="address.telephone">
+				<input type="text" name="b_telephone" value="${status.value}" id="b_telephone" maxlength="20" class="box-input"/>
+			</spring:bind>
+		</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td colspan="3" align="left">
+			<content:showContentItem contentCode="privacyNotice" var="privacyNotice"></content:showContentItem>
+			Please make sure that the telephone number you typed is correct, during the shipping process, the shipping company might contact you for the delivery. For your security, we may need to contact you at a verified phone number before your order ships.
+			<a href="${privacyNotice.url}" target="_blank">view our privacy policy.</a>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="checkout" value="payment_process"/>
+<script type="text/javascript">
+    //以下代码自动根据用户的运输地址加载国、市、区下拉框
+	$(document).ready(function(){
+		 countrySelector("b_countryId","");
+	});
+	function copyToBillAddress(){
+		if($("#isSame:checked")){
+			setAddressValue("title");
+			setAddressValue("firstname");
+			setAddressValue("lastname");
+			setAddressValue("address");
+			setAddressValue("address2");
+			setAddressValue("countryId");
+			setAddressValue("coutryname_h");
+			setAddressValue("stateId");
+			setAddressValue("statename_h");
+			setAddressValue("cityName")
+			setAddressValue("zip");
+			setAddressValue("telephone");
+			//**********/
+			stateSelector($("#b_countryId").val(),'b_stateId',$("#stateId").val());
+		}
+	}
+	function setAddressValue(id){
+		if($("#"+id) && $('#b_'+id)){
+			$('#b_'+id).val($("#"+id).val());
+		}
+	}
+	function showBilling(){
+		if($('#isSame:checked')){
+			//hide('billingDiv');
+		}else{
+			$("#b_title").val('1');
+			$("#b_firstname").val('');
+			$("#b_lastname").val('');
+			$("#b_address").val('');
+			$("#b_address2").val('');
+			$("#b_countryId").val('');
+			$("#b_coutryname_h").val('');
+			$("#b_stateId").val('');
+			$("#b_statename_h").val('');
+			$("#b_stateId").val('');
+			$("#b_cityName").val('');
+			$("#b_zip").val('');
+			$("#b_telephone").val('');
+		}
+	}
+</script>
