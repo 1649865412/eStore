@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cartmatic.estore.common.helper.CatalogHelper;
 import com.cartmatic.estore.common.model.content.Content;
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
 import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
+import com.cartmatic.estore.textsearch.SearchConstants;
 import com.cartmatic.estore.textsearch.model.SearchResult;
 
 /**
@@ -30,13 +32,16 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
 	private SolrService solr = null;
 	private CulturalInformationManager culturalInformationManager = null;
 	
-	
-    @Override
+
+	@Override
     protected void initController() throws Exception
     {
         mgr = culturalInformationManager;
         defaultPageSize=20;
     }
+	
+
+	
 	
 	/**
 	 * 功能:搜索查询，未完工，待测试
