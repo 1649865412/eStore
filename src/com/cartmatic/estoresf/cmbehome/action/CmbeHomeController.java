@@ -43,6 +43,8 @@ import com.cartmatic.estoresf.cmbehome.action.security.CertificateVerifier;
 import com.cartmatic.estoresf.cmbehome.action.security.PfxSigner;
 import com.cartmatic.estoresf.cmbehome.action.security.SignatureFactory;
 
+
+
 /**
  * 招商银行企业e家跳转路径 规则：来自e家的路径做跳转，一方面判断用户是不是，另一方面路径重跳转 <code>CmbeHome.java</code>
  * <p>
@@ -167,6 +169,7 @@ public class CmbeHomeController extends BaseStoreFrontController
      */
 	@RequestMapping(value="/cmbeHome/submitCallbacK.html")
 	public void submitCallbacK(HttpServletRequest req, HttpServletResponse resp){
+		System.out.println("===============招商状态回复调用============");
 		String orderNumber ="";
 		SalesOrder salesOrder =new SalesOrder();
 		List<String> orderNos =new ArrayList();
@@ -226,7 +229,6 @@ public class CmbeHomeController extends BaseStoreFrontController
 				salesOrder.setPaidAmount(salesOrder.getTotalAmount());
 				salesOrderManager.save(salesOrder);
 			}
-			
 		} catch (Exception ex) {
 		    ex.printStackTrace();
 			System.out.println("支付调用有错：============");
