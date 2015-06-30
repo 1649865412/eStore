@@ -40,7 +40,6 @@ public class ProductSearchFrontController extends GenericStoreFrontController<Pr
 	private ProductManager productManager = null;
 	@Autowired
 	private BrandManager brandManager=null;
-	
 	private SolrService solr = null;
 	
 	

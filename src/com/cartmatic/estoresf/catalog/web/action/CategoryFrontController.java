@@ -126,7 +126,9 @@ public class CategoryFrontController extends GenericStoreFrontController<Categor
 			e.printStackTrace();
 		}
 		
+		
 		List<Category> navigatorCategorys=category.getNavigatorCategorys();
+		
 		
 		// 没有指定模版，或指定的模版找不到的时候，使用的缺省模版
 		String defaultMv="/catalog/categoryTemplate";
@@ -181,9 +183,12 @@ public class CategoryFrontController extends GenericStoreFrontController<Categor
 		return productList;
 	}
 	
+	
+
 	public void setProductManager(ProductManager productManager) {
 		this.productManager = productManager;
 	}
+
 
 	public void setCategoryManager(CategoryManager categoryManager) {
 		this.categoryManager = categoryManager;
