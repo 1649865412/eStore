@@ -43,7 +43,7 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
     protected void initController() throws Exception
     {
         mgr = culturalInformationManager;
-        defaultPageSize=30;
+        defaultPageSize=60;
     }
 	
 	
