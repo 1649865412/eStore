@@ -167,6 +167,7 @@ function fnUpdatePrice() {
 	// alert("fnUpdatePrice");
 	var cartTotal = parseFloat($("#cart_sum_prev").val());// 所有的原先总价格
 	var cart_dis_member = parseFloat($("#cart_dis_member").text());// 惠员优惠
+	var cart_full_cut = parseFloat($("#cart_full_cut").text());//满减优惠
 	var discount = parseFloat($("#cartDiscountAmount").text());// 优惠卷优惠
 	var giftTotal = parseFloat($("#giftPay").text());// 礼品卡礼卷
 	var pointTotal = parseFloat($("#shopPointMoney").text());// 积分优惠
@@ -175,14 +176,16 @@ function fnUpdatePrice() {
 
 	// alert("object:"+$("#juankongPay").text());
 	// alert("object:"+$("#juankongPay"));
-
 	if ($("#juankongPay").text().trim() != "") {
 		// alert("it is not null")
 		juankongPay = parseFloat($("#juankongPay").text()); // 卷控优惠
 		total = parseFloat(
 				cartTotal - cart_dis_member - discount - giftTotal - pointTotal
 						- juankongPay).toFixed(2);
-	} else {
+	}else if($("#cart_full_cut").text()!=0){
+		total = parseFloat(
+				cartTotal - cart_dis_member -cart_full_cut - discount - giftTotal - pointTotal).toFixed(2);
+	}else {
 		// alert("it is null")
 		total = parseFloat(
 				cartTotal - cart_dis_member - discount - giftTotal - pointTotal)
@@ -251,7 +254,16 @@ function substractQuantity(obj, shoppingcartItemId, cartUuid, price,
 				{
 					shoppingcartItemId : shoppingcartItemId,
 					cartUuid : cartUuid
-				}, "json");
+				}, function(result) {
+					if (result.msg != 0) {
+						$("#cart_full_cut").text(result.msg);
+						fnUpdatePrice();
+					}else{
+						$("#cart_full_cut").text(0);
+						document.getElementById("full_cut").style.display = "none";
+						fnUpdatePrice();
+					}
+				},"json");
 
 		$("span[id='discountPrice_" + shoppingcartItemId + "']").each(
 				function() {
@@ -313,6 +325,14 @@ function addQuantity(obj, shoppingcartItemId, cartUuid, price, discountPrice,
 			shoppingcartItemId : shoppingcartItemId,
 			cartUuid : cartUuid,
 			productSkuId : productSkuId
+		},function(result) {
+//			alert("result.msg"+result.msg);
+			if (result.msg != 0) {
+				$("#cart_full_cut").text(result.msg);
+				document.getElementById("full_cut").style.display = "";
+//				$("#full_cut").attr("display","");
+				fnUpdatePrice();
+			}
 		}, "json");
 
 		$("span[id='discountPrice_" + shoppingcartItemId + "']").each(

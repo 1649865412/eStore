@@ -918,6 +918,10 @@
                   <th class="f13px"><fmt:message key="shoppingcart.discount" />:</th>
                   <td class="f13px red fB">-${appConfig.defaultCurrencySymbol}&nbsp;<span id="save">${shoppingcart.cartDiscountAmount == null ? 0.00 : shoppingcart.cartDiscountAmount}</span></td>
                 </tr>
+                <tr id="full_tr"  style="display: block">
+                  <th class="f13px"><fmt:message key="shoppingcart.fullCutSum" />:</th>
+                  <td class="f13px red fB">-${appConfig.defaultCurrencySymbol}&nbsp;<span id="full_cut">${shoppingcart.fullCutSum == null ? 0.00 : shoppingcart.fullCutSum}</span></td>
+                </tr>
                 <tr id="gift_tr" style="display: block;">
                   <th class="f13px"><fmt:message key="checkout.labelUseGiftCertificate" />:</th>
                   <td class="f13px red fB">

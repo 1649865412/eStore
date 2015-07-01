@@ -43,6 +43,7 @@ function fnUpdatePrice(){
 	var saveTotal =  parseFloat($("#save").text());   //${shoppingcart.cartDiscountAmount }
 	var giftTotal = parseFloat($("#giftPay").text());//${shoppingcart.giftCertificateNos}
 	var pointTotal = parseFloat($("#point").text());//${shoppingcart.shopPoint * appConfig.shopPointUseGiftPercent}
+	var fullCutTotal = parseFloat($("#full_cut").text());
 	
 	/*alert("cartTotal:"+cartTotal);
 	alert("saveTotal:"+saveTotal);
@@ -50,7 +51,7 @@ function fnUpdatePrice(){
 	alert("pointTotal:"+pointTotal);*/
 	
 	
-	var discount = saveTotal + giftTotal + pointTotal;
+	var discount = saveTotal + giftTotal + pointTotal+fullCutTotal;
 	$("#discount").text(discount.toFixed(2));
 	var total = parseFloat(cartTotal - discount);
 	if(total < 0){

@@ -132,7 +132,14 @@ public class ShoppingcartController extends BaseStoreFrontController {
 		String shoppingcartItemId=request.getParameter("shoppingcartItemId");
 		Shoppingcart shoppingcart =	shoppingcartManager.doDeleteItemOne(cartUuid, shoppingcartItemId, request, response);
 		System.out.println("购物车ID:"+shoppingcartItemId+"商品-1");
-		return defaultAction(request, response);
+		defaultAction(request, response);
+		String fullCutPrice=request.getAttribute("fullCutPrice").toString();
+		AjaxView ajaxView = new AjaxView(response);
+        	ajaxView.setMsg(fullCutPrice);
+			shoppingcart.setFullCutSum(new BigDecimal(fullCutPrice));
+//			shoppingcart.setTotal(shoppingcart.getTotal().subtract(new BigDecimal(fullCutPrice)));
+			shoppingcartManager.save(shoppingcart);
+        return ajaxView;
     }
 	/**
 	 * 购物车商品数量+1
@@ -150,7 +157,14 @@ public class ShoppingcartController extends BaseStoreFrontController {
 		Integer productSkuId=Integer.valueOf(request.getParameter("productSkuId"));
 		Shoppingcart shoppingcart =	shoppingcartManager.addQuantityOne(cartUuid, productSkuId,"", request, response);
 		System.out.println("购物车商品ID:"+productSkuId+"商品+1");
-		return defaultAction(request, response);
+		defaultAction(request, response);
+		String fullCutPrice=request.getAttribute("fullCutPrice").toString();
+		AjaxView ajaxView = new AjaxView(response);
+        	ajaxView.setMsg(fullCutPrice);
+			shoppingcart.setFullCutSum(new BigDecimal(fullCutPrice));
+//			shoppingcart.setTotal(shoppingcart.getTotal().subtract(new BigDecimal(fullCutPrice)));
+			shoppingcartManager.save(shoppingcart);
+        return ajaxView;
     }
 	
 
@@ -196,6 +210,7 @@ public class ShoppingcartController extends BaseStoreFrontController {
     	 
         Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
 		Shoppingcart shoppingcart = null;
+		String fullCutPrice=request.getAttribute("fullCutPrice").toString();
 		String sUuid = "";
 		if(cookie!=null){
 		    sUuid = cookie.getValue();
@@ -389,6 +404,10 @@ public class ShoppingcartController extends BaseStoreFrontController {
 		
 		//判断 显不显示卷控的输入框
 		request.setAttribute("checkHaveJuankong",ShoppingCartUtil.checkHaveJuankong(shoppingcart)); 
+		request.setAttribute("fullCutPrice",ShoppingCartUtil.fullCutPrice(shoppingcart)); 
+		shoppingcart.setFullCutSum(new BigDecimal(ShoppingCartUtil.fullCutPrice(shoppingcart)));
+		shoppingcart.setTotal(shoppingcart.getTotal().subtract(new BigDecimal(ShoppingCartUtil.fullCutPrice(shoppingcart))));
+		shoppingcartManager.save(shoppingcart);
 		return new ModelAndView("cart/shoppingcart");
 	}
 	

@@ -103,8 +103,8 @@
 						</td>
 					</tr>
 				</c:when>
-				<c:otherwise>
-		            <%--<tr class="cut_bg">
+				<c:otherwise><%--
+		            <tr class="cut_bg">
 		              <td class="chart_cut border_with">
 		                <img src="${resPath }/images/cart/bell.gif"/>
 		                <span class="cut_title">满减</span>
@@ -121,6 +121,33 @@
 		            --%><%-- 商品开始 --%>
 					<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus">
 						<c:if test="${item.isSaved==0 and empty item.parent}">
+						<c:if test="${item.productSku.product.brandId=='15'||item.productSku.product.brandId=='37'||item.productSku.product.brandId=='34'}">
+				 			<tr class="cut_bg">
+		            		  <td class="chart_cut border_with">
+		            		    <img src="${resPath }/images/cart/bell.gif"/>
+		   			             <span class="cut_title">满减</span>
+		       			       </td>
+		            		   <c:if test="${item.productSku.product.brandId=='15'}">
+					                <td colspan="5" class="border_with align_left">[Mipenna]&nbsp;&nbsp;买满500减100,买满800减200,买满1000减300</td>
+					                <td class="cut_howmuch border_with">
+					                	<span id="mipennaFullCut"></span>
+		              				</td>
+					  		   </c:if>
+							   <c:if test="${item.productSku.product.brandId=='37'}">
+					                <td colspan="5" class="border_with align_left">[Lapeewee]&nbsp;&nbsp;买满900减100,买满1200减200</td>
+					                <td class="cut_howmuch border_with">
+					                	<span id="lapeeweeFullCut"></span>
+		              				</td>
+						       </c:if>
+					    	 	<c:if test="${item.productSku.product.brandId=='34'}">
+					             	<td colspan="5" class="border_with align_left">[V.Charm]&nbsp;&nbsp;买满400减100,买满500减150,最高减300</td>
+					             	<td class="cut_howmuch border_with">
+					             		<span id="vcharmFullCut"></span>
+		              				</td>
+					         	</c:if>
+		              			<td class="border_with"></td>
+		            		</tr>
+		            	</c:if>
 							 <tr>
 					              <td rowspan="3" class="chart_img border_with">
 					                <product:productImg sku="${item.productSku}" size="e" width="165" height="165"/>
@@ -131,7 +158,7 @@
 									<input type="hidden" name="buyNowItemId" value="${item.shoppingcartItemId}"/>
 									<input type="hidden" name="${item.shoppingcartItemId}_sku" value="${item.productSku.productSkuCode}"/>
 					              </td>
-					              <td>${item.productSku.productSkuCode}</td>
+					              <td>${item.productSku.product.productCode}</td>
 					              <td class="product_quantity">
 					                <div class="form">
 						               <input  name="" type="button" value="-"  onclick="substractQuantity(this,'${item.shoppingcartItemId}','${item.shoppingcart.uuid}',
@@ -211,6 +238,20 @@
 	              -${appConfig.defaultCurrencySymbol}
 	              <span id="cart_dis_member">${shoppingcart.cartDiscountAmount == null ? 0.00 : shoppingcart.cartDiscountAmount}</span>
               </td>
+              
+              <%--满减优惠--%>
+      
+            <tr id="full_cut" colspan="2" class="chart_howmany">
+              <td colspan="2" class="chart_howmany" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品牌满减优惠：</td>
+              </td>
+              <td class="align_right padding_right30">
+	             -${appConfig.defaultCurrencySymbol}
+	              <span id="cart_full_cut">${fullCutPrice}</span>
+              </td>
+            </tr>  
+       
+            
+            
             <tr>
               <td colspan="2">
                 <!-- Text input-->
@@ -354,5 +395,8 @@
 				$("#giftCertificateNo").attr("disabled",true);
 			}
 			fnUpdatePrice();
+			if(${fullCutPrice==0}){
+				document.getElementById("full_cut").style.display = "none";
+			}
 	  });
 </script>
