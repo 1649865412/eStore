@@ -43,7 +43,7 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
     protected void initController() throws Exception
     {
         mgr = culturalInformationManager;
-        defaultPageSize=60;
+        defaultPageSize=90;
         System.out.println("yang");
     }
 	
