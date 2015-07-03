@@ -121,7 +121,7 @@
 		            --%><%-- 商品开始 --%>
 					<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus">
 						<c:if test="${item.isSaved==0 and empty item.parent}">
-						<c:if test="${item.productSku.product.brandId=='15'||item.productSku.product.brandId=='37'||item.productSku.product.brandId=='34'}">
+						<c:if test="${item.productSku.product.brandId=='15'||item.productSku.product.brandId=='37'||item.productSku.product.brandId=='44'}">
 				 			<tr class="cut_bg">
 		            		  <td class="chart_cut border_with">
 		            		    <img src="${resPath }/images/cart/bell.gif"/>
@@ -139,7 +139,7 @@
 					                	<span id="lapeeweeFullCut"></span>
 		              				</td>
 						       </c:if>
-					    	 	<c:if test="${item.productSku.product.brandId=='34'}">
+					    	 	<c:if test="${item.productSku.product.brandId=='44'}">
 					             	<td colspan="5" class="border_with align_left">[V.Charm]&nbsp;&nbsp;买满400减100,买满500减150,最高减300</td>
 					             	<td class="cut_howmuch border_with">
 					             		<span id="vcharmFullCut"></span>
