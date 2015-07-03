@@ -44,7 +44,7 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
     {
         mgr = culturalInformationManager;
         defaultPageSize=70;
-        System.out.println("yang");
+      //  System.out.println("yang");
     }
 	
 	

@@ -58,8 +58,6 @@ public class CategoryFrontController extends GenericStoreFrontController<Categor
 	}
 
 	
-	
-	
 	/**
 	 * 产品列表页
 	 */
@@ -108,6 +106,7 @@ public class CategoryFrontController extends GenericStoreFrontController<Categor
 		Store store=ConfigUtil.getInstance().getStore();
 		
 		CatalogHelper catalogHelper=CatalogHelper.getInstance();
+		
 		//CategoryTreeItem继承category
 		CategoryTreeItem category=(CategoryTreeItem)catalogHelper.getProductCategoryByUri(uri);
 		if(category==null){
@@ -184,7 +183,6 @@ public class CategoryFrontController extends GenericStoreFrontController<Categor
 	}
 	
 	
-
 	public void setProductManager(ProductManager productManager) {
 		this.productManager = productManager;
 	}

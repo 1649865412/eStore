@@ -49,7 +49,6 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	}
 	
 	
-	
 	/**
 	 * 品牌列表页
 	 */
