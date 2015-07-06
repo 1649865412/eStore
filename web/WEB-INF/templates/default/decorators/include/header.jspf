@@ -98,7 +98,9 @@
 	         <div id="BDBridgeFixedWrap" ></div>
           --%>
           <!-- WPA Button Begin -->
-<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script>
+          <!-- 
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script> -->
+<a href ="http://webim.qiao.baidu.com//im/index?siteid=4706350&ucid=7282853"><img src="${resPath}/images/baidushangqiao.png"/></a>
 <!-- WPA Button End -->
           
           </div>
