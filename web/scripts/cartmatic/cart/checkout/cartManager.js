@@ -167,7 +167,7 @@ function fnUpdatePrice() {
 	// alert("fnUpdatePrice");
 	var cartTotal = parseFloat($("#cart_sum_prev").val());// 所有的原先总价格
 	var cart_dis_member = parseFloat($("#cart_dis_member").text());// 惠员优惠
-	var cart_full_cut = parseFloat($("#cart_full_cut").text());//满减优惠
+	var cart_full_cut = parseFloat($("#cart_full_cut").text());// 满减优惠
 	var discount = parseFloat($("#cartDiscountAmount").text());// 优惠卷优惠
 	var giftTotal = parseFloat($("#giftPay").text());// 礼品卡礼卷
 	var pointTotal = parseFloat($("#shopPointMoney").text());// 积分优惠
@@ -182,10 +182,11 @@ function fnUpdatePrice() {
 		total = parseFloat(
 				cartTotal - cart_dis_member - discount - giftTotal - pointTotal
 						- juankongPay).toFixed(2);
-	}else if($("#cart_full_cut").text()!=0){
+	} else if ($("#cart_full_cut").text() != 0) {
 		total = parseFloat(
-				cartTotal - cart_dis_member -cart_full_cut - discount - giftTotal - pointTotal).toFixed(2);
-	}else {
+				cartTotal - cart_dis_member - cart_full_cut - discount
+						- giftTotal - pointTotal).toFixed(2);
+	} else {
 		// alert("it is null")
 		total = parseFloat(
 				cartTotal - cart_dis_member - discount - giftTotal - pointTotal)
@@ -195,7 +196,7 @@ function fnUpdatePrice() {
 	$("#cart_sum").text(total < 0 ? '0.00' : total);
 
 	// 隐藏积分优惠下拉框触发
-	if (total < 300) {
+	if (total < 300 || discount != 0 || giftTotal !=0) {
 		$("#selectbasic").attr("disabled", true);
 	} else {
 		$("#selectbasic").attr("disabled", false);
@@ -248,22 +249,24 @@ function substractQuantity(obj, shoppingcartItemId, cartUuid, price,
 			((newSubtotal * 100) * (memberDiscount * 100)) / 10000).toFixed(2);
 	if (parseInt($next.val()) != 1) {
 		$next.val(parseInt($next.val()) - 1);
-		$.post(
-				__ctxPath
-						+ "/cart/shoppingcart.html?doAction=substractQuantity",
-				{
-					shoppingcartItemId : shoppingcartItemId,
-					cartUuid : cartUuid
-				}, function(result) {
-					if (result.msg != 0) {
-						$("#cart_full_cut").text(result.msg);
-						fnUpdatePrice();
-					}else{
-						$("#cart_full_cut").text(0);
-						document.getElementById("full_cut").style.display = "none";
-						fnUpdatePrice();
-					}
-				},"json");
+		$
+				.post(
+						__ctxPath
+								+ "/cart/shoppingcart.html?doAction=substractQuantity",
+						{
+							shoppingcartItemId : shoppingcartItemId,
+							cartUuid : cartUuid
+						},
+						function(result) {
+							if (result.msg != 0) {
+								$("#cart_full_cut").text(result.msg);
+								fnUpdatePrice();
+							} else {
+								$("#cart_full_cut").text(0);
+								document.getElementById("full_cut").style.display = "none";
+								fnUpdatePrice();
+							}
+						}, "json");
 
 		$("span[id='discountPrice_" + shoppingcartItemId + "']").each(
 				function() {
@@ -281,26 +284,25 @@ function substractQuantity(obj, shoppingcartItemId, cartUuid, price,
 											.toFixed(2));
 				});
 		$("#sum").text(Number(buyNowItemsCount) - 1);
-//		$("span[id='sum']").each(function() {
-//			$(this).html(Number(buyNowItemsCount) - 1);
-//		});
+		// $("span[id='sum']").each(function() {
+		// $(this).html(Number(buyNowItemsCount) - 1);
+		// });
 		$("#cart_sum_prev").val(newSubtotal);
 		$("#subtotal").text(newSubtotal);
-//		$("span[id='subtotal']").each(function() {
-//			$(this).html(newSubtotal);
-//		});
+		// $("span[id='subtotal']").each(function() {
+		// $(this).html(newSubtotal);
+		// });
 		$("#cart_dis_member").text(newMemberDiscount);
-//		$("span[id='cart_dis_member']").each(function() {
-//			$(this).html(newMemberDiscount);
-//		});
+		// $("span[id='cart_dis_member']").each(function() {
+		// $(this).html(newMemberDiscount);
+		// });
 		fnUpdatePrice();
 	}
 }
 
 // 购物车商品+1
 function addQuantity(obj, shoppingcartItemId, cartUuid, price, discountPrice,
-		oldSubtotal, cartDiscountAmount, productSkuId,
-		quantityOnHand) {
+		oldSubtotal, cartDiscountAmount, productSkuId, quantityOnHand) {
 	var $this = $(obj);
 	var $prev = $this.prev();
 	if ($prev.val() != quantityOnHand) {
@@ -325,12 +327,12 @@ function addQuantity(obj, shoppingcartItemId, cartUuid, price, discountPrice,
 			shoppingcartItemId : shoppingcartItemId,
 			cartUuid : cartUuid,
 			productSkuId : productSkuId
-		},function(result) {
-//			alert("result.msg"+result.msg);
-			if (result.msg != 0) {
-				$("#cart_full_cut").text(result.msg);
-				document.getElementById("full_cut").style.display = "";
-//				$("#full_cut").attr("display","");
+		}, function(result) {
+			// alert("result.msg"+result.msg);
+				if (result.msg != 0) {
+					$("#cart_full_cut").text(result.msg);
+					document.getElementById("full_cut").style.display = "";
+					// $("#full_cut").attr("display","");
 				fnUpdatePrice();
 			}
 		}, "json");
@@ -351,18 +353,18 @@ function addQuantity(obj, shoppingcartItemId, cartUuid, price, discountPrice,
 											.toFixed(2));
 				});
 		$("#sum").text(Number(buyNowItemsCount) + 1);
-//		$("span[id='sum']").each(function() {
-//			$(this).html(Number(buyNowItemsCount) + 1);
-//		});
+		// $("span[id='sum']").each(function() {
+		// $(this).html(Number(buyNowItemsCount) + 1);
+		// });
 		$("#cart_sum_prev").val(newSubtotal);
 		$("#subtotal").text(newSubtotal);
-//		$("span[id='subtotal']").each(function() {
-//			$(this).html(newSubtotal);
-//		});
+		// $("span[id='subtotal']").each(function() {
+		// $(this).html(newSubtotal);
+		// });
 		$("#cart_dis_member").text(newMemberDiscount);
-//		$("span[id='cart_dis_member']").each(function() {
-//			$(this).html(newMemberDiscount);
-//		});
+		// $("span[id='cart_dis_member']").each(function() {
+		// $(this).html(newMemberDiscount);
+		// });
 
 		fnUpdatePrice();
 	} else {
