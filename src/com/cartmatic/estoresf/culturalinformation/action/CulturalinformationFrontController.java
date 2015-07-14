@@ -18,6 +18,7 @@ import com.cartmatic.estore.culturalinformation.service.CulturalInformationManag
 import com.cartmatic.estore.textsearch.SearchConstants;
 import com.cartmatic.estore.textsearch.model.SearchResult;
 
+
 /**
  * 文化资讯模块查询
  *  <code>CulturalinformationFrontController.java</code>
@@ -72,7 +73,9 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
         }
     }
     
-	/**
+    
+
+    /**
 	 * 功能:搜索查询测试
 	 * <p>作者 杨荣忠 2015-6-19 下午05:02:34
 	 * @param request
