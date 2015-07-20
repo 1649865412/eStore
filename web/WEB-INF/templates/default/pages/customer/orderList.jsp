@@ -182,7 +182,15 @@
 										                      <span class="processing"><i class="fa fa-adjust padding_right5"></i>部分支付</span>
 														</c:when>
 														<c:when test="${order.paymentStatus == 30}">
-										                      <span class="complete"><i class="fa fa-check-circle-o padding_right5"></i>已支付</span>
+															<c:if test="${order.isCod == 1}">
+																<span class="complete"><i class="fa fa-check-circle-o padding_right5"></i>货到付款</span>
+															</c:if>
+															<c:if test="${order.isCod != 1}">
+										                        <span class="complete"><i class="fa fa-check-circle-o padding_right5"></i>已支付</span>
+										                     </c:if>
+														</c:when>
+														<c:when test="${order.paymentStatus == 40}">
+										                      <span class="complete"><i class="fa fa-check-circle-o padding_right5"></i>货到付款</span>
 														</c:when>
 														<c:otherwise>
 															 <span class="cancel"><i class="fa fa-times-circle-o padding_right5"></i>未支付</span>
@@ -201,7 +209,7 @@
 														</c:if>
 						                    		</c:when>
 						                    		<c:otherwise>
-						                    			<c:if test="${order.paymentStatus!=30}">
+						                    			<c:if test="${order.paymentStatus!=30 && order.paymentStatus != 40}">
 															<button name="pay" class="btn_small btn-gold" type="button" onclick="window.location.href='${ctxPath}/checkout/goToPay.html?doAction=selectOnlinePayment&orderNo=${order.orderNo}'" >
 										                          <i class="fa fa-credit-card padding_right10"></i>
 										                          支付
