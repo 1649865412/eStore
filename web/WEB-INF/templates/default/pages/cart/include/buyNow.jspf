@@ -225,6 +225,7 @@
                   <li>在您选择送货目的地后，商品的价格可能会有所更改。在完成付款程序前，请在订单总结页面检查总金额。</li>
                   <li>一旦订购过程完成后，您将无法在此订单中添加新的商品。</li>
                   <li>积分兑换，每20积分可兑换1元，但每次需兑换100积分的倍数。</li>
+                  <li>积分不可与优惠券、礼品卡/礼券同时使用。</li>
                 </ul>
               </td>
               <td class="chart_howmany">共计有<span id="sum"  class="colour_trash padding_td text_bold">${shoppingcart.buyNowItemsCount }</span>件商品</td>

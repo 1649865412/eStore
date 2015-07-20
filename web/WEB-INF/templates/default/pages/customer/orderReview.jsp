@@ -74,7 +74,14 @@
 			                   <div class="score_info_right">
 			                     <p>${salesOrder.orderNo}</p>
 			                     <p>${salesOrder.createTime}</p> 
-			                     <p><fmt:message key="salesOrder.paymentStatus_${salesOrder.paymentStatus}" /></p>
+			                     <p>
+			                     	<c:if test="${salesOrder.isCod == 1}">
+										货到付款
+									</c:if>
+									<c:if test="${salesOrder.isCod != 1}">
+										<fmt:message key="salesOrder.paymentStatus_${salesOrder.paymentStatus}" />
+									</c:if>
+			                     </p>
 			                     <p>
 			                     	<c:choose>
 										<c:when test="${salesOrder.isOnHold==1 and salesOrder.isHoldByCustomer==1}">
@@ -174,7 +181,19 @@
 			                    <td>小计：</td>
 			                    <td colspan="2" class="align_right padding_right30">￥${salesOrder.totalAmount }</td>
 			                  </tr>
-			                  
+			                  <c:if test="${salesOrder.isCod ==1}">
+			                  <tr class="border_none">
+			                    <td colspan="2"></td>
+			                    <td>支付方式:</td>
+			                    <td colspan="2" class="align_right padding_right30">货到付款</td>
+			                  </tr>  
+			                  <tr>
+			                    <td colspan="2"></td>
+			                    <td class="colour_gold text_bold padding_bottom15"></td>
+			                    <td colspan="2" class="align_right padding_right30 colour_gold text_bold padding_bottom15"></td>
+			                  </tr>
+			                  </c:if>
+			                  <c:if test="${salesOrder.isCod !=1}">
 			                  <tr class="border_none">
 			                    <td colspan="2"></td>
 			                    <td>已支付</td>
@@ -186,6 +205,7 @@
 			                    <td class="colour_gold text_bold padding_bottom15">还需支付：</td>
 			                    <td colspan="2" class="align_right padding_right30 colour_gold text_bold padding_bottom15">￥${salesOrder.totalAmount - salesOrder.paidAmount }</td>
 			                  </tr>
+			                  </c:if>
 			                  <c:forEach var="orderShipment" items="${salesOrder.orderShipments}" varStatus="orderShipment_varStatus">
 				                  <td colspan="2"></td>
 				                    <td class="colour_gold text_bold padding_bottom15"></td>
