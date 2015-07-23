@@ -54,7 +54,9 @@
 	<import resource="spring-hibernate.xml" />
 	<import resource="spring-dao.xml" />
 	<import resource="spring-service.xml" />
+
 	<import resource="spring-security.xml" />
+	
 	<import resource="spring-scheduling.xml" />
 	<import resource="spring-validation.xml" />
 	<import resource="spring-jcaptcha.xml" />
