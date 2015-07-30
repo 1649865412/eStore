@@ -343,7 +343,7 @@
 		               </ul>
          	  </div><!--product_size-->
            	</c:if>
-			
+           	
            <div class="product_quantity">
            	<product:productQuantity2 product="${product}" />
              <form id="myform" method="POST" action="#">

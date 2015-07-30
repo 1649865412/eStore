@@ -38,9 +38,8 @@
 			<%-- ========== 头部开始 ==2014041412点修订版========= --%>
 		   <%@ include file="./include/header.jspf"%>
 				<c:set var="isShowHiddenCategory" value="true"></c:set>
-				
-		
 			<%-- ========== 头部结束 ========= --%>
+			
 			<%-- ========== 内容开始 ========== --%>
 			 <div class="maincontent" id="maincontent">
 				<decorator:body />
@@ -49,7 +48,6 @@
            
 			<%-- ========== 底部开始 ========= --%>
 				<%@ include file="./include/footer.jspf"%>
-			
 			<%-- ========== 底部结束 ========= --%>
 	</body>
 </html>

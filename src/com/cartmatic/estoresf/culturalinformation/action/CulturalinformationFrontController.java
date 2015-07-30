@@ -73,7 +73,6 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
         }
     }
     
-    
 
     /**
 	 * 功能:搜索查询测试
@@ -101,8 +100,8 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
                 results.add(obj);                
             }
         }
-    } 
-
+    }
+    
 	public CulturalInformationManager getCulturalInformationManager()
 	{
 		return culturalInformationManager;

@@ -5,14 +5,12 @@
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
-		
 <html>
 	<head>
 		<title>设计师</title>	
 		<%@ include file="/WEB-INF/templates/default/decorators/include/styles2.jspf"%>
 		<%@ include file="/WEB-INF/templates/default/decorators/include/styles6.jspf"%>
 		<%@ include file="/WEB-INF/templates/default/decorators/include/javascripts4.jspf"%>
-				
 	</head>
 	<body>
         <div class="lyt-content-left">

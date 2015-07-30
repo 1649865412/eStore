@@ -166,7 +166,14 @@ $(document).ready(function(){
 	}
 }); 
 
+
+
+/**
+ * 顶部通过获取cookie,显示已登录用户
+ * @return
+ */
 function fillLoginPrompt() {
+//	alert("fillLoginPrompt");
 	var _str='';
 	if (!isLogined()) {
 		_str=$("#loginPromptHolderTemplateLogout").html();
@@ -177,10 +184,12 @@ function fillLoginPrompt() {
 			uname=uname.substring(0,uname.indexOf("@"));
 		_str=format_params($("#loginPromptHolderTemplateLogin").html(),uname);
 	}
+	//alert("str:"+_str);
 	if($("#loginPromptHolder")){
 		$("#loginPromptHolderTemplateLogout").html(_str);
 	}
 }
+
 
 /*为所有详细内容的tab写的公共方法，
  * 默认tab命名为tab_head_n，tab对应页面的div命名为tab_content_n。
@@ -563,7 +572,9 @@ function fnCheckSearchForm($frm)
 	}
 	return true;
 }
+
 function format_params(source, params) {
+//	alert("format_params:===="+source+"====params:====="+params);
 	if ( arguments.length == 1 ) 
 		return function() {
 			var args = $.makeArray(arguments);
@@ -579,7 +590,9 @@ function format_params(source, params) {
 	$.each(params, function(i, n) {
 		source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
 	});
+//	alert("source:"+source);
 	return source;
+	
 }
 
 function fnFormatNumber(nStr) {
