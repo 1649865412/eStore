@@ -26,8 +26,6 @@
     <link rel="stylesheet" type="text/css" href="${resPath}/styles/component.css" />
     <script type="text/javascript" src="${ctxPath}/scripts/jquery/jquery-1.8.2.min.js"></script>
  
- 
-  
 </head>
 
 <body><br><br>

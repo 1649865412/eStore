@@ -1,4 +1,4 @@
-#Wed Apr 01 11:31:31 CST 2015
+#Thu Jul 30 14:38:11 CST 2015
 eclipse.preferences.version=1
 encoding//common/TrustMerchant.properties=UTF-8
 encoding//common/conf/app-config.properties=UTF-8
@@ -32,6 +32,7 @@ encoding//web/WEB-INF/templates/default/pages/cart/include/orderReviewBody.jspf=
 encoding//web/WEB-INF/templates/default/pages/catalog/categoryTemplate.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/catalog/categoryTemplateCatalogs.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/catalog/designer.jsp=UTF-8
+encoding//web/WEB-INF/templates/default/pages/catalog/include/Qma.jspf=UTF-8
 encoding//web/WEB-INF/templates/default/pages/catalog/productTemplate.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/content/contentDetail.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/customer/addressForm.jsp=UTF-8
