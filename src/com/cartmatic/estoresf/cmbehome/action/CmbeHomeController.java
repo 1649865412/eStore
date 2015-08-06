@@ -117,6 +117,8 @@ public class CmbeHomeController extends BaseStoreFrontController
 	}
 	
 	
+
+	 
 	/**
 	 * 功能:匿名用户（企业e家用户与社会化分享登录用户注册）
 	 * <p>作者 杨荣忠 2015-6-5 上午11:42:26

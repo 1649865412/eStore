@@ -1,497 +1,737 @@
+<!DOCTYPE html>
 <%@ include file="/common/taglibs.jsp"%>
 <%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
-<html>
+<%@page import="com.cartmatic.estore.common.model.customer.Customer"%>
+<html lang="zh-CN">
+
 	<head>
-		<title>${appConfig.store.title}</title>
-		<meta name="keywords" content="${appConfig.store.keyWords}" />
-		<meta name="description" content="${appConfig.store.description}" />
-		<meta name="baidu-site-verification" content="3PsP8afx3G" />
-		<script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>四方街</title>
+		<%@ include file=".././decorators/include/meta.jspf"%>
+		<%@ include file=".././decorators/include/styles2.jspf"%>
+		<%@ include file=".././decorators/include/styles3.jspf"%>
+		<%@ include file=".././decorators/include/styles5.jspf"%>
+		<%@ include file=".././decorators/include/javascripts2.jspf"%>
+		<script type="text/javascript"
+			src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
+		<script type="text/javascript"
+			src="${ctxPath}/scripts/jquery/plugins/validation/jquery.validate.js"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet"
+			href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<script type="text/javascript">
+		$(document).ready(function(){
+
+		//	alert('${param.tag}');
+			if('${param.tag}'!=""){
+				   // alert("hello");
+					$(".w-login").show();
+					$(".w-login-left").show();
+					$(".w-login-right").hide();
+			}
+
+			if('${param.tag1}'!=""){
+				   // alert("hello");
+					$(".w-login").show();
+					$(".w-login-left").hide();
+					$(".w-login-right").show();
+			}
+
+			var _str = '';
+			if (!isLogined()) {
+				$("#loginPromptHolderTemplateLogin").hide();
+				$("#loginPromptHolderTemplateLogout").show();
+			} else {
+				var uname = getCookie("UNAME");
+				//alert("getCookie"+uname);
+				//emial的去掉@后的部分
+				if (uname.indexOf("@") != -1)
+					uname = uname.substring(0, uname.indexOf("@"));
+				$("#username").html(uname);
+				$("#loginPromptHolderTemplateLogin").show();
+				$("#loginPromptHolderTemplateLogout").hide();
+			}
+			});
+		function fnUnlock(){
+			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
+			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
+			$("#searchForm").submit();
+		}
+		
+	function getCurrentUserId() {
+		return getCookie("UID") || -2;
+	}
+	/**不严格的简单判断用户是否登录的方法，性能较好，缺省设置为5分钟更新一次*/
+	function isLogined() {
+		return getCurrentUserId() > 0;
+	}
+	function getCurrentUserName(loginRequired) {
+		return (!loginRequired || isLogined()) && getCookie("UNAME") || "";
+	}
+	function getLoginUserEmail(loginRequired) {
+		return (!loginRequired || isLogined()) && getCookie("UEMAIL") || "";
+	}
+
+	function userName() {
+		var username = getLoginUserEmail(false);
+		if ($("#j_username").val().trim().length == 0) {
+			$("#p_username").show();
+		}else{
+			$("#p_username").hide();
+		}
+	}
+
+	function passWord() {
+		var password = $("#j_password").val().trim();
+		if (password.length == 0) {
+			$("#p_password").show();
+			$("#q_password").hide();
+		}else if(password.length>0 && password.length<6){
+			$("#p_password").hide();
+			$("#q_password").show();
+		}else{
+			$("#p_password").hide();
+			$("#q_password").hide();
+		}
+	}
+
+	function validateMethod() {
+		var validatecode = $("#j_validateCode").val().trim();
+		if(validatecode.length ==0){
+			$("#p_validateCode").show();
+		}else{
+			$("#p_validateCode").hide();
+		}
+	}
+
+	function validateCode2() {
+		var validatecode = $("#k_validateCode").val().trim();
+		if(validatecode.length ==0){
+			$("#q_validateCode").show();
+		}else{
+			$("#q_validateCode").hide();
+		}
+	}
+
+	function emailPhone() {
+		if ($("#email").val().trim().length == 0) {
+			$("#p_email").show();
+		}else{
+			$("#p_email").hide();
+		}
+	}
+
+	function passWord2() {
+		var password = $("#password").val().trim();
+		if (password.length == 0) {
+			$("#a_password").show();
+			$("#b_password").hide();
+		}else if(password.length>0 && password.length<6){
+			$("#a_password").hide();
+			$("#b_password").show();
+		}else{
+			$("#a_password").hide();
+			$("#b_password").hide();
+		}
+	}
+
+	function rePassWord() {
+		var password = $("#password").val().trim();
+		var rePassword = $("#rePassword").val().trim();
+		if (rePassword.length == 0) {
+			$("#p_rePassword").show();
+			$("#q_rePassword").hide();
+		}else if(rePassword !=password){
+			$("#p_rePassword").hide();
+			$("#q_rePassword").show();
+		}else{
+			$("#p_rePassword").hide();
+			$("#q_rePassword").hide();
+		}
+	}
+
+	function checkbox1() {
+		if($("#checkboxre").is(":checked")){
+			$("#button1").show();
+			$("#button2").hide();
+		}else{
+			$("#button1").hide();
+			$("#button2").show();
+		}
+	}
+	
+	function getCookie(name) {
+		var prefix = name + "="
+		var start = document.cookie.indexOf(prefix)
+		if (start == -1) {
+			return null;
+		}
+		start += prefix.length;
+		var end = document.cookie.indexOf(";", start)
+		if (end == -1) {
+			end = document.cookie.length;
+		}
+		var cookieValue = document.cookie.substring(start, end);
+		if (cookieValue) //把所有'"'去掉.
+		{
+			cookieValue = cookieValue.replace(/"/g, "");
+			cookieValue = decodeURI(cookieValue);
+		}
+		return unescape(cookieValue);
+	}
 	jQuery(document).ready(function($) {
 		$('.grid-container').gridQuote( {
 			slideshow : false,
-			initOpen : false			
+			initOpen : false
 		});
 	});
 </script>
-		<script>
-	$(function() {
-		$('.big_ab').bxSlider( {
-			margin : 0,
-			auto : true,
-			controls : false,
-			autoHover : true,
-			mode : 'fade',
-			pause : 4000
 
-		});
-		$('.hot').bxSlider( {
-			margin : 0,
-			auto : true,
-			controls : false,
-			autoHover : true,
-			pagerCustom : '.hot_tabs'
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	</head>
 
-		});
-
-		$('.slider2').bxSlider({
-			auto: true,
-			pager: false,
-			controls:true,
-			nextSelector: '#slider-next',
-			prevSelector: '#slider-prev',
-			nextText:'▶',
-			prevText:'◀',
-			wrapper_class: 'sale_popular',
-			pause: 2500,
-			slideWidth: 150,
-		    minSlides: 6,
-		    maxSlides: 6,
-		    moveSlides: 1,
-		    slideMargin: 30
-		});
-	});
-</script>
-<script>
-// perform JavaScript after the document is scriptable.
-$(function() {
-    // setup ul.tabs to work as tabs for each div directly under div.panes
-    $("#product_tabs").tabs("div.boards > div.board");	
-	$("#css_tabs").tabs("div.css-panes > div.items", {
- 
-    // enable "cross-fading" effect
-    effect: 'default',
-    fadeOutSpeed: "slow",
- 
-    // start from the beginning after the last tab
-    rotate: true
- 
-    // use the slideshow plugin. It accepts its own configuration
-    }).slideshow();
-	
-});
-</script>
-<%--<!--自动弹出窗-->
- <!-- Add fancyBox main JS and CSS files -->
-    <script type="text/javascript" src="${ctxPath}/scripts/jquery/jquery.fancybox.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="${resPath}/styles/jquery.fancybox.css?v=2.1.5" 
-
-media="screen" />
-    <link href="${resPath}/styles/popout.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript">
-		$(document).ready(function() {
-			$.fancybox('#target');
- 
-});
-		
-		</script>
-
-<!--end of 自动弹出窗-->
---%></head>
 	<body>
-		<%-- ========== 广告开始  修订之后的一个版本========== --%><%--
-		 <!--自动弹出窗-->
-
-
- <div id="target" class="popout_ad">
-   
-   <div class="ad_detail_half">
-     <h1 class="ad_title margin_TD20">母亲节尊爱巨献</h1>
-     <h2 class="detail_title">消费满888元送母亲节鲜花一束</h2>
-     <p class="detail_text">关注微信参与母亲节抽奖</p>
-     <p class="detail_text">回复”我爱妈妈”送400元优惠券</p>
-     <a href="${ctxPath}/static/special47.html" class="btn btn-pupo margin_top30">点击查看详情</a>
-   </div>
-   
-   <div class="ad_detail_half half_last">
-     <h1 class="ad_title margin_TD20">四方街网秒杀周</h1>
-     <h2 class="detail_title">狂欢继续，秒杀不断</h2>
-     <p class="detail_text">5月8日-5月10日</p>
-      <p class="detail_text">每天10:00开抢</p>
-     <a href="${ctxPath}/seckill.html" class="btn btn-pupo margin_top30">点击查看详情</a>
-   </div>
- </div>
-<!--end of 自动弹出窗-->
-		--%><div class="index-show">
-			<div class="left_ab">
-				<div class="big_ab">
-					<div>
-						<content:showAd adPositionType="mainad1" />			
-					</div>
-					<div>
-						<content:showAd adPositionType="mainad2" />
-					</div>
-					<div>
-						<content:showAd adPositionType="mainad3" />
-					</div>
-					<div>
-						<content:showAd adPositionType="mainad4" />
-					</div>
-				</div>
-				<!--big_ab-->
-			</div>
-			<!--left_ab-->
-			<div id="rightphoto">
-				<div class="customer-links">
-					<content:showAd adPositionType="mainsad1" />
-				</div>
-				<div class="banner">
-					<div class="banner_in">
-						<content:showAd adPositionType="mainsad2" />
-					</div>
-					<div class="banner_in">
-						<content:showAd adPositionType="mainsad3" />
-					</div>
-					<div class="banner_in">
-						<content:showAd adPositionType="mainsad4" />
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="break">
-			<span class="title_Ch_l">设计师推荐</span>
-			<p class="title_eng">
-				Designers ' Collections
-			</p>
-		</div>
-		<!--break-->
-		
-		<div class="wrapper">
-    <!--for triangle-->
-	<div class="popover top">
-	
-	    <div class="arrow"></div>
-	    <div class="popover-inner">
-	      <!-- <h3 class="popover-title"></h3> -->
-	      <div class="popover-content">
-	        
-	      </div>
-	    </div>
- 	</div><!--popover top-->
-
-	<div class="grid-container">
-	<c:forEach items="${brandList}" var="brand" varStatus="varStatus"
-					end="7">
-		<div class="thumb-container" data-title="${brand.designer}<br/> 品牌：${brand.brandName}" data-fontsize="18" data-bgcolor="black">
-			<cartmatic:img url="${brand.logo}" mediaType="other" alt="" />
-		
-				
-			<div class="quote-container">
-				<p>
-                <a href="${ctxPath}/search-prod.html?brandId=${brand.id}"><span class="date-info">More+</span></a>
-				</p>
-				
-			<div class="shoe_section">
-                 <div class="designer_shoe">                 
-                 <c:forEach items="${brand.products}" var="product"
-								varStatus="varStatus" end="9">             
-
-                  <div class="shoe_show">
-                  
-                   <product:productImg product="${product}" size="e"/>   
-              
-                   <div class="Item_name">
-                     <p class="text_prod">${product.productName}</p> 
-                     <p class="price">
-                     <product:showPrice productSku="${product.defaultProductSku}" viewType="4"/>
-                  
-          
-                     </p>
-                   </div><!--Item_name-->
-                  </div><!--shoe_show-->
-                 
-			</c:forEach>
-			</div><!--designer_shoe-->
-                </div><!--shoe_section-->
-		
-				
-			</div><!--quote-container-->
-		</div><!--thumb-container-->
-	
+		<div class="w-login">
+			<div class="w-login-s"></div>
+			<div class="w-login-c">
+			
+				<form method="post" name="loginForm" id="loginForm"
+					action="<c:url value="/j_security_check"/>" >
+					<div class="w-login-left">
+						<div class="w-l-close">
+							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
+						</div>
+						<div class="w-l-title">
+							会员登陆
+						</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-user"></i>
+								<input class="form-control" type="text" placeholder="邮箱/手机"
+									name="j_username" size="41" maxlength="288" id="j_username"
+									onblur="userName();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+							<div for="j_username" generated="true" class="red"
+								style="display: none;" id="p_username">
+								&nbsp;&nbsp;&nbsp;&nbsp;邮箱/手机 不能为空
+							</div>
+						</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-lock"></i>
+								<input class="form-control" type="password" placeholder="输入用户密码"
+									name="j_password" size="41" maxlength="120" id="j_password"
+									onblur="passWord();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+								<div for="j_password" generated="true" class="red"
+									style="display: none;" id="p_password">
+									&nbsp;&nbsp;&nbsp;&nbsp;密码不能为空
+								</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+								<div for="j_password" generated="true" class="red"
+									style="display: none;" id="q_password">
+									&nbsp;&nbsp;&nbsp;&nbsp;密码必须最小为6位字符
+								</div>
+						</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-tag"></i>
+								<input class="form-control" type="text" placeholder="输入验证码" name="validateCode" id="j_validateCode" onblur="validateMethod()">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+								<div for="j_validateCode" generated="true" class="red" style="display: none;" id="p_validateCode">
+									&nbsp;&nbsp;&nbsp;&nbsp;验证码不能为空
+								</div>
+						</div>
+						<%@ include file="/common/messages.jsp"%>
+		<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
+		<spring:bind path="customer.*">
+			<c:if test="${not empty status.errorMessages}">
+				<c:forEach var="error" items="${status.errorMessages}">
+					<div class="error_box"><c:out value="${error}" escapeXml="false" /></div>
 				</c:forEach>
-				
-					</div><!--grid-container-->
- </div><!--wrapper-->
- 
- 
-		<div class="break">
-  <span class="title_Ch_l">热门风向标</span>
-  <p class="title_eng">Hot Trends</p>
- </div><!--break-->
- <div class="hot_trends">
-  <div id="new_product">
- 
+			</c:if>
+		</spring:bind>
+		
+		<c:if test="${param.error != null}">
+			<div class="error_box"><fmt:message key="customer.login.fail" /></div>
+		</c:if>
+		<c:if test="${param.errorCode != null}">
+			<div class="error_box"><fmt:message key="front.errorCode" /></div>
+		</c:if>
+						<div class="w-l-yzm">
+							<div class="w-l-itemscon">
+								<a href="javascript:;" onClick="return refreshImage('login',this)"><img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=login" title="点击改变" /> </a>
+							</div>
+						</div>
+						<div class="w-l-btn">
+							<div class="w-l-itemscon">
+								<button name="login" class="btn btn-default signin" type="submit">
+									登陆
+								</button>
+							</div>
+						</div>
+						<div class="w-l-info">
+							<div class="w-l-itemscon">
+								<a class="lost_password"
+									href="<c:url value="/forgetPassword.html" />" title="忘记密码">忘记密码?</a>
+								|
+								<a href="javascript:void(0)" class="w-menu-lrzc">注册新用户</a>
+							</div>
+						</div>
+						<div class="w-l-note">
+							<div class="w-l-itemscon">
+												<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>
+				<script type='text/javascript' charset='utf-8'>
+					(function() {
+						var _dl_time = new Date().getTime();
+						var _dl_login = document.getElementById('denglu_login_js');
+						_dl_login.id = _dl_login.id + '_' + _dl_time;
+						_dl_login.src = 'http://static.denglu.cc/connect/logincode?appid=82529denuh8LjbM9yT1Fqp48COxlA3&v=1.0.2&widget=3&styletype=1&size=348_214&asyn=true&time=' + _dl_time;
+					})();
+				</script>
+							</div>
+						</div>
+					</div>
+					</form>
+					
+					
+					<form id="customerRegisterForm" action="${ctxPath}/register.html" method="post">
+					<div class="w-login-right">
+						<div class="w-l-close">
+							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
+						</div>
+						<div class="w-l-title">
+							注册新会员
+						</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-user"></i>
+								<input type="text" id="email" name="email" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="邮箱/手机" onblur="emailPhone();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+           					<div for="email" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_email">&nbsp;&nbsp;&nbsp;&nbsp;邮箱/手机不能为空</div>
+           				</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-lock"></i>
+								<input type="password" name="password" id="password" size = "41" maxlength= "120" " class="form-control" placeholder="输入用户密码" onblur="passWord2();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+            				<div for="password" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="a_password">&nbsp;&nbsp;&nbsp;&nbsp;密码不能为空</div>
+            			</div>
+            			<div class="mark margin-bottom-sm">
+								<div for="password" generated="true" class="red"style="display: none;" id="q_password">
+									&nbsp;&nbsp;&nbsp;&nbsp;密码必须最小为6位字符
+								</div>
+						</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-lock"></i>
+								<input type="password" name="rePassword" id="rePassword"  size = "41" maxlength= "120" class="form-control" placeholder="确认用户密码" onblur="rePassWord()">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+            				<div for="rePassword" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_rePassword">&nbsp;&nbsp;&nbsp;&nbsp;请确认用户密码</div>
+            			</div>
+            			<div class="mark margin-bottom-sm">
+								<div for="password" generated="true" class="red"style="display: none;" id="q_rePassword">
+									&nbsp;&nbsp;&nbsp;&nbsp两次输入密码不一致
+								</div>
+						</div>
+						<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-tag"></i>
+								<input type="text" name="validateCode" class="form-control" id="k_validateCode" placeholder="输入验证码" onblur="validateCode2();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+            				<div for="validateCode" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="q_validateCode">&nbsp;&nbsp;&nbsp;&nbsp;验证码不能为空</div>
+            			</div>
+            			
+            			<%@ include file="/common/messages.jsp"%>
+		<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
+		<spring:bind path="customer.*">
+			<c:if test="${not empty status.errorMessages}">
+				<c:forEach var="error" items="${status.errorMessages}">
+					<div class="error_box"><c:out value="${error}" escapeXml="false" /></div>
+				</c:forEach>
+			</c:if>
+		</spring:bind>
+		
+		<c:if test="${param.error != null}">
+			<div class="error_box"><fmt:message key="customer.login.fail" /></div>
+		</c:if>
+		<c:if test="${param.errorCode != null}">
+			<div class="error_box"><fmt:message key="front.errorCode" /></div>
+		</c:if>
+						<div class="w-l-yzm">
+							<div class="w-l-itemscon">
+								<a href="javascript:;" onClick="return refreshImage('register',this)">
+                   					<img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=register" title="点击改变" />
+               					</a>
+							</div>
+						</div>
+						<div class="w-l-info">
+							<div class="w-l-itemscon">
+								<label>
+									<input type="checkbox" id="checkboxre" class="regular-checkbox" onclick="checkbox1()"/>
+									我已阅读并接受四方街sifangstreet服务条款。
+								</label>
 
-	<ul class="tabs" id="product_tabs">
-	<li><a href="#">新品上架&nbsp;|</a></li>
-	<li><a href="#">热卖款式&nbsp;</a></li>
-	
-	<%--<li><a href="#">人气收藏&nbsp;|</a></li>
-    <li><a href="#">即将售罄</a></li>
---%></ul>
-<!-- tab "panes" -->
-<!-- /eStore/src/com/cartmatic/estoresf/sales/web/action/RecommendedProductFrontController.java -->
-<div class="boards">
-<!-- b1 -->
-     <div class="board" id="b1">
-     <div class="new_big">
-                                      <!-- 新品上架的商品 new_arrival 最新商品-->
-									<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-										<jsp:param name="typeName" value="new_arrival" />
-										<jsp:param name="firstResult" value="0" />
-										<jsp:param name="maxResults" value="1" />
-										<jsp:param name="template"
-											value="sales/include/recommendProduct4MainPage2" />
-										<jsp:param name="doAction" value="defaultAction" />
-										<jsp:param name="sourceId"
-											value="${appConfig.store.catalog.categoryId}" />
-									</jsp:include>
-							
-	   </div>
-  
-      <div class="right_small">
-                                       <!-- 新品上架的商品  new_arrival-->       
-	                                   <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-											<jsp:param name="typeName" value="new_arrival" />
-											<jsp:param name="firstResult" value="1" />
-											<jsp:param name="maxResults" value="4" />
-											<jsp:param name="template"
-												value="sales/include/recommendProduct4MainPage" />
-											<jsp:param name="doAction" value="defaultAction" />
-											<jsp:param name="sourceId"
-												value="${appConfig.store.catalog.categoryId}" />
-										</jsp:include>
+							</div>
+						</div>
+						<div class="w-l-btn">
+							<div class="w-l-itemscon">
+								<button class="btn btn-default signup" type="submit" id="button1" style="display: none;">
+									注册
+								</button>
+								<span class="btn btn-default un-signup" type="" id="button2">
+									无法注册
+								</span>
+							</div>
+						</div>
 
-      </div><!--right_small-->		
-     </div><!--b1-->
-     <!--end of b1-->
-	<!-- b2 -->
-     <div class="board" id="b2">
-        <div class="new_big">
-                                    <!-- 热卖款式的商品 hot_sell 热卖商品-->
-									<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-										<jsp:param name="typeName" value="hot_sell" />
-										<jsp:param name="firstResult" value="0" />
-										<jsp:param name="maxResults" value="1" />
-										<jsp:param name="template"
-											value="sales/include/recommendProduct4MainPage2" />
-										<jsp:param name="doAction" value="defaultAction" />
-										<jsp:param name="sourceId"
-											value="${appConfig.store.catalog.categoryId}" />
-									</jsp:include>							
-	   </div>
-	     <div class="right_small">
-	                                    <!-- 热卖款式的商品 hot_sell 热卖商品 -->
-	                                   <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-											<jsp:param name="typeName" value="hot_sell" />
-											<jsp:param name="firstResult" value="1" />
-											<jsp:param name="maxResults" value="4" />
-											<jsp:param name="template"
-												value="sales/include/recommendProduct4MainPage" />
-											<jsp:param name="doAction" value="defaultAction" />
-											<jsp:param name="sourceId"
-												value="${appConfig.store.catalog.categoryId}" />
-										</jsp:include>
-
-      </div><!--right_small-->		
-      </div><!--b2-->
-     <!--end of b2-->
-</div>
+						<div class="w-l-note">
+							<div class="w-l-itemscon">
+								<span class="w-menu-lr">会员登录</span>
+							</div>
+						</div>
+					</div>
+					</form>
+			</div>
+		</div>
+		<div class="w-nav navbar-fixed-top">
+			<div class="container" style="position: relative; z-index: 1300;">
+				<div class="w-sea">
+					<div class="w-sea-list">
+						<div class="w-sea-sj"></div>
+						<div class="w-sea-con">
+						<!-- 搜索 -->
+						<form  method="get" id="searchForm" action="" >
+								<input name="q" type="text" title="Search for" autocomplete="off" id="q"/>
+								<i class="fa fa-long-arrow-right" onclick="fnUnlock()"></i>
+								</span>
+						</form>
+						</div>
+					</div>
+				</div>
 
 
-  </div><!--new_product-->
-  <!--booking-->
-  <div id="booking_hot">
-  <div id="product_booking">
-    <div class="thumb_tabs">
-       
-      <ul id="css_tabs" class="tabs">
-      <li><a id="t1" href="#">新品预售&nbsp;|</a></li>
-      <li><a id="t2" href="#">配饰预售</a></li>  
-      </ul>
-      <div class="slide_bu">
-      <!-- "previous slide" button -->
-      <a class="backward"><img src="images/img_narrow_l.gif"/></a>
-       <!-- "next slide" button -->
-      <a class="forward"><img src="images/img_narrow_r.gif"/></a>
-      </div><!--slide_bu-->
-    </div><!--thumb_tabs-->
-<!-- panes -->
-  <div class="css-panes">
-   <div class="items">
-                                        <!-- 鞋品预售的商品 Hot Wholesale Products -->    
-                           <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-											<jsp:param name="typeName" value="hot_wholesale_products" />
-											<jsp:param name="firstResult" value="0" />
-											<jsp:param name="maxResults" value="3" />
-											<jsp:param name="template"
-												value="sales/include/recommendProduct4MainPage4" />
-											<jsp:param name="doAction" value="defaultAction" />
-											<jsp:param name="sourceId"
-												value="${appConfig.store.catalog.categoryId}" />
-										</jsp:include>
-     
-     
-  <a href="${ctxPath}/new-arrivals/shoespresell_catalog.html"><span class="date-info">More+</span></a>
-  </div><!--items-->
-  <div class="items">
-                                   <!-- 配饰预售的商品 feature_product 特色商品 --> 
-                                  <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-											<jsp:param name="typeName" value="feature_product" />
-											<jsp:param name="firstResult" value="0" />
-											<jsp:param name="maxResults" value="3" />
-											<jsp:param name="template"
-												value="sales/include/recommendProduct4MainPage4" />
-											<jsp:param name="doAction" value="defaultAction" />
-											<jsp:param name="sourceId"
-												value="${appConfig.store.catalog.categoryId}" />
-										</jsp:include>
+				<div class="w-car">
+					<div class="w-car-list">
+						<div class="w-car-sj"></div>
+						<div class="w-car-con">
+							<ul class="list-unstyled clearfix">
+							<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus" begin="0" end ="1">
+								<c:if test="${item.isSaved==0 and empty item.parent}">
+									<li class="clearfix">
+									<div class="w-car-img">
+										<product:productImg sku="${item.productSku}" size="e" width="100" height="100"/>
+									</div>
+									<div class="w-car-info">
+										<span><product:productName product="${item.productSku.product}"/></span>
+										<span>${item.productSku.product.brand.brandName}</span>
+										<span class="w-car-price">￥<system:CurrencyForRate value="${item.price}" /></span>
+									</div>
+									</li>
+								</c:if>
+							</c:forEach>
+							</ul>
+							<div class="w-car-msg">
+								购物车里还有${shoppingcart.buyNowItemsCount <=2 || shoppingcart.buyNowItemsCount ==null?0:shoppingcart.buyNowItemsCount -2}件物品
+							</div>
+							<div class="w-car-zj clearfix">
+								<div class="w-car-zjmc">
+									总计：
+								</div>
+								<div class="w-car-price">
+									￥ ${shoppingcart.subtotal == null?0:shoppingcart.subtotal}
+								</div>
+							</div>
+							<div class="w-car-btn">
+								<a class="w-car-btn" href="#">查看购物车</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row visible-md-block visible-lg-block">
+					<div class="col-md-2 col-lg-2 w-logo">
+						<a href="${ctxPath}/index.html">四方街</a>
+					</div>
+					<div class="col-md-6 col-lg-7">
+						<ul class="w-menu list-unstyled">
+							<li>
+								<a href="#"><span class="w-menu-on">商城</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span>
+								</a>
+							</li>
+							<li>
+								<a href="#"><span>设计师</span> </a>
+							</li>
+							<li>
+								<a href="#"><span>关于我们</span> </a>
+							</li>
+							<li>
+								<a href="#"><span>线下店铺</span> </a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-lg-3" style="padding-bottom: 50px;">
+						<ul class="w-menu-right list-unstyled">
+							<li>
+								<a href="javascript:void(0)"><span class="w-gwc">购物车
+										(${shoppingcart.buyNowItemsCount})</span> </a>
+							</li>
+							<li id="loginPromptHolderTemplateLogout">
+								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
+									class="w-menu-lrzc">注册</span> </a>
+							</li>
+							<li id="loginPromptHolderTemplateLogin">
+								<a href="javascript:void(0)"><span id="username" class="w-gwc"></span> </a> (
+								<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;
+							</li>
+							<li>
+								<a href="#"><span class="w-search">搜索</span> </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row visible-sm-block visible-xs-block w-menusm">
+					<div class="col-xs-4 col-sm-3 text-left">
+						<a href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+					</div>
+					<div class="col-xs-4 col-sm-6 w-logo text-center">
+						<a href="#">四方街</a>
+					</div>
+					<div class="col-xs-4 col-sm-3 text-right w-gwct"
+						style="padding-bottom: 50px;">
+						<a href="javascript:void(0)"><span class="w-gwc">购物车
+								(0)</span> </a>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="w-menush visible-sm-block visible-xs-block">
+				<ul class="w-menush-items list-unstyled">
+					<li>
+						<a href="#"><span class="w-menu-on">商城</span> </a>
+					</li>
+					<li>
+						<a href="list.html"><span>文化资讯</span> </a>
+					</li>
+					<li>
+						<a href="#"><span>设计师</span> </a>
+					</li>
+					<li>
+						<a href="#"><span>关于我们</span> </a>
+					</li>
+					<li>
+						<a href="#"><span>线下店铺</span> </a>
+					</li>
+					<li>
+						<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
+							class="w-menu-lrzc">注册</span> </a>
+					</li>
+					<li>
+						<a href="#"><span>搜索</span> </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="w-slide jumbotron">
+			<div class="swiper-container">
+				<div class="swiper-page-right">
+					<div class="swiper-page-next">
+						<i class="fa fa-angle-right"></i>
+					</div>
+				</div>
+				<div class="swiper-page-left">
+					<div class="swiper-page-prev">
+						<i class="fa fa-angle-left"></i>
+					</div>
+				</div>
+
+				<div class="swiper-wrapper">
+					<%--首页轮播图，目前数量为4，如需改动数量可在此修改 --%>
+					<content:showAdNew adPositionType="mainadNew1" />
+
+					<content:showAdNew adPositionType="mainadNew2" />
+
+					<content:showAdNew adPositionType="mainadNew3" />
+
+					<content:showAdNew adPositionType="mainadNew4" />
+
+				</div>
+			</div>
+		</div>
+		<div class="w-banner jumbotron">
+			<content:showAdNew adPositionType="mainsadNew1" />
+		</div>
+		<div class="w-bannert jumbotron ">
+			<content:showAdNew adPositionType="mainsadNew2" />
+		</div>
+
+		<div class="w-lf jumbotron clearfix">
+			<div class="w-lf-con">
+				<content:showAdNew adPositionType="mainsadNew3" />
+				<div class="w-lf-cen">
+					<div class="w-lf-br"></div>
+				</div>
+				<content:showAdNew adPositionType="mainsadNew4" />
+			</div>
+		</div>
+
+		<div class="w-mem">
+			<div class="w-mem-hse"></div>
+			<div class="container">
+				<div class="row">
+
+					<div class="w-mem-hr">
+						<div class="w-mem-hrt">
+							最新入驻设计师
+						</div>
+					</div>
+					<div class="w-mem-list">
+						<c:forEach items="${brandList}" var="brand" varStatus="varStatus"
+							end="4">
+							<div class="w-mem-con">
+								<span class="w-mem-cn">${brand.designer}</span>
+								<span class="w-mem-en">${brand.brandName}</span>
+								<figure class="w-mem-milo">
+
+								<img src="${mediaPath}other/${brand.pic}" alt="img11" />
+								<figcaption>
+								<div class="w-mem-bg">
+								</div>
+								<p>
+									${brand.story}
+								</p>
+
+								</figcaption>
+								</figure>
+							</div>
 
 
-<a href="${ctxPath}/new-arrivals/accepresell_catalog.html"><span class="date-info">More+</span></a>
+						</c:forEach>
 
-
-</div>
-     
-  
-  </div><!--css-panes-->
-
-  </div><!--product_booking-->
-  
-  
- <div class="top_hot">
-   <div class="hot_section">
-   <div class="section_title">
-   <p class="hot_title">精选TOP 5</p>
-   <div class="hot_tabs">
-    <a data-slide-index="0" href=""></a>
-    <a data-slide-index="1" href=""></a>
-    <a data-slide-index="2" href=""></a>
-    <a data-slide-index="3" href=""></a>
-    <a data-slide-index="4" href=""></a>
-   </div>
-  </div><!--section_title-->
-  
-    <div class="hot">
-                             <!-- 精选Top5的商品--Favorite --> 
-                             <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-											<jsp:param name="typeName" value="Favorite" />
-											<jsp:param name="firstResult" value="0" />
-											<jsp:param name="maxResults" value="5" />
-											<jsp:param name="template"
-												value="sales/include/recommendProduct4MainPage5" />
-											<jsp:param name="doAction" value="defaultAction" />
-											<jsp:param name="sourceId"
-												value="${appConfig.store.catalog.categoryId}" />
-										</jsp:include> 
-    
-       </div><!--hot-->
-  </div><!--hot_section-->
-  </div><!--top_hot-->
-
- </div><!--booking_hot-->
- </div><!--hot_trends-->
-  
-<div class="break">
-  <span class="title_Ch_l">品牌播报站</span>
-  <p class="title_eng">Brand Issues</p>
- </div><!--break-->
-  <!-- 中间的页面 广告4、5、6 -->
- <div class="topic_pic">
-  <div class="topic_top">
-  <div class="pic_left">
-      <content:showAd adPositionType="3adbanner_A" />
-      </div>   
-       <div class="pic_mid">
-       <content:showAd adPositionType="3adbanner_B" />
-      </div>
-      <div class="pic_right">
-       <content:showAd adPositionType="3adbanner_C" />
-      </div>   
-  </div><!--topic_top-->
-  
-  <!-- 最下角的杂志页面 广告7、8、9 -->
-  <div class="topic_bottom">
-   <div class="bottom_left">
-        <div class="pic_big">
-           <content:showAd adPositionType="3adbanner_D" />
-          </div>
-   </div><!--bottom_left-->
-   <div class="bottom_right">
-           <div class="pic_ad">
-           <content:showAd adPositionType="3adbanner_E" />
-          </div>
-           <div class="pic_video">
-           <content:showAd adPositionType="3adbanner_F" />
-          </div>
-   </div><!--bottom_right-->
-  </div><!--topic_bottom-->
- </div><!--topic_pic-->
-<div class="break">
-  <span class="title_Ch_l">人气单品带</span>
-  <p class="title_eng">Best Sellers</p>
- </div><!--break-->
- 
- <div class="sale_popular">
- 
-  <div class="outside">
-    <p><span id="slider-prev"></span> <span id="slider-next"></span></p>
-  </div>
-  <div class="slider2">    
-               <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-											<jsp:param name="typeName" value="hot_sell" />
-											<jsp:param name="firstResult" value="0" />
-											<jsp:param name="maxResults" value="10" />
-											<jsp:param name="template"
-												value="sales/include/recommendProduct4MainPage3" />
-											<jsp:param name="doAction" value="defaultAction" />
-											<jsp:param name="sourceId"
-												value="${appConfig.store.catalog.categoryId}" />
-										</jsp:include>
-  
-
-    </div><!--slider2-->
- </div><!--sale_popular--><%-- 
- 
- <div id="tips" style="display: none;">
- 	开始抢购》》》》
-</div>
---%><script type="text/javascript">
-/*
-<!--
-function showDD(){
-	var popuw = function(skucode,type){
-    	this.skucode = skucode;
-    	this.type = type;
-    }
-    popuw.prototype={
-    	id:'tips_',
-    	skucode:'',
-    	type:1,
-    	messageDlgZIndex:1000,
-		html:$("#tips").html(),
-		show:function(){
-			  var cartDlg=fnCreateSimpleDialog(this.id,'','',{});
-			  $("#_dlgContBox"+this.id).html(this.html);
-			  cartDlg.showDialog();
-		}
-    }
-	var win = new popuw('',1);
-	win.show();
-}
-//-->
-
-if("${isRush}"){
-	showDD();
-}
-*/
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w-footer">
+			<div class="container">
+				<div class="row">
+					<div class="w-footer-con">
+						<div class="w-footer-item w-footer-links col-lg-4">
+							<span class="w-links"> <a href="#">关于我们 | </a> <a href="#">隐私保护政策
+									| </a> <a href="#">使用条款 | </a> <a href="#">商家入驻 | </a> <a href="#">友情链接
+									| </a> <a href="#">优品联盟</a> </span>
+							<span>Copyright©2013-2014 SifangStreet四方街版权所有
+								粤ICP备13075482号-1</span>
+							<a href="http://www.anquan.org/s/www.sifangstreet.com"
+								name="bIe7hLFwEsIGD6e0PKwvzqD2yXwpSzfTo6hyXQFEOOuySFBo9P">安全联盟、百度</a>
+							<script type="text/javascript">
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://"
+			: " http://");
+	document
+			.write(unescape("%3Cscript src='"
+					+ _bdhmProtocol
+					+ "hm.baidu.com/h.js%3F5987b6886920e65d633daea3a74b6ffe' type='text/javascript'%3E%3C/script%3E"));
 </script>
- 
+						</div>
+						<div class="w-footer-item col-lg-4">
+							<div class="w-footer-email">
+								<input type="text" name="" value="输入邮箱地址订阅最新资讯" />
+								<a> <i class="fa fa-arrow-right"></i> </a>
+							</div>
+						</div>
+						<div class="w-footer-item w-footer-con col-lg-4">
+							<span>联系我们</span>
+							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五
+								9:30-18:30 节假日休息</span>
+							<span><img src="${resPath}/images/img/yj.png" /> </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/swiper.animate.min.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+
+		<script>
+	var swiper = new Swiper('.swiper-container', {
+		nextButton : '.swiper-page-next',
+		prevButton : '.swiper-page-prev',
+		paginationClickable : true,
+		spaceBetween : 0,
+		mousewheelControl : false,
+		//							autoplay: 5000,
+		speed : 500,
+		onInit : function(swiper) {
+			swiperAnimateCache(swiper);
+			swiperAnimate(swiper);
+		},
+		onSlideChangeEnd : function(swiper) {
+			swiperAnimate(swiper);
+		},
+		onTransitionEnd : function(swiper) {
+			swiperAnimate(swiper);
+		}
+	});
+
+	function refreshImage(type, obj) {
+		//var image=document.getElementById("imgValidationCode");
+		var image = $(obj).children()[0];
+		var url = "${ctxPath}/jCaptcha.html?type=" + type;
+		var xmlHttpReq = null;
+		if (window.ActiveXObject) {
+			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttpReq = new XMLHttpRequest();
+		}
+		xmlHttpReq.open("Post", url, true);
+		xmlHttpReq.send(null);
+
+		image.src = "${ctxPath}/jCaptcha.html?rand="
+				+ parseInt(1000 * Math.random());
+		return false;
+	}
+</script>
+
+
+
 	</body>
-	
+
 </html>

@@ -15,6 +15,7 @@
 
 <c:if test="${product.status != 1}">
 	<%response.setStatus(response.SC_GONE);%>
+	
 </c:if>
 
 <html>
@@ -184,7 +185,6 @@
       <![endif]-->
    </head>
    <body> 
-   
    <content tag="heading"> <product:navigatorBar navigatorCategorys="${navigatorCategorys}" pageType="2"/></content>
       <div class="maincontent" id="designer_detail">
        <div class="detail_top">
@@ -343,7 +343,7 @@
 		               </ul>
          	  </div><!--product_size-->
            	</c:if>
-           	
+			
            <div class="product_quantity">
            	<product:productQuantity2 product="${product}" />
              <form id="myform" method="POST" action="#">
@@ -379,11 +379,6 @@
             --%>
              
              
-             
-          
-           
-           
-           
            </div><!--product_quantity-->
           
            <div class="product_delivery">

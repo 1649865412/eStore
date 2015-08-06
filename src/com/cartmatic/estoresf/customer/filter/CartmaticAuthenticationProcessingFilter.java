@@ -52,12 +52,13 @@ public class CartmaticAuthenticationProcessingFilter extends OncePerRequestFilte
 
 					captchaService = (ImageCaptchaService) context
 							.getBean("imageCaptchaService");
-
+                
 					Boolean isValidationCodeCorrect = captchaService.validateResponseForID(captchaId + type, validationCode);
+					
 					boolean isCodeCorrect = isValidationCodeCorrect.booleanValue();
 					if (!isCodeCorrect) {
 						response.sendRedirect(request.getContextPath()
-								+ "/signup.html?errorCode=true");
+								+ "/index.html?errorCode=true");
 						return;
 					}
 				}

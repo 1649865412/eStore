@@ -182,6 +182,11 @@
 	          </div><!--inline1-->
 			</c:forEach>  
 			
+			
+			
+			
+			
+			
 		  </div><!--container-->
       </div><!--filters demo1-->
       </div>

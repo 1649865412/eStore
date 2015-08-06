@@ -18,7 +18,6 @@
 $.extend($.fn, {
 	// http://docs.jquery.com/Plugins/Validation/validate
 	validate: function( options ) {
-         // alert("zsdfg")
 		// if nothing is selected, return nothing; can't chain anyway
 		if (!this.length) {
 			options && options.debug && window.console && console.warn( "nothing selected, can't validate, returning nothing" );
@@ -58,6 +57,7 @@ $.extend($.fn, {
 					if ( validator.settings.submitHandler ) {
 						if (validator.submitButton) {
 							// insert a hidden input as a replacement for the missing submit button
+							
 							var hidden = $("<input type='hidden'/>").attr("name", validator.submitButton.name).val(validator.submitButton.value).appendTo(validator.currentForm);
 						}
 						validator.settings.submitHandler.call( validator, validator.currentForm );

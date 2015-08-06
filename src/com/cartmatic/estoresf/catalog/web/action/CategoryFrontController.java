@@ -59,7 +59,7 @@ public class CategoryFrontController extends GenericStoreFrontController<Categor
 
 	
 	/**
-	 * 产品列表页 
+	 * 产品列表页
 	 */
 	@RequestMapping(value={"/**/*_catalog.html","/**/*_catalog_pn*.html"})
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) {

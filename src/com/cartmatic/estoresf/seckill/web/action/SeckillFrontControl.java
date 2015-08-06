@@ -40,15 +40,6 @@ public class SeckillFrontControl extends GenericStoreFrontController<SekillProdu
 	}
 	
 	
-	@RequestMapping(value = "/seckillpage/text.html", method = RequestMethod.GET)
-	public ModelAndView text(HttpServletRequest request, HttpServletResponse response)
-	{
-		System.out.println("二维码");
-		ModelAndView mv = new ModelAndView("/seckillpage/Qma");
-		System.out.append("hello");
-		return mv;
-	}
-	
 	@RequestMapping(value = "/love520.html", method = RequestMethod.GET)
 	public ModelAndView getSekillProductList(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -82,18 +73,25 @@ public class SeckillFrontControl extends GenericStoreFrontController<SekillProdu
 			}
 		}
 		
+		
 /*		SeckillTool.getStayDay( sekillProductListDay1, sekillProductListDay2,
 				 sekillProductListDay3);*/
+		
 		ModelAndView mv = new ModelAndView("/seckillpage/seckill");
+		
+		
 	//	Collections.reverse(sekillProductListDay1);
 	//  Collections.reverse(sekillProductListDay2);
 	//	Collections.reverse(sekillProductListDay3);
+		
 		mv.addObject("sekillProductListDay1", sekillProductListDay1);
 		mv.addObject("sekillProductListDay2", sekillProductListDay2);
 		mv.addObject("sekillProductListDay3", sekillProductListDay3);
 		// mv.addObject("facetMap", searchResult.getFacetMap());	
 		return mv;
 	}
+	
+	
 	
 	
 	public void setProductManager(ProductManager inMgr)

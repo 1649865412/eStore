@@ -53,6 +53,7 @@ function fnDoLoginHandler() {
 		return;
 	}
 	$.post(__ctxPath+"/ajaxLogin.html",{username:username,password:password},function (result) {
+		alert("fujun");
 		if (result.status == 1) {
 			//sysMsg("You signed in system successfully!");
 			dlgLogin.closeDialog();

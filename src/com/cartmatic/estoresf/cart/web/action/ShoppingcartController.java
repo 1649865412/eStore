@@ -118,6 +118,38 @@ public class ShoppingcartController extends BaseStoreFrontController {
 	    Pattern.compile("^http://(.+)/search-prod.html.*$")
 	};
 	/**
+	 * 新版首页获取购物车列表
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+//	@RequestMapping(params="doAction=getHeadCart", method=RequestMethod.POST)
+//	public void getHeadCart(HttpServletRequest request,HttpServletResponse response) throws Exception
+//    {
+//		if (logger.isDebugEnabled()) {
+//			logger.debug("entering 'ShoppingcartController defaultAction' method...");
+//		}
+//		Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
+//		Shoppingcart shoppingcart = null;
+//		String sUuid = "";
+//		if(cookie!=null){//进入购物车页面时，假如cookie中没有购物车uuid，则初始化一辆购物车给用户
+//		    sUuid = cookie.getValue();
+////		    shoppingcart = shoppingcartManager.loadShoppingcartByUuid(sUuid);
+//		    shoppingcartManager.doNotUseCoupon(sUuid);
+//		    shoppingcart = shoppingcartManager.refreshCart(sUuid, request, response);
+//		    if(shoppingcart==null){
+//		    	Customer customer = (Customer) RequestContext.getCurrentUser();
+//		    	shoppingcart = shoppingcartManager.initShoppingcart(customer);
+//		    }
+//		}
+//		else{
+//			Customer customer = (Customer) RequestContext.getCurrentUser();
+//			shoppingcart = shoppingcartManager.initShoppingcart(customer);
+//		}
+//			shoppingcartManager.save(shoppingcart);
+//    }
+	
+	/**
 	 * 购物车商品数量-1
 	 * /eStore/web/scripts/cartmatic/cart/checkout/cartManager.js
 	 * @param request

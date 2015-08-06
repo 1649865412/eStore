@@ -2,6 +2,7 @@ package com.cartmatic.estoresf.culturalinformation.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.cartmatic.estore.common.service.SolrService;
-import com.cartmatic.estore.common.helper.CatalogHelper;
-import com.cartmatic.estore.common.model.content.Content;
+
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
+import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
+import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
-import com.cartmatic.estore.textsearch.SearchConstants;
+import com.cartmatic.estore.monthlycultural.service.MonthlyCulturalManager;
 import com.cartmatic.estore.textsearch.model.SearchResult;
 
 
@@ -32,7 +33,16 @@ import com.cartmatic.estore.textsearch.model.SearchResult;
 public class CulturalinformationFrontController extends GenericStoreFrontController<CulturalInformation>
 {
 	private CulturalInformationManager culturalInformationManager = null;
-	
+	private MonthlyCulturalManager monthlyCulturalManager = null;
+	public MonthlyCulturalManager getMonthlyCulturalManager() {
+		return monthlyCulturalManager;
+	}
+
+	public void setMonthlyCulturalManager(
+			MonthlyCulturalManager monthlyCulturalManager) {
+		this.monthlyCulturalManager = monthlyCulturalManager;
+	}
+
 	private SolrService solr = null;
 	
 	public void setSolrService(SolrService avalue)
@@ -48,19 +58,78 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
        // System.out.println("fujun");
     }
 	
+	/**
+	 * 文化资讯列表页获取类型list
+	 */
+	@RequestMapping(value="/culturalinformation/index.html")
+	public ModelAndView getCulTypeResultList(HttpServletRequest request,HttpServletResponse response,String type) {
+		ModelAndView mv=new ModelAndView("cultura/culturalinformation");
+		List<CulturalInformation> culturalinformationList=culturalInformationManager.getResutlType(type);
+		mv.addObject("culturalinformationList", culturalinformationList);
+		return mv;
+	}
+	
+	/**
+	 * 文化资讯详情页
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/culturalinformation/culturatemplate.html*")
+	public ModelAndView getCulTemResultList(HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mv=new ModelAndView("cultura/culturaTemplate");
+		Integer culId=Integer.parseInt(request.getParameter("culId"));
+		CulturalInformation culturalInformation =culturalInformationManager.getById(culId);
+		mv.addObject("culturalInformation", culturalInformation);
+		return mv;
+	}
+	
+	/**
+	 * 功能:月刊页面数据
+	 * <p>作者 杨荣忠 2015-6-19 下午05:02:34
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+    @RequestMapping(value="/Cultural_Service/month.html")
+    public ModelAndView getMonhtData(HttpServletRequest request, HttpServletResponse response)	 
+    {
+    	ModelAndView mv = getModelAndView("");
+    	//获取哪个月刊的ID
+    	System.out.println("culturalInformationID==========="+request.getParameter("culturalInformationId"));
+        //上一个月刊资讯的ID
+    	System.out.println("lastmonthID==========="+request.getParameter("lastmonthID"));
+    	//下一个月刊资讯的ID
+    	System.out.println("nextmonthID==========="+request.getParameter("nextmonthID"));
+    	CulturalInformation lastCultural =culturalInformationManager.getById(Integer.parseInt(request.getParameter("lastmonthID")));
+    	CulturalInformation nextCultural =culturalInformationManager.getById(Integer.parseInt(request.getParameter("nextmonthID")));
+    	//获取月刊图片
+    	CulturalInformation culturalInformation =culturalInformationManager.getById(Integer.parseInt(request.getParameter("culturalInformationId")));
+    	Set<MonthlyCultural> monthlyCulturalList  =culturalInformation.getMonthlyCultural();
+    	//获取推荐信息List
+        List<CulturalInformation> reCommendResults = culturalInformationManager.getAllByIdArray(culturalInformation.getRecommendArrayId());
+        mv.addObject("reCommendResults", reCommendResults);   
+        mv.addObject("monthlyCultural", monthlyCulturalList);
+        mv.addObject("lastCultural", lastCultural);
+        mv.addObject("nextCultural", nextCultural);
+		return mv;
+    }
+
 	
 	/**
 	 * 功能:搜索查询controller，根据查询的tag查询，返回查询到的文化列表beanList
 	 * <p>作者 杨荣忠 2015-6-19 下午05:02:34
 	 * @param request
 	 * @param response
+	 * @return 
 	 * @return
 	 */
     @RequestMapping(value="/Cultural_Service/search.html")
-    public void searchAction(HttpServletRequest request, HttpServletResponse response,String tags)	 
+    public ModelAndView searchAction(HttpServletRequest request, HttpServletResponse response,String q)	 
     {
+    	ModelAndView mv=new ModelAndView("cultura/culturalinformation");
         List<CulturalInformation> results = new ArrayList<CulturalInformation>();
-        SearchResult searchResult = solr.queryAllCulturalByTag(request,tags,defaultPageSize);
+        SearchResult searchResult = solr.queryAllCulturalByTag(request,q,defaultPageSize);
         List<Integer> ids = (List<Integer>)searchResult.getResultList();
         for (Integer id : ids)
         {
@@ -68,9 +137,11 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
             if(obj!=null)
             {
             	System.out.println(obj.getTitle());
-                results.add(obj);                
+                results.add(obj);  
             }
         }
+        mv.addObject("culturalinformationList",results);
+        return mv;
     }
     
 

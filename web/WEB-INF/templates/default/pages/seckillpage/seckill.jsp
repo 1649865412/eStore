@@ -15,7 +15,12 @@
 
     <link href="${resPath}/styles/main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="${resPath}/styles/component.css" />
-
+   
+ 
+ 
+		
+	
+       
    <style type="text/css">
    /* tabs-s */
 .tabs-s {
@@ -109,6 +114,9 @@
 .content .sale_s:after {
 	clear: both;
 }
+
+
+
   
    </style> 
 </head>

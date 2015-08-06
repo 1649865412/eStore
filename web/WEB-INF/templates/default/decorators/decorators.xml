@@ -6,18 +6,19 @@
 		<pattern>/**/product_cat_iframe.html</pattern>
 		<pattern>/view-image.html*</pattern>
 		<pattern>/google*.html</pattern>
+		<pattern>/index.html</pattern>
 	</excludes>
 
 	<!-- dec 为前缀的jsp文件为装饰器专用文件。-->
 	<!-- 装饰器的匹配一般是两种方式： URL和参数 -->
 	<!-- URL 主要看每个装饰器定义的pattern -->
 	<!-- 参数  可以在url后面通过GET方式带参数： decorator=[指定的装饰器name，如printable] -->
-	<!--主页装饰器 -->
+	<!--主页装饰器 
 <decorator name="mainpage" page="decMainPage.jsp">
 		<pattern>/index.html</pattern>
 	</decorator> 
 
-	<!--购物车装饰器 -->
+	--><!--购物车装饰器 -->
 	<decorator name="shoppingcart" page="decShoppingCart.jsp">
 		<pattern>/cart/shoppingcart.html</pattern>
 	</decorator>

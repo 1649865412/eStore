@@ -27,6 +27,7 @@
                   </ul>
                </div>
                 
+                   
 			    <attribute:attribute var="attribute" attributeCode="changhe"></attribute:attribute>
                     <c:set var="checkBoxIndex" value="1"/>
                     <div class="attribute-item">

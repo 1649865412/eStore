@@ -1,4 +1,4 @@
-#Mon Aug 03 17:29:27 CST 2015
+#Thu Jul 23 10:16:03 CST 2015
 eclipse.preferences.version=1
 encoding//common/TrustMerchant.properties=UTF-8
 encoding//common/conf/app-config.properties=UTF-8
@@ -41,7 +41,7 @@ encoding//web/WEB-INF/templates/default/pages/customer/giftCard.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/customer/giftCouponQuery.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/customer/orderReview.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/customer/shopPoint.jsp=UTF-8
-encoding//web/WEB-INF/templates/default/pages/index.jsp=UTF-8
+encoding//web/WEB-INF/templates/default/pages/index(old).jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/magazine/p1.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/magazine/p2.jsp=UTF-8
 encoding//web/WEB-INF/templates/default/pages/newArrivals.jsp=UTF-8

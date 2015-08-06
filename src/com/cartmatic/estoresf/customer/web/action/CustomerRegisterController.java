@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -30,11 +32,14 @@ import com.cartmatic.estore.common.model.attribute.AttributeValue;
 import com.cartmatic.estore.common.model.customer.Customer;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.core.exception.ApplicationException;
+import com.cartmatic.estore.core.util.ContextUtil;
 import com.cartmatic.estore.core.view.AjaxView;
 import com.cartmatic.estore.core.view.MailEngine;
 import com.cartmatic.estore.customer.service.CustomerManager;
 import com.cartmatic.estore.system.service.AppUserManager;
 import com.cartmatic.estore.webapp.util.RequestUtil;
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.image.ImageCaptchaService;
 
 
 
@@ -89,7 +94,7 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 		}
 	    
 	    
-	    @RequestMapping(value={"/register.html", "/checkout/register.html"},method=RequestMethod.POST)
+	    @RequestMapping(value={"*/register.html", "/checkout/register.html"},method=RequestMethod.POST)
 		public ModelAndView register(@Valid Customer customer,BindingResult result,HttpServletRequest request,HttpServletResponse response) throws Exception {
 			String originalPass = "";
 	    	//检查email是否已使用
@@ -98,10 +103,45 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 					result.rejectValue("email","appUser.email.isExist","the email has exist!");
 				}
 			}
+			String captchaId = request.getSession().getId();
+			String type = request.getParameter("type");
+			// retrieve the validation code
+			String validationCode = request.getParameter("validateCode");
+			
+			// validate validation code
+			try {
+				if (validationCode != null) {
+
+					ImageCaptchaService captchaService = null;
+
+					WebApplicationContext context = WebApplicationContextUtils
+							.getRequiredWebApplicationContext(getServletContext());
+
+					captchaService = (ImageCaptchaService) context
+							.getBean("imageCaptchaService");
+                
+					Boolean isValidationCodeCorrect = captchaService.validateResponseForID(captchaId + type, validationCode);
+					
+					boolean isCodeCorrect = isValidationCodeCorrect.booleanValue();
+					if (!isCodeCorrect) {
+						request.getRequestDispatcher("/index.html?errorCode=true").forward(request, response);
+//						response.sendRedirect(request.getContextPath()
+//								+ "/index.html?errorCode=true");
+					}
+				}
+			} catch (CaptchaServiceException e) {
+				// should not happen, may be thrown if the id is not valid
+				e.printStackTrace();
+			}
 			ModelAndView mav = null;
 			try {
 				if (result.hasErrors()) {
-					return new ModelAndView("signup");
+					if (ContextUtil.isStoreFront()) {
+						request.getRequestDispatcher("/index.html?error=true&tag1=0").forward(request, response);
+					} else {
+						request.getRequestDispatcher("index.html?error=true&tag1=0").forward(request, response);
+					}
+
 				}else{
 					//立即激活
 					customer.setStatus(Constants.STATUS_ACTIVE);
@@ -123,6 +163,7 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 			} catch (ApplicationException e) {
 				handleApplicationException(result, e);
 			}
+			
 			if (result.hasErrors()) {
 				mav = signup(request, response);
 			} else {
@@ -131,7 +172,7 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 		        	//下单时，创建用户的直接跳到运输地址页面
 					mav=new ModelAndView(new RedirectView("/checkout/login.html",true));
 		        }else{
-		        	mav=new ModelAndView(new RedirectView("/myaccount/account.html",true));
+		        	mav=new ModelAndView(new RedirectView("/index.html",true));
 		        	//Send a email
 		        	Map model = new HashMap();
 
