@@ -6,7 +6,6 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 
-
 <html>
 	<head>
 		<c:choose>
@@ -49,10 +48,7 @@
 			
 			
 			<%-- ========== 产品列表结束 ========= --%>
-			
-			
 			<div class="clear"></div>
-			
 			<%-- ========== 分页开始 ========= --%>
 			<%@ include file="./../../decorators/include/catalogPagingTop.jsp"%>
 			<%-- ========== 分页结束 ========= --%>

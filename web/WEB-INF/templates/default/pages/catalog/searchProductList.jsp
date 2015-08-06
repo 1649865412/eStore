@@ -19,6 +19,7 @@
                     <p>鞋款<span>Category</span><span class="arrow up"></span></p>
                     
                   </div><!--sort_title-->
+                  
                   <ul class="sort_list">
                    <product:showCategorys categoryType="1" displayCategoryCode="all" displayLevel="1"></product:showCategorys>
                         	<c:forEach items="${categoryTreeItems}" var="categoryTreeItem">
