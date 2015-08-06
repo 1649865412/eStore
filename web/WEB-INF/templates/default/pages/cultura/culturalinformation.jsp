@@ -29,10 +29,27 @@
 					<a href="#section-6" id="t6">月刊</a>
 				</div>
 			</div>
+		
 			<div id="theGrid" class="main">
+			
 				<section class="grid">
-				<c:forEach items="${culturalinformationList}" var="culList">
-					<a class="grid__item w-g-h" href="/culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}">
+				<c:forEach items="${culturalinformationList}" var="culList" varStatus="i">
+				
+			<c:choose>
+              <c:when test="${i.count==1}">
+       <a class="grid__item w-g-h" href="/culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}&lastId=null&nextId=${culturalinformationList[i.count+1].culturalInformationId}">
+                </c:when>
+              <c:when test="${i.count==fn:length(list)}">
+       <a class="grid__item w-g-h" href="/culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}&lastId=${culturalinformationList[i.count-1].culturalInformationId}&nextId=null">
+                </c:when>
+                <c:otherwise>
+          <a class="grid__item w-g-h" href="/culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}&lastId=${culturalinformationList[i.count-2].culturalInformationId}&nextId=${culturalinformationList[i.count].culturalInformationId}">
+                </c:otherwise>
+            </c:choose>
+            
+		
+					
+					
 						<div class="w-g-header">
 							<b></b>
 							<c:if test="${culList.type == 0}">秀场</c:if>

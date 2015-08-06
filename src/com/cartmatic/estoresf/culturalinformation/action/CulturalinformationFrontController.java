@@ -77,10 +77,8 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
 	 */
 	@RequestMapping(value="/culturalinformation/culturatemplate.html*")
 	public ModelAndView getCulTemResultList(HttpServletRequest request,HttpServletResponse response){
-		ModelAndView mv=new ModelAndView("cultura/culturaTemplate");
-		Integer culId=Integer.parseInt(request.getParameter("culId"));
-		CulturalInformation culturalInformation =culturalInformationManager.getById(culId);
-		mv.addObject("culturalInformation", culturalInformation);
+		ModelAndView mv = getModelAndView("");
+    	mv= setCommend( request, mv );
 		return mv;
 	}
 	
@@ -95,26 +93,42 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
     public ModelAndView getMonhtData(HttpServletRequest request, HttpServletResponse response)	 
     {
     	ModelAndView mv = getModelAndView("");
-    	//获取哪个月刊的ID
-    	System.out.println("culturalInformationID==========="+request.getParameter("culturalInformationId"));
-        //上一个月刊资讯的ID
-    	System.out.println("lastmonthID==========="+request.getParameter("lastmonthID"));
-    	//下一个月刊资讯的ID
-    	System.out.println("nextmonthID==========="+request.getParameter("nextmonthID"));
-    	CulturalInformation lastCultural =culturalInformationManager.getById(Integer.parseInt(request.getParameter("lastmonthID")));
-    	CulturalInformation nextCultural =culturalInformationManager.getById(Integer.parseInt(request.getParameter("nextmonthID")));
+    	mv=setCommend( request, mv );
     	//获取月刊图片
-    	CulturalInformation culturalInformation =culturalInformationManager.getById(Integer.parseInt(request.getParameter("culturalInformationId")));
+    	CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culturalInformationId"));  
     	Set<MonthlyCultural> monthlyCulturalList  =culturalInformation.getMonthlyCultural();
-    	//获取推荐信息List
-        List<CulturalInformation> reCommendResults = culturalInformationManager.getAllByIdArray(culturalInformation.getRecommendArrayId());
-        mv.addObject("reCommendResults", reCommendResults);   
         mv.addObject("monthlyCultural", monthlyCulturalList);
-        mv.addObject("lastCultural", lastCultural);
-        mv.addObject("nextCultural", nextCultural);
 		return mv;
     }
 
+    
+    
+    
+    public ModelAndView setCommend(HttpServletRequest request,ModelAndView mv ){
+    	CulturalInformation lastCultural = getCulturalInformation(request.getParameter("lastId"));
+    	CulturalInformation nextCultural = getCulturalInformation(request.getParameter("nextId")); 
+    	//获取culturalInformation
+    	CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culturalInformationId"));  
+    	//获取推荐信息List
+        List<CulturalInformation> reCommendResults = culturalInformationManager.getAllByIdArray(culturalInformation.getRecommendArrayId());
+        mv.addObject("culturalInformation", culturalInformation);   
+    	 mv.addObject("reCommendResults", reCommendResults);   
+         mv.addObject("lastCultural", lastCultural);
+         mv.addObject("nextCultural", nextCultural);
+         return mv;
+    }
+    
+    
+    public CulturalInformation getCulturalInformation(String id){
+    	CulturalInformation Cultural =new CulturalInformation();
+    	try{
+    	 Cultural =culturalInformationManager.getById(Integer.parseInt( id));
+    	}
+    	catch(Exception e ){
+    		
+    	}
+    	return Cultural;
+    }
 	
 	/**
 	 * 功能:搜索查询controller，根据查询的tag查询，返回查询到的文化列表beanList
