@@ -43,7 +43,7 @@ public class SeckillFrontControl extends GenericStoreFrontController<SekillProdu
 	@RequestMapping(value = "/seckillpage/text.html", method = RequestMethod.GET)
 	public ModelAndView text(HttpServletRequest request, HttpServletResponse response)
 	{
-		System.out.println("二维码");
+		System.out.println("二维码7777");
 		ModelAndView mv = new ModelAndView("/seckillpage/Qma");
 		System.out.append("hello");
 		return mv;
