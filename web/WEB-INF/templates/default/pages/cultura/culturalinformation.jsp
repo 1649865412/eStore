@@ -64,8 +64,11 @@
 						<p class="w-content">
 							${culList.content}
 						</p>
-						<div class="w-g-pyf" onmouseover="setShare('${culList.title}', 'culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}');">
-							评论数 (${culList.commentNumber}) | 阅读数 (${culList.readNumber}) |<a href="http://www.jiathis.com/share/?uid=2052677" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank")>分享</a> 
+						<div class="w-g-pyf jiathis_style_32x32" onmouseover="setShare('${culList.title}', 'culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}');">
+							评论数 (${culList.commentNumber}) | 阅读数 (${culList.readNumber}) |
+							<a class="jiathis_button_qzone"></a>
+							<a class="jiathis_button_tsina"></a>
+							<a class="jiathis_button_tqq"></a>
 						</div>
 
 						<div class="loader"></div>

@@ -167,7 +167,7 @@
 							<div class="w-c-pl">
 								<!--jiaThis评论 UY BEGIN -->
 <div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2038562"></script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2052677"></script>
 <!-- UY END -->
 							</div>
 

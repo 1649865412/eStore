@@ -119,6 +119,11 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
     }
     
     
+    /**
+     * 
+     * @param id
+     * @return
+     */
     public CulturalInformation getCulturalInformation(String id){
     	CulturalInformation Cultural =new CulturalInformation();
     	try{
