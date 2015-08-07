@@ -109,18 +109,47 @@
                         	</c:forEach>
                   </ul>
                </div>
+               
                 <div class="attribute-item">
                   <div class="sort_title">
-                    <p>鞋款<span>Shoes</span><span class="arrow up"></span></p>
-                    
+                    <p>服装<span>accessories</span><span class="arrow up"></span></p>
                   </div><!--sort_title-->
                   <ul class="sort_list">
-                   <product:showCategorys categoryType="1" displayCategoryCode="shoes" displayLevel="1"></product:showCategorys>
+                   <product:showCategorys categoryType="1" displayCategoryCode="Mmeizhuang" displayLevel="2"></product:showCategorys>
                         	<c:forEach items="${categoryTreeItems}" var="categoryTreeItem">
 					        	<li><a href="<product:categoryUrl category="${categoryTreeItem}" />">${categoryTreeItem.name}</a></li>
                         	</c:forEach>
                   </ul>
                </div>
+               
+              <div class="attribute-item">
+                  <div class="sort_title">
+                    <p>鞋品<span>Shoes</span><span class="arrow up"></span></p>
+                    
+                  </div><!--sort_title-->
+                  <ul class="sort_list">
+                   <product:showCategorys categoryType="1" displayCategoryCode="Mshoes" displayLevel="1"></product:showCategorys>
+                        	<c:forEach items="${categoryTreeItems}" var="categoryTreeItem">
+					        	<li><a href="<product:categoryUrl category="${categoryTreeItem}" />">${categoryTreeItem.name}</a></li>
+                        	</c:forEach>
+                  </ul>
+               </div>
+               
+                 <div class="attribute-item">
+                  <div class="sort_title">
+                    <p>配件<span>accessories</span><span class="arrow up"></span></p>
+                  </div><!--sort_title-->
+                  <ul class="sort_list">
+                   <product:showCategorys categoryType="1" displayCategoryCode="Maccessories" displayLevel="2"></product:showCategorys>
+                        	<c:forEach items="${categoryTreeItems}" var="categoryTreeItem">
+					        	<li><a href="<product:categoryUrl category="${categoryTreeItem}" />">${categoryTreeItem.name}</a></li>
+                        	</c:forEach>
+                  </ul>
+               </div>
+               
+               
+               
+               
                     <attribute:attribute var="attribute" attributeCode="changhe"></attribute:attribute>
                     <c:set var="checkBoxIndex" value="1"/>
                     <div class="attribute-item">
