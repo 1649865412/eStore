@@ -77,8 +77,10 @@ public class ProductSearchFrontController extends GenericStoreFrontController<Pr
 		Category searcheCategory=CatalogHelper.getInstance().getCategoryById4Front(Constants.CATEGORY_TYPE_CATALOG, cat);
 		mv.addObject("category", searcheCategory);
 		request.setAttribute("category", searcheCategory);
+		
 		Integer brandId=(Integer)request.getAttribute("brandId");
 		if(brandId!=null){
+			
 			Brand brand=brandManager.getById(brandId);
 			request.setAttribute("brand", brand);
 		}
@@ -88,25 +90,6 @@ public class ProductSearchFrontController extends GenericStoreFrontController<Pr
 	}
 	
 	
-	public List<Product> productList(List<Product> productList,List<SekillProduct>  sekListAll ){
-		String a =null;
-		if(productList!=null){
-			for(int i=0;i<productList.size();i++){
-				Product product =productList.get(i);
-				product.setSekillStatus(Constant.STATUS_OTHER);
-				if(sekListAll!=null){
-				for(int j=0;j<sekListAll.size();j++){
-					SekillProduct sekillProduct = sekListAll.get(j);
-					if(product.getDefaultProductSkuId()==sekillProduct.getProduct().getDefaultProductSkuId()){
-						product.setSekillStatus(sekillProduct.getStatus());
-						break;
-					 }
-				  }
-				}
-			}
-		}
-		return productList;
-	}
 	
 
 	public void setProductManager(ProductManager productManager) {

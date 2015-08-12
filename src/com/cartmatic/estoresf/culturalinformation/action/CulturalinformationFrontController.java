@@ -2,6 +2,7 @@ package com.cartmatic.estoresf.culturalinformation.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.cartmatic.estore.common.service.SolrService;
-import com.cartmatic.estore.common.helper.CatalogHelper;
-import com.cartmatic.estore.common.model.content.Content;
+
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
+import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
+import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
-import com.cartmatic.estore.textsearch.SearchConstants;
+import com.cartmatic.estore.monthlycultural.service.MonthlyCulturalManager;
 import com.cartmatic.estore.textsearch.model.SearchResult;
 
 
@@ -32,6 +33,7 @@ import com.cartmatic.estore.textsearch.model.SearchResult;
 public class CulturalinformationFrontController extends GenericStoreFrontController<CulturalInformation>
 {
 	private CulturalInformationManager culturalInformationManager = null;
+	  private MonthlyCulturalManager monthlyCulturalManager = null;
 	
 	private SolrService solr = null;
 	
@@ -101,6 +103,7 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
             }
         }
     }
+    
     
 	public CulturalInformationManager getCulturalInformationManager()
 	{
