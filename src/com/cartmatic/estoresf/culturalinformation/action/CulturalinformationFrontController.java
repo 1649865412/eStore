@@ -1,18 +1,17 @@
 package com.cartmatic.estoresf.culturalinformation.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
-import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
@@ -75,7 +74,6 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
         }
     }
     
-
     /**
 	 * 功能:搜索查询测试
 	 * <p>作者 杨荣忠 2015-6-19 下午05:02:34

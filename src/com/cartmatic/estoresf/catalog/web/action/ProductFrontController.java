@@ -277,6 +277,10 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 	}
 	
 	
+	
+	
+	
+	
 	private JSONObject skuToJson(ProductSku productSku,Map<SkuOption, SkuOptionValue> skuOptionAndValues){
 		ConfigUtil configUtil=ConfigUtil.getInstance();
 		JSONObject jsonProductSku=new JSONObject();

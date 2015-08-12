@@ -22,20 +22,13 @@ import com.cartmatic.extend.catalog.util.CharacterSort;
  */
 @Controller
 public class BrandFrontController  extends GenericStoreFrontController<Brand>{
+	
 	private BrandManager brandManager = null;
 
 	
     public void setBrandManager(BrandManager inMgr) {
         this.brandManager = inMgr;
     }
-    
-    private SekillProductManager sekillProductManager = null;
-	
-	public void setSekillProductManager(SekillProductManager sekillProductManager)
-	{
-		this.sekillProductManager = sekillProductManager;
-	}
-	
 	
 	@Override
 	protected void initController() throws Exception {
@@ -52,8 +45,8 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv=new ModelAndView("catalog/designer");
 		List<Brand> brandList=brandManager.findAllBrands();
-		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
-		//mv.addObject("brandList", brandList);
+		//mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
+		mv.addObject("brandList", brandList);
 		return mv;
 	}
 		
@@ -66,7 +59,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 		ModelAndView mv=new ModelAndView("catalog/designer");
 		String initials = request.getParameter("initials");
 		List<Brand> brandList=brandManager.findByProperty("initials", initials);
-		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
+		mv.addObject("mapResult",brandList);
 		return mv;
 	}
 		
