@@ -79,6 +79,7 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 	private ProductRateItemManager productRateItemManager=null;
 	private ProductStatManager productStatManager=null;
 	
+	
 	public void setProductStatManager(ProductStatManager productStatManager) {
 		this.productStatManager = productStatManager;
 	}
