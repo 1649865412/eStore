@@ -67,8 +67,10 @@
             	var content ="";
             	var value="";
             	var time="";
-            	var culid=""
-                var click=""
+            	var culid="";
+                var click="";
+                var title="";
+                var key="";
 				for(i=0;i<json.reCommendResults.length;i++){
 					var object=json.reCommendResults[i];
 					 img ="/StoreAdmin/media/other/"+object.logoImg;
@@ -84,11 +86,12 @@
 							 }
 					 time=(object.createTime.year+1900)+"年"+(object.createTime.month+1)+"月"+object.createTime.date+"日";
 					 culid=object.culturalInformationId;
-					 alert(culid);
 					 click="getDetail("+culid+")";
+					 title=object.title;
+					 key=object.metaKeywork;
 					 value = ("<div class='w-x-item  w-g-b'><div class='w-g-header'><b></b>"+type+" | "+time+"</div>"+
-					"<a onClick='"+click+"'><div class='w-x-imgs'><img src='"+img+"' /></div><h2 class='title title--preview'>2016春夏男装流行趋势：新简学主义</h2></a>"+
-					"<div class='loader'></div><div class='meta meta--preview'><a href='#'>简学主义</a></div></div>");
+					"<a onClick='"+click+"'><div class='w-x-imgs'><img src='"+img+"' /></div><h2 class='title title--preview'>"+title+"</h2></a>"+
+					"<div class='loader'></div><div class='meta meta--preview'><a >"+key+"</a></div></div>");
 						content+=value;
 					}
 				 $(".w-x-items").html(content);
@@ -189,7 +192,7 @@
 					<a href="#section-3" id="t3">访谈</a>
 					<a href="#section-4" id="t4">行业动态</a>
 					<a href="#section-5" id="t5">线下主题活动</a>
-					<a href="/monthlyinformation/index.html?type=5" id="t6">月刊</a>
+					<a href="/monthlyinformation/index.html?type=4" id="t6">月刊</a>
 				</div>
 			</div>
 		
