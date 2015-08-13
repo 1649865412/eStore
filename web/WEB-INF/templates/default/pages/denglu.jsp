@@ -24,18 +24,20 @@ String sign = SignUtil.signMD5(map, Constants.API_KEY);		// 生成签名
     String valueStr = jsonObj.toString();
     long mediaUserID = (Integer)jsonObj.get("mediaUserID");
     String username = (String) jsonObj.get("name");
-    username = java.net.URLEncoder.encode(username.toString(),"UTF-8");
+  //  username = java.net.URLEncoder.encode(username.toString(),"UTF-8");
     String  webPath = request.getScheme()+"://"+request.getServerName();
-    String  responsePath = "/index.html?useremail="+mediaUserID+"&username="+username;
+    String  responsePath = "/customer/dengluRegister.html?useremail="+mediaUserID+"&username="+username;
     String path = webPath.concat(responsePath);
-	response.sendRedirect(webPath＋"/index.html?useremail="+mediaUserID+"&username="+username);
+	response.sendRedirect(responsePath);
 %>
 <span><%=valueStr%></span><br><br><br>
+<span><%=username%></span><br><br><br>
 <span><%=mediaUserID%></span><br><br><br>
 <span><%=token%></span><br><br>
 <span><%=webPath%></span><br><br>
 <span><%=responsePath %></span><br><br>
 <span><%=path%></span><br><br>
+
 
 
 

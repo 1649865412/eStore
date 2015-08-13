@@ -35,7 +35,7 @@
 		sidebarEl = document.getElementById('theSidebar'),
 		gridItemsContainer = gridEl.querySelector('section.grid'),
 		contentItemsContainer = gridEl.querySelector('section.content'),
-		gridItems = gridItemsContainer.querySelectorAll('.grid__item'),
+		gridItems = gridItemsContainer.querySelectorAll('.grid__item_a'),
 		contentItems = contentItemsContainer.querySelectorAll('.content__item'),
 		closeCtrl = contentItemsContainer.querySelector('.close-button-list'),
 		current = -1,
@@ -80,7 +80,7 @@
 				// index of current item
 				current = pos;
 				// simulate loading time..
-				classie.add(item, 'grid__item--loading');
+				classie.add(item.parentNode, 'grid__item--loading');
 				setTimeout(function() {
 					classie.add(item, 'grid__item--animate');
 					// reveal/load content after the last element animates out (todo: wait for the last transition to finish)
@@ -156,7 +156,7 @@
 			// show the main content container
 			classie.add(contentItemsContainer, 'content--show');
 			// show content item:
-			classie.add(contentItems[current], 'content__item--show');
+			classie.add(contentItems[0], 'content__item--show');
 			// show close control
 			classie.add(closeCtrl, 'close-button--show');
 			// sets overflow hidden to the body and allows the switch to the content scroll
@@ -167,7 +167,7 @@
 	}
 
 	function hideContent() {
-		var gridItem = gridItems[current], contentItem = contentItems[current];
+		var gridItem = gridItems[current], contentItem = contentItems[0];
 
 		classie.remove(contentItem, 'content__item--show');
 		classie.remove(contentItemsContainer, 'content--show');
@@ -179,14 +179,16 @@
 
 			classie.removeClass(bodyEl, 'noscroll');
 
-			dummy.style.WebkitTransform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
-			dummy.style.transform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
+//			dummy.style.WebkitTransform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
+//			dummy.style.transform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
+			dummy.style.WebkitTransform = '';
+			dummy.style.transform = '';
 
 			onEndTransition(dummy, function() {
 				// reset content scroll..
 				contentItem.parentNode.scrollTop = 0;
 				gridItemsContainer.removeChild(dummy);
-				classie.remove(gridItem, 'grid__item--loading');
+				classie.remove(gridItem.parentNode, 'grid__item--loading');
 				classie.remove(gridItem, 'grid__item--animate');
 				lockScroll = false;
 				window.removeEventListener( 'scroll', noscroll );
@@ -194,7 +196,7 @@
 			
 			// reset current
 			current = -1;
-		}, 25);
+		}, 1500);
 	}
 
 	function noscroll() {

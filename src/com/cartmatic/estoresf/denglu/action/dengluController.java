@@ -47,7 +47,7 @@ public class dengluController extends BaseStoreFrontController {
 			if (securityContext != null) {
 				securityContext.setAuthentication(authRequest);
 			}
-			RequestUtil.setUserInfoCookieCMHOME(response, customer, (request)
+			RequestUtil.setUserInfoCookie(response, customer, (request)
 					.getContextPath());
 			// 合并购物车信息
 			ShoppingCartUtil.getInstance().setShoppingcartInfo(request,

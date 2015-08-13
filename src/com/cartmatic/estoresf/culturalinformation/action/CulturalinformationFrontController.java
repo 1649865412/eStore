@@ -1,11 +1,19 @@
 package com.cartmatic.estoresf.culturalinformation.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
+import net.sf.json.util.JSONUtils;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +23,7 @@ import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation
 import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
+import com.cartmatic.estore.core.view.AjaxView;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
 import com.cartmatic.estore.monthlycultural.service.MonthlyCulturalManager;
 import com.cartmatic.estore.textsearch.model.SearchResult;
@@ -58,6 +67,64 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
        // System.out.println("fujun");
     }
 	
+	public Map<String,CulturalInformation>get_last_nextID( List<CulturalInformation> result,int culId){
+    	Map<String,CulturalInformation>map=new HashMap();
+		CulturalInformation culturalInformation =null;
+		CulturalInformation lastId =new CulturalInformation() ;
+		CulturalInformation nextId =new CulturalInformation();
+		int size =result.size();
+    	for(int i=0;i<size;i++){
+    		culturalInformation =result.get(i);
+    		int nowId= culturalInformation.getId();
+    		if(size==1){
+    			//lastId =null;
+    			//nextId =null;
+    		}
+    		else if(nowId==culId&&i==0){
+    			//lastId=null;
+    			nextId=culturalInformationManager.getById(result.get(i+1).getId());
+    		}else if(nowId==culId&&i>0&&i<size-1){
+    			lastId=culturalInformationManager.getById(result.get(i-1).getId());
+    			nextId=culturalInformationManager.getById(result.get(i+1).getId());
+    		}else if(nowId==culId&&i>0&&i==size-1){
+    			lastId=culturalInformationManager.getById(result.get(i-1).getId());
+    			//nextId=null;
+    		}
+    	}
+    	map.put("lastId", lastId);
+    	map.put("nextId", nextId);
+    	return map;
+    }
+	
+	/**
+	 * 详情页
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/culturalinformation/getCulView.html")
+	public ModelAndView getCulView(HttpServletRequest request,HttpServletResponse response){
+		CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culId"));
+		 AjaxView ajaxView = new AjaxView(response);
+		String type =culturalInformation.getType()+"";
+		Map map = new HashMap();
+		if(type.equals("4")){
+			map=getMonthData(request,response,map);
+		}else{
+		  map=	getCulData( request, response,map);
+		}
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] {"yyyy-MM-dd HH:mm:ss"}) );
+		JSONObject json =JSONObject.fromObject(map, jsonConfig);
+		String result = json.toString();
+		System.out.print(result);
+	     ajaxView.setData(result);
+		 return ajaxView;
+	}
+	
+	
+	
 	/**
 	 * 文化资讯列表页获取类型list
 	 */
@@ -75,52 +142,65 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/culturalinformation/culturatemplate.html*")
-	public ModelAndView getCulTemResultList(HttpServletRequest request,HttpServletResponse response){
-		ModelAndView mv = getModelAndView("");
-    	mv= setCommend( request, mv );
+	public Map getCulData(HttpServletRequest request,HttpServletResponse response,Map map){
+		map=setCommend( request,map);
+		return map;
+	}
+	
+	/**
+	 * 月刊列表页获取类型list
+	 */
+	@RequestMapping(value="/monthlyinformation/index.html")
+	public ModelAndView getMonTypeResultList(HttpServletRequest request,HttpServletResponse response,String type) {
+		ModelAndView mv=new ModelAndView("cultura/monthlyinformation");
+		List<CulturalInformation> monthlyCulturalList=culturalInformationManager.getResutlType(type);
+		mv.addObject("culturalinformationList", monthlyCulturalList);
 		return mv;
 	}
 	
 	/**
-	 * 功能:月刊页面数据
+	 * 功能:月刊详情页数据
 	 * <p>作者 杨荣忠 2015-6-19 下午05:02:34
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-    @RequestMapping(value="/Cultural_Service/month.html")
-    public ModelAndView getMonhtData(HttpServletRequest request, HttpServletResponse response)	 
+    public Map getMonthData(HttpServletRequest request, HttpServletResponse response,Map map)	 
     {
-    	ModelAndView mv = getModelAndView("");
-    	mv=setCommend( request, mv );
+    	map=setCommend( request,map);
     	//获取月刊图片
-    	CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culturalInformationId"));  
-    	Set<MonthlyCultural> monthlyCulturalList  =culturalInformation.getMonthlyCultural();
-        mv.addObject("monthlyCultural", monthlyCulturalList);
-		return mv;
+    	CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culId"));
+    	Set<MonthlyCultural> monthlyCultural  =culturalInformation.getMonthlyCultural();
+    	map.put("monthlyCultural", monthlyCultural);
+		return map;
     }
 
     
     
-    
-    public ModelAndView setCommend(HttpServletRequest request,ModelAndView mv ){
-    	CulturalInformation lastCultural = getCulturalInformation(request.getParameter("lastId"));
-    	CulturalInformation nextCultural = getCulturalInformation(request.getParameter("nextId")); 
+    /**
+     * 获取文化资讯列表数据
+     * @param request
+     * @param mv
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+	public Map setCommend(HttpServletRequest request,Map map ){
     	//获取culturalInformation
-    	CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culturalInformationId"));  
+    	CulturalInformation culturalInformation =getCulturalInformation(request.getParameter("culId"));
+    	 List<CulturalInformation> result= culturalInformationManager.getResutlType(culturalInformation.getType()+"");
+    	Map<String,CulturalInformation>last_next_map =get_last_nextID(result,culturalInformation.getId());
     	//获取推荐信息List
         List<CulturalInformation> reCommendResults = culturalInformationManager.getAllByIdArray(culturalInformation.getRecommendArrayId());
-        mv.addObject("culturalInformation", culturalInformation);   
-    	 mv.addObject("reCommendResults", reCommendResults);   
-         mv.addObject("lastCultural", lastCultural);
-         mv.addObject("nextCultural", nextCultural);
-         return mv;
+        map.put("culturalInformation", culturalInformation);
+        map.put("reCommendResults", reCommendResults);
+        map.put("lastCultural", last_next_map.get("lastId"));
+        map.put("nextCultural",  last_next_map.get("nextId"));
+         return map;
     }
     
     
     /**
-     * 
+     * 获取文化资讯详情页数据
      * @param id
      * @return
      */

@@ -4,8 +4,9 @@
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
-<!--文化资讯列表页-->
+<!--月刊详情页-->
 <html lang="en" class="no-js">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,8 +16,18 @@
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/monthly.css" />
 		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/book/js/modernizr.custom.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/classie.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+		
+
+		<link rel="stylesheet" type="text/css" href="${ctxPath}/scripts/jquery/js/book/css/book.css" />
+		<link rel="stylesheet" type="text/css" href="${ctxPath}/scripts/jquery/js/book/css/bookblock.css" />
+		<link rel="stylesheet" type="text/css" href="${ctxPath}/scripts/jquery/js/book/css/component.css" />
+		
 	</head>
 	<body>
 			<div id="theSidebar" class="sidebar" >
@@ -32,16 +43,18 @@
 			<div id="theGrid" class="main">
 					<div class="scroll-wrap">
 							<div class="w-c-nrb">
-								<span class="category category--full">时尚前沿</span>
-								<h2 class="title title--full">${culturalInformation.title}</h2>
-								<div class="meta meta--full">
-									<span class="meta__author">来源：${culturalInformation.writer}</span>
-									<span class="meta__date"><fmt:formatDate value="${culturalInformation.createTime}" type="date" dateStyle="long"/></span>
-									<span class="meta__reading-time">阅读数 （${culturalInformation.readNumber}）| <a href="#">分享<i class="fa fa-share"></i></a></span>
-								</div>
-								<div>
-								${culturalInformation.textIntroduction}
-								</div>
+								<div class="w-book">
+									<div class="bb-custom-wrapper show" id="book-1">
+										<div class="bb-bookblock">
+											<div class="bb-item">
+												<c:forEach items="${monthlyCultural}" var="culList" varStatus="i">
+													<div class="bb-custom-side page-layout-3" style=" background: rgba(0, 0, 0, 0) url(${culList.img}) no-repeat scroll left top / cover ;">
+													</div>
+												</c:forEach>
+											</div>
+										</div><!-- /bb-bookblock -->
+									</div><!-- /bb-custom-wrapper -->
+									</div>
 								<div class="w-c-np">
 									<a href="#">
 										<div class="w-c-prev">

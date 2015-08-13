@@ -53,7 +53,7 @@
 				$("#loginPromptHolderTemplateLogout").show();
 			} else {
 				var uname = getCookie("UNAME");
-				//alert("getCookie"+uname);
+				//alert("uname:"+uname);
 				//emial的去掉@后的部分
 				if (uname.indexOf("@") != -1)
 					uname = uname.substring(0, uname.indexOf("@"));
@@ -63,9 +63,14 @@
 			}
 			});
 		function fnUnlock(){
+			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
+				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
+				$("#searchForm").submit();
+			}else{
 			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
 			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
 			$("#searchForm").submit();
+			}
 		}
 		
 	function getCurrentUserId() {

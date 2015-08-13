@@ -56,6 +56,8 @@ public class OrderController extends GenericStoreFrontController<SalesOrder> {
 	@Override
 	@RequestMapping("/myaccount/account.html")
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) {
+		System.out.println(request.getContextPath());
+		System.out.println(request.getServletPath());
         if (logger.isDebugEnabled()) {
             logger.debug("entering 'OrderController defaultAction' method...");
         }
@@ -70,6 +72,8 @@ public class OrderController extends GenericStoreFrontController<SalesOrder> {
 	 */
 	@RequestMapping(value="/myaccount/order/list.html")
 	public ModelAndView list(HttpServletRequest request,HttpServletResponse response) {
+		System.out.println(request.getContextPath());
+		System.out.println(request.getServletPath());
         if (logger.isDebugEnabled()) {
             logger.debug("entering 'OrderController list' method...");
         }

@@ -32,7 +32,8 @@ public class CartmaticAuthenticationProcessingFilter extends OncePerRequestFilte
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
-
+       
+	
 		if (ConfigUtil.getInstance().getIsValidationCodeEnabled()) {
 
 			// remember that we need an id to validate!
@@ -40,6 +41,7 @@ public class CartmaticAuthenticationProcessingFilter extends OncePerRequestFilte
 			String type = request.getParameter("type");
 			// retrieve the validation code
 			String validationCode = request.getParameter("validateCode");
+			String a = request.getParameter("a");
 			
 			// validate validation code
 			try {

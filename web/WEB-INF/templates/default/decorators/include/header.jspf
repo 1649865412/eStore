@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ include file="./meta.jspf"%>
 		<%@ include file="./styles2.jspf"%>
 		<%@ include file="./styles3.jspf"%>
@@ -18,6 +19,9 @@
 		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
+		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
 
@@ -53,7 +57,7 @@
 			});
 
 		function fnUnlock(){
-			if(window.location.pathname=="/culturalinformation/index.html"){
+			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
 				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
 				$("#searchForm").submit();
 			}else{
