@@ -91,9 +91,6 @@ public class ProductSearchFrontController extends GenericStoreFrontController<Pr
 		return mv;
 	}
 	
-	
-	
-
 	public void setProductManager(ProductManager productManager) {
 		this.productManager = productManager;
 	}

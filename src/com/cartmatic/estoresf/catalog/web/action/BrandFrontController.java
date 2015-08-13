@@ -62,8 +62,6 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 		mv.addObject("mapResult",brandList);
 		return mv;
 	}
-		
-	
     
     
     /**
@@ -80,7 +78,6 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
     	// @RequestMapping(value="/search-prod.html")
     	//参考老的就可以获取到
     }
-    
     
     
     /**
