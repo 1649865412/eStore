@@ -22,11 +22,11 @@
 			<div id="theSidebar" class="sidebar" >
 				<div class="related">
 					<a href="/culturalinformation/index.html" class="on" id="t1">全部</a>
-					<a href="#section-2" id="t2">秀场</a>
-					<a href="#section-3" id="t3">访谈</a>
-					<a href="#section-4" id="t4">行业动态</a>
-					<a href="#section-5" id="t5">线下主题活动</a>
-					<a href="/monthlyinformation/index.html?type=4" id="t6">月刊</a>
+					<a href="/culturalinformation/index.html?type=0" id="t2">秀场</a>
+					<a href="/culturalinformation/index.html?type=1" id="t3">访谈</a>
+					<a href="/culturalinformation/index.html?type=2" id="t4">行业动态</a>
+					<a href="/culturalinformation/index.html?type=3" id="t5">线下主题活动</a>
+					<a href="/culturalinformation/index.html?type=4" id="t6">月刊</a>
 				</div>
 			</div>
 			<div id="theGrid" class="main">

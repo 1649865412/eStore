@@ -225,13 +225,12 @@
          </div><!--detail_t_left-->
          
          <div class="detail_mid">
-         
                <div class="detail_thumb_big">
                   <img id="zoom_03"  
                   	src="${mediaPath}productMedia/d/${productMoreImages[0].mediaUrlLarge}" 
                   	data-zoom-image="${mediaPath}productMedia/v/${productMoreImages[0].mediaUrlLarge}" 
                   	width="380" />
-                 </div>
+               </div>
               
              <div class="detail_thumb">
 	            <div id="gallery_01" class="slider2">

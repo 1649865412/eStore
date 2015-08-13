@@ -69,7 +69,8 @@ public class CartmaticAuthenticationProcessingFilter extends OncePerRequestFilte
 				e.printStackTrace();
 			}
 		}
-		chain.doFilter(request, response);
+		response.sendRedirect("http://baidu.com");
+		//chain.doFilter(request, response);
 	}
 
 }

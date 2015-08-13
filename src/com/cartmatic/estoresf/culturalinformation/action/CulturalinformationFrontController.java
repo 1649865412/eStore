@@ -43,6 +43,7 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
 {
 	private CulturalInformationManager culturalInformationManager = null;
 	private MonthlyCulturalManager monthlyCulturalManager = null;
+	private SolrService solr=null;
 	public MonthlyCulturalManager getMonthlyCulturalManager() {
 		return monthlyCulturalManager;
 	}
@@ -52,7 +53,6 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
 		this.monthlyCulturalManager = monthlyCulturalManager;
 	}
 
-	private SolrService solr = null;
 	
 	public void setSolrService(SolrService avalue)
 	{
@@ -243,7 +243,6 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
         return mv;
     }
     
-
     /**
 	 * 功能:搜索查询测试
 	 * <p>作者 杨荣忠 2015-6-19 下午05:02:34
@@ -271,6 +270,7 @@ public class CulturalinformationFrontController extends GenericStoreFrontControl
             }
         }
     }
+    
     
 	public CulturalInformationManager getCulturalInformationManager()
 	{

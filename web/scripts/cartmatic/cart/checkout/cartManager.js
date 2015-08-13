@@ -150,7 +150,7 @@ function fnjuankongPay() {
 	}, function(result) {
 		// alert("result:"+result.status);
 			if (result.status == 1) {
-				$("#juankongPay").text("500");
+				$("#juankongPay").text("500"); 
 			} else {
 				alert("验证不通过");
 			}

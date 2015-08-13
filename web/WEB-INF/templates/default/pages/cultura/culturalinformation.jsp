@@ -97,6 +97,10 @@
 				 $(".w-x-items").html(content);
 				}
 
+			function lastNext(culId){
+					
+				}
+
 			function changetMonth(json){
 				$("#box2").show();
 				$("#box1").hide();
@@ -137,6 +141,7 @@
 				$("#boxNext").html(checkNull(json.nextCultural.title));
 				var lastid=checkNull(json.lastCultural.culturalInformationId);
 				var nextid=checkNull(json.nextCultural.culturalInformationId);
+				//alert(lastid+"------"+nextid);
 				if(lastid==null||lastid==""){
 					$("#flipLast").hide();
 					}else{
@@ -169,6 +174,12 @@
 				$("#boxNext").html(checkNull(json.nextCultural.title));
 				var lastid=checkNull(json.lastCultural.culturalInformationId);
 				var nextid=checkNull(json.nextCultural.culturalInformationId);
+
+				var value = ("<a class='grid__item_a' onClick='getDetail("+lastid+")'><div class='w-c-prev'><div class='w-c-i'><i class='fa fa-angle-double-left'></i>+"
+						"</div><div class='w-c-txt' id='flipLast'><span>上一篇</span><span class='w-c-ttitle' id='boxLast'></span></div></div></a>"+
+						"<a class='grid__item_a' onClick='getDetail("+nextid+")'><div class='w-c-next'><div class='w-c-i'><i class='fa fa-angle-double-right'></i></div>"+
+								"<div class='w-c-txt' id='flipNext'><span>下一篇</span><span class='w-c-ttitle' id='boxNext'></span></div></div></a>");
+				
 				if(lastid==null||lastid==""){
 					$("#flipLast").hide();
 					}else{
@@ -188,11 +199,12 @@
 	<body>
 			<div id="theSidebar" class="sidebar" >
 				<div class="related">
-					<a href="#section-2" id="t2">秀场</a>
-					<a href="#section-3" id="t3">访谈</a>
-					<a href="#section-4" id="t4">行业动态</a>
-					<a href="#section-5" id="t5">线下主题活动</a>
-					<a href="/monthlyinformation/index.html?type=4" id="t6">月刊</a>
+					<a href="/culturalinformation/index.html" class="on" id="t1">全部</a>
+					<a href="/culturalinformation/index.html?type=0" id="t2">秀场</a>
+					<a href="/culturalinformation/index.html?type=1" id="t3">访谈</a>
+					<a href="/culturalinformation/index.html?type=2" id="t4">行业动态</a>
+					<a href="/culturalinformation/index.html?type=3" id="t5">线下主题活动</a>
+					<a href="/culturalinformation/index.html?type=4" id="t6">月刊</a>
 				</div>
 			</div>
 		
@@ -299,8 +311,8 @@
 									</nav>
 								</div><!-- /bb-custom-wrapper -->
 							</div>
-							<div class="w-c-np">
-									<a class="grid__item_a" onClick="getDetail()">
+							<div class="w-c-np" id="last_next">
+									<a class="grid__item_a" onClick="getDetail(17)">
 										<div class="w-c-prev">
 											<div class="w-c-i">
 												<i class="fa fa-angle-double-left"></i>
@@ -311,7 +323,7 @@
 											</div>
 										</div>
 									</a>
-									<a class="grid__item_a" onClick="getDetail()">
+									<a class="grid__item_a" onClick="getDetail(19)">
 										<div class="w-c-next">
 
 											<div class="w-c-i">
