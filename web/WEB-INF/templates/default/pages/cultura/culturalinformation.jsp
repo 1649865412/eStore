@@ -137,11 +137,23 @@
 				$("#boxTime").html((object.createTime.year+1900)+"年"+(object.createTime.month+1)+"月"+object.createTime.date+"日");
 				$("#boxRead").html("阅读数	("+checkNull(object.readNumber)+")		|");
 				$("#boxText").html(checkNull(object.textIntroduction));
-				$("#boxLast").html(checkNull(json.lastCultural.title));
-				$("#boxNext").html(checkNull(json.nextCultural.title));
+				$("#informationKey").html(checkNull(object.metaKeywork));
 				var lastid=checkNull(json.lastCultural.culturalInformationId);
 				var nextid=checkNull(json.nextCultural.culturalInformationId);
 				//alert(lastid+"------"+nextid);
+				var value = ("<a class='grid__item_a' onClick='getDetail("+lastid+")'><div class='w-c-prev'><div class='w-c-i'><i class='fa fa-angle-double-left'></i>"+
+						"</div><div class='w-c-txt' id='flipLast'><span>上一篇</span><span class='w-c-ttitle' id='boxLast'></span></div></div></a>"+
+						"<a class='grid__item_a' onClick='getDetail("+nextid+")'><div class='w-c-next'><div class='w-c-i'><i class='fa fa-angle-double-right'></i></div>"+
+								"<div class='w-c-txt' id='flipNext'><span>下一篇</span><span class='w-c-ttitle' id='boxNext'></span></div></div></a>");
+				$("#last_next").html(value);
+				$("#boxLast").html(checkNull(json.lastCultural.title));
+				$("#boxNext").html(checkNull(json.nextCultural.title));
+				var readNum=checkNull(object.readNumber);
+				alert(readNum);
+				var valueRead = ("阅读数 （"+readNum+"）| <a >分享<a class='jiathis_button_qzone'></a><a class='jiathis_button_tsina'></a>"+
+						"<a class='jiathis_button_weixin'></a><a class='jiathis_button_cqq'></a></a>");
+				$(".w-lin-right").html(valueRead);
+				
 				if(lastid==null||lastid==""){
 					$("#flipLast").hide();
 					}else{
@@ -170,16 +182,16 @@
 				$("#boxTime").html((object.createTime.year+1900)+"年"+(object.createTime.month+1)+"月"+object.createTime.date+"日");
 				$("#boxRead").html("阅读数	("+checkNull(object.readNumber)+")		|");
 				$("#boxText").html(checkNull(object.textIntroduction));
-				$("#boxLast").html(checkNull(json.lastCultural.title));
-				$("#boxNext").html(checkNull(json.nextCultural.title));
+				$("#informationKey").html(checkNull(object.metaKeywork));
 				var lastid=checkNull(json.lastCultural.culturalInformationId);
 				var nextid=checkNull(json.nextCultural.culturalInformationId);
-
-				var value = ("<a class='grid__item_a' onClick='getDetail("+lastid+")'><div class='w-c-prev'><div class='w-c-i'><i class='fa fa-angle-double-left'></i>+"
+				var value = ("<a class='grid__item_a' onClick='getDetail("+lastid+")'><div class='w-c-prev'><div class='w-c-i'><i class='fa fa-angle-double-left'></i>"+
 						"</div><div class='w-c-txt' id='flipLast'><span>上一篇</span><span class='w-c-ttitle' id='boxLast'></span></div></div></a>"+
 						"<a class='grid__item_a' onClick='getDetail("+nextid+")'><div class='w-c-next'><div class='w-c-i'><i class='fa fa-angle-double-right'></i></div>"+
 								"<div class='w-c-txt' id='flipNext'><span>下一篇</span><span class='w-c-ttitle' id='boxNext'></span></div></div></a>");
-				
+				$("#last_next").html(value);
+				$("#boxLast").html(checkNull(json.lastCultural.title));
+				$("#boxNext").html(checkNull(json.nextCultural.title));
 				if(lastid==null||lastid==""){
 					$("#flipLast").hide();
 					}else{
@@ -235,10 +247,12 @@
 						</p>
 						<div class="w-g-pyf jiathis_style_32x32" onmouseover="setShare('${culList.title}', 'culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}');">
 							评论数 (${culList.commentNumber}) | 阅读数 (${culList.readNumber}) |
-							<a class="jiathis_button_qzone"></a>
-							<a class="jiathis_button_tsina"></a>
-							<a class="jiathis_button_weixin"></a>
-							<a class="jiathis_button_cqq"></a>
+							<%--<span>分享<i class="fa fa-share"></i> </span>
+							
+						--%></div>
+						<div class="jiathis_style">
+							<span class="jiathis_txt">分享到</span>
+							<a href="http://www.jiathis.com/share?uid=2052677" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
 						</div>
 						<div class="loader"></div>
 						<div class="meta meta--preview">
@@ -312,7 +326,7 @@
 								</div><!-- /bb-custom-wrapper -->
 							</div>
 							<div class="w-c-np" id="last_next">
-									<a class="grid__item_a" onClick="getDetail(17)">
+									<a class="grid__item_a" onClick="getDetail()">
 										<div class="w-c-prev">
 											<div class="w-c-i">
 												<i class="fa fa-angle-double-left"></i>
@@ -323,7 +337,7 @@
 											</div>
 										</div>
 									</a>
-									<a class="grid__item_a" onClick="getDetail(19)">
+									<a class="grid__item_a" onClick="getDetail()">
 										<div class="w-c-next">
 
 											<div class="w-c-i">
@@ -340,13 +354,9 @@
 							<div class="w-c-links">
 								<div class="w-lin-left">
 									<b>标签：</b>
-									<a href="#">对话</a>,
-									<a href="#">时尚</a>,
-									<a href="#">时尚预测</a>,
-									<a href="#">Li EdelKoort</a>,
-									<a href="#">设计博览会</a>
+									<a id="informationKey"></a>
 								</div>
-								<div class="w-lin-right">阅读数 （12）| <a href="#">分享<i class="fa fa-share"></i></a></div>
+								<div class="w-lin-right">阅读数 （12）| <a >分享<i class="fa fa-share"></i></a></div>
 							</div>
 							<div class="w-x-wz">
 								<h3>相关文章</h3>

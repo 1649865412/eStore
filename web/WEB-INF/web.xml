@@ -138,6 +138,10 @@
 		<filter-name>cartmaticSecurityFilter</filter-name>
 		<url-pattern>/j_security_check</url-pattern>
 	</filter-mapping>
+		<filter-mapping>
+		<filter-name>cartmaticSecurityFilter</filter-name>
+		<url-pattern>/index_check.html</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>securityFilter</filter-name>
 		<url-pattern>/j_security_check</url-pattern>

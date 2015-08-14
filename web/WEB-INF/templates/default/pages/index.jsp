@@ -32,14 +32,14 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 
-		//	alert('${param.tag}');
+			alert('${param.tag}');
 			if('${param.tag}'!=""){
 				   // alert("hello");
 					$(".w-login").show();
 					$(".w-login-left").show();
 					$(".w-login-right").hide();
 			}
-
+			alert('${param.tag1}');
 			if('${param.tag1}'!=""){
 				   // alert("hello");
 					$(".w-login").show();
@@ -216,7 +216,7 @@
 			<div class="w-login-c">
 			
 				<form method="post" name="loginForm" id="loginForm"
-					action="<c:url value="/j_security_check"/>" >
+					action="${ctxPath}/j_security_check " >
 					<div class="w-login-left">
 						<div class="w-l-close">
 							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -230,6 +230,7 @@
 								<input class="form-control" type="text" placeholder="邮箱/手机"
 									name="j_username" size="41" maxlength="288" id="j_username"
 									onblur="userName();">
+									<input type="hidden"  name ="papeurl" id="papeurl" value=""/>
 							</div>
 						</div>
 						<div class="mark margin-bottom-sm">
@@ -292,7 +293,7 @@
 						</div>
 						<div class="w-l-btn">
 							<div class="w-l-itemscon">
-								<button name="login" class="btn btn-default signin" type="submit">
+								<button name="login" class="btn btn-default signin" type="submit" onClick="index_login()">
 									登陆
 								</button>
 							</div>
@@ -696,6 +697,13 @@
 		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
 
 		<script>
+	function index_login(){
+		  var url =""+self.location.href;
+		   $("#papeurl").val(url);
+		    alert( $("#papeurl").val());
+		    $("#loginForm").submit();
+		}
+		
 	var swiper = new Swiper('.swiper-container', {
 		nextButton : '.swiper-page-next',
 		prevButton : '.swiper-page-prev',

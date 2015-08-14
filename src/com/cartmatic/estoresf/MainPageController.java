@@ -1,6 +1,7 @@
 
 package com.cartmatic.estoresf;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +21,9 @@ import com.cartmatic.estore.catalog.service.ProductManager;
 import com.cartmatic.estore.common.model.cart.Shoppingcart;
 import com.cartmatic.estore.common.model.catalog.Brand;
 import com.cartmatic.estore.common.model.customer.Customer;
+import com.cartmatic.estore.common.model.system.AppUser;
 import com.cartmatic.estore.common.service.SolrService;
+import com.cartmatic.estore.system.service.AppUserManager;
 import com.cartmatic.estore.webapp.util.RequestContext;
 import com.cartmatic.estore.webapp.util.RequestUtil;
 
@@ -29,6 +33,29 @@ public class MainPageController{
 	private ProductManager productManager=null;
 	private BrandManager brandManager = null;
 	private ShoppingcartManager shoppingcartManager = null;
+	private AppUserManager	appUserManager	= null;
+	
+	private PasswordEncoder passwordEncoder;
+
+	public AppUserManager getAppUserManager() {
+		return appUserManager;
+	}
+
+
+	public void setAppUserManager(AppUserManager appUserManager) {
+		this.appUserManager = appUserManager;
+	}
+
+
+	public PasswordEncoder getPasswordEncoder() {
+		return passwordEncoder;
+	}
+
+
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+
 
 	@RequestMapping("/index.html")
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) throws ServletException {
@@ -60,6 +87,31 @@ public class MainPageController{
 		}*/
 		return mav;
 	}
+	
+	
+	@RequestMapping("/index_check/*.html")
+	public void index_check(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		System.out.print(request.getParameter("papeurl"));
+		String url =request.getParameter("papeurl");
+		response.sendRedirect(url);
+	}
+	
+	   public boolean checkAppUser(HttpServletRequest request)
+		{
+			AppUser appUser = appUserManager.getUserByName(request.getParameter("eamil"));
+			boolean tag = false;
+			if(appUser!=null){
+				String oldPassword = passwordEncoder.encodePassword(request.getParameter("password"), null);
+				boolean isOldPasswordRight = appUserManager.getIsPasswordRight(appUser.getAppuserId(), oldPassword);
+				if(isOldPasswordRight==true){
+					//此处判断是不是登录成功
+					tag = true;
+					//可继续写其它代码，例如购物车与用户cookie
+				}
+			}
+			return tag;
+		}
+	
 	
 	public ShoppingcartManager getShoppingcartManager() {
 		return shoppingcartManager;

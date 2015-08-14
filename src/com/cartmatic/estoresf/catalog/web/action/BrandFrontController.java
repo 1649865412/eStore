@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cartmatic.estore.catalog.service.BrandManager;
 import com.cartmatic.estore.common.model.catalog.Brand;
+import com.cartmatic.estore.common.model.catalog.Product;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.sekillproduct.service.SekillProductManager;
 import com.cartmatic.estore.webapp.util.RequestUtil;
@@ -72,11 +73,20 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	 * @return
 	 */
     @RequestMapping(value="/Designer_Service/designer_datial.html")
-    public void designerDatialAction(HttpServletRequest request, HttpServletResponse response)	 
+    public ModelAndView designerDatialAction(HttpServletRequest request, HttpServletResponse response)	 
     {
     	//ProductSearchFrontController
     	// @RequestMapping(value="/search-prod.html")
     	//参考老的就可以获取到
+    	ModelAndView mv = getModelAndView("designer/designerTemplate");
+		Integer brandId=(Integer)request.getAttribute("brandId");
+		if(brandId!=null){
+			Brand brand=brandManager.getById(brandId);
+//			List<Product> recommendProductList=
+//			brandManager.getAllByIdArray(uio);
+			mv.addObject("brand", brand);
+		}
+		return mv;
     }
     
     

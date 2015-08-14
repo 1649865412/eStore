@@ -79,6 +79,7 @@
     <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
     
 	<mvc:view-controller path="/index.html" view-name="index"/>
+		<mvc:view-controller path="/index_check.html" view-name="index"/>
 	<mvc:view-controller path="/Marketindex.html" view-name="Marketindex"/>
 	<mvc:view-controller path="/review.html" view-name="denglu"/>
 	<mvc:view-controller path="/signup.html" view-name="signup"/>
