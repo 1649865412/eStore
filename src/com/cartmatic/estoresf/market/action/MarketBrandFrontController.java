@@ -2,6 +2,7 @@ package com.cartmatic.estoresf.market.action;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,10 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cartmatic.estore.cart.CheckoutConstants;
+import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.catalog.service.BrandManager;
+import com.cartmatic.estore.common.model.cart.Shoppingcart;
 import com.cartmatic.estore.common.model.catalog.Brand;
+import com.cartmatic.estore.common.model.customer.Customer;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.sekillproduct.service.SekillProductManager;
+import com.cartmatic.estore.webapp.util.RequestContext;
 import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.extend.catalog.util.CharacterSort;
 
@@ -29,6 +35,8 @@ import com.cartmatic.extend.catalog.util.CharacterSort;
 public class MarketBrandFrontController  extends GenericStoreFrontController<Brand>{
 	
 	private BrandManager brandManager = null;
+	
+	private ShoppingcartManager shoppingcartManager = null;
 
 	
     public void setBrandManager(BrandManager inMgr) {
@@ -46,12 +54,34 @@ public class MarketBrandFrontController  extends GenericStoreFrontController<Bra
 	 * 商城设计师列表页
 	 */
 	@Override
-	@RequestMapping(value="/marketDesigner/index.html")
+	@RequestMapping(value="/marketDesignerList/index.html")
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) {
-		ModelAndView mv=new ModelAndView("catalog/marketDesigner");
+		System.out.print("url:"+request.getContextPath());
+		System.out.print("url2:"+request.getServletPath());
+		
+		ModelAndView mv=new ModelAndView("designer/marketDesignerList");
 		List<Brand> brandList=brandManager.findAllBrands();
 		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
 		//mv.addObject("brandList", brandList);
+		
+		Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
+		Shoppingcart shoppingcart = null;
+		String sUuid = "";
+		if(cookie!=null){//进入购物车页面时，假如cookie中没有购物车uuid，则初始化一辆购物车给用户
+		    sUuid = cookie.getValue();
+//		    shoppingcart = shoppingcartManager.loadShoppingcartByUuid(sUuid);
+		    shoppingcartManager.doNotUseCoupon(sUuid);
+		    shoppingcart = shoppingcartManager.refreshCart(sUuid, request, response);
+		    if(shoppingcart==null){
+		    	Customer customer = (Customer) RequestContext.getCurrentUser();
+		    	shoppingcart = shoppingcartManager.initShoppingcart(customer);
+		    }
+		}
+		else{
+			Customer customer = (Customer) RequestContext.getCurrentUser();
+			shoppingcart = shoppingcartManager.initShoppingcart(customer);
+		}
+		mv.addObject("shoppingcart", shoppingcart);
 		return mv;
 	}
 		
@@ -61,10 +91,10 @@ public class MarketBrandFrontController  extends GenericStoreFrontController<Bra
 	 */
 	@RequestMapping(value="/marketDesigner/initialsSelect.html")
 	public ModelAndView initialsSelect(HttpServletRequest request,HttpServletResponse response) {
-		ModelAndView mv=new ModelAndView("catalog/marketDesigner");
+		ModelAndView mv=new ModelAndView("designer/marketDesignerList");
 		String initials = request.getParameter("initials");
 		List<Brand> brandList=brandManager.findByProperty("initials", initials);
-		mv.addObject("mapResult",brandList);
+		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
 		return mv;
 	}
 		

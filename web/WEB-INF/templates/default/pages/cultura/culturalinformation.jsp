@@ -149,7 +149,7 @@
 				$("#boxLast").html(checkNull(json.lastCultural.title));
 				$("#boxNext").html(checkNull(json.nextCultural.title));
 				var readNum=checkNull(object.readNumber);
-				alert(readNum);
+				//alert(readNum);
 				var valueRead = ("阅读数 （"+readNum+"）| <a >分享<a class='jiathis_button_qzone'></a><a class='jiathis_button_tsina'></a>"+
 						"<a class='jiathis_button_weixin'></a><a class='jiathis_button_cqq'></a></a>");
 				$(".w-lin-right").html(valueRead);

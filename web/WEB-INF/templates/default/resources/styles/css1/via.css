@@ -1,0 +1,108 @@
+.maincontent{
+	padding-bottom:40px;
+	
+}
+
+.large-banner{
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	height:400px;
+	background-image:url(/images/via/6-01.jpg);
+	z-index: 1;
+}
+
+.bg-s{
+	width:100%;
+	float:left;
+	padding-bottom:50px;
+	margin-top:20px;
+}
+.title_part{
+	margin-top:100px;
+	font-size:36px;
+	text-align:center;
+	font-weight:bold;
+}
+.title_part2{
+	margin:40px 0;
+	font-size:20px;
+	text-align:center;
+}
+.brand_list{
+	width:800px;
+	float:left;
+	margin-left:150px;
+	margin-top:20px;
+}
+.brand_list h3{
+	float:left;
+	padding-top:40px;
+}
+.brand_list img{
+	float:left;
+	margin-left:20px;
+}
+.control-group{
+	float:left;
+}
+
+.form_bg{
+	background:#eee;
+	float:left;
+	width:100%;
+	padding-top:20px;
+	padding-bottom:40px;
+}
+.form_position{
+	margin-left:250px;
+	float:left;
+}
+.runway_info{
+	float:left;
+	margin:20px 0;
+	height:300px;
+	line-height:250%;
+}
+.runway_info p{
+	margin-left:90px;
+	font-size:15px;
+
+
+}
+.infor_title_1{
+	font-size:20px;
+	font-weight:bold;
+}
+
+.left_info{
+	float:left;
+	width:500px;
+	margin-top:100px;
+}
+.right_info{
+	float:left;
+	width:500px;
+	margin-top:100px;
+}
+.support_com{
+	float:left;
+	padding:40px 0;
+	background:#313131;
+	width:100%;
+	color:#fff;
+}
+.support_com p{
+	padding-left:20px;
+	padding-right:10px;
+	font-size:15px;
+}
+.support_com p span{
+	padding-left:75px;
+	font-size:15px;
+	line-height:180%;
+}
+
+.control-group input[type="text"]{
+	text-align:left;
+}

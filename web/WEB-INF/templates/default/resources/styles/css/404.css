@@ -1,0 +1,54 @@
+.w-404 {
+	background: url(../img/pic1.jpg) no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	width: 2000px;
+	color: #FFF;
+	font-family:'FontYht';
+}
+.w-404 h2, .w-404 h3 {
+	margin: 0;
+}
+.w-404 h2 {
+	font-size: 150px;
+	margin-bottom: 110px;
+}
+.w-404 h3 {
+	line-height: 52px;
+	font-size: 30px;
+}
+.w-404 p a {
+	display: inline-block;
+	width: 413px;
+	height: 63px;
+	line-height: 63px;
+	color: #FFF;
+	font-size: 15px;
+	background: #fbbd6a;
+	margin-top: 80px;
+}
+.w-404 p a:hover {
+	background: #FFF;
+	color: #fbbd6a;
+}
+ @media (max-width: 768px) {
+.w-404 h2 {
+	font-size: 60px;
+	margin-bottom: 30px;
+}
+.w-404 h3 {
+	font-size: 18px;
+	line-height: 30px;
+	padding: 0 5%;
+}
+.w-404 p a {
+	width: 70%;
+	margin-top: 30px;
+	height: auto;
+	padding: 5% 0;
+	line-height: normal;
+}
+}

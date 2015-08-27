@@ -32,14 +32,15 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 
-			alert('${param.tag}');
+			//alert('${param.tag}');
 			if('${param.tag}'!=""){
 				   // alert("hello");
 					$(".w-login").show();
 					$(".w-login-left").show();
 					$(".w-login-right").hide();
+					
 			}
-			alert('${param.tag1}');
+			//alert('${param.tag1}');
 			if('${param.tag1}'!=""){
 				   // alert("hello");
 					$(".w-login").show();
@@ -72,6 +73,15 @@
 			$("#searchForm").submit();
 			}
 		}
+
+		function DelCookie(name)
+		{
+		var exp = new Date();
+		exp.setTime (exp.getTime() - 1);
+		var cval = GetCookie (name);
+		document.cookie = name + "=" + cval + "; expires="+ exp.toGMTString();
+		}
+				
 		
 	function getCurrentUserId() {
 		return getCookie("UID") || -2;
@@ -216,7 +226,7 @@
 			<div class="w-login-c">
 			
 				<form method="post" name="loginForm" id="loginForm"
-					action="${ctxPath}/j_security_check " >
+					action="${ctxPath}/index_check.html" >
 					<div class="w-login-left">
 						<div class="w-l-close">
 							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -230,7 +240,7 @@
 								<input class="form-control" type="text" placeholder="邮箱/手机"
 									name="j_username" size="41" maxlength="288" id="j_username"
 									onblur="userName();">
-									<input type="hidden"  name ="papeurl" id="papeurl" value=""/>
+								<input type="hidden"  name ="papeurl" id="papeurl" value=""/>
 							</div>
 						</div>
 						<div class="mark margin-bottom-sm">
@@ -271,21 +281,21 @@
 								</div>
 						</div>
 						<%@ include file="/common/messages.jsp"%>
-		<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
-		<spring:bind path="customer.*">
-			<c:if test="${not empty status.errorMessages}">
-				<c:forEach var="error" items="${status.errorMessages}">
-					<div class="error_box"><c:out value="${error}" escapeXml="false" /></div>
-				</c:forEach>
-			</c:if>
-		</spring:bind>
-		
-		<c:if test="${param.error != null}">
-			<div class="error_box"><fmt:message key="customer.login.fail" /></div>
-		</c:if>
-		<c:if test="${param.errorCode != null}">
-			<div class="error_box"><fmt:message key="front.errorCode" /></div>
-		</c:if>
+						<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
+						<spring:bind path="customer.*">
+							<c:if test="${not empty status.errorMessages}">
+								<c:forEach var="error" items="${status.errorMessages}">
+									<div class="error_box"><c:out value="${error}" escapeXml="false" /></div>
+								</c:forEach>
+							</c:if>
+						</spring:bind>
+						
+						<c:if test="${param.error != null}">
+							<div class="error_box"><fmt:message key="customer.login.fail" /></div>
+						</c:if>
+						<c:if test="${param.errorCode != null}">
+							<div class="error_box"><fmt:message key="front.errorCode" /></div>
+						</c:if>
 						<div class="w-l-yzm">
 							<div class="w-l-itemscon">
 								<a href="javascript:;" onClick="return refreshImage('login',this)"><img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=login" title="点击改变" /> </a>
@@ -306,20 +316,20 @@
 								<a href="javascript:void(0)" class="w-menu-lrzc">注册新用户</a>
 							</div>
 						</div>
-						<div class="w-l-note">
+						<%--<div class="w-l-note">
 							<div class="w-l-itemscon">
-												<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>
-				<script type='text/javascript' charset='utf-8'>
-					(function() {
-						var _dl_time = new Date().getTime();
-						var _dl_login = document.getElementById('denglu_login_js');
-						_dl_login.id = _dl_login.id + '_' + _dl_time;
-						_dl_login.src = 'http://static.denglu.cc/connect/logincode?appid=82529denuh8LjbM9yT1Fqp48COxlA3&v=1.0.2&widget=3&styletype=1&size=348_214&asyn=true&time=' + _dl_time;
-					})();
-				</script>
+								<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>
+								<script type='text/javascript' charset='utf-8'>
+									(function() {
+										var _dl_time = new Date().getTime();
+										var _dl_login = document.getElementById('denglu_login_js');
+										_dl_login.id = _dl_login.id + '_' + _dl_time;
+										_dl_login.src = 'http://static.denglu.cc/connect/logincode?appid=82529denuh8LjbM9yT1Fqp48COxlA3&v=1.0.2&widget=3&styletype=1&size=348_214&asyn=true&time=' + _dl_time;
+									})();
+								</script>
 							</div>
 						</div>
-					</div>
+					--%></div>
 					</form>
 					
 					
@@ -379,21 +389,21 @@
             			</div>
             			
             			<%@ include file="/common/messages.jsp"%>
-		<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
-		<spring:bind path="customer.*">
-			<c:if test="${not empty status.errorMessages}">
-				<c:forEach var="error" items="${status.errorMessages}">
-					<div class="error_box"><c:out value="${error}" escapeXml="false" /></div>
-				</c:forEach>
-			</c:if>
-		</spring:bind>
-		
-		<c:if test="${param.error != null}">
-			<div class="error_box"><fmt:message key="customer.login.fail" /></div>
-		</c:if>
-		<c:if test="${param.errorCode != null}">
-			<div class="error_box"><fmt:message key="front.errorCode" /></div>
-		</c:if>
+						<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
+						<spring:bind path="customer.*">
+							<c:if test="${not empty status.errorMessages}">
+								<c:forEach var="error" items="${status.errorMessages}">
+									<div class="error_box"><c:out value="${error}" escapeXml="false" /></div>
+								</c:forEach>
+							</c:if>
+						</spring:bind>
+						
+						<c:if test="${param.error != null}">
+							<div class="error_box"><fmt:message key="customer.login.fail" /></div>
+						</c:if>
+						<c:if test="${param.errorCode != null}">
+							<div class="error_box"><fmt:message key="front.errorCode" /></div>
+						</c:if>
 						<div class="w-l-yzm">
 							<div class="w-l-itemscon">
 								<a href="javascript:;" onClick="return refreshImage('register',this)">
@@ -491,14 +501,14 @@
 					<div class="col-md-6 col-lg-7">
 						<ul class="w-menu list-unstyled">
 							<li>
-								<a href="#"><span class="w-menu-on">商城</span> </a>
+								<a href="${ctxPath}/MarketIndex.html"><span class="w-menu-on">商城</span> </a>
 							</li>
 							<li>
 								<a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span>
 								</a>
 							</li>
 							<li>
-								<a href="#"><span>设计师</span> </a>
+								<a href="${ctxPath}/designerList.html"><span>设计师</span> </a>
 							</li>
 							<li>
 								<a href="#"><span>关于我们</span> </a>
@@ -700,7 +710,7 @@
 	function index_login(){
 		  var url =""+self.location.href;
 		   $("#papeurl").val(url);
-		    alert( $("#papeurl").val());
+		    //alert( $("#papeurl").val());
 		    $("#loginForm").submit();
 		}
 		

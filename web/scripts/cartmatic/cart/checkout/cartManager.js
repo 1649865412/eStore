@@ -112,6 +112,8 @@ function fnUseCoupon(couponId) {
 				fnUpdatePrice();
 			}, "json");
 	} else {
+		alert("goodbye");
+		if(checkCoupon()){
 		var dis = parseFloat($("#cart_dis_member").val());
 		$
 				.post(
@@ -129,6 +131,7 @@ function fnUseCoupon(couponId) {
 								cartDiscountAmount = parseFloat($(
 										"#cartDiscountAmount").text());
 								$("#giftCertificateNo").attr("disabled", true);
+								 storeRightCoupon($("#couponNo_input_id").val());
 							} else {
 								alert(result.msg);
 								cartDiscountAmount = result.data;
@@ -138,7 +141,22 @@ function fnUseCoupon(couponId) {
 							}
 							fnUpdatePrice();
 						}, "json");
+		}
 	}
+}
+
+function storeRightCoupon(value){
+	$("#rightcoupon").val(value);
+}
+
+function checkCoupon(){
+     var value =	$("#rightcoupon").val();
+     var  secondValue = $("#couponNo_input_id").val();
+     if(value==secondValue){
+    	 return false;
+     }else{
+    	 return true;
+     }
 }
 
 // 进入卷控使用

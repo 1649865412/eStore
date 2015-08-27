@@ -12,7 +12,9 @@
 			</c:when>
 			
 			
-			--%><c:when test="${ad.advertisementId == 78}">
+			--%>
+			<%--首页轮播图一--%>
+			<c:when test="${ad.advertisementId == 78}">
 		  		<div class="w-banner-con">
 					<div class="w-b-bg" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 					<!--<img src="img/bg.jpg" />-->
@@ -23,7 +25,7 @@
 					</div>
 				</div>
 			</c:when>
-			
+			<%--首页轮播图二--%>
 			<c:when test="${ad.advertisementId == 79}">
 		  		<div class="w-banner-cont">
 					<div class="w-banner-img" style="background-image: url(${resPath}/images/img/bg3.jpg);"></div>
@@ -39,7 +41,7 @@
 					</div>
 				</div>
 			</c:when>
-			
+			<%--首页轮播图三--%>
 			<c:when test="${ad.advertisementId == 80}">
 		  		<div class="w-lf-left">
 					<div class="w-lf-lrcon">
@@ -54,7 +56,7 @@
 					</div>
 				</div>
 			</c:when>
-			
+			<%--首页轮播图四--%>
 			<c:when test="${ad.advertisementId == 81}">
 		  		<div class="w-lf-right">
 					<div class="w-lf-lrcon">
@@ -68,6 +70,37 @@
 					</div>
 					</div>
 				</div>
+			</c:when>
+			<%--商城首页轮播图一--%>
+			<c:when test="${ad.advertisementId == 82}">
+				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
+                        <div class="show_title">
+                            <h3 class="li1 title-font">${ad.contextTitle}</h3>
+                            <p><span>${ad.contextSubTitle}</span></p>
+                        </div>
+                    </div>
+			</c:when>
+			<%--商城首页轮播图二--%>
+			<c:when test="${ad.advertisementId == 83}">
+				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
+                        <div class="w-video">
+							<video id="wvideo" autoplay>
+								<source src="${mediaPath}a_and_d/${ad.mediaPathMpFour}" type="video/mp4"> 
+								<source src="${mediaPath}a_and_d/${ad.mediaPathOgv}" type="video/ogv"> 
+								<source src="${mediaPath}a_and_d/${ad.mediaPathMpWebm}" type="video/webm">
+							</video>
+						</div>
+                    </div>
+			</c:when>
+			<%--商城首页右上角大图--%>
+			<c:when test="${ad.advertisementId == 84}">
+				<div class="index_right" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
+            	<a class="index_right_title" href="${ad.redirectUrl}">
+                	<h3 class="li1 title-font">${ad.contextTitle}</h3>
+                    <p class="li2">${ad.contextSubTitle}</p>
+                    <p class="li3">${ad.context}</p>
+                </a>
+            </div>
 			</c:when>
 			
 			<c:otherwise>

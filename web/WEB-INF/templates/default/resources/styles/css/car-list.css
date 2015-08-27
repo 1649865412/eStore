@@ -1,0 +1,66 @@
+ul,li{ list-style:none;}
+*{ margin:0; padding:0;}
+
+.w-car-box{ width:100%; display:block; max-width:1570px; margin:0 auto; margin-top:60px; padding:0 2%;}
+.w-car-box .row{ margin:0;}
+.w-car-box-tit{ text-align:center; padding:45px 0; font-size:30px;}
+.w-car-box-list-tit{ border-top:solid 1px #757575;  border-bottom:solid 1px #757575; padding:10px 0; font-size:12px; color:#000; font-weight:bold;}
+.w-car-box-list-box { margin-top:40px;}
+.w-car-box-list-box table th{ padding:10px 0; border-bottom:solid 1px #e3e3e3; font-weight:normal; color:#757575; white-space:nowrap; padding-right:10px;}
+.w-car-box-list-box table th a{ color:#fbbd6a;}
+.w-car-box-list-box table th a.underline{ text-decoration:underline;}
+.w-car-box-list-box table td{ padding:30px 0;}
+.w-car-box-list-box dl dt{ float:left; width:28%; font-size:12px; font-weight:normal;}
+.w-car-box-list-box dl dt p span{ color:#fb6e67;}
+.w-car-box-list-box dl dt p em{ font-style:normal; color:#a6d5ab;}
+.w-car-box-list-box dl dd{ float:left;}
+.w-car-box-list-box dl dd a{ color:#313131;}
+.w-car-box-list-box dl dd.w-car-close{ width:7%; text-align:center;}
+.w-car-box-list-box dl dd.b-car-price{ width:20%; text-align:center;}
+.w-car-box-list-box dl dd.w-car-last{ width:45%; text-align:center;}
+.w-car-box-list-box dl dd.w-car-last div{ float:left;}
+.w-car-box-list-box dl dd.w-car-last div.Spinner{ width:43%;}
+.w-car-box-list-box dl dd.w-car-last div.Spinner input{ width:70px; text-align:center; border:none;}
+.w-car-box-list-box dl dd.w-car-last div.m-car-price{ width:57%;}
+.w-car-box-list-box dl dd.w-car-last div.m-car-price span{ display:inline-block; width:50%; vertical-align:middle;}
+.w-car-box-list-box dl dd.w-car-last div.m-car-price span font{ font-size:14px;}
+
+.w-car-bottom{ padding:40px 0; border-top:solid 1px #757575;}
+.w-car-bottom-info{ color:#999; line-height:22px; font-size:12px; float:left;}
+.w-car-bottom-info p{ margin:0;}
+.w-car-bottom-info p span{ display:inline-block; width:6px; height:6px; border-radius:50%; background:#bfbfbf; vertical-align:middle; margin:-2px 5px 0 0;}
+.w-car-bottom-btn{ float:right; width:30%;}
+.w-car-bottom-btn h2{ margin:0; font-size:18px; color:#757575;}
+.w-car-bottom-btn ul li{ margin-top:20px;}
+.w-car-bottom-btn ul li input{ width:98%; padding:10px 0 10px 2%; color:#999;}
+.w-car-bottom-btn ul li select{ width:100%; padding:10px 0; color:#999;}
+.w-car-bottom-btn p{ font-size:18px; color:#757575;}
+.w-car-bottom-btn p b{ font-weight:normal; color:#fbbd6a; font-size:20px;}
+.w-car-bottom-btn p a{ font-size:20px; color:#FFF; background:#fbbd6a; display:block; text-align:center; line-height:50px; border:solid 2px #fbbd6a;}
+.w-car-bottom-btn p a:hover{ background:none; color:#fbbd6a;}
+
+
+@media (max-width: 992px){
+	.w-car-box-tit{ padding:20px 0 0 0;}
+	.w-car-box-list-tit{ display:none;}
+	.w-car-box-list-box{ margin-top:20px;}
+	.w-car-box-list-box dl dt{ width:90%;}
+	.w-car-box-list-box dl dd.b-car-price{ display:none;}
+	.w-car-box-list-box dl dd.w-car-last{ float:none; width:100%;}
+	.w-car-box-list-box dl dd.w-car-last div.Spinner{ float:right; text-align:right;}
+	.w-car-box-list-box dl dd.w-car-last div.m-car-price{ text-align:left;}
+	.w-car-box-list-box dl dd.w-car-last div.m-car-price span{ width:auto; font-size:12px; padding-right:10px;}
+	.w-car-box-list-box dl dd.w-car-last div.m-car-price span font{ color:#f2bc7c;}
+	.w-car-bottom-info{ width:100%;}
+	.w-car-bottom-btn{ width:100%; margin-top:10px;}
+	.w-car-box-list-box{ border-top:solid 1px #e2e2e2;}
+}
+
+@media (max-width: 768px){
+	.w-car-box-list-box dl dd.w-car-last div.Spinner input{ width:30px;}
+	.w-car-bottom-btn p a{ line-height:45px;}
+}
+
+@media (max-width: 320px){
+	.w-car-box-list-box dl{ margin-left:-10%;}
+}

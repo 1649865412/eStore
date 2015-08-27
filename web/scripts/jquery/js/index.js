@@ -20,7 +20,7 @@ function pagec() {
 	}else{
 	$(".w-lf").css("height", pageheight+200);	
 	}
-	$('.index_show').height($(window).height()-94);
+	$('.index_show').height($(window).height()-300);
 	$('.mrzt,.mall_right').height($('.mall_con').height());
 	$('.product .li2 div').width($('.product .li2').width()-85);
 	$(".cutstr2").each(function(i){
@@ -31,7 +31,14 @@ function pagec() {
 			$p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
 		};
 	});
-	
+	$(".cutstr3").each(function(i){
+		var divH = $(this).height();
+		var $p = $("div", $(this)).eq(0);
+		$p.text($p.attr('title'));
+		while ($p.outerHeight() > divH) {
+			$p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
+		};
+	});
 }
 $(function() {
 
@@ -85,22 +92,23 @@ $(function() {
 	$(".jumbotron").click(function() {
 //		$(".w-car").hide();
 	})
-//	$(window).scroll(function() {
-//		if (!$(".w-nav").hasClass("w-nav-no")) {
-//			if ($(window).scrollTop() > 1) {
-//				$(".w-nav").addClass("w-nav-s");
-//
-//			} else {
-//				$(".w-nav").removeClass("w-nav-s");
-//			}
-//		}
-//	})
+	$(window).scroll(function() {
+		if (!$(".index-nav").hasClass("w-nav-no")) {
+			if ($(window).scrollTop() > 1) {
+				$(".w-nav").addClass("w-nav-s");
+
+			} else {
+				$(".w-nav").removeClass("w-nav-s");
+			}
+		}
+	})
 	var isopen = false;
 	$(".w-menusm .fa").click(function() {
 		if (isopen) {
 			$(this).removeClass('fa-times');
 			$(this).addClass('fa-bars');
 			$(".w-menush").removeClass('w-menush-s');
+			$(".w-m-tmenus").slideUp("slow"); //2015-8-11 
 			isopen = false;
 		} else {
 			$(this).removeClass('fa-bars');
@@ -124,6 +132,12 @@ $(function() {
 			paginationClickable :true,
 		});
 	}
+	if($('.designer_show .swiper-slide').length>1){
+		var swiper3 = new Swiper('.designer_show', {
+			autoplay: 4500,
+			pagination : '.designer_pagination',
+		});
+	}
 	$('.carefully_list li').click(function(){
 		var $this = $(this).index();
 		$(this).addClass('current').siblings().removeClass('current');
@@ -137,4 +151,54 @@ $(function() {
 			$(this).children('.mall_right_title').fadeOut();
 		}
 	);
+	$('.join_box .j2 span').click(function(){
+		$(this).addClass('current').siblings().removeClass('current');
+	});
+	$('.product .li6 .join').click(function(){
+		$(this).hide();
+		$(this).parent().siblings('.join_box').show();
+	});
+	$('.product .li1').hover(function(){
+		$(this).find('.imgt').fadeIn();
+	},function(){
+		$(this).find('.imgt').fadeOut();
+	});
+	
+	
+	
+	//2015-8-11 商城二级菜单 js
+	$(".w-menu-sc").click(function() {
+		if ($(".w-m-tmenus").is(":visible") == false) {
+			$(".w-m-tmenus").slideDown("slow");
+		} else {
+			$(".w-m-tmenus").slideUp("slow");;
+		}
+	});
+	$(".w-mt-ud").click(function() {
+		$(".w-mt-ud").each(function(){
+			$(this).removeClass("w-mt-up");
+			$(this).addClass("w-mt-down");
+			$(this).find('.w-mt-nav').removeClass("w-oon");
+			$(this).find('.fa').addClass("fa-chevron-down");
+			$(this).find('.fa').removeClass("fa-chevron-up");
+		})
+		if ($(this).hasClass("w-mt-down")) {
+			$(this).removeClass("w-mt-down");
+			$(this).addClass("w-mt-up");
+			$(this).find('.w-mt-nav').addClass("w-oon");
+			$(this).find('.fa').removeClass("fa-chevron-down");
+			$(this).find('.fa').addClass("fa-chevron-up");
+		} else {
+			$(this).removeClass("w-mt-up");
+			$(this).addClass("w-mt-down");
+			$(this).find('.w-mt-nav').removeClass("w-oon");
+			$(this).find('.fa').addClass("fa-chevron-down");
+			$(this).find('.fa').removeClass("fa-chevron-up");
+		}
+
+	});
+	//2015-8-11 商城二级菜单 js end
+	
+	
+	
 });

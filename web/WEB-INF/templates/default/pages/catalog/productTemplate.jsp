@@ -370,12 +370,10 @@
               })
               </script>
              
-             <%--
              <div class="product_stock">
                <i class="fa fa-exclamation-circle fa-lg fa_storck"></i>
                 还剩<span>${maxOrderQuantity == null ? 0 :  maxOrderQuantity}</span>件
              </div><!--product_stock-->
-            --%>
              
              
            </div><!--product_quantity-->

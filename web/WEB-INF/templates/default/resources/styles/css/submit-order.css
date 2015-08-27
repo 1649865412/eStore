@@ -1,0 +1,57 @@
+ul,li{ list-style:none;}
+*{ margin:0; padding:0;}
+
+.w-submit-order{ margin-top:60px;}
+.w-submit-order-hd{ padding:45px 2%; background:#eee; text-align:center;}
+.w-submit-order-bd{ max-width:1570px; margin:0 auto; padding:0 2%;}
+.w-submit-order .row{ margin:0;}
+.order-hd-tit{ font-size:30px;}
+.order-hd-number{ padding:20px 0; color:#757575; font-size:15px;}
+.order-hd-number p b{ color:#313131;}
+.order-hd-number p span{ color:#fb6e67;}
+.order-hd-ps{ font-size:12px; color:#757575;}
+.order-hd-ps p span{ color:#313131;}
+.w-submit-order-hd ul{ text-align:left; max-width:600px; margin:0 auto;}
+.w-submit-order-hd ul li{ font-size:12px; margin-bottom:5px; color:#313131;}
+.w-submit-order-hd ul li span{ display:inline-block; vertical-align:middle; margin:-2px 15px 0 0; border-radius:50%; width:5px; height:5px; background:#fb6e67;}
+.w-submit-order-hd ul li:nth-child(even){ color:#757575;}
+
+.w-submit-order-bd table{ max-width:920px; margin:30px auto;}
+.w-submit-order-bd table td{ text-align:center; border-bottom:solid 1px #b5b5b5; font-size:12px; padding:10px 0;}
+.w-submit-order-bd table tr:last-child td{ border-bottom:none;}
+
+.tabs-banks{ max-width:1010px; margin:0 auto; padding:40px 0;}
+.tabs-banks ul#tabs li{ float:left; margin-right:10px; display:inline;}
+.tabs-banks ul#tabs li a{ font-size:15px; color:#999;}
+.tabs-banks ul#tabs li a#current{ color:#fbbd6a;}
+.banks-list{ margin-top:10px;}
+.banks-list ul{ height:47px; overflow:hidden;}
+.banks-list ul li{ float:left; width:25%; margin-bottom:10px;}
+.banks-list ul li input{ vertical-align:middle;}
+.more-banks{ margin-top:10px;}
+.more-banks a{ display:inline-block; color:#FFF; font-size:14px; line-height:36px; width:20%; text-align:center; background:#fbbd6a; border:solid 2px #fbbd6a; margin-right:10px;}
+.more-banks a i{ margin-right:10px;}
+.more-banks a:hover{ color:#fbbd6a; background:none;}
+.others-pay{ margin-top:10px;}
+.others-pay ul{ height:47px; overflow:hidden;}
+.others-pay ul li{ float:left; width:25%; margin-bottom:10px;}
+.others-pay ul li input{ vertical-align:middle;}
+
+
+@media (max-width: 768px){
+	.w-submit-order{ margin-top:50px;}
+	.w-submit-order-bd table td{ width:25%; padding:10px 1%;}
+	.w-submit-order-bd table td img{ width:100%;}
+}
+
+@media (max-width: 640px){
+	.bd-list ul li{ width:98%;}
+	.banks-list ul li{ width:50%;}
+	.more-banks a{ width:40%;}
+}
+
+@media (max-width: 320px){
+	.bd-list ul li{ width:98%;}
+	.banks-list ul li{ width:100%;}
+	.more-banks a{ width:40%;}
+}

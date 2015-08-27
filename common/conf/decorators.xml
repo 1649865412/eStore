@@ -9,6 +9,8 @@
 		<pattern>/index.html*</pattern>
 		<pattern>/loginError.html</pattern>
 		<pattern>*/register.html</pattern>
+		<pattern>/index_check.html</pattern>
+		<pattern>/MarketIndex.html</pattern>
 		<!--<pattern>/culturalinformation/index.html*</pattern>
 		--><!--<pattern>/culturalinformation/culturatemplate.html*</pattern>
 	--></excludes>
@@ -37,15 +39,14 @@
 	</decorator>
 	
 
-
 	<!-- 产品目录主页 -->
-	<decorator name="catalog_col2" page="decCatalog_col2.jsp">
+	<!--<decorator name="catalog_col2" page="decCatalog_col2.jsp">
 		<pattern>/*_catalog*.html*</pattern>
 		<pattern>/new-arrivals.html*</pattern>
 	</decorator>
 	
 	
-	<!-- 产品列表页装饰器 -->
+	--><!-- 产品列表页装饰器 -->
 	<decorator name="catalog_search" page="decSearch.jsp">
 		<pattern>/search-prod.html*</pattern>
 	</decorator>

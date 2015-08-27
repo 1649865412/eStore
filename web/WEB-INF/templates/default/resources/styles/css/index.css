@@ -14,6 +14,7 @@ a {
 	color: #FFFFFF;
 	text-decoration: none;
 }
+ul,li{ list-style:none;}
 a:focus,
 a:hover {
 	color: #000000;
@@ -35,7 +36,7 @@ a:hover {
 	-webkit-transition: all .2s linear 0s;
 }
 .w-nav a {
-	color: #000;
+	color: #FFFFFF;
 }
 .w-nav-s {
 	background-color: #FFFFFF;
@@ -745,6 +746,8 @@ figure.w-mem-milo img {
 .w-login-s {
 	width: 100%;
 	height: 100%;
+	top:0;
+	left:0;
 	background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
 }
 .w-login-c {
@@ -862,6 +865,7 @@ figure.w-mem-milo img {
 }
 .w-menusm .w-gwct {
 	padding-top: 16px;
+	padding-right:10px; padding-left:0;
 }
 .w-lf {
 	margin-bottom: 30px;
@@ -953,7 +957,7 @@ figure.w-mem-milo img {
 	-webkit-transform: skewY(2deg) translate3d(-40px, 0, 0);
 	width: 50%;
 	border-right: #FFFFFF solid 1px;
-	padding: 5px;
+	padding: 5px 35px 5px 5px;/*2015-8-11 右边距修改*/
 	text-align: right;
 	margin-top: 15%;
 	margin-left: 14%;
@@ -1001,7 +1005,7 @@ figure.w-mem-milo img {
 	font-size: 60px;
 }
 .w-menush {
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(255, 255, 255, 0.95);/*2015-8-11 背景色修改*/
 	text-align: center;
 	color: #000000;
 	font-size: 1.5em;
@@ -1064,6 +1068,63 @@ figure.w-mem-milo img {
 	z-index: 0;
 	background-size: cover;
 }
+
+/*2015-8-11 新增 index2.html 手机 二级菜单*/
+.w-nav .w-menush ul li{
+	padding: 0;
+}
+ul.w-m-tmenus{
+	text-align: left;
+	padding: 0;
+	padding-top: 40px;
+	padding-bottom: 20px;
+	width: 100%;
+	display: none;
+}
+ul.w-m-tmenus li{
+	/*padding: 15px 0 15px 25px;*/
+	border-top: 1px solid #313131;
+	font-size: 25px;
+}
+ul.w-m-tmenus .w-oon{
+	background-color:#FBBB74 ;
+	color: #FFFFFF;
+	border: 1px solid #FBBB74;
+}
+ul.w-m-tmenus li i{
+	float: right;
+	padding-right: 25px;
+}
+.w-nav .w-menush .w-m-tmenus a{
+	padding: 0;
+	color: #313131;
+}
+.w-m-tmenus .w-mt-nav{
+	padding: 15px 0 15px 25px;
+}
+.w-m-tmenus .w-mto-a{
+	width: 100%;
+	padding: 0;
+}
+.w-m-tmenus a.w-ton{
+	color:#FBBB74 ;
+}
+.w-m-tmenus ul{
+	padding: 10px 0;
+}
+.w-nav .w-m-tmenus ul li {
+	padding: 5px 0 5px 150px;
+border:none;
+font-size: 15px;
+}
+.w-m-tmenus .w-mt-nlast{
+	border-bottom: 1px solid #313131;
+}
+.w-m-tmenus .w-mt-down ul{
+	display: none;
+}
+/*2015-8-11 新增 end*/
+
 @media (max-width: 1900px) {
 	.w-lf .w-lf-yywz p {
 		font-size: 20px;
@@ -1237,7 +1298,7 @@ figure.w-mem-milo img {
 		border: 2px solid #FFFFFF;
 	}
 	.w-nav {
-		height: 50px;
+		height:50px;
 	}
 	/*.w-banner .w-banner-txt {
 		width: 183px;

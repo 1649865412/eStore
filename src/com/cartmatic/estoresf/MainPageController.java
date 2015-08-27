@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.web.WebAttributes;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +27,7 @@ import com.cartmatic.estore.common.model.catalog.Brand;
 import com.cartmatic.estore.common.model.customer.Customer;
 import com.cartmatic.estore.common.model.system.AppUser;
 import com.cartmatic.estore.common.service.SolrService;
+import com.cartmatic.estore.core.util.ContextUtil;
 import com.cartmatic.estore.system.service.AppUserManager;
 import com.cartmatic.estore.webapp.util.RequestContext;
 import com.cartmatic.estore.webapp.util.RequestUtil;
@@ -89,19 +94,55 @@ public class MainPageController{
 	}
 	
 	
-	@RequestMapping("/index_check/*.html")
+	
+	
+	@RequestMapping("/index_check.html")
 	public void index_check(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.print(request.getParameter("papeurl"));
 		String url =request.getParameter("papeurl");
+   try{
+		//此处判断是不是登录成功
+		if(checkAppUser(request)){
+			//可继续写其它代码，例如购物车与用户cookie  
+				Customer appUser = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
+				RequestUtil.setUserInfoCookie(response, appUser, (request).getContextPath());
+		}else{
+					RequestUtil.setErrorResultCookie(response, "error", "0",(request).getContextPath());
+					RequestUtil.setErrorResultCookie(response, "tag", "0",(request).getContextPath());
+		}
+   }
+	   catch(Exception e){
+			response.sendRedirect(url);
+	   }
 		response.sendRedirect(url);
 	}
 	
-	   public boolean checkAppUser(HttpServletRequest request)
+	
+	@RequestMapping(value="/login_Error.html")
+	public void loginError(HttpServletRequest req,HttpServletResponse resp) throws ServletException {
+		try {
+			String url =req.getParameter("url");
+			if (ContextUtil.isStoreFront()) {
+				req.setAttribute("error", 0);
+				req.setAttribute("tag", 0);
+			//	resp.sendRedirect("http://localhost:8080/MarketIndex.html");
+				req.getRequestDispatcher("/MarketIndex.html").forward(req, resp);
+			//	req.getRequestDispatcher("http://localhost:8080/MarketIndex.html").forward(req, resp);
+			} else {
+				req.getRequestDispatcher(url+"?error=1&tag=0").forward(req, resp);
+			}
+		} catch (Throwable ex) {
+			//logger.error("Cannot forward to error login page: " + targetUrl, ex);
+		}
+	}
+	
+	
+	
+	  public boolean checkAppUser(HttpServletRequest request)
 		{
-			AppUser appUser = appUserManager.getUserByName(request.getParameter("eamil"));
+			AppUser appUser = appUserManager.getUserByName(request.getParameter("j_username"));
 			boolean tag = false;
 			if(appUser!=null){
-				String oldPassword = passwordEncoder.encodePassword(request.getParameter("password"), null);
+				String oldPassword = passwordEncoder.encodePassword(request.getParameter("j_password"), null);
 				boolean isOldPasswordRight = appUserManager.getIsPasswordRight(appUser.getAppuserId(), oldPassword);
 				if(isOldPasswordRight==true){
 					//此处判断是不是登录成功

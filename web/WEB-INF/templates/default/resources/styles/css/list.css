@@ -1142,9 +1142,27 @@ button:focus {
 .grid__item h2.title,.grid__item .w-content,.grid__item .w-g-pyf,.grid__item .meta{
 	width: 94%;
 	margin-left: 3%;
+	text-align: left;/*2015-8-11 左对齐*/
 }
 .grid__item .loader{
 	margin-left: 3%;
+}
+.w-nav a {
+	color: #000000;
+}
+.w-menu a span:hover::after {
+	background: #000000 none repeat scroll 0 0;
+	left: 2px;
+	right: 2px;
+}
+.w-menu a span.w-menu-on::after {
+	background: #000000 none repeat scroll 0 0;
+	left: 2px;
+	right: 2px;
+}
+.w-nav{
+	background-color: #ffffff;
+    border-bottom: 1px solid #000000;
 }
 @media screen and (min-width: 600px) {
 	.w-book{

@@ -121,7 +121,7 @@
 		            --%><%-- 商品开始 --%>
 					<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus">
 						<c:if test="${item.isSaved==0 and empty item.parent}">
-						<c:if test="${item.productSku.product.brandId=='15'||item.productSku.product.brandId=='37'||item.productSku.product.brandId=='44'}">
+						<%--<c:if test="${item.productSku.product.brandId=='15'||item.productSku.product.brandId=='37'||item.productSku.product.brandId=='44'}">
 				 			<tr class="cut_bg">
 		            		  <td class="chart_cut border_with">
 		            		    <img src="${resPath }/images/cart/bell.gif"/>
@@ -148,7 +148,7 @@
 		              			<td class="border_with"></td>
 		            		</tr>
 		            	</c:if>
-							 <tr>
+							 --%><tr>
 					              <td rowspan="3" class="chart_img border_with">
 					                <product:productImg sku="${item.productSku}" size="e" width="165" height="165"/>
 					              </td>
@@ -262,6 +262,8 @@
                      type="text" placeholder="输入优惠劵"  title="温馨提示：“输入优惠券”后，点击“去结算”，即可看到“优惠”的金额。"
                       onblur="fnUseCoupon(${shoppingcart.usedCouponNo });"  value="${shoppingcart.usedCouponNo }"
                        autocomplete="off"  <c:if test="${shoppingcart.giftCertificateNos != null }">disabled</c:if>/>
+                       
+                       <input  type="hidden" value ="" id="rightcoupon">
                   </div>
                 </div>
               </td>

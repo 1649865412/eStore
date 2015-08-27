@@ -1,0 +1,85 @@
+*{ margin:0; padding:0;}
+body{ overflow-x:hidden;}
+.w-weekly-hd{ background:url(../img/pic2.jpg) no-repeat; background-size:cover; background-position:50% 50%; position:relative;}
+.weekly-hd-info{ width:41%; background:rgba(255,255,255,0.7); position:absolute; top:50%; left:3%; padding:1.5%;}
+.hd-info{ font-size:40px;}
+.hd-info a{ text-decoration:underline; font-size:12px; color:#fbbd6a;}
+.hd-info font{ color:#fbbd6a; font-family:sans-serif; font-size:12px;}
+.hd-info-text{ line-height:24px; font-size:15px; padding-top:10px; font-family:"黑体"; color:#000;}
+
+.bd-tit{ text-align:center; margin:60px 0 30px 0; font-size:36px; font-family: 'FontYht';}
+.bd-tit1{ text-align:center; font-family:"黑体"; font-size:18px; color:#757575; margin-bottom:60px;}
+
+.w-weekly-recomm ul.row{ padding:0 10%; margin:0;}
+.w-weekly-recomm ul li{ float:left; width:48%;}
+.w-weekly-recomm ul li:last-child{ float:right;}
+.w-weekly-recomm ul li dl dt{ float:left; width:70%;}
+.w-weekly-recomm ul li dl dt img{ width:100%;}
+.w-weekly-recomm ul li dl dd{ float:right; width:29%;}
+.w-weekly-recomm ul li dl dd img{ display:block; width:100%; margin-bottom:6.3%;}
+.w-weekly-recomm ul li a img{ transition-duration: .5s;}
+.w-weekly-recomm ul li a:hover img{ opacity:0.5;}
+.w-weekly-recomm ul li a.buy_btn:hover img{ opacity:1;}
+
+.bd-list ul.row{ padding:0 2%; margin:0;}
+.bd-list ul{}
+.bd-list ul li{ float:left; width:23%; margin:0 1% 30px 1%; line-height:22px; font-size:12px;}
+.bd-list ul li img{ width:100%; transition-duration: .5s;}
+.bd-list ul li a:hover img{ opacity:0.5;}
+.bd-list ul li .bd-list-tit{ margin-top:10px;}
+.bd-list ul li .bd-list-tit span{ float:right; color:#fbbd6a;}
+.bd-list ul li .bd-list-tit a{ color:#313131;}
+.bd-list ul li p{ margin:0;}
+.bd-list ul li p a{ color:#AAA; margin-right:10px;}
+.bd-list ul li p a:hover{ color:#666;}
+.bd-list ul li p span{ color:#abdce3;}
+.bd-list ul li p em{ font-style:normal; color:#AAA;}
+
+.more{ text-align:center; margin-bottom:50px;}
+.more a{ display:inline-block; border:solid 1px #fbbd6a; font-size:18px; line-height:65px; background:#fbbd6a; padding:0 50px;}
+.more a:hover{ color:#fbbd6a; background:none;}
+
+.w-buy-pop{ position:fixed; z-index:1036; top:50px; width:835px; left:50%; margin-left:-417.5px; background:#FFF; display:none;}
+.w-buy-pop-mask{ position:fixed; width:100%; height:100%; top:0; left:0; background:rgba(0,0,0,0.5); z-index:1035; display:none;}
+.w-buy-pop .row{ margin:0;}
+.w-buy-pop i{ position:absolute; right:10px; top:10px; font-style:normal; font-size:16px; font-weight:normal; cursor:pointer;}
+.w-buy-pop-tit{ text-align:center; padding:35px 0 20px 0; border-bottom:dashed 1px #bbb3aa; color:#000; margin:0 10px;}
+.w-buy-pop ul.row{ margin:15px 10px 0 10px;}
+.w-buy-pop ul li{ float:left; width:50%; margin-bottom:15px;}
+.w-buy-pop ul li dl dt{ float:left;}
+.w-buy-pop ul li dl dd{ float:left; width:250px; margin-left:10px; display:inline; font-size:12px;}
+.w-buy-pop ul li dl dd p{ margin:0; white-space:nowrap; overflow:hidden; color:#AAA; line-height:24px;}
+.w-buy-pop ul li dl dd p span{ color:#abdce3;}
+.w-buy-pop ul li dl dd p b{ font-size:15px; color:#333;}
+.w-buy-pop ul li dl dd p em{ font-style:normal;}
+.w-buy-pop ul li dl dd p a{ color:#AAA; padding:0 10px;}
+.w-buy-pop ul li dl dd p a.active{ color:#fbbd6a;}
+.w-buy-pop-number{ text-align:center; font-size:15px;}
+.w-buy-pop-number input{ width:40px; text-align:center; border:none; background:none; color:#fb6e67;}
+.w-buy-pop-number div{ display:inline-block;}
+.w-buy-pop-number a{ color:#fb6e67; font-size:12px;}
+.w-buy-pop-number a.buy-pop-btn{ font-size:15px; display:inline-block; width:50%; height:58px; line-height:58px; color:#FFF; font-size:15px; background:#fbbd6a; border:solid 1px #fbbd6a; margin:15px 0;}
+.w-buy-pop-number a.buy-pop-btn:hover{ background:#FFF; color:#fbbd6a;}
+
+
+@media (max-width: 992px){
+	.weekly-hd-info{ width:94%;}
+	.w-weekly-recomm ul.row{ padding:0 2%; margin:0;}
+	.w-buy-pop{ width:90%; height:80%; overflow-y:scroll; left:5%; margin-left:0;}
+	.w-buy-pop ul li{ width:100%;}
+}
+
+@media (max-width: 768px){
+	.w-weekly-recomm ul.row li{ width:100%;}
+	.hd-info{ font-size:25px;}
+	.hd-info-text{ line-height:22px; font-size:12px;}
+	.bd-tit{ font-size:25px}
+	.bd-tit1{ font-size:12px;}
+	.bd-list ul{ padding:0 2%;}
+	.bd-list ul li{ width:48%;}
+	.more a{ line-height:55px;}
+}
+
+@media (max-width: 320px){
+	.bd-list ul li{ width:98%;}
+}
