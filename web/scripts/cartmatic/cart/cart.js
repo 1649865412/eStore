@@ -294,6 +294,7 @@ var $mnc = new ShoppingcartManager.minicart();
 addOnload(function(){
 $cm.isBusy = false;
 });
+
 $cm = ShoppingcartManager;
 //$cm.isBusy = true;
 function moveCartBtn(b){

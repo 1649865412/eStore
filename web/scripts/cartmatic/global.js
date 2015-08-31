@@ -17,7 +17,6 @@ jQuery(document).ready(function(){
 String.prototype.trim = function(){
     return this.replace(/(^\s*)|(\s*$)/g, "");
 }
-alert("hjhahaha");
 /**去除字符串头尾的空格*/
 function trim(str) {
     return str==null?null:str.trim();
@@ -160,22 +159,17 @@ $(document).ready(function(){
 }); 
 
 function fillLoginPrompt() {
-	alert("fillLoginPrompt");
+	//alert("fillLoginPrompt");
 	var _str='';
 	alert(isLogined());
 	if (!isLogined()) {
 		_str=$("#loginPromptHolderTemplateLogout").html();
 	} else {
-		alert("sdafdsa");
 		var uname=getCookie("UNAME");
-		alert(uname);
 		//emial的去掉@后的部分
 		if(uname.indexOf("@")!=-1)
 			uname=uname.substring(0,uname.indexOf("@"));
-		alert("uname2:"+uname);
-		alert("loginPromptHolderTemplateLogin"+"#loginPromptHolderTemplateLogin").html());
 		_str=format_params($("#loginPromptHolderTemplateLogin").html(),uname);
-		alert("haha:"+_str);
 	}
 
 	if($("#loginPromptHolder")){

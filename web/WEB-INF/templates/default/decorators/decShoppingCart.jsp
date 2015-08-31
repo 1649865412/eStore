@@ -23,7 +23,6 @@
 			<%-- ========== 内容开始 ========= --%>
 			<div class="lyt-maincontent">
 				<div class="productlist-wrap">
-					<%@ include file="/common/messages.jsp"%>
 					<decorator:body />
 				</div>
 				

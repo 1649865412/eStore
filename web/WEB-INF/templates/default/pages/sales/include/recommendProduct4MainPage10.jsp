@@ -3,20 +3,12 @@
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
-<c:forEach items="${productList}" var="product" varStatus="varStatus" begin="0" end ="8">
-           <li>
-            	<div class="li1"><a href="${ctxPath}/product/${product.productId}.html">
-            	
-            	<img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}" width="100%"/>
-            	
-            	<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>
-            	
-            	</a></div>
-                <div class="li2"><div class="cutstr2"><a href="${ctxPath}/product/${product.productId}.html" title="${product.productName}">${product.productName}</a></div><span>&nbsp;</span></div>
-                <p class="li3">${product.brand.designer}</p>
-                <p class="li4">${product.brand.brandName}</p>
-                <div class="li5">
-                <c:choose>
+<c:forEach items="${productList}" var="product" varStatus="varStatus">
+			<li><a href="${ctxPath}/product/${product.productId}.html"><img src="${mediaPath}product/v/${product.defaultProductSku.image}"></a>
+                        	<div class="bd-list-tit"><span>SALE</span><a href="${ctxPath}/product/${product.productId}.html">${product.productName}</a></div>
+                            <p><span>${product.brand.designer}</span></p>
+                            <p><em>${product.brand.brandName}</em></p>
+                            <p><b> <c:choose>
 					<c:when test="${product.defaultProductSku.priceViewType==2}">
 						<c:set var="defaultProductSkuPrice" value="${product.defaultProductSku.salePrice}"/>
 					</c:when>
@@ -85,48 +77,12 @@
 					         	  </div><!--product_size-->
 					           	</c:if>
 					           	</div>
-					           	<div class="product_quantity">
-						           	<product:productQuantity2 product="${product}" />
-						             <form id="myform" method="POST" action="#">
-						               <input id="min" name="" type="button" value="-" />
-						               <input id="quantity" name="quantity" type="text"  value="${minOrderQuantity}" onKeyUp="value=value.replace(/[^\d]/g,'');fnChangePrice()" size="3" onblur="changeToOne(this);">
-						               <input id="add" name="" type="button" value="+" />
-						             </form>
-						              <!--product_quantity-->
-									  <script>
-						              $(function(){
-						                  var t = $("#quantity");
-						                  $("#add").click(function(){		
-						                      t.val(parseInt(t.val())+1)
-						                      //setTotal();
-						                  })
-						                  $("#min").click(function(){
-						                      if(parseInt(t.val()) == 1)
-						                          t.val(1);
-						                      else{
-						                    	  t.val(parseInt(t.val())-1)
-						                          //setTotal();
-						                      }
-						                  })
-						                  
-						              })
-						              </script>
-						             
-						             <%--
-						             <div class="product_stock">
-						               <i class="fa fa-exclamation-circle fa-lg fa_storck"></i>
-						                还剩<span>${maxOrderQuantity == null ? 0 :  maxOrderQuantity}</span>件
-						             </div><!--product_stock-->
-						            --%>  
-						           
-						           </div><!--product_quantity-->
 					           	</c:if>
            					</c:forEach>
-	                	</c:forEach>
-	                	</div>
-	                <product:addToCart productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
+	                	</c:forEach></b></p>
+                            <product:addToCart productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
                     <a class="j3" href="#">加入购物车</a>
                 
                 <p class="li6"><a href="#"><i class="i1"></i>分享</a><a href="#"><i class="i2"></i>加入收藏</a></p>
-            </li>
-        </c:forEach>
+             </li>
+</c:forEach>

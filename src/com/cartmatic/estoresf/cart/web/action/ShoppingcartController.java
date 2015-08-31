@@ -2,6 +2,7 @@ package com.cartmatic.estoresf.cart.web.action;
 
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
@@ -29,18 +30,18 @@ import com.cartmatic.estore.cart.service.ShoppingcartItemManager;
 import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.cart.util.CheckoutUtil;
 import com.cartmatic.estore.cart.util.ShoppingCartUtil;
+import com.cartmatic.estore.catalog.service.BrandManager;
 import com.cartmatic.estore.catalog.service.CategoryManager;
 import com.cartmatic.estore.catalog.service.ProductCategoryManager;
 import com.cartmatic.estore.common.helper.CatalogHelper;
 import com.cartmatic.estore.common.helper.ConfigUtil;
 import com.cartmatic.estore.common.model.cart.Shoppingcart;
 import com.cartmatic.estore.common.model.cart.ShoppingcartItem;
-import com.cartmatic.estore.common.model.catalog.Category;
+import com.cartmatic.estore.common.model.catalog.Brand;
 import com.cartmatic.estore.common.model.catalog.Product;
 import com.cartmatic.estore.common.model.customer.Address;
 import com.cartmatic.estore.common.model.customer.Customer;
 import com.cartmatic.estore.common.model.customer.ShopPoint;
-import com.cartmatic.estore.common.model.inventory.Inventory;
 import com.cartmatic.estore.common.model.sales.Coupon;
 import com.cartmatic.estore.common.model.sales.GiftCertificate;
 import com.cartmatic.estore.common.model.sales.PromoRule;
@@ -75,8 +76,17 @@ import com.cartmatic.estore.webapp.util.SessionUtil;
 @RequestMapping("/cart/shoppingcart.html")
 public class ShoppingcartController extends BaseStoreFrontController {
 	
+	public BrandManager getBrandManager() {
+		return brandManager;
+	}
+
+	public void setBrandManager(BrandManager brandManager) {
+		this.brandManager = brandManager;
+	}
+
 	// ---- Manager
 	private ShoppingcartManager shoppingcartManager = null;
+	private BrandManager brandManager = null;
 	private ShoppingcartItemManager shoppingcartItemManager=null;
 	private PromoService promoService; 
 	private final static Pattern item_quantity_pattern = Pattern.compile("^[1-9]\\d{0,2}$");
@@ -439,8 +449,53 @@ public class ShoppingcartController extends BaseStoreFrontController {
 		request.setAttribute("fullCutPrice",ShoppingCartUtil.fullCutPrice(shoppingcart)); 
 		shoppingcart.setFullCutSum(new BigDecimal(ShoppingCartUtil.fullCutPrice(shoppingcart)));
 		shoppingcart.setTotal(shoppingcart.getTotal().subtract(new BigDecimal(ShoppingCartUtil.fullCutPrice(shoppingcart))));
+		List<Brand> brandList=brandManager.getAll();
+		request.setAttribute("brandList",getProductBrand(shoppingcart.getCartItems())); 
 		shoppingcartManager.save(shoppingcart);
 		return new ModelAndView("cart/shoppingcart");
+	}
+	
+	/**
+	 * 功能:获取购物车产品里的品牌列表
+	 * <p>作者 杨荣忠 2015-8-31 下午02:29:43
+	 * @param productList
+	 * @return
+	 */
+	public List<Brand>getProductBrand(Set<ShoppingcartItem>shoppingcartItem){
+		List<Brand>haveList =new ArrayList();
+		if(shoppingcartItem!=null){
+			List<ShoppingcartItem>productList = new ArrayList(shoppingcartItem);
+			for(int i=0;i<productList.size();i++){
+				try{
+					Brand value =productList.get(i).getProductSku().getProduct().getBrand();
+					if(!checkHaveBrand(value,haveList)){
+						//不重复包含的话，增加品牌
+						haveList.add(value);
+					}
+				}catch(Exception e){
+					
+				}
+			}
+		}
+		return haveList;
+	}
+	
+	
+	/**
+	 * 功能:判断产品品牌是不是已重复包含在已有的品牌
+	 * <p>作者 杨荣忠 2015-8-31 下午02:28:58
+	 * @param brand
+	 * @param list
+	 * @return
+	 */
+	public boolean checkHaveBrand(Brand brand,List<Brand>list){
+		boolean tag = false;
+		for(int i=0;i<list.size();i++){
+			if(brand.getBrandId()==list.get(i).getBrandId()){
+				tag =true;
+			}
+		}
+		return tag;
 	}
 	
 

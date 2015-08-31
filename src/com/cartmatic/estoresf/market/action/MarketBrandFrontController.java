@@ -36,6 +36,16 @@ public class MarketBrandFrontController  extends GenericStoreFrontController<Bra
 	
 	private BrandManager brandManager = null;
 	
+	public ShoppingcartManager getShoppingcartManager() {
+		return shoppingcartManager;
+	}
+
+	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
+		this.shoppingcartManager = shoppingcartManager;
+	}
+
+
+
 	private ShoppingcartManager shoppingcartManager = null;
 
 	

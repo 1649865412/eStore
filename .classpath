@@ -92,5 +92,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/StoreAdmin"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/denglu_java_sdk.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/Qrcode_swetake.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/qrcode.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

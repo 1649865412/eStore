@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%@ include file="/common/taglibs.jsp"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <html lang="zh-CN">
 	<head>
 		<meta charset="utf-8">
@@ -25,77 +30,26 @@
 		<div class="w-weekly">
         	<div class="w-weekly-hd">
             	<div class="weekly-hd-info">
-                	<div class="hd-info">${tempCatalog.weekOnNewTitle}<a href="/marketDesignerList/index.html">了解更多关于品牌设计师的理念</a><font>>></font></div>
-                    <div class="hd-info-text">
-                    	${tempCatalog.weekOnNewContent}
-                    </div>
+                	<content:showAdNew adPositionType="weeklyTitle" />
                 </div>
             </div>
             
             
             <div class="w-weekly-bd">
-            	<div class="bd-tit">固定标题啊给每周主打产品列表</div>
-                <div class="bd-tit1">来点简短的介绍童多力地以蘭酒易優達取成文這效的都可、的舞港面期帶重過然。應間市作下<br>視前車賣省究員生新你照真速以公在客太護的讀而為輕。</div>
+            	<div class="bd-tit">${tempCatalog.weekOnNewTitle}</div>
+                <div class="bd-tit1">${tempCatalog.weekOnNewContent}</div>
                 <div class="bd-list">
                 	<ul class="row">
-                    	<li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
-                        <li><a href="#"><img src="img/pic6.jpg"></a>
-                        	<div class="bd-list-tit"><span>SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                            <p><span>郑荣凯&曾思宇</span></p>
-                            <p><em>品牌名</em></p>
-                            <p><b>￥ 50.00</b></p>
-                            <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
-                        </li>
+                		<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
+							<jsp:param name="typeName" value="feature_product" />
+							<jsp:param name="firstResult" value="0" />
+							<jsp:param name="maxResults" value="8" />
+							<jsp:param name="template" value="sales/include/recommendProduct4MainPage10" />
+							<jsp:param name="doAction" value="defaultAction" />
+							<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
+						</jsp:include>
                     </ul>
-                    <div class="more"><a href="#">点击查看更多该品牌产品</a></div>
+                    <div class="more"><a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${tempCatalog.brandId}">点击查看更多该品牌产品</a></div>
                 </div>
             </div>
         </div>

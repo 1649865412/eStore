@@ -138,67 +138,6 @@ public class MarketIndexFrontControler
 		String recommendProductNum=brand.getProductRecommendId();
 		List<Product> recommendProductList=productManager.getAllByIdArray(recommendProductNum);
 		mav.addObject("recommendProductList", recommendProductList);
-		
-		
-		Store store=ConfigUtil.getInstance().getStore();
-		String typeName = "hot_wholesale_products"; // 推荐类型
-		String firstResultString = "0"; // 起始序号
-		String maxResultsString = "8"; // 最大数量
-		String sourceFormat = RequestUtil.getParameterNullSafe(request,
-				"sourceFormat"); // 标示是用sourceId还是用sourceIds,默认用sourceId
-		String sourceIdString = "1"; // sourceId 可以是categoryId 也可以是productId
-		String sourceIdsString = RequestUtil.getParameterNullSafe(request,
-				"sourceIds"); // sourceIds 可以是categoryIds 也可以是productIds
-		// 由typeName决定
-		//String template = RequestUtil.getParameterNullSafe(request, "template"); // 模板
-		// ----------------------初始化参数 开始------------------------------//
-		int firstResult;
-		int maxResults;
-		Integer sourceId;
-		List<Integer> sourceIds = new ArrayList<Integer>();
-		if (firstResultString.equals("")) {
-			firstResult = 0;
-		} else {
-			firstResult = Integer.parseInt(firstResultString);
-		}
-		if (maxResultsString.equals("")) {
-			maxResults = -1;
-		} else {
-			maxResults = Integer.parseInt(maxResultsString);
-		}
-		if (sourceIdString.equals("")) {
-			sourceId = ConfigUtil.getInstance().getStore().getCatalog().getCategoryId();
-		} else {
-			sourceId = new Integer(sourceIdString);
-		}
-		if (sourceFormat.equals("list")) {
-			if (!sourceIdsString.trim().equals("")) {
-				String[] temps = sourceIdsString.split(",");
-				for (String temp : temps) {
-					sourceIds.add(new Integer(temp));
-				}
-			}
-		}
-		RecommendedType recommendedType = recommendedTypeManager
-				.getRecommendedTypeByName(typeName);
-
-		// ----------------------初始化参数 结束------------------------------//
-		List<Product> list;
-		if (!sourceFormat.equals("list")) {
-		    if (Constants.FLAG_TRUE.equals(recommendedType.getIsApplyToCategory()))
-		    { 
-		        list = evalRecommendationManager.getProductsByRecommendedTypeNameByCategoryId(store,typeName, sourceId, firstResult, maxResults);
-		    }
-		    else
-		    {
-		        list = evalRecommendationManager.getProductsByRecommendedTypeNameByProductId(store,typeName, sourceId, firstResult, maxResults);
-		    }
-		} else {
-			//目前只是做了AlsoBuy部分
-			list = evalRecommendationManager.getProductsByRecommendedTypeNameBySourceIdList(store,typeName, sourceIds, firstResult, maxResults);
-		}
-
-		mav.addObject("productList", list);
 		return mav;
 	}
 	

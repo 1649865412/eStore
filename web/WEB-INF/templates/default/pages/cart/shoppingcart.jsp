@@ -9,13 +9,21 @@
 	<title><fmt:message key="shoppingcart.yourShoppingcart" /></title>
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-store" />
-	<link href="${resPath}/styles/head_foot.css" rel="stylesheet" type="text/css" />
-	<link href="${resPath}/styles/nav.css" rel="stylesheet" type="text/css" />
-	<link href="${resPath }/styles/main.css" rel="stylesheet" type="text/css"/>
-	<link href="${resPath }/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="${resPath }/styles/chart.css" rel="stylesheet" type="text/css" />
+	<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+        <link href="${resPath}/styles/css/car-list.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+          <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 </head>
 <body>
+
 <form action="${ctxPath}/cart/shoppingcart.html" id="cart_form" method="post">  
 <%@ include file="./include/buyNow.jspf"%>
 <!-- cartUUID${shoppingcart.uuid}-->

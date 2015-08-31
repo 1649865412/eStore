@@ -42,53 +42,29 @@
 		<c:choose>
 			<c:when test="${salesOrder.isCod == 0}">
 				<div class="maincontent" id="designer_main">
-			     <div class="chart_top">
-			       <div class="chart_t_left">
-			         <p class="chart_title">提交订单并支付</p>
-			       </div><!--chart_t_left-->
-			       <div class="chart_t_right">
-			         <img src="${resPath }/images/cart/step3.png"/>
-			       </div><!--chart_t_right-->
-			     </div><!--chart_top-->
 			     <div class="chart_bottom">
-			       <div class="checkout_info">
-			         <div class="checkout_title margin_bottom20">
-			           <p><i class="fa fa-check fa-2x margin_LR10"></i><span>订单生成</span></p>
-			         </div><!--checkout_title-->
-			         <div class="current_infowtool">
-			           <div class="width_all">
-			             <div class="current_info_col">
-			               <div class="current_info_t">订单号:</div>
-			               <div class="current_info_c colourBlack text_bold">${salesOrder.orderNo}</div>
-			             </div>
-			             <div class="current_info_col">
-			               <div class="current_info_t">应付款：</div>
-			               <div class="current_info_c colour_trash text_bold"><system:CurrencyForRate value="${salesOrder.shouldPay}" /></div>
-			             </div>
-			              <div class="current_info_col cash_note">
-			               <p class="colourBlack">请您尽快完成支付，以便我们尽快安排发货。</p>
-			               <br/>
-			               <p>请您在提交订单后的72小时内完成支付，否则订单将会自动取消。</p>
-			               </div>
-			           </div><!--current_info-->
-			         </div><!--current_infowtool-->
-			       </div><!--checkout_info-->
+			       
+			       <div class="w-submit-order-hd">
+		            	<div class="order-hd-tit">订单已生成</div>
+		                <div class="order-hd-number">
+		                	<p>订单号：<b>${salesOrder.orderNo}</b></p>
+		                    <p><span>应付款：<system:CurrencyForRate value="${salesOrder.shouldPay}" /></span></p>
+		                </div>
+		                <div class="order-hd-ps">
+		                	<p><span>请您尽快完成支付，以便我们尽快安排发货。</span></p>
+		                    <p>请您在提交订单后的72小时内完成支付，否则订单将会自动取消。</p>
+		                </div>
+		            </div>
 			       
 			       
-			       <div class="checkout_info">
-			         <div class="checkout_title margin_bottom20">
-			           <p><i class="fa fa-credit-card fa-2x margin_LR10"></i><span>在线支付</span></p>
-			         </div><!--checkout_title-->
-			          <div class="current_infowtool">
-			           <div class="width_all">
-			             <div class="current_info_col hot_trends margin_left30">
+			       <div class="w-submit-order-bd">
+			          <div class="tabs-banks">
 			               <ul class="tabs" id="product_tabs">
 			                <li><a href="#">网银支付&nbsp;|</a></li>
 			                <li><a href="#">信用卡支付&nbsp;|</a></li>
 			              <!--   <li><a href="#">信用积分支付&nbsp;|</a></li> -->
 			                <li><a href="#">第三方平台支付</a></li>
 			              </ul> 
-			             </div><!--current_info_col-->
 			              <!-- tab "panes" -->
 			              <div class="boards current_info_col">
 			                <!-- b1 -->
@@ -452,7 +428,6 @@
 			                
 			                
 			              </div><!--boards current_info_col-->
-			           </div><!--width_all-->
 			          </div><!--current_infowtool-->
 			       </div><!--checkout_info-->
 			       
@@ -470,138 +445,92 @@
 			</c:when>
 			
 			<c:when test="${salesOrder.isCod == 1}">
-					<div class="maincontent" id="designer_main">
-				     <div class="chart_top">
-				       <div class="chart_t_left">
-				         <p class="chart_title">提交订单并支付</p>
-				       </div><!--chart_t_left-->
-				       <div class="chart_t_right">
-				         <img src="${resPath }/images/cart/step3.png"/>
-				       </div><!--chart_t_right-->
-				     </div><!--chart_top-->
-				     <div class="chart_bottom">
-				       <div class="checkout_info">
-				         <div class="checkout_title margin_bottom20">
-				           <p><i class="fa fa-check fa-2x margin_LR10"></i><span>订单生成</span></p>
-				         </div><!--checkout_title-->
-				         <div class="current_infowtool">
-				           <div class="width_all">
-				             <div class="current_info_col">
-				               <div class="current_info_t">订单号:</div>
-				               <div class="current_info_c colourBlack text_bold">${salesOrder.orderNo }</div>
-				             </div>
-				             <div class="current_info_col">
-				               <div class="current_info_t">应付款：</div>
-				               <div class="current_info_c colour_trash text_bold"><system:CurrencyForRate value="${salesOrder.shouldPay}" /></div>
-				             </div>
-				             <div class="current_info_col cash_note">
-				               <p class="colourBlack">我们将尽快安排发货，请在收货时把应付金额交给快递人员代收。</p>
-				               </div>
-				           </div><!--current_info-->
-				         </div><!--current_infowtool-->
-				       </div><!--checkout_info-->
-				     </div><!--chart_bottom-->
-				    </div><!--end of maincontent-->
+					<div class="w-submit-order">
+			        	<div class="w-submit-order-hd">
+			            	<div class="order-hd-tit">订单已生成</div>
+			                <div class="order-hd-number">
+			                	<p>订单号：<b>${salesOrder.orderNo }</b></p>
+			                    <p><span>应付款：<system:CurrencyForRate value="${salesOrder.shouldPay}" /></span></p>
+			                </div>
+			                <div class="order-hd-ps">
+			                	<p><span>我们将尽快安排发货，请在收货时把应付金额交给快递人员代收。</span></p>
+			                </div>
+			            </div>
+			        </div>
+					
 			</c:when>
 			<c:otherwise>
-				<div class="maincontent" id="designer_main">
-			     <div class="chart_top">
-			       <div class="chart_t_left">
-			         <p class="chart_title">提交订单并支付</p>
-			       </div><!--chart_t_left-->
-			       <div class="chart_t_right">
-			         <img src="${resPath }/images/cart/step3.png"/>
-			       </div><!--chart_t_right-->
-			     </div><!--chart_top-->
-			     <div class="chart_bottom">
-			       <div class="checkout_info">
-			         <div class="checkout_title margin_bottom20">
-			           <p><i class="fa fa-check fa-2x margin_LR10"></i><span>订单生成</span></p>
-			         </div><!--checkout_title-->
-			         <div class="current_infowtool">
-			           <div class="width_all">
-			             <div class="current_info_col">
-			               <div class="current_info_t">订单号:</div>
-			               <div class="current_info_c colourBlack text_bold">${salesOrder.orderNo }</div>
-			             </div>
-			             <div class="current_info_col">
-			               <div class="current_info_t">应付款：</div>
-			               <div class="current_info_c colour_trash text_bold"><system:CurrencyForRate value="${salesOrder.shouldPay}" /></div>
-			             </div>
-			             <div class="current_info_col">
-			               <ul class="chart_waring padding_left30" id="transfer_note">
-			                  <li>请您尽快完成支付，以便我们尽快安排发货。</li>
-			                  <li>请您在提交订单后的72小时内完成支付，否则订单将会自动取消。</li>
-			                  <li>请在成功付款后，截取【成功支付页面】至我们的客服邮箱cs@sifangstreet.com</li>
-			                  <li>我们客服人员将会第一时间为您核查到账情况，并安排发货，并会以邮件形式回复您结果，谢谢配合。</li>
-			                  <li>在客服核查期间，系统依然会显示“待支付”，属于正常现象，请耐心等候邮件通知。</li>
-			                </ul>
-			             </div>
-			           </div><!--current_info-->
-			         </div><!--current_infowtool-->
-			       </div><!--checkout_info-->
-			       
-			       
-			       <div class="checkout_info">
-			         <div class="checkout_title margin_top20">
-			           <p><i class="fa fa-credit-card fa-2x margin_LR10"></i><span>对公转账</span></p>
-			         </div><!--checkout_title-->
-			         <table class="checkout_table transfer_table" cellspacing="0" cellpadding="0">
-			           <thead>
-			           	<tr>
-			              <th width="24%">
-			                转账银行
-			              </th>
-			              <th width="25%">
-			                户名
-			              </th>
-			              <th width="25%">
-			                账号
-			              </th>
-			              <th width="26%">
-			                开户行
-			              </th>
-			             </tr>
-			           </thead><!--thead-->
-			           <tbody>
-			             <tr>
-			               <td class="bank_table"><span id="bank-boc" class="bank-logo"></span></td>
-			               <td>广州名度网络技术有限公司</td>
-			               <td class="bank_num">678261846178</td>
-			               <td class="align_left">中国银行股份有限公司广州东风东路支行</td>
-			             </tr>
-			              <tr>
-			               <td class="bank_table"><span id="bank-ccb" class="bank-logo"></td>
-			               <td>广州名度网络技术有限公司</td>
-			               <td class="bank_num">44001400115053006279</td>
-			               <td class="align_left">中国建设银行广州东宝大厦支行</td>
-			             </tr>
-			              <tr>
-			               <td class="bank_table"><span id="bank-cmb" class="bank-logo"></td>
-			               <td>广州名度网络技术有限公司</td>
-			               <td class="bank_num">120908323010505</td>
-			               <td class="align_left">招商银行股份有限公司广州锦城大厦支行</td>
-			             </tr>
-			              <tr>
-			               <td class="bank_table"><span id="bank-abc" class="bank-logo"></td>
-			               <td>广州名度网络技术有限公司</td>
-			               <td class="bank_num">44306001040009002</td>
-			               <td class="align_left">中国农业银行东莞洪梅支行</td>
-			             </tr>
-			              <tr>
-			               <td class="bank_table"><span id="bank-cmbc" class="bank-logo"></span></td>
-			               <td>广州名度网络技术有限公司</td>
-			               <td class="bank_num">691131279</td>
-			               <td class="align_left">中国民生银行广州分行</td>
-			             </tr>
-			              
-			           </tbody>     
-			          
-			         </table>
-			       </div><!--checkout_info-->
-			       
-			     </div><!--chart_bottom-->
-			    </div><!--end of maincontent-->
+				<div class="w-submit-order">
+		        	<div class="w-submit-order-hd">
+		            	<div class="order-hd-tit">订单已生成</div>
+		                <div class="order-hd-number">
+		                	<p>订单号：<b>${salesOrder.orderNo }</b></p>
+		                    <p><span>应付款：￥${salesOrder.shouldPay}</span></p>
+		                </div>
+		                <ul>
+		                	<li><span></span>请您尽快完成支付，以便我们尽快安排发货。</li>
+		                    <li><span></span>请您在提交订单后的72小时内完成支付，否则订单将会自动取消。</li>
+		                    <li><span></span>请在成功付款后，截取【成功支付页面】至我们的客服邮箱cs@sifangstreet.com</li>
+		                    <li><span></span>我们客服人员将会第一时间为您核查到账情况，并安排发货，并会以邮件形式回复您结果，谢谢配合。</li>
+		                    <li><span></span>在客服核查期间，系统依然会显示“待支付”，属于正常现象，请耐心等候邮件通知。</li>
+		                </ul>
+		            </div>
+		            <div class="w-submit-order-bd">
+		                <table class="checkout_table transfer_table" cellspacing="0" cellpadding="0">
+				           <thead>
+				           	<tr>
+				              <th width="24%">
+				                转账银行
+				              </th>
+				              <th width="25%">
+				                户名
+				              </th>
+				              <th width="25%">
+				                账号
+				              </th>
+				              <th width="26%">
+				                开户行
+				              </th>
+				             </tr>
+				           </thead><!--thead-->
+				           <tbody>
+				             <tr>
+				               <td class="bank_table"><span id="bank-boc" class="bank-logo"></span></td>
+				               <td>广州名度网络技术有限公司</td>
+				               <td class="bank_num">678261846178</td>
+				               <td class="align_left">中国银行股份有限公司广州东风东路支行</td>
+				             </tr>
+				              <tr>
+				               <td class="bank_table"><span id="bank-ccb" class="bank-logo"></td>
+				               <td>广州名度网络技术有限公司</td>
+				               <td class="bank_num">44001400115053006279</td>
+				               <td class="align_left">中国建设银行广州东宝大厦支行</td>
+				             </tr>
+				              <tr>
+				               <td class="bank_table"><span id="bank-cmb" class="bank-logo"></td>
+				               <td>广州名度网络技术有限公司</td>
+				               <td class="bank_num">120908323010505</td>
+				               <td class="align_left">招商银行股份有限公司广州锦城大厦支行</td>
+				             </tr>
+				              <tr>
+				               <td class="bank_table"><span id="bank-abc" class="bank-logo"></td>
+				               <td>广州名度网络技术有限公司</td>
+				               <td class="bank_num">44306001040009002</td>
+				               <td class="align_left">中国农业银行东莞洪梅支行</td>
+				             </tr>
+				              <tr>
+				               <td class="bank_table"><span id="bank-cmbc" class="bank-logo"></span></td>
+				               <td>广州名度网络技术有限公司</td>
+				               <td class="bank_num">691131279</td>
+				               <td class="align_left">中国民生银行广州分行</td>
+				             </tr>
+				              
+				           </tbody>     
+				          
+				         </table>
+		            </div>
+		        </div>
+			
 			</c:otherwise>
 		</c:choose>
 		<input type="hidden" name="orderNo" value="${salesOrder.orderNo}" />

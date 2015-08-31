@@ -29,9 +29,26 @@
 		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-
+			$("#error_box1").hide();
+			$("#error_box2").hide();
+			
+			var tag = getCookie("tag");
+			var error = getCookie("error");
+			if(tag!=""&&tag!=null){
+					$(".w-login").show();
+					$(".w-login-left").show();
+					$(".w-login-right").hide();
+					delCookie("tag");
+					if(error!=""&&error!=null){
+						$("#error_box1").show();
+						$("#error_box2").hide();
+						delCookie("error");
+				}
+			}
+			
 			//alert('${param.tag}');
 			if('${param.tag}'!=""){
 				   // alert("hello");
@@ -74,11 +91,11 @@
 			}
 		}
 
-		function DelCookie(name)
+		function delCookie(name)
 		{
 		var exp = new Date();
 		exp.setTime (exp.getTime() - 1);
-		var cval = GetCookie (name);
+		var cval = getCookie (name);
 		document.cookie = name + "=" + cval + "; expires="+ exp.toGMTString();
 		}
 				
@@ -280,7 +297,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;验证码不能为空
 								</div>
 						</div>
-						<%@ include file="/common/messages.jsp"%>
+						<%--<%@ include file="/common/messages.jsp"%>
 						<%if(request.getAttribute("customer")==null)request.setAttribute("customer",new Customer()); %>
 						<spring:bind path="customer.*">
 							<c:if test="${not empty status.errorMessages}">
@@ -289,13 +306,8 @@
 								</c:forEach>
 							</c:if>
 						</spring:bind>
-						
-						<c:if test="${param.error != null}">
-							<div class="error_box"><fmt:message key="customer.login.fail" /></div>
-						</c:if>
-						<c:if test="${param.errorCode != null}">
-							<div class="error_box"><fmt:message key="front.errorCode" /></div>
-						</c:if>
+						--%><div class="error_box" id="error_box1"><fmt:message key="customer.login.fail" /></div>
+						<div class="error_box" id="error_box2"><fmt:message key="front.errorCode" /></div>
 						<div class="w-l-yzm">
 							<div class="w-l-itemscon">
 								<a href="javascript:;" onClick="return refreshImage('login',this)"><img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=login" title="点击改变" /> </a>
@@ -489,7 +501,7 @@
 								</div>
 							</div>
 							<div class="w-car-btn">
-								<a class="w-car-btn" href="#">查看购物车</a>
+								<a class="w-car-btn" href="/cart/shoppingcart.html">查看购物车</a>
 							</div>
 						</div>
 					</div>

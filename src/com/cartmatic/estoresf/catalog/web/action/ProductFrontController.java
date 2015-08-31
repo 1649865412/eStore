@@ -63,6 +63,7 @@ import com.cartmatic.estore.core.view.RedirectView301;
 import com.cartmatic.estore.webapp.util.RequestContext;
 import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.estore.webapp.util.SessionUtil;
+import com.denglu.util.QrCodeTool;
 
 
 @Controller
@@ -265,6 +266,11 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 		List<Map.Entry<AccessoryGroup, List<Accessory>>> productAccessoryList=productManager.getProductAccessoryMap(product.getProductId());
 		modelAndView.addObject("productAccessoryList",productAccessoryList);
 		
+		
+		
+		//获取商品二维码
+		modelAndView.addObject("encoderContent",getImgCode(	 product , request));
+		
 		modelAndView.addObject("product",product);
 		modelAndView.addObject("category",category);
 		modelAndView.addObject("navigatorCategorys",navigatorCategorys);
@@ -278,6 +284,14 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 	}
 	
 	
+	//获取商品二维码
+	public String getImgCode(	Product product ,HttpServletRequest request){
+		String imgPath = getMessage("dimension.url")+"/"+product.getProductId()+".png";
+		StringBuffer url = request.getRequestURL();  
+		String encoderContent = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString()+product.getProductId()+".html"; 
+		QrCodeTool.getQrCodeImgUrl(encoderContent,imgPath);
+		return   (product.getProductId()+".png");
+	}
 	
 	
 	

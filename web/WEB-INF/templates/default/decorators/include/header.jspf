@@ -22,6 +22,7 @@
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
 		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
 

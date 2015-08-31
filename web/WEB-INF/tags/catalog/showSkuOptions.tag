@@ -18,13 +18,13 @@ Map<SkuOption,SkuOptionValue> result=productMainManager.findSkuOptionAndValuesBy
 jspContext.setAttribute("__skuOptions",result);
 %>
 <c:forEach items="${__skuOptions}" var="optionAndValue">
-	<span class="colour_trash"><i class="fa fa-angle-right fa-lg"></i></span>
+	<span class="colour_trash"></span>
 	${optionAndValue.key.skuOptionName}：${optionAndValue.value.skuOptionValueName}<br/><br/>
 </c:forEach>
 <c:if test="${empty __skuOptions }">
-	<span class="colour_trash"><i class="fa fa-angle-right fa-lg"></i></span>
+	<span class="colour_trash"></span>
      尺码：均码
      <br/>
-     <span class="colour_trash"><i class="fa fa-angle-right fa-lg"></i></span>
+     <span class="colour_trash"></span>
      颜色：绿色
 </c:if>

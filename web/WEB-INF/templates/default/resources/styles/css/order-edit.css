@@ -49,6 +49,7 @@ ul,li{ list-style:none;}
 .edit-btn{ position:absolute; bottom:30px; left:50%; margin-left:-10%; width:20%; text-align:center; line-height:56px; z-index:15;}
 .edit-btn a{ display:block; color:#313131; border:solid 2px #313131;}
 .edit-btn a:hover{ background:#313131; color:#FFF;}
+.current .edit-btn{ display:none;}
 
 
 .item2 ul{ width:80%; margin:0 auto;}
