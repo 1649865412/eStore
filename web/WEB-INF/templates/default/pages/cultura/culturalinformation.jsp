@@ -11,24 +11,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
+		<%@ include file="../../decorators/include/styles7.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/index.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/monthly.css" />
-		
-
-		<link rel="stylesheet" type="text/css" href="${ctxPath}/scripts/jquery/js/book/css/book.css" />
-		<link rel="stylesheet" type="text/css" href="${ctxPath}/scripts/jquery/js/book/css/bookblock.css" />
-		<link rel="stylesheet" type="text/css" href="${ctxPath}/scripts/jquery/js/book/css/component.css" />
-		
-		
 		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/snap.svg-min.js"></script>
-		
-		
 		<script type="text/javascript">
 		
 			function getDetail(culid){
@@ -216,8 +202,8 @@
 					<a href="/culturalinformation/index.html?type=1" id="t3">访谈</a>
 					<a href="/culturalinformation/index.html?type=2" id="t4">行业动态</a>
 					<a href="/culturalinformation/index.html?type=3" id="t5">线下主题活动</a>
-					<a href="/culturalinformation/index.html?type=4" id="t6">月刊</a>
-				</div>
+					<%--<a href="/culturalinformation/index.html?type=4" id="t6">月刊</a>
+				--%></div>
 			</div>
 		
 			<div id="theGrid" class="main">
@@ -245,7 +231,7 @@
 						<p class="w-content">
 							${culList.content}
 						</p>
-						<div class="w-g-pyf jiathis_style_32x32" onmouseover="setShare('${culList.title}', 'culturalinformation/culturatemplate.html?culId=${culList.culturalInformationId}');">
+						<div class="w-g-pyf jiathis_style_32x32" onmouseover="setShare('${culList.title}', 'culturalinformation/index.html');">
 							评论数 (${culList.commentNumber}) | 阅读数 (${culList.readNumber}) |
 							<%--<span>分享<i class="fa fa-share"></i> </span>
 							
@@ -284,40 +270,6 @@
 							
 							<div class="w-book" id="box2">
 								<div class="bb-custom-wrapper show" id="book-1">
-									<div class="bb-bookblock">
-										<div class="bb-item">
-											<div class="bb-custom-side page-layout-1">
-												<h3>
-													Chapter 9 <span>Nomadic Lifestyle</span>
-												</h3>
-											</div>
-											<div class="bb-custom-side page-layout-1">
-												<p>Candy canes lollipop macaroon marshmallow gummi bears tiramisu. Dessert croissant cupcake candy canes. Bear claw faworki faworki lemon drops. Faworki marzipan sugar plum jelly-o marzipan cookie.</p>
-											</div>
-										</div>
-										<div class="bb-item">
-											<div class="bb-custom-side page-layout-2">
-												<div>
-													<h3>Aa</h3>
-													<p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-												</div>
-												<div>
-													<h3>Bb</h3>
-													<p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-												</div>
-											</div>
-											<div class="bb-custom-side page-layout-2">
-												<div>
-													<h3>Cc</h3>
-													<p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-												</div>
-												<div>
-													<h3>Dd</h3>
-													<p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-												</div>
-											</div>
-										</div>
-									</div><!-- /bb-bookblock -->
 									<nav>
 										<a href="#" class="bb-nav-prev"><i class="fa fa-chevron-left"></i></a>
 										<a href="#" class="bb-nav-next"><i class="fa fa-chevron-right"></i></a>
@@ -475,7 +427,7 @@
 		                          </script>  
 		<script type="text/javascript" >
 			var jiathis_config={
-				data_track_clickback:true,
+				data_track_clickback:false,
 				sm:"qzone,tsina,weixin,cqq",
 				summary:"",
 				shortUrl:true,

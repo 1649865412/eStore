@@ -50,6 +50,7 @@ import com.cartmatic.estore.exception.OutOfStockException;
 import com.cartmatic.estore.order.service.SalesOrderManager;
 import com.cartmatic.estore.sales.service.GiftCertificateManager;
 import com.cartmatic.estore.webapp.util.RequestContext;
+import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.estore.webapp.util.SessionUtil;
 import com.cartmatic.estoresf.seckill.help.Constant;
 
@@ -309,7 +310,6 @@ public class CheckoutPagingController extends BaseStoreFrontController {
 	 * @return
 	 */
 	private ModelAndView check(HttpServletRequest request,HttpServletResponse response){
-		String uri=request.getRequestURI();
 		ModelAndView mv=null;
 		//判断ShoppingCart是否为空（checkout流程每一步都需要）
 //		Shoppingcart cart = ShoppingCartUtil.getInstance().getCurrentUserShoppingcart();
@@ -326,7 +326,9 @@ public class CheckoutPagingController extends BaseStoreFrontController {
 			request.getSession().setAttribute(Constants.CHECKOUT_TARGET_URL,request.getRequestURL().toString());
 			//匿名Checkout的跳到登录/注册页
 			request.setAttribute("customerRegister",new CustomerRegister());
-			mv= new ModelAndView("/cart/checkout_signup");
+			RequestUtil.setErrorResultCookie(response, "error", "0",(request).getContextPath());
+			RequestUtil.setErrorResultCookie(response, "tag", "0",(request).getContextPath());
+			mv= new ModelAndView(new RedirectView("/cart/shoppingcart.html"));
 		}
 		
 		//检查地址是否已选择，（checkout流程中paymentProcess,doCK需要）

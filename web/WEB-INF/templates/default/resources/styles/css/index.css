@@ -22,6 +22,8 @@ a:hover {
 	outline: none;
 	-moz-outline-style: none;
 }
+
+
 .jumbotron h1 {
 	font-size: 40px;
 	font-family: 'FontYht';
@@ -29,9 +31,13 @@ a:hover {
 .jumbotron p {
 	font-size: 14px;
 }
+
+
+/*导航+购物车预览+搜索*/
+
 .w-nav {
 	font-size: 14px;
-	height: 60px;
+	height: 50px; /*2015-8 蔡蔡改动*/
 	transition: all .2s linear 0s;
 	-webkit-transition: all .2s linear 0s;
 }
@@ -61,13 +67,13 @@ a:hover {
 	padding: 0 15px;
 }
 .w-nav ul li a {
-	padding-top: 22px;
+	padding-top: 12px;/*2015-8 蔡蔡改动*/
 	display: inline-block;
 	position: relative;
 }
 .w-menu a span::after {
 	background: transparent none repeat scroll 0 0;
-	bottom: -10px;
+	bottom: -6px;/*2015-8 蔡蔡改动*/
 	content: "";
 	height: 3px;
 	left: 16px;
@@ -97,7 +103,7 @@ a:hover {
 	font-weight: bold;
 }
 .w-logo a {
-	padding-top: 10px;
+	padding-top: 5px; /*2015-8 蔡蔡改动*/
 	display: inline-block;
 }
 .jumbotron {
@@ -118,7 +124,7 @@ a:hover {
 .w-slide .swiper-page-left,
 .w-slide .swiper-page-right {
 	position: absolute;
-	top: 40%;
+	top: 36%; /*2015-8 蔡蔡改动*/
 	z-index: 1000;
 	cursor: pointer;
 }
@@ -130,18 +136,18 @@ a:hover {
 }
 .w-slide .swiper-page-prev,
 .w-slide .swiper-page-next {
-	width: 110px;
-	border: 2px solid #FFFFFF;
-	height: 80px;
+	width: 90px; /*2015-8 蔡蔡改动*/
+	border: 4px solid #FFFFFF;
+	height: 70px; /*2015-8 蔡蔡改动*/
 	color: #FFFFFF;
 	text-align: center;
-	font-size: 5em;
+	font-size: 4em; /*2015-8 蔡蔡改动*/
 	font-weight: normal;
-	line-height: 70px;
+	line-height: 55px; /*2015-8 蔡蔡改动*/
 }
 .w-slide .swiper-page-prev:hover,
 .w-slide .swiper-page-next:hover {
-	opacity: 0.7;
+	opacity: 0.5; /*2015-8 蔡蔡改动*/
 }
 .w-slide .swiper-container {
 	/*max-width: 1770px;*/
@@ -186,7 +192,7 @@ a:hover {
 	-webkit-transform: skewY(-2deg);
 	transition: transform 200ms ease 0s;
 	overflow: hidden;
-	margin-top: 80px;
+	margin-top: 60px; /*2015-8 蔡蔡改动*/
 	z-index: 5;
 }
 .w-banner .w-banner-con {
@@ -276,9 +282,12 @@ a:hover {
 	border: 5px solid #fbbd6a;
 	margin: 15% 0 0 10%;
 }
+
 .w-bannert .w-bannert-txt .w-bannert-k h1 {
 	margin-top: 30px;
 	line-height: 65px;
+	font-size:35px;/*2015-8 蔡蔡改动*/
+	
 }
 .w-bannert .w-bannert-txt .w-bannert-k p {
 	margin-bottom: 10px;
@@ -288,15 +297,15 @@ a:hover {
 .w-bannert .w-bannert-txt .w-bannert-k hr {
 	border-width: 2px 0 0;
 	margin: 0;
-	border-color: #fbbd6a -moz-use-text-color -moz-use-text-color;
+	border-color: #fbbd6a;/*2015-8 蔡蔡改动*/
 	width: 30%;
 }
 .w-bannert .w-bannert-txt .w-bannert-kt {
-	width: 66%;
+	width: 60%; /*2015-8 蔡蔡改动*/
 	margin: 2% 0 0 17%;
 }
 .w-bannert .w-bannert-txt .w-bannert-kt p {
-	line-height: 40px;
+	line-height: 35px; /*2015-8 蔡蔡改动*/
 	font-size: 18px;
 	margin-bottom: 40px;
 }
@@ -310,20 +319,23 @@ a:hover {
 	background-color: #fbbd6a;
 	text-align: center;
 	padding: 10px 0;
-	border: 1px solid #FFFFFF;
+	border: 2px solid #FFFFFF;
 }
 .w-bannert-kt a:hover {
 	color: #fbbd6a;
 	background-color: #FFFFFF;
-	border: 1px solid #fbbd6a;
+	border: 2px solid #fbbd6a;
 }
+
+/*搜索框*/
+/*2015-8 蔡蔡改动*/
 .w-sea {
 	position: absolute;
 	z-index: 200;
 	display: none;
 	right: 226px;
-	padding-top: 180px;
-	top: -72px;
+	padding-top: 150px;/*2015-8 蔡蔡改动*/
+	top: -82px;
 }
 .w-sea .w-sea-list {
 	background-color: #000000;
@@ -345,30 +357,62 @@ a:hover {
 	position: absolute;
 	background-color: #FFFFFF;
 	z-index: 102;
+	width: 280px;
 	/*width: 370px;*/
 	/*top: 80px;*/
 }
-.w-sea i {
-	position: absolute;
-	right: 22px;
-	top: 27px;
-	color: #000000;
-}
-.w-sea input {
-	width: 90%;
+.search_txt {
 	width: 200px;
-	height: 30px;
-	padding-left: 10px;
-	border: 1px #000000 solid;
+	height: 40px;
+	float: left;
+	font: bold 16px;
+	border: 1px solid #000;
+	border-right:0;
 	margin: 20px 15px;
+	margin-right:0px;
+	padding:0 10px;
+     
 }
+.search_txt:focus {
+	outline: 0;
+	border-color: #000;
+}
+.search_txt::-webkit-input-placeholder,
+.search_txt:-moz-placeholder,
+.search_txt:-ms-input-placeholder {
+	color: #ccc;
+	font-weight: normal;
+}
+
+.search_button {
+	float: left;
+	border: 1px solid #000;
+	border-left:0;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+	text-transform: uppercase;
+	background-color:transparent;
+	font-size:20px;
+	font-weight:bold;
+	margin-top:20px;
+    
+}
+.search_button:hover,
+.search_button:focus {
+	color:#757575;
+}
+.search_button:active {
+	outline: 0;
+}
+/*end of 蔡蔡改动*/  
 .w-car {
 	position: absolute;
 	z-index: 200;
 	display: none;
 	right: 410px;
-	padding-top: 180px;
-	top: -72px;
+	padding-top: 150px;/*2015-8 蔡蔡改动*/
+	top: -82px;/*2015-8 蔡蔡改动*/
 }
 .w-car .w-car-list {
 	background-color: #000000;
@@ -407,17 +451,23 @@ a:hover {
 
 .w-car .w-car-img,
 .w-car .w-car-info {
-	float: left;
+	float:left;
+}
+/*2015-8 蔡蔡改动*/ 
+.w-car .w-car-info{
+	width:72%; 
+	padding-left:10px;
 }
 .w-car .w-car-info span {
 	display: block;
 }
 .w-car .w-car-img {
-	margin-right: 20px;
+	width:25%;
 }
+/*end of 2015-8 蔡蔡改动*/
 .w-car .w-car-price {
 	color: #fbbd6a;
-	font-size: 1.4em;
+	font-size: 1.1em;
 	margin-top: 15px;
 }
 .w-car .w-car-msg,
@@ -437,7 +487,7 @@ a:hover {
 }
 .w-car .w-car-zj .w-car-price {
 	padding: 0;
-	margin: 0;
+	margin:0 8px 0 0;
 	float: right;
 }
 .w-car .w-car-btn {
@@ -452,13 +502,13 @@ a:hover {
 	color: #FFFFFF;
 	background-color: #fbbd6a;
 	text-align: center;
-	padding: 20px 0;
-	border: 1px solid #FFFFFF;
+	padding: 10px 0; /*2015-8 蔡蔡改动*/ 
+	border: 2px solid #FFFFFF; /*2015-8 蔡蔡改动*/ 
 }
 .w-car .w-car-btn a:hover {
 	color: #fbbd6a;
 	background-color: #FFFFFF;
-	border: 1px solid #fbbd6a;
+	border: 2px solid #fbbd6a;
 }
 .w-mem {
 	margin-bottom: 150px;
@@ -716,20 +766,39 @@ figure.w-mem-milo img {
 .w-footer .w-footer-email {
 	border-bottom: 1px #000000 solid;
 }
-.w-footer .w-footer-email input {
+/*2015-8 蔡蔡改动*/   
+.w-footer .w-footer-email input.email_txt {
 	width: 90%;
 	margin-bottom: 10px;
 	border: none;
 }
-.w-footer .w-footer-email a {
-	float: right;
+.email_txt::-webkit-input-placeholder,
+.email_txt:-moz-placeholder,
+.email_txt:-ms-input-placeholder {
+	color: #999;
+	font-weight: normal;
 }
+.w-footer .w-footer-email .email_button {
+	float: right;
+	background-color:transparent;
+	font-size:15px;
+	font-weight:bold;
+	border:0;
+}
+
+/*end of 2015-8 蔡蔡改动*/   
 .w-footer .w-footer-item {
 	padding-top: 20px;
 }
 .w-footer .w-aqlm {
 	color: #aaaaaa;
 }
+/*2015-8 蔡蔡改动*/
+.w-footer .social_link{
+	padding-left:10px;
+}
+/**/
+
 .w-login {
 	position: fixed;
 	width: 100%;
@@ -771,7 +840,7 @@ figure.w-mem-milo img {
 	background-color: #FFFFFF;
 	margin: 0 auto;
 	max-width: 360px;
-	min-width: 290px;
+	min-width: 360px; /*2015-8 蔡蔡改动*/ 
 }
 .w-login .w-l-close {
 	text-align: right;
@@ -820,11 +889,13 @@ figure.w-mem-milo img {
 	width: 100%;
 	background-color: #fbbd6a;
 	color: #FFFFFF;
-	border: 1px #FFFFFF solid;
+	border: 2px #FFFFFF solid; /*2015-8 蔡蔡改动*/ 
 	border-radius: initial;
+	padding:10px 0; /*2015-8 蔡蔡改动*/ 
+	font-size:15px; /*2015-8 蔡蔡改动*/ 
 }
 .w-login .w-l-btn button:hover {
-	border: 1px #fbbd6a solid;
+	border: 2px #fbbd6a solid; /*2015-8 蔡蔡改动*/ 
 	color: #fbbd6a;
 	background-color: #FFFFFF;
 }
@@ -832,7 +903,7 @@ figure.w-mem-milo img {
 	background-color: #a6d5ab;
 }
 .w-login .w-login-right .w-l-btn button:hover {
-	border: 1px #a6d5ab solid;
+	border: 2px #a6d5ab solid; /*2015-8 蔡蔡改动*/ 
 	color: #a6d5ab;
 	background-color: #FFFFFF;
 }
@@ -840,6 +911,8 @@ figure.w-mem-milo img {
 	text-align: center;
 	color: #c1c1c1;
 	padding: 10px 0;
+	font-size:12px; /*2015-8 蔡蔡改动*/ 
+	font-weight:normal; /*2015-8 蔡蔡改动*/ 
 }
 .w-login .w-l-info a {
 	color: #c1c1c1;
@@ -861,7 +934,7 @@ figure.w-mem-milo img {
 .w-menusm i {
 	padding-top: 16px;
 	font-size: 1.5em;
-	color: #FFFFFF;
+	color: #000;
 }
 .w-menusm .w-gwct {
 	padding-top: 16px;
@@ -959,9 +1032,9 @@ figure.w-mem-milo img {
 	border-right: #FFFFFF solid 1px;
 	padding: 5px 35px 5px 5px;/*2015-8-11 右边距修改*/
 	text-align: right;
-	margin-top: 15%;
+	margin-top: 30%; /*2015-8 蔡蔡改动*/
 	margin-left: 14%;
-	font-size: 24px;
+	font-size: 20px; /*2015-8 蔡蔡改动*/
 	-webkit-transition: -webkit-transform 0.35s;
 	transition: transform 0.35s;
 	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
@@ -976,30 +1049,34 @@ figure.w-mem-milo img {
 	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
+.w-lf .w-lf-right:hover .w-lf-yywz p {
+	margin-top: 34%; /*2015-8 蔡蔡改动*/
+}
 .w-lf .w-lf-br {
-	width: 2px;
-	background-color: #254460;
-	height: 88%;
+	width: 1px;
+	background-color: #313131; /*2015-8 蔡蔡改动*/
+	height: 80%;
 	margin: 0 auto;
 }
 .w-lf .w-lf-txt {
 	transform: skewY(2deg);
 	-webkit-transform: skewY(2deg);
 	position: absolute;
-	bottom: 12%;
 	width: 38%;
 	z-index: 50;
 	opacity: 1;
 	max-width: 326px;
-}
+} /*2015-8 蔡蔡改动-删去 bottom,改为在w-lf-right .w-lf-txt里*/
 .w-lf .w-lf-right .w-lf-txt {
 	right: 16%;
 	text-align: right;
+	bottom: 15%; /*2015-8 蔡蔡改动*/
+
 }
 .w-lf .w-lf-left .w-lf-txt {
 	left: 16%;
 	text-align: left;
-	bottom: 16.6%;
+	bottom: 18.6%; /*2015-8 蔡蔡改动*/
 }
 .w-lf .w-lf-txt h1{
 	font-size: 60px;
@@ -1127,7 +1204,7 @@ font-size: 15px;
 
 @media (max-width: 1900px) {
 	.w-lf .w-lf-yywz p {
-		font-size: 20px;
+		font-size: 16px; /*2015-8 蔡蔡改动*/
 	}
 	.w-bannert .w-bannert-txt .w-bannert-k {
 		margin: 20% 0 0 10%;
@@ -1136,7 +1213,7 @@ font-size: 15px;
 	}
 	.w-bannert .w-bannert-txt .w-bannert-k h1 {
 		line-height: 60px;
-		font-size: 35px;
+		font-size: 30px;/*2015-8 蔡蔡改动*/
 	}
 	.swiper-container .swiper-o-to h1 {
 		font-size: 50px;
@@ -1166,7 +1243,7 @@ font-size: 15px;
 }
 @media (max-width: 1500px) {
 	.w-lf .w-lf-left .w-lf-txt {
-	bottom: 14.4%;
+	bottom: 17.4%; /*2015-8 蔡蔡改动*/
 }
 	.w-lf .w-lf-txt h1{
 	font-size: 40px;
@@ -1179,7 +1256,7 @@ font-size: 15px;
 	}
 	.w-bannert .w-bannert-txt .w-bannert-k h1 {
 		line-height: 50px;
-		font-size: 30px;
+		font-size: 25px;/*2015-8 蔡蔡改动*/
 	}
 	.w-bannert .w-bannert-txt .w-bannert-kt p {
 		font-size: 14px;
@@ -1214,27 +1291,28 @@ font-size: 15px;
 	.w-slide .swiper-page-next {
 		font-size: 4em;
 		height: 70px;
-		line-height: 66px;
+		line-height: 50px; /*2015-8 蔡蔡改动*/
 	}
 	.w-lf .w-lf-txt h1{
 	font-size: 50px;
 	}
 	.w-lf .w-lf-yywz p {
-		font-size: 18px;
+		font-size: 14px; /*2015-8 蔡蔡改动*/
 	}
 }
 @media (max-width: 992px) {
 .w-lf .w-lf-left .w-lf-txt {
-	bottom: 13.4%;
+	bottom: 15.4%; /*2015-8 蔡蔡改动*/
 }
 	.w-lf .w-lf-txt h1{
 	font-size: 30px;
 	}
 	.w-slide .swiper-page-prev,
 	.w-slide .swiper-page-next {
-		font-size: 3em;
-		height: 59px;
-		line-height: 56px;
+		font-size: 3em; 
+		width:70px;/*2015-8 蔡蔡改动*/
+		height: 59px; /*2015-8 蔡蔡改动*/
+		line-height: 50px;
 	}
 	.w-mem-list .w-mem-con {
 		width: 50%;
@@ -1328,7 +1406,7 @@ font-size: 15px;
 		font-size: 30px;
 	}
 	.w-lf .w-lf-right .w-lf-txt{
-		bottom: 15%;
+		bottom: 15%; /*2015-8 蔡蔡改动*/
 	}
 }
 @media (max-width: 468px) {

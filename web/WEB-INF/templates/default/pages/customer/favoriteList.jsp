@@ -1,42 +1,39 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+
 <html>
 	<head>
-<title>我的收藏</title>
-</head>
-<body>
-
-<div class="maincontent">
-         
-			         <div class="position-wrap">
-			            <a href="${ctxPath }/index.html">首页</a>&nbsp;&gt;&nbsp;
-			            <a href="${ctxPath }/myaccount/order/list.html">我的账户</a>&nbsp;&gt;&nbsp;
-			            <span class="selected">我的收藏</span>
-			         </div>  
-			         <div class="top_about">
-			         <br>
-			           <div class="top_title">
-			           <h1>我的账户</h1>
-			           </div>
-			           <ul class="tophelp">
-			                <li>有任何疑问&nbsp;|</li>
-			                <li>请点击在线客服&nbsp;|</li>
-			                <li>或拨打400-661-5677&nbsp;|</li>
-			                <li><a href="mailto:cs@sifangstreet.com">客服电子邮件地址</a>&nbsp;|</li>
-			                
-			                    <li><a href="#"  target="_blank" >配送信息</a>&nbsp;|</li>
-			                <li>
-			                    <a href="#"  target="_blank" >退换货条款</a>
-			                </li>
-			           </ul> 
-			           <div class="blank24"></div>
-			           <hr>
-			         </div>
+		<title>我的收藏</title>
+		<%@ include file="../../decorators/include/styles7.jspf"%>
+		<link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
+        <link href="${resPath}/styles/css/help.css" rel="stylesheet" type="text/css" />
+        <link href="${resPath}/styles/css/myaccount.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+	<div class="maincontent">
+         <div class="account_all">
+         <div class="top_about">
+           <div class="top_title">
+           <h1>我的账户</h1>
+           </div>
+           <ul class="tophelp">
+                <li>有任何疑问&nbsp;|</li>
+                <li>请点击在线客服&nbsp;|</li>
+                <li>或拨打400-661-5677&nbsp;|</li>
+                <li><a href="mailto:cs@sifangstreet.com">客服电子邮件地址</a>&nbsp;|</li>
                 
-	                <div class="bottom_about">
-	       
-			           <div class="remote_nav">
-			            <ul id="remote_nav_ul">
+                    <li><a href="#"  target="_blank" >配送信息</a>&nbsp;|</li>
+                <li>
+                    <a href="#"  target="_blank" >退换货条款</a>
+                </li>
+           </ul> 
+          
+          
+         </div>
+         <div class="bottom_about">
+       
+           <div class="remote_nav">
+            <ul id="">
 			              <li><a id="t1" href="${ctxPath}/myaccount/order/list.html" title="我的订单" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/order/')!=-1}"> class="current"</c:if>>我的订单</a></li>
 			              <li><a id="t2" href="${ctxPath}/myaccount/favorites.html" title="我的收藏" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/favorites.html')!=-1}"> class="current"</c:if>>我的收藏</a></li>
 			              <li><a id="t3" href="${ctxPath}/myaccount/review/list.html" title="我的评价" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/review/')!=-1}"> class="current"</c:if>>我的评价<span id="reviews_count"></span></a></li>
@@ -47,34 +44,33 @@
 			              <li><a id="t8" href="${ctxPath}/myaccount/giftCard.html" title="礼品卡管理" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/giftCard.html')!=-1}"> class="current"</c:if>>礼品卡</a></li>
 			        
 			            </ul>
-			           </div><!--remote_nav-->
-			           
-			           
-			           <div class="down_right left_border" id="tab1">
-				             <p class="account_info_title">
-				               账户：${customer.email}
-				               <span class="header_breadcrumb">我的收藏</span>
-				             </p>
-				             <p class="cus_id">会员级别：${membership.membershipName}</p>
-				             <table class="account_table" cellspacing="0" cellpadding="0">
-				               <thead>
-				                 <tr>
-				                    <th width="20%">
-				                      商品图像
-				                    </th>
-				                    <th width="35%">
-				                      商品名称
-				                    </th>
-				                    <th width="15%">
-				                      收藏时间
-				                    </th>
-				                    <th width="30%">
-				                      操作
-				                    </th>
-				                 </tr>
-				               </thead><!--thead-->
-				               <tbody>
-				               <c:forEach var="favorite" items="${favoriteList}" varStatus="s">
+           </div><!--remote_nav-->
+           <!--分页内容tab-->
+           <div class="down_right left_border" id="tab2">
+            <p class="account_info_title">
+               账户：${customer.email}
+               <span class="header_breadcrumb">我的收藏</span>
+             </p>
+             <p class="cus_id">会员级别：${membership.membershipName}</p>
+            <table class="account_table" cellspacing="0" cellpadding="0">
+               <thead>
+                 <tr>
+                    <th width="20%">
+                      商品图像
+                    </th>
+                    <th width="35%">
+                      商品名称
+                    </th>
+                    <th width="15%">
+                      收藏时间
+                    </th>
+                    <th width="30%">
+                      操作
+                    </th>
+                 </tr>
+               </thead><!--thead-->
+               <tbody>
+                 <c:forEach var="favorite" items="${favoriteList}" varStatus="s">
 				                 <tr>
 				                    <td class="wish_img">
 				                  	  <product:productImg product="${favorite.product}" size="e" width="110" height="110" isLazyload="true"/>
@@ -90,22 +86,36 @@
 				                    </td>
 				                 </tr>
 				                 </c:forEach>
-				               </tbody>
-				             </table>
-				
-				           </div><!--down_right-->
-				           
-			         </div>
-                
-			</div>
+               </tbody>
+             </table>
 
-	<script type="text/javascript">
+           </div><!--down_right-tab2-->
+         </div><!--bottom_about-->
+         </div><!--account_all-->
+           
+      </div><!--end of maincontent-->
+			<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+			<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
+			<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script> 
+			<script src="${ctxPath}/scripts/jquery/js/swiper.animate.min.js"></script>
+			<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+	        
+	        <script src="${ctxPath}/scripts/jquery/js/jquery.tools.min.js"></script>
+			<script>
+			$(function() {
+				// setup ul.tabs to work as tabs for each div directly under div.panes
+				$("#remote_nav_ul").tabs("div.down_right", { history: true });	
+				
+			});
+			</script>
+			<script type="text/javascript">
 		function fnRemoveFavorite(id){
 			if(confirm("确定要取消该商品收藏？")){
 				window.location.href=__ctxPath+"/myaccount/favorite/delete/"+id+".html"
 			}
 		}
 	</script>
-	
-</body>
+    
+	</body>
 </html>
+

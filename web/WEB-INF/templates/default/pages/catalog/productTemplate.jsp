@@ -25,11 +25,7 @@
 		<title>四方街</title>
 		
 		<!-- Bootstrap -->
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<%@ include file="../../decorators/include/styles7.jspf"%>
         <link href="${resPath}/styles/css/pro-deta.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +33,7 @@
           <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+       <!-- <link href="${resPath}/styles/global.css" rel="stylesheet" type="text/css" />->
         
          <!-- Include the story plugin: -->
 	  <script type="text/javascript">
@@ -59,9 +56,27 @@
       <!-- Add fancyBox main JS and CSS files -->
       
       <link rel="stylesheet" type="text/css" href="${resPath }/styles/jquery.fancybox.css" media="screen" />
-    </script>
 	  <!-- Include the elevatezoom plugin: -->
-      
+	  <script type="text/javascript" src="${ctxPath}/scripts/jquery/jquery.fancybox.js"></script>
+      <script type="text/javascript">
+		$(document).ready(function() {
+			$(".target").fancybox({
+				maxWidth	: 800,
+				maxHeight	: 600,
+				fitToView	: false,
+				width		: '70%',
+				height		: '70%',
+				autoSize	: false,
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none'
+			});
+		});
+ 
+});
+		
+		</script>
+		
 	  <script type="text/javascript">
       $(document).ready(function($){
 			$("#zoom_03").elevateZoom({
@@ -185,13 +200,16 @@
             	<div class="w-pro-pic">
                     <!-- Swiper -->
                     <div class="swiper-container">
-                    	<div class="pro-pic-share"><a href="#"><i class="fa fa-share-alt"></i>分享</a></div>
+                    	<div class="pro-pic-share jiathis_style" ><span class="jiathis_txt" onmouseover="setShare('${product.productName}', 'product/${product.productId}.html');">分享到</span>
+							<a href="http://www.jiathis.com/share?uid=2052677" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" 
+target="_blank"></a></div>
+
                         <div class="swiper-wrapper">
                         <c:if test="${empty productMoreImages}">
                         	<img src="/images/null.jpg">
                         </c:if>
                         <c:forEach items="${productMoreImages}" var="productImages">
-                            <div class="swiper-slide"><img src="${mediaPath}productMedia/v/${productImages.mediaUrlLarge}"></div>
+                            <div class="swiper-slide" ><img src="${mediaPath}productMedia/v/${productImages.mediaUrlLarge}"></div>
                         </c:forEach>
                         </div>
                         <!-- Add Pagination -->
@@ -210,6 +228,15 @@
                         <p><span>品牌：</span><a href="${ctxPath}/search-prod.html?brandId=${product.brand.id}">${product.brand.brandName}</a></p>
                     </div>
                     <p class="w-pro-info-numbering">产品编号：${product.productCode}</p>
+                    <input type="hidden" id="productId" value="${product.productId}" />
+		           <input type="hidden" id="productCode" value="${product.productCode}" />
+		           <input type="hidden" id="productName" value="${product.productName}" />
+		           <input type="hidden" id="productSkuCode" value="${product.defaultProductSku.productSkuCode}" />
+		           <input type="hidden" id="accessoriesSkuCodes" value="" />
+		           <input type="hidden" id="categoryId" value="${category.categoryId}" />
+		           <input type="hidden" id="product_simpleName" value="<app:interceptString str="${product.productName}" length="50"></app:interceptString>" />
+		           <input type="hidden" id="productLinkUrl" value="${uri}" />
+		           <input type="hidden" id="listPrice" value="${product.defaultProductSku.listPrice}" />
                     <div class="w-pro-info-tabs">
                     	<ul id="tabs" class="row">
                         	<li><a href="#" name="#tab1">产品信息</a></li>
@@ -272,32 +299,47 @@
                                	</div>
                             </div>
                         </div>
+                        <div class="w-pro-info-btn"><a class="target" href="#shoppingCartTemplate">加入购物车</a></div>
                     </div>
-                    <div class="w-pro-car">
+                    <div id="skuOptions" class="w-pro-car">
                     	<em class="fa fa-close"></em>
-                    	<ul>
-                        	<li class="pro-car-1">
-                            	<label>选择尺码</label>
-                                <p><a href="#" class="active">XXS</a><a href="#">XS</a><a href="#">S</a><a href="#">M</a><a href="#">L</a><a href="#">XL</a><a href="#">XXL</a><a href="#">XXXL</a></p>
-                            </li>
-                            <li class="pro-car-2">
-                            	<label>选择尺码</label>
-                                <p>
-                                	<a href="#" class="active"><img src="img/pic14.jpg" width="72" height="97"></a>
-                                	<a href="#"><img src="img/pic14.jpg" width="72" height="97"></a>
-                                    <a href="#"><img src="img/pic14.jpg" width="72" height="97"></a>
-                                    <a href="#"><img src="img/pic14.jpg" width="72" height="97"></a>
-                                    <a href="#"><img src="img/pic14.jpg" width="72" height="97"></a>
-                                    <a href="#"><img src="img/pic14.jpg" width="72" height="97"></a>
-                                </p>
-                            </li>
-                            <li class="pro-car-3">
-                            	<label>选择数量</label>
-                                <div class="spinner"><a href="#"><i class="fa fa-minus"></i></a><input name="" type="text" value="1"><a href="#"><i class="fa fa-plus"></i></a></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-pro-info-btn"><a href="#">加入购物车</a></div>
+		                 <c:forEach items="${productSkuOptionAndValues}" var="productSkuOptionAndValue">
+		                 	<div class="tb-prop tm-clear">
+									<c:if test="${fn:indexOf(productSkuOptionAndValue.key.skuOptionCode,'color') > -1}">
+										<div class="product_color">
+											<%--图片 --%>
+											<ul class="tm-clear J_TSaleProp tb-img" data-property="${productSkuOptionAndValue.key.skuOptionName}">
+												<c:forEach items="${productSkuOptionAndValue.value}" var="skuOptionValue" varStatus="status">
+													<li data-value="${productSkuOptionAndValue.key.id}:${skuOptionValue.id}" >
+															<a  id="color_${skuOptionValue.skuOptionValue }" class="imageSku"  href="#">
+																<span>${skuOptionValue.skuOptionValueName}</span>
+																<!--  background: url(<product:productImg sku="${skuOptionValue.sku}" size="a" isUrlOnly="true"/>) center no-repeat; -->
+															</a>
+													</li>
+						                        </c:forEach>
+											</ul>
+										</div>
+									</c:if>
+		                                  
+									<c:if test="${fn:indexOf(productSkuOptionAndValue.key.skuOptionCode,'size') > -1}">
+										<div class="product_size">
+											<%--文本 --%>
+			                                 <ul class="size" data-property="${productSkuOptionAndValue.key.skuOptionName}">
+			                                 	<label>选择尺码</label>
+												<c:forEach items="${productSkuOptionAndValue.value}" var="skuOptionValue" varStatus="status">
+													<li class="pro-car-1" data-value="${productSkuOptionAndValue.key.id}:${skuOptionValue.id}">
+						                                <p><a href="#" class="active"><span>${skuOptionValue.skuOptionValueName}</span></a></p>
+						                            </li>
+						                        </c:forEach>
+											</ul>
+										</div>
+									</c:if>
+							</div>
+		                 </c:forEach>
+		                 <product:addToCart productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
+		           	</div>
+		           	
+		           	
                 </div>
             </div>
             <div class="w-pro-deta-bd">
@@ -687,6 +729,26 @@ $("a[target='popup_larger_image']").click(function(){
 	return false;
 });
 </script>
+<script type="text/javascript">
+		                          function setShare(title, url) {
+		                            //  alert("titile:"+title);
+		                            //  alert("url:"+url);
+		                             // alert("http://"+window.location.host+"/"+url);
+		                              jiathis_config.title = title;
+		                              jiathis_config.url = "http://"+window.location.host+"/"+url;
+		                          }
+		                            var jiathis_config = {}
+		                          </script>  
+		<script type="text/javascript" >
+			var jiathis_config={
+				data_track_clickback:false,
+				sm:"qzone,tsina,weixin,cqq",
+				summary:"",
+				shortUrl:true,
+				hideMore:false
+			}
+		</script>
+		<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2052677" charset="utf-8"></script>
 	</body>
 
 </html>

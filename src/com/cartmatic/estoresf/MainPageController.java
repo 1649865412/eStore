@@ -2,7 +2,9 @@
 package com.cartmatic.estoresf;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -11,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
@@ -20,11 +26,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cartmatic.estore.cart.CheckoutConstants;
 import com.cartmatic.estore.cart.service.ShoppingcartManager;
+import com.cartmatic.estore.cart.util.ShoppingCartUtil;
 import com.cartmatic.estore.catalog.service.BrandManager;
 import com.cartmatic.estore.catalog.service.ProductManager;
 import com.cartmatic.estore.common.model.cart.Shoppingcart;
 import com.cartmatic.estore.common.model.catalog.Brand;
+import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
 import com.cartmatic.estore.common.model.customer.Customer;
+import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.model.system.AppUser;
 import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.util.ContextUtil;
@@ -83,7 +92,7 @@ public class MainPageController{
 			shoppingcart = shoppingcartManager.initShoppingcart(customer);
 		}
 		mav.addObject("shoppingcart", shoppingcart);
-		List<Brand> brandList=brandManager.findAllBrands();
+		List<Brand> brandList=brandManager.getAllOrdered("sortOrder", true);
 		mav.addObject("brandList", brandList);
 /*		Cookie cookie = RequestUtil.getCookie(request, "IS_RUSH");
 		if(cookie == null){
@@ -101,7 +110,7 @@ public class MainPageController{
 		String url =request.getParameter("papeurl");
    try{
 		//此处判断是不是登录成功
-		if(checkAppUser(request)){
+		if(checkAppUser(request,response)){
 			//可继续写其它代码，例如购物车与用户cookie  
 				Customer appUser = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
 				RequestUtil.setUserInfoCookie(response, appUser, (request).getContextPath());
@@ -135,9 +144,16 @@ public class MainPageController{
 		}
 	}
 	
+	@RequestMapping(value="/coming.html")
+	public ModelAndView coming(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("coming");
+		return mv;
+	}
 	
 	
-	  public boolean checkAppUser(HttpServletRequest request)
+	
+	  public boolean checkAppUser(HttpServletRequest request,HttpServletResponse response)
 		{
 			AppUser appUser = appUserManager.getUserByName(request.getParameter("j_username"));
 			boolean tag = false;
@@ -148,6 +164,16 @@ public class MainPageController{
 					//此处判断是不是登录成功
 					tag = true;
 					//可继续写其它代码，例如购物车与用户cookie
+					Authentication authRequest = new UsernamePasswordAuthenticationToken(request.getParameter("j_username"), request.getParameter("j_password"));
+					SecurityContext securityContext = SecurityContextHolder
+							.getContext();
+					if (securityContext != null) {
+						securityContext.setAuthentication(authRequest);
+					}
+					Customer customer = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
+					RequestUtil.setUserInfoCookie(response, customer,(request).getContextPath());
+					//合并购物车信息
+					ShoppingCartUtil.getInstance().setShoppingcartInfo(request, response, customer);
 				}
 			}
 			return tag;

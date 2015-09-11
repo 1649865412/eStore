@@ -5,6 +5,7 @@
 <%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/cart"%>
         <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/checkout/cartManager.js"></script>
+        <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 
 
 		<div class="w-car-box">
@@ -37,7 +38,7 @@
             	<table width="100%" border="0" cellspacing="0" cellpadding="0">
             		<tr>
                         <th width="2%"><input name="" type="checkbox" value=""></th>
-                        <th width="15%">品牌：<a href="#" class="underline">${brand.brandName}</a></th>
+                        <th width="15%">品牌：<a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}" class="underline">${brand.brandName}</a></th>
                     </tr>
             		<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus">
                     <c:if test="${item.productSku.product.brandId==brand.brandId}">
@@ -102,6 +103,14 @@
 			              -${appConfig.defaultCurrencySymbol}
 			              <span id="cart_dis_member">${shoppingcart.cartDiscountAmount == null ? 0.00 : shoppingcart.cartDiscountAmount}</span>
 		              </td>
+		              <h id="full_cut" colspan="2" class="chart_howmany" >
+			              <td colspan="2" class="chart_howmany" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品牌满减优惠：</td>
+			              </td>
+			              <td class="align_right padding_right30">
+				             -${appConfig.defaultCurrencySymbol}
+				              <span id="cart_full_cut">${fullCutPrice}</span>
+			              </td>
+			            </h>
                     <ul>
                     	<li><input id="couponNo_input_id" name="couponNo_input_name" 
 			                     type="text" placeholder="输入优惠劵"  title="温馨提示：“输入优惠券”后，点击“去结算”，即可看到“优惠”的金额。"
@@ -149,7 +158,7 @@
                 </div>
             </div>
 		</div>
-        
+        <input type="hidden" id="cart_sum_prev" value="${shoppingcart.subtotal}" />
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>
@@ -178,9 +187,23 @@
 			});
 		</script>
         <script type="text/javascript">
+        $(document).ready(function () {
+	  		  debugger;
+	  		  if(!${useAbled}){
+	  				$("#couponNo_input_id").attr("disabled",true);
+	  				$("#giftCertificateNo").attr("disabled",true);
+	  			}
+	  			fnUpdatePrice();
+	  			if(${fullCutPrice==0}){
+	  				document.getElementById("full_cut").style.display="none";
+	  			}
+	  	  });
+	        
         	$(function(){
 					$(window).scroll(function(){
 						$(".index-nav").addClass("w-nav-s")
 					})
 				})
+				
+		
         </script>

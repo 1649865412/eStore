@@ -59,16 +59,16 @@
 		<decorator name="product" page="decProduct.jsp">
 		<pattern>/product/*.html*</pattern> </decorator>
 	
-	<decorator name="checkout" page="decCheckout.jsp">
+	<!--<decorator name="checkout" page="decCheckout.jsp">
 		<pattern>/checkout*</pattern>
 	</decorator>
 
-	<!-- decorator for customer -->
-	<decorator name="customer" page="decAccount.jsp">
+	--><!-- decorator for customer -->
+	<!--<decorator name="customer" page="decAccount.jsp">
 		<pattern>/myaccount/*</pattern>
 	</decorator>
 	
-	<!--
+	--><!--
 		decorator for print(has parameter: printable=true) has css, has js
 	-->
 	<decorator name="printable" page="decPrintable.jsp" />

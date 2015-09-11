@@ -13,9 +13,9 @@ function doRequiredLoginAction(loginCallback , flag) {
 	if(!flag)
 		globalLoginCallback = loginCallback;
 	if (!isLoginedAtServer()) {
-		if (window.confirm(__FMT.loginConfirm)) {
-			fnShowLoginDialog();
-		}
+		$(".w-login").show();
+		$(".w-login-left").show();
+		$(".w-login-right").hide();
 	} else {
 		globalLoginCallback = loginCallback;
 		execLoginCallback();
@@ -53,7 +53,6 @@ function fnDoLoginHandler() {
 		return;
 	}
 	$.post(__ctxPath+"/ajaxLogin.html",{username:username,password:password},function (result) {
-		alert("fujun");
 		if (result.status == 1) {
 			//sysMsg("You signed in system successfully!");
 			dlgLogin.closeDialog();

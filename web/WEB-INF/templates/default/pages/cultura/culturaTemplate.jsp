@@ -11,10 +11,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
+		<%@ include file="../../decorators/include/styles7.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/index.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
 		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
 		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
 	</head>

@@ -1,5 +1,5 @@
 .w-404 {
-	background: url(../img/pic1.jpg) no-repeat;
+	background: url(../../images/img/pic1.jpg) no-repeat;
 	background-size: cover;
 	background-position: 50% 50%;
 	text-align: center;
@@ -9,8 +9,27 @@
 	color: #FFF;
 	font-family:'FontYht';
 }
+.hover_op{
+	width:2000px;
+	background:#000;
+	opacity:0.5;
+	height:100.1%;
+	filter: alpha(opacity=30); 
+	position:absolute;
+	top:-1px;
+	z-index:1;
+}
+.w-coming {
+	background: url(../../images/img/pic3.jpeg) no-repeat;
+}
+.text_op{
+	z-index:555;
+	position:relative;
+}
+
 .w-404 h2, .w-404 h3 {
 	margin: 0;
+	z-index:2;
 }
 .w-404 h2 {
 	font-size: 150px;

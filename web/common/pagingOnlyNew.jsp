@@ -27,7 +27,7 @@ function gotoPage(pageNo) {
 				--%>
 				<li  style="padding-top:1px;">
 					<a href="javascript:void(0);">
-						<img src="${resPath }/images/icon/icon_back.gif">
+						<i class="fa fa-caret-left"></i>
 					</a>
 				</li>
 			</c:when>
@@ -37,7 +37,7 @@ function gotoPage(pageNo) {
 				</li>
 				--%><li  style="padding-top:1px;">
 					<a href="javascript:gotoPage(<c:choose><c:when test="${(sc.pageNo-1) lt 1}">1</c:when><c:otherwise>${sc.pageNo-1}</c:otherwise></c:choose>);void(0)"> 
-						<img src="${resPath }/images/icon/icon_back.gif">
+						<i class="fa fa-caret-left"></i>
 					</a>
 				</li>
 			</c:otherwise>
@@ -63,7 +63,7 @@ function gotoPage(pageNo) {
 			<c:when test="${sc.pageNo==sc.totalPageCount}">
 				<li>
 					<a href="javascript:void(0);">
-						<img src="${resPath }/images/icon/icon_next.gif">
+						<i class="fa fa-caret-right"></i>
 					</a>
 				</li>
 				<%--<li>
@@ -73,7 +73,7 @@ function gotoPage(pageNo) {
 			<c:otherwise>
 				<li>
 					<a href="javascript:gotoPage(${sc.pageNo+1});void(0)"> 
-						<img src="${resPath }/images/icon/icon_next.gif">
+						<i class="fa fa-caret-right"></i>
 					</a>
 				</li>
 				<%--<li>

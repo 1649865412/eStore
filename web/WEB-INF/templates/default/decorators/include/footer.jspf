@@ -10,34 +10,69 @@
 					<div class="w-footer-con">
 						<div class="w-footer-item w-footer-links col-lg-4">
 							<span class="w-links">
-							<a href="#">关于我们 | </a>
-							<a href="#">隐私保护政策 | </a>
-							<a href="#">使用条款 | </a>
-							<a href="#">商家入驻 | </a>
-							<a href="#">友情链接 | </a>
-							<a href="#">优品联盟</a>
+							<a href="${ctxPath}/customer_service/_18.html">关于我们 | </a>
+							<a href="${ctxPath}/coming.html">隐私保护政策 | </a>
+							<a href="${ctxPath}/coming.html">使用条款 | </a>
+							<a href="${ctxPath}/coming.html">商家入驻 | </a>
+							<a href="${ctxPath}/coming.html">友情链接 | </a>
 						</span>
-							<span>Copyright©2013-2014 SifangStreet四方街版权所有 粤ICP备13075482号-1</span>
+                     <!--2015-8 蔡蔡改动-->
+							<span>Copyright©2013-2014 &nbsp;SifangStreet四方街版权所有&nbsp;<a href="http://www.miibeian.gov.cn/">粤ICP备13075482号-1</a></span>
+                            
+                      <!--end of 蔡蔡改动-->
 							<a href="http://www.anquan.org/s/www.sifangstreet.com" name="bIe7hLFwEsIGD6e0PKwvzqD2yXwpSzfTo6hyXQFEOOuySFBo9P" >安全联盟、百度</a>
 							 <script type="text/javascript">
 									var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 									document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5987b6886920e65d633daea3a74b6ffe' type='text/javascript'%3E%3C/script%3E"));
 							</script>
-						</div>
+						</div><!--w-footer-item w-footer-links col-lg-4-->
 						<div class="w-footer-item col-lg-4">
 							<div class="w-footer-email">
-								<input type="text" name="" value="输入邮箱地址订阅最新资讯" />
-								<a>
-									<i class="fa fa-arrow-right"></i>
-								</a>
+                             <!--2015-8 蔡蔡改动---->
+								<input type="text" class="email_txt" required placeholder="输入邮箱地址订阅最新资讯"/>
+								<input type="submit" class="email_button" value="&rarr;" src="/resources/images/icon/btn_form.jpg" onclick="saveUserRss()">
+                             <!--end of 蔡蔡改动-->
+                             <script>
+								function saveUserRss(){
+									var userName = $("#userName").val();
+									var email = $("#email").val();
+									$.post(__ctxPath+"/customer/addUserRss.html",{userName:userName,email:email},function(result){
+										if(result.status==1){
+											alert("订阅成功！");
+										}else{
+										}
+									},"json");
+								}
+							</script>
 							</div>
-						</div>
+						</div><!--w-footer-item col-lg-4-->
 						<div class="w-footer-item w-footer-con col-lg-4">
 							<span>联系我们</span>
 							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五 9:30-18:30 节假日休息</span>
-							<span><img src="${resPath}/images/img/yj.png"/></span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                            <!--2015-8 蔡蔡改动-->
+							<span>
+                              <!-- WPA Button Begin -->
+
+                               <!--<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script> -->
+                              <!--<a target="_blank" href ="http://webim.qiao.baidu.com//im/index?siteid=4706350&ucid=7282853"><img src="/resources/images/baidushangqiao.png"/></a>-->
+                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52&pic=51" alt="欢迎咨询" title="欢迎咨询"/></a>
+                              <!-- WPA Button End -->
+                              <a target="_blank" href="http://weibo.com/sifangstreet" class="social_link">
+									<i class="fa fa-weibo fa-lg"></i>
+							  </a>
+                               
+                               <a target="_blank" href="http://www.sifangstreet.com/resources/images/weixin.jpg" class="social_link">
+									<i class="fa fa-weixin fa-lg"></i>
+							  </a>
+                               <a target="_blank" href="#" class="social_link">
+									<i class="fa fa-facebook fa-lg"></i>
+							  </a>
+
+                              
+							</span>
+                            <!--end of 蔡蔡改动-->
+						</div><!--w-footer-item w-footer-con col-lg-4-->
+					</div><!--w-footer-con-->
+				</div><!--row-->
+			</div><!--container-->
+		</div><!--w-footer-->

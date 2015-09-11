@@ -6,6 +6,10 @@
 <html>
 	<head>
 		<title>我的订单</title>
+		<%@ include file="../../decorators/include/styles7.jspf"%>
+		<link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
+        <link href="${resPath}/styles/css/help.css" rel="stylesheet" type="text/css" />
+        <link href="${resPath}/styles/css/myaccount.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 	
@@ -35,36 +39,29 @@
 		</script>
 	
 	<div class="maincontent">
-         
-			         <div class="position-wrap">
-			            <a href="${ctxPath }/index.html">首页</a>&nbsp;&gt;&nbsp;
-			            <a href="${ctxPath }/myaccount/order/list.html">我的账户</a>&nbsp;&gt;&nbsp;
-			            <span class="selected">我的订单</span>
-			         </div>  
-			         <div class="top_about">
-			         <br>
-			           <div class="top_title">
-			           <h1>我的账户</h1>
-			           </div>
-			           <ul class="tophelp">
-			                <li>有任何疑问&nbsp;|</li>
-			                <li>请点击在线客服&nbsp;|</li>
-			                <li>或拨打400-661-5677&nbsp;|</li>
-			                <li><a href="mailto:cs@sifangstreet.com">客服电子邮件地址</a>&nbsp;|</li>
-			                
-			                    <li><a href="#"  target="_blank" >配送信息</a>&nbsp;|</li>
-			                <li>
-			                    <a href="#"  target="_blank" >退换货条款</a>
-			                </li>
-			           </ul> 
-			           <div class="blank24"></div>
-			           <hr>
-			         </div>
+         <div class="account_all">
+         <div class="top_about">
+           <div class="top_title">
+           <h1>我的账户</h1>
+           </div>
+           <ul class="tophelp">
+                <li>有任何疑问&nbsp;|</li>
+                <li>请点击在线客服&nbsp;|</li>
+                <li>或拨打400-661-5677&nbsp;|</li>
+                <li><a href="mailto:cs@sifangstreet.com">客服电子邮件地址</a>&nbsp;|</li>
                 
-	                <div class="bottom_about">
-	       
-			           <div class="remote_nav">
-			            <ul id="remote_nav_ul">
+                    <li><a href="#"  target="_blank" >配送信息</a>&nbsp;|</li>
+                <li>
+                    <a href="#"  target="_blank" >退换货条款</a>
+                </li>
+           </ul> 
+          
+          
+         </div>
+         <div class="bottom_about">
+       
+           <div class="remote_nav">
+            <ul id="">
 			              <li><a id="t1" href="${ctxPath}/myaccount/order/list.html" title="我的订单" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/order/')!=-1}"> class="current"</c:if>>我的订单</a></li>
 			              <li><a id="t2" href="${ctxPath}/myaccount/favorites.html" title="我的收藏" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/favorites.html')!=-1}"> class="current"</c:if>>我的收藏</a></li>
 			              <li><a id="t3" href="${ctxPath}/myaccount/review/list.html" title="我的评价" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/review/')!=-1}"> class="current"</c:if>>我的评价<span id="reviews_count"></span></a></li>
@@ -75,21 +72,20 @@
 			              <li><a id="t8" href="${ctxPath}/myaccount/giftCard.html" title="礼品卡管理" <c:if test="${fn:indexOf(OriginalRequestURI,'/myaccount/giftCard.html')!=-1}"> class="current"</c:if>>礼品卡</a></li>
 			        
 			            </ul>
-			           </div><!--remote_nav-->
-			           
-			           <form action="${ctxPath}/myaccount/order/list.html" method="post">
-			           
-			           <div class="down_right left_border" id="tab1">
-				             <p class="account_info_title">
-				               账户：${customer.email}
-				               <span class="header_breadcrumb">我的订单</span>
-				             </p>
-				             <p class="cus_id">会员级别：${membership.membershipName}</p>
-				             <div class="order_sort">
-				                    <label class="styled">显示所有订单</label>
-				                <fieldset>
-				                    <div class="select">
-				                        <select name="orderFilter" id="orderFilter" onchange="changeOrderFilter()">
+           </div><!--remote_nav-->
+           <!--分页内容tab-->
+           <form action="${ctxPath}/myaccount/order/list.html" method="post">
+           <div class="down_right left_border" id="tab1">
+             <p class="account_info_title">
+               账户：${customer.email}
+               <span class="header_breadcrumb">我的订单</span>
+             </p>
+             <p class="cus_id">会员级别：${membership.membershipName}</p>
+             <div class="order_sort">
+                    <label class="styled">显示所有订单</label>
+                <fieldset>
+                    <div class="select">
+                        <select name="orderFilter" id="orderFilter" onchange="changeOrderFilter()">
 				                          <option selected="selected" value="">
 				                              -选择你要查询的订单范围-
 				                          </option>
@@ -109,37 +105,37 @@
 				                              指定订单号查询
 				                          </option>
 				                      </select>
-				                    </div>
-				                    <input style="display: none;" name="orderNo" id="orderNo" type="text" class="box-input" value="" placeholder="输入要查询订单号" value="${param.orderNo}">
+                    </div>
+                    <input style="display: none;" name="orderNo" id="orderNo" type="text" class="box-input" value="" placeholder="输入要查询订单号" value="${param.orderNo}">
 				                     <button name="login" class="btn btn-black" type="button" onClick="return doQuery();">
 				                        <i class="fa fa-search padding_right10"></i>
 				                        搜索
 				                     </button>
 				                    <div class="clear"></div>
-				                </fieldset>
-				             </div><!--order_sort-->
-				             <table class="account_table" cellspacing="0" cellpadding="0">
-				               <thead>
-				                 <tr>
-				                    <th width="20%">
-				                      订单号
-				                    </th>
-				                    <th width="30%">
-				                      日期
-				                    </th>
-				                    <th width="15%">
-				                      订单状态
-				                    </th>
-				                    <th width="15%">
-				                      支付状态
-				                    </th>
-				                    <th width="20%">
-				                      操作
-				                    </th>
-				                 </tr>
-				               </thead><!--thead-->
-				               <tbody>
-					               	<c:forEach var="order" items="${salesOrderList}" varStatus="s">
+                </fieldset>
+             </div><!--order_sort-->
+             <table class="account_table" cellspacing="0" cellpadding="0">
+               <thead>
+                 <tr>
+                    <th width="20%">
+                      订单号
+                    </th>
+                    <th width="30%">
+                      日期
+                    </th>
+                    <th width="15%">
+                      订单状态
+                    </th>
+                    <th width="15%">
+                      支付状态
+                    </th>
+                    <th width="20%">
+                      操作
+                    </th>
+                 </tr>
+               </thead><!--thead-->
+               <tbody>
+                 <c:forEach var="order" items="${salesOrderList}" varStatus="s">
 						                 <tr>
 						                    <td><a href="${ctxPath}/myaccount/order/${order.salesOrderId}.html">${order.orderNo}</a></td>
 						                    <td><fmt:formatDate value="${order.createTime}" pattern="yyyy/MM/dd HH:mm:ss" /></td>
@@ -225,29 +221,42 @@
 												</c:if>
 						                    </td>
 						                 </tr>
-					                 </c:forEach>																			
-				               </tbody>
-				             </table>
-				             
-				             <c:if test="${not empty salesOrderList}">
+					                 </c:forEach>
+               </tbody>
+             </table>
+
+             <c:if test="${not empty salesOrderList}">
 							<div class="pagebar">
+							<ul class="paginations">
 							<%@ include file="/common/pagingOnlyNew.jsp"%>
+							</ul>
 							</div>
 							</c:if>
-
-				           </div><!--down_right-->
-				           
-				           </form>
-			           
-			           <form method="post" id="cancelForm" name="cancelForm" action=""  style="display: inline;">
+           </div><!--down_right-tab1-->
+           </form>
+         
+         <form method="post" id="cancelForm" name="cancelForm" action=""  style="display: inline;">
 						<input type="hidden" name="doAction" value="cancelOrder" />
 						<input type="hidden" name="cancleType" value="6"/>
 						</form>
-						
-			         </div>
-                
-			</div>
-			
+         </div><!--bottom_about-->
+         </div><!--account_all-->
+           
+      </div><!--end of maincontent-->
+			<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+			<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
+			<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script> 
+			<script src="${ctxPath}/scripts/jquery/js/swiper.animate.min.js"></script>
+			<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+	        
+	        <script src="${ctxPath}/scripts/jquery/js/jquery.tools.min.js"></script>
+			<script>
+			$(function() {
+				// setup ul.tabs to work as tabs for each div directly under div.panes
+				$("#remote_nav_ul").tabs("div.down_right", { history: true });	
+				
+			});
+			</script>
 			<script>
 			function cancelOrder(id){
 				if(confirm('确认取消此订单？')){

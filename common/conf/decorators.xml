@@ -71,11 +71,11 @@
 	</decorator>
 
 	<!-- decorator for customer -->
-	<decorator name="customer" page="decAccount.jsp">
+	<!--<decorator name="customer" page="decAccount.jsp">
 		<pattern>/myaccount/*</pattern>
 	</decorator>
 	
-	<!--
+	--><!--
 		decorator for print(has parameter: printable=true) has css, has js
 	-->
 	<decorator name="printable" page="decPrintable.jsp" />

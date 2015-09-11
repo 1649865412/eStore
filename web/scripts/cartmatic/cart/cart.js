@@ -245,7 +245,8 @@ ShoppingcartManager.alert=function(skucode,type,$obj,addToCartResult){
     	this.type = type;
     	this.$obj = $obj;
     }
-    popuw.prototype={
+    window.location.href = '/cart/shoppingcart.html';
+    /*popuw.prototype={
     	id:'shoppingcartAlertWId_',
     	skucode:'',
     	type:1,//购物车,0,收藏夹
@@ -266,7 +267,7 @@ ShoppingcartManager.alert=function(skucode,type,$obj,addToCartResult){
 			  	$mnc.refresh();//refresh the minicart
 			
 		}
-    }
+    }*/
 	var win = new popuw(skucode,type);
 	win.show();
 }

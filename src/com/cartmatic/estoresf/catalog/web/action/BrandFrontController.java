@@ -180,9 +180,12 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	 * @return
 	 */
     @RequestMapping(value="/Designer_Service/search.html")
-    public void searchAction(HttpServletRequest request, HttpServletResponse response,String tags)	 
+    public ModelAndView searchAction(HttpServletRequest request, HttpServletResponse response,String q)	 
     {  
-		  List<Brand>  result =  brandManager.getSearch(tags);
+    	 ModelAndView mv = new ModelAndView("designer/designerList");
+		  List<Brand>  result =  brandManager.getSearch(q);
+		  mv.addObject("mapResult",CharacterSort.listBrandSort(result));
+		  return mv;
     }
 	
 

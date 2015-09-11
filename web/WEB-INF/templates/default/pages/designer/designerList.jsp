@@ -14,11 +14,7 @@
 		<title>四方街</title>
 
 		<!-- Bootstrap -->
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<%@ include file="../../decorators/include/styles7.jspf"%>
         <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -50,8 +46,8 @@
 						                <span class="w-mem-cn">${brand.designer}</span>
 						                <span class="w-mem-en">${brand.brandName}</span>
 						                <figure class="w-mem-milo">
-						                    <img src="${mediaPath}/other/${brand.logo}" alt="img11" class="w-mem-imgo" />
-						                    <img src="${mediaPath}/other/${brand.icon}" alt="img11" class="w-mem-imgt" />
+						                    <img src="${mediaPath}/other/${brand.icon}" alt="img11" class="w-mem-imgo" />
+						                    <img src="${mediaPath}/other/${brand.logo}" alt="img11" class="w-mem-imgt" />
 						                    <figcaption>
 						                        <div class="w-mem-bg">
 						                        </div>

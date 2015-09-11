@@ -9,11 +9,7 @@
 	<title><fmt:message key="shoppingcart.yourShoppingcart" /></title>
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-store" />
-	<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<%@ include file="../../decorators/include/styles7.jspf"%>
         <link href="${resPath}/styles/css/car-list.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

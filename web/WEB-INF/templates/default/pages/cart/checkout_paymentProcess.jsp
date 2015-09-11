@@ -9,9 +9,9 @@
 <link href="${resPath }/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 <link href="${resPath }/styles/chart.css" rel="stylesheet" type="text/css" />
 <link href="${resPath }/styles/checkout.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/checkout/jquery.tools_side_menu.js"></script>
-
+<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/checkout/checkoutPagingManager.js"></script>
 <script>
 	  $(document).ready(function () {
 		  debugger;
@@ -20,7 +20,7 @@
 			  alert("你的账号已享受过面膜优惠或去我的账号里继续支付,该订单不享受优惠噢");
 		  }
 
-		$(":range").rangeinput({progress: true});
+		//$(":range").rangeinput({progress: true});
 
 			
 			/* Slide Toogle */
@@ -126,7 +126,7 @@
 
 				
 			});
-		
+			fnUpdatePrice;
 			
 	});
 
@@ -173,7 +173,7 @@
 		}
       </script>  
 
-<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/checkout/checkoutPagingManager.js"></script>
+
 
 <div class="maincontent" id="designer_main">
      <div class="chart_top">
@@ -837,7 +837,7 @@
                 <td></td>
                 <td class="colour_trash text_bold">共计：</td>
                 <td class="align_right padding_right30 colour_trash text_bold">
-            	   ${appConfig.defaultCurrencySymbol}&nbsp;<span id="cart_sum">${shoppingcart.subtotal}</span>
+            	   ${appConfig.defaultCurrencySymbol}&nbsp;<span id="cart_sum">${shoppingcart.total}</span>
                 </td>
               </tr>
               
@@ -1089,50 +1089,71 @@
   	}
 
   //增加新收货人信息
-  function addAddress(){
-	 	var firstname = $("#firstname").val();
-	 	var address = $("#address").val();
-	 	var zip = $("#zip").val();
-	 	var email = $("#email").val();
-	 	var telephone = $("#telephone").val();
-	 	var stateName = $("#s_province").val();
-	 	var cityName = $("#s_city").val();
-	 	var sectionName = $("#s_county").val();
-	 	var title = $("#title").val();
-		$.post(__ctxPath+"/checkout/address/addAjax.html",
-   	 			{
-						firstname:firstname,
-						address:address,
-						zip:zip,
-						email:email,
-						telephone:telephone,
-						stateName:stateName,
-						cityName:cityName,
-						sectionName:sectionName,
-						title:title
-					},
-   	 			function(result){
-       	 			if(result != null){
-           	 			var ss = format_params($("#newAddressTemp").html(), result.id, result.firstname, result.stateName, result.cityName, result.sectionName, result.address, result.telephone);
-           	 			var $label = $("#radios-a").parent("label");
-           	 			$(ss).insertBefore($label); 
-	           	 		var $nifDiv = $label.next();
-	           			$nifDiv.find("input").val("");		
-	           			$nifDiv.find("select").each(function(){
-	           				$(this).find("option:first").attr("selected",true);
-	           			});
-           	 			/*
-           	 			if(${shippingAddressList == null}){
-               	 			$("#current_user_info").remove();
-           	 			}
-           	 			*/
-       	 			}else{
-           	 			alert("保存新地址有误！");
-       	 			}
-       	 		},
-       	 		"json"
-       	 	);
- 	}
+    function addAddress(){
+  	   // alert("hello");
+  	 	var firstname = $("#firstname").val();
+  	 	var address = $("#address").val();
+  	 	var zip = $("#zip").val();
+  	 	var email = $("#email").val();
+  	 	var telephone = $("#telephone").val();
+  	 	var stateName = $("#s_province").val();
+  	 	var cityName = $("#s_city").val();
+  	 	var sectionName = $("#s_county").val();
+  	 	var title = $("#title").val();
+          var tag =true;
+  	 	if(checkValue(firstname)){
+                alert("名字不能为空");
+                tag =false;
+  		 	}
+  	 	else if(checkValue(email)){
+  	 		  alert("邮件不能为空");
+  	 		 tag =false;
+  		 	}
+  	 	else if(checkValue(telephone)){
+  	 		  alert("电话 不能为空");
+  	 		 tag =false;
+  	 	}
+  	 	else if(checkValue(address)){
+  	 		  alert("地址不能为空");
+  	 		 tag =false;
+  		 	}
+
+  	 	if(tag){
+  	 		$.post(__ctxPath+"/checkout/address/addAjax.html",
+  	   	 			{
+  							firstname:firstname,
+  							address:address,
+  							zip:zip,
+  							email:email,
+  							telephone:telephone,
+  							stateName:stateName,
+  							cityName:cityName,
+  							sectionName:sectionName,
+  							title:title
+  						},
+  	   	 			function(result){
+  	       	 			if(result != null){
+  	           	 			var ss = format_params($("#newAddressTemp").html(), result.id, result.firstname, result.stateName, result.cityName, result.sectionName, result.address, result.telephone);
+  	           	 			var $label = $("#radios-a").parent("label");
+  	           	 			$(ss).insertBefore($label); 
+  		           	 		var $nifDiv = $label.next();
+  		           			$nifDiv.find("input").val("");		
+  		           			$nifDiv.find("select").each(function(){
+  		           				$(this).find("option:first").attr("selected",true);
+  		           			});
+  	           	 			/*
+  	           	 			if(${shippingAddressList == null}){
+  	               	 			$("#current_user_info").remove();
+  	           	 			}
+  	           	 			*/
+  	       	 			}else{
+  	           	 			alert("保存新地址有误！");
+  	       	 			}
+  	       	 		},
+  	       	 		"json"
+  	       	 	);
+  		 	}
+   	}
 
   //编辑收货人信息
 	function editAddress(obj,id){

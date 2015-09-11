@@ -63,7 +63,7 @@ public class ProductSearchFrontController extends GenericStoreFrontController<Pr
     @RequestMapping(value="/search-prod.html")
 	public ModelAndView defaultAction(HttpServletRequest request, HttpServletResponse response) {
 		Store store=ConfigUtil.getInstance().getStore();
-		ModelAndView mv = getModelAndView("catalog/searchProductList");
+		ModelAndView mv = getModelAndView("market/marketList");
 		List<Product> results = new ArrayList<Product>();
 		SearchResult searchResult = solr.queryProductBySearch(request,store.getCategoryListPerSize());
 		List<Integer> ids = (List<Integer>)searchResult.getResultList();

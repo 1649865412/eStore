@@ -398,6 +398,10 @@ font-weight: normal;
 }
 
 /*订单详情*/
+.score_bottom{
+	float:left;
+	width:100%;
+}
 
 table tfoot tr td{
 	padding-top:10px;

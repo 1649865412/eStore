@@ -81,10 +81,13 @@
 			}
 			});
 		function fnUnlock(){
+			alert("000");
 			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
+				alert("111");
 				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
 				$("#searchForm").submit();
 			}else{
+				alert("222");
 			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
 			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
 			$("#searchForm").submit();
@@ -426,8 +429,9 @@
 						<div class="w-l-info">
 							<div class="w-l-itemscon">
 								<label>
-									<input type="checkbox" id="checkboxre" class="regular-checkbox" onclick="checkbox1()"/>
-									我已阅读并接受四方街sifangstreet服务条款。
+									<!--2015-8 蔡蔡改动-->  
+										<input type="checkbox" /> <a href="#" style="float:right; margin-top:2px; margin-left:5px;">我已阅读并接受四方街sifangstreet服务条款。</a>
+		                            <!--end of 蔡蔡改动-->   
 								</label>
 
 							</div>
@@ -460,9 +464,8 @@
 						<div class="w-sea-con">
 						<!-- 搜索 -->
 						<form  method="get" id="searchForm" action="" >
-								<input name="q" type="text" title="Search for" autocomplete="off" id="q"/>
-								<i class="fa fa-long-arrow-right" onclick="fnUnlock()"></i>
-								</span>
+							<input name="q" type="text" required placeholder="输入搜索内容" class="search_txt" "q">
+                            <input type="submit" class="search_button" value="&rarr;" onclick="fnUnlock()">
 						</form>
 						</div>
 					</div>
@@ -523,10 +526,10 @@
 								<a href="${ctxPath}/designerList.html"><span>设计师</span> </a>
 							</li>
 							<li>
-								<a href="#"><span>关于我们</span> </a>
+								<a href="${ctxPath}/customer_service/_18.html"><span>关于我们</span> </a>
 							</li>
 							<li>
-								<a href="#"><span>线下店铺</span> </a>
+								<a href="${ctxPath}/coming.html"><span>线下店铺</span> </a>
 							</li>
 						</ul>
 					</div>
@@ -541,7 +544,7 @@
 									class="w-menu-lrzc">注册</span> </a>
 							</li>
 							<li id="loginPromptHolderTemplateLogin">
-								<a href="javascript:void(0)"><span id="username" class="w-gwc"></span> </a> (
+								<a href="/myaccount/account.html"><i class="fa fa-user"></i></a> (
 								<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;
 							</li>
 							<li>
@@ -650,6 +653,7 @@
 					<div class="w-mem-list">
 						<c:forEach items="${brandList}" var="brand" varStatus="varStatus"
 							end="4">
+							<a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
 							<div class="w-mem-con">
 								<span class="w-mem-cn">${brand.designer}</span>
 								<span class="w-mem-en">${brand.brandName}</span>
@@ -666,6 +670,7 @@
 								</figcaption>
 								</figure>
 							</div>
+							</a>
 
 
 						</c:forEach>
@@ -679,38 +684,73 @@
 				<div class="row">
 					<div class="w-footer-con">
 						<div class="w-footer-item w-footer-links col-lg-4">
-							<span class="w-links"> <a href="#">关于我们 | </a> <a href="#">隐私保护政策
-									| </a> <a href="#">使用条款 | </a> <a href="#">商家入驻 | </a> <a href="#">友情链接
-									| </a> <a href="#">优品联盟</a> </span>
-							<span>Copyright©2013-2014 SifangStreet四方街版权所有
-								粤ICP备13075482号-1</span>
-							<a href="http://www.anquan.org/s/www.sifangstreet.com"
-								name="bIe7hLFwEsIGD6e0PKwvzqD2yXwpSzfTo6hyXQFEOOuySFBo9P">安全联盟、百度</a>
-							<script type="text/javascript">
-	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://"
-			: " http://");
-	document
-			.write(unescape("%3Cscript src='"
-					+ _bdhmProtocol
-					+ "hm.baidu.com/h.js%3F5987b6886920e65d633daea3a74b6ffe' type='text/javascript'%3E%3C/script%3E"));
-</script>
-						</div>
+							<span class="w-links">
+							<a href="${ctxPath}/customer_service/_18.html">关于我们 | </a>
+							<a href="${ctxPath}/coming.html">隐私保护政策 | </a>
+							<a href="${ctxPath}/coming.html">使用条款 | </a>
+							<a href="${ctxPath}/coming.html">商家入驻 | </a>
+							<a href="${ctxPath}/coming.html">友情链接 | </a>
+						</span>
+                     <!--2015-8 蔡蔡改动-->
+							<span>Copyright©2013-2014 &nbsp;SifangStreet四方街版权所有&nbsp;<a href="http://www.miibeian.gov.cn/">粤ICP备13075482号-1</a></span>
+                            
+                      <!--end of 蔡蔡改动-->
+							<a href="http://www.anquan.org/s/www.sifangstreet.com" name="bIe7hLFwEsIGD6e0PKwvzqD2yXwpSzfTo6hyXQFEOOuySFBo9P" >安全联盟、百度</a>
+							 <script type="text/javascript">
+									var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+									document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5987b6886920e65d633daea3a74b6ffe' type='text/javascript'%3E%3C/script%3E"));
+							</script>
+						</div><!--w-footer-item w-footer-links col-lg-4-->
 						<div class="w-footer-item col-lg-4">
 							<div class="w-footer-email">
-								<input type="text" name="" value="输入邮箱地址订阅最新资讯" />
-								<a> <i class="fa fa-arrow-right"></i> </a>
+                             <!--2015-8 蔡蔡改动---->
+								<input type="text" class="email_txt" required placeholder="输入邮箱地址订阅最新资讯"/>
+								<input type="submit" class="email_button" value="&rarr;" src="/resources/images/icon/btn_form.jpg" onclick="saveUserRss()">
+                             <!--end of 蔡蔡改动-->
+                             <script>
+								function saveUserRss(){
+									var userName = $("#userName").val();
+									var email = $("#email").val();
+									$.post(__ctxPath+"/customer/addUserRss.html",{userName:userName,email:email},function(result){
+										if(result.status==1){
+											alert("订阅成功！");
+										}else{
+										}
+									},"json");
+								}
+							</script>
 							</div>
-						</div>
+						</div><!--w-footer-item col-lg-4-->
 						<div class="w-footer-item w-footer-con col-lg-4">
 							<span>联系我们</span>
-							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五
-								9:30-18:30 节假日休息</span>
-							<span><img src="${resPath}/images/img/yj.png" /> </span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五 9:30-18:30 节假日休息</span>
+                            <!--2015-8 蔡蔡改动-->
+							<span>
+                              <!-- WPA Button Begin -->
+
+                               <!--<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script> -->
+                              <!--<a target="_blank" href ="http://webim.qiao.baidu.com//im/index?siteid=4706350&ucid=7282853"><img src="/resources/images/baidushangqiao.png"/></a>-->
+                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52&pic=51" alt="欢迎咨询" title="欢迎咨询"/></a>
+                              <!-- WPA Button End -->
+                              <a target="_blank" href="http://weibo.com/sifangstreet" class="social_link">
+									<i class="fa fa-weibo fa-lg"></i>
+							  </a>
+                               
+                               <a target="_blank" href="http://www.sifangstreet.com/resources/images/weixin.jpg" class="social_link">
+									<i class="fa fa-weixin fa-lg"></i>
+							  </a>
+                               <a target="_blank" href="#" class="social_link">
+									<i class="fa fa-facebook fa-lg"></i>
+							  </a>
+
+                              
+							</span>
+                            <!--end of 蔡蔡改动-->
+						</div><!--w-footer-item w-footer-con col-lg-4-->
+					</div><!--w-footer-con-->
+				</div><!--row-->
+			</div><!--container-->
+		</div><!--w-footer-->
 
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>

@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <%@ page pageEncoding="UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+<%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <html lang="zh-CN">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
-		<%@ include file="../../decorators/include/meta.jspf"%>
-		<%@ include file="../../decorators/include/styles3.jspf"%>
-		<%@ include file="../../decorators/include/styles4.jspf"%>
-		<%@ include file="../../decorators/include/javascripts3.jspf"%>
-		<!-- Bootstrap -->
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<%@ include file="../../decorators/include/styles7.jspf"%>
         <link href="${resPath}/styles/css/shooping-list.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,10 +18,25 @@
           <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
+        <c:choose>
+			<c:when test="${sc.pageNo>1}">
+				<title>${category.categoryName} Page (${sc.pageNo})</title>
+			</c:when>
+			<c:otherwise>
+				<attribute:attributeValue entity="${category}" attributeValueVar="categoryTitle" attributeCode="categoryTitle"></attribute:attributeValue>
+				<title>${empty categoryTitle.attributeValue ? category.categoryName : categoryTitle.attributeValue}</title>
+				<meta name="keywords" content="<c:out value="${category.metaKeyword}"/>" />
+				<meta name="description" content="<c:out value="${category.metaDescription}"/>" />
+			</c:otherwise>
+		</c:choose>
 	</head>
 
 	<body>
-	
+	<content tag="heading"><product:navigatorBar navigatorCategorys="${navigatorCategorys}" /></content>
+        <content:showAd adPositionType="category" />
+		<div class="hot-sell">
+        <form method="post" action="">
 		<div class="w-shooping-list">
 			<div class="w-shooping-list-sort">
             	<ul class="row">
@@ -41,9 +48,9 @@
                     </li>
                     
                     <li>
-                        <p><a href="/main_catalog.html" class="active">所有产品</a></p> 
-                        <p><a href="/wen/meizhuang/coat_catalog.html"><i class="fa fa-venus"></i>女性</a></p>
-                        <p><a href="/man/Mmeizhuang/Mcoat_catalog.html"><i class="fa fa-mars"></i>男性</a></p>
+                        <p><a href="/catalog_default_catalog.html" class="active">所有产品</a></p> 
+                        <p><a href="/wen_catalog.html"><i class="fa fa-venus"></i>女性</a></p>
+                        <p><a href="/man_catalog.html"><i class="fa fa-mars"></i>男性</a></p>
                     </li>
                 </ul>
                 <div class="sort-btn">
@@ -81,13 +88,19 @@
 						</c:choose>
 		                </b>
 		                </p>
-                        <p><a href="#"><i class="fa fa-share-alt"></i> 分享</a><a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
+                        <p><i class="fa fa-share-alt"></i> <div class="jiathis_style" onmouseover="setShare('${product.productName}', 'product/${product.productId}.html');">
+                              <span class="jiathis_txt">分享到</span>
+							<a href="http://www.jiathis.com/share?uid=2052677" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+							</div>
+							<a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a><a href="#"><i class="fa fa-cart-plus"></i> 加入购物车</a></p>
                     </li>
 				</c:forEach>
             </ul>
             </div>
+            <%@ include file="./../../decorators/include/catalogPagingTop.jsp"%>
         </div>
-
+</form>
+        </div>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>
@@ -187,6 +200,26 @@
 						}
 				})
         </script>
+        <script type="text/javascript">
+		                          function setShare(title, url) {
+		                            //  alert("titile:"+title);
+		                            //  alert("url:"+url);
+		                            //  alert("http://"+window.location.host+"/"+url);
+		                              jiathis_config.title = title;
+		                              jiathis_config.url = "http://"+window.location.host+"/"+url;
+		                          }
+		                            var jiathis_config = {}
+		                          </script>  
+		<script type="text/javascript" >
+			var jiathis_config={
+				data_track_clickback:false,
+				sm:"qzone,tsina,weixin,cqq",
+				summary:"",
+				shortUrl:true,
+				hideMore:false
+			}
+		</script>
+		<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2052677" charset="utf-8"></script>
 	</body>
 
 </html>

@@ -1,0 +1,6 @@
+		<c:if test="${not empty appConfig.rssURL}"><link href="${appConfig.rssURL}" title="${appConfig.store.name} RSS FEED" type="application/rss+xml" rel="alternate"/></c:if>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href="${resPath}/styles/font-awesome.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
+		

@@ -128,9 +128,9 @@
         <property name="accessDecisionManager" ref="accessDecisionManager"/>
         <property name="securityMetadataSource">
     		<s:filter-security-metadata-source>
-      			<s:intercept-url pattern="/**/myaccount/*.html*" access="customer"/>
+      			<!--<s:intercept-url pattern="/**/myaccount/*.html*" access="customer"/>
       			<s:intercept-url pattern="/**/myaccount/**/*.html*" access="customer"/>
-      			<s:intercept-url pattern="/**/system/payment/inc_common_response.html*" access="NO_ONE_CAN_VISITED"/>
+      			--><s:intercept-url pattern="/**/system/payment/inc_common_response.html*" access="NO_ONE_CAN_VISITED"/>
       			<s:intercept-url pattern="/**/login.html*" access="ROLE_ANONYMOUS,customer,admin"/>
       			<s:intercept-url pattern="/**/loginError.html*" access="ROLE_ANONYMOUS"/>
       			<s:intercept-url pattern="/**/postLogin.html*" access="customer,admin"/>

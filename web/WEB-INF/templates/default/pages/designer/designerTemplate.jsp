@@ -20,27 +20,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/index.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-        <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
-		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
-		
-      <link href="${resPath}/styles/head_foot.css" rel="stylesheet" type="text/css" />
-		
-      <link rel="stylesheet" href="${resPath }/styles/jquery.bxslider.css" type="text/css" />
-      <link href="${resPath }/styles/nav.css" rel="stylesheet" type="text/css"/>
-      <link href="${resPath }/styles/main.css" rel="stylesheet" type="text/css"/>
-      <!--product detail css-->
-      <link rel="stylesheet" href="${resPath }/styles/tabs.css" type="text/css" media="screen" />
-      <!--detail page css-->
-      <link href="${resPath }/styles/detail.css" rel="stylesheet" type="text/css" />
-      <link href="${resPath }/styles/comment.css" rel="stylesheet" type="text/css">
-      <!-- Include the awesome icon css -->
-      <link href="${resPath }/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+      	<%@ include file="../../decorators/include/styles7.jspf"%>
+	     <script src="${ctxPath}/scripts/jquery/js/global_brain.js"></script>
+	     <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
 		
 	</head>
 	<body>
