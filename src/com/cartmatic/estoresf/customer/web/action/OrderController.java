@@ -32,6 +32,7 @@ import com.cartmatic.estore.customer.service.MembershipManager;
 import com.cartmatic.estore.order.OrderConstants;
 import com.cartmatic.estore.order.service.SalesOrderManager;
 import com.cartmatic.estore.webapp.util.RequestContext;
+import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.estore.webapp.util.SessionUtil;
 
 /**
@@ -56,12 +57,21 @@ public class OrderController extends GenericStoreFrontController<SalesOrder> {
 	@Override
 	@RequestMapping("/myaccount/account.html")
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) {
-		System.out.println(request.getContextPath());
-		System.out.println(request.getServletPath());
-        if (logger.isDebugEnabled()) {
-            logger.debug("entering 'OrderController defaultAction' method...");
-        }
-        return getRedirectView("/myaccount/order/list.html");
+		Customer customer = (Customer) RequestContext.getCurrentUser();
+		String url =request.getParameter("url");
+		if(customer != null){
+			System.out.println(request.getContextPath());
+			System.out.println(request.getServletPath());
+	        if (logger.isDebugEnabled()) {
+	            logger.debug("entering 'OrderController defaultAction' method...");
+	        }
+	        return getRedirectView("/myaccount/order/list.html");
+		}else{
+			RequestUtil.setErrorResultCookie(response, "flag", "0",(request).getContextPath());
+			RequestUtil.setErrorResultCookie(response, "tag", "0",(request).getContextPath());
+			return getRedirectView(url);
+		}
+		
     }    
 	/**
 	 * 订单列表

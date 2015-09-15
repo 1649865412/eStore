@@ -11,7 +11,7 @@
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags/app"%>
-<!--文化资讯列表页-->
+<!--设计师详情页-->
 <html lang="en" class="no-js">
 	<head>
 		<c:set var="productPrice"><system:CurrencyForRate value="${product.defaultProductSku.price}" /></c:set>

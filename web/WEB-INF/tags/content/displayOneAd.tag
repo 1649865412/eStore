@@ -122,9 +122,15 @@
 					<section class="swiper-slide swiper-slide-o" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 						<div class="w-video">
 							<video autoplay="" loop="">
-								<source src="${mediaPath}a_and_d/${ad.mediaPathMpFour}" type="video/mp4"> 
-								<source src="${mediaPath}a_and_d/${ad.mediaPathOgv}" type="video/ogv"> 
+							<c:if test="${ad.mediaPathMpFour !=null && ad.mediaPathMpFour !=''}">
+								<source src="${mediaPath}a_and_d/${ad.mediaPathMpFour}" type="video/mp4">
+							</c:if>
+							<c:if test="${ad.mediaPathOgv !=null && ad.mediaPathOgv !=''}">
+								<source src="${mediaPath}a_and_d/${ad.mediaPathOgv}" type="video/ogv">
+							</c:if>
+							<c:if test="${ad.mediaPathMpWebm !=null && ad.mediaPathMpWebm !=''}">
 								<source src="${mediaPath}a_and_d/${ad.mediaPathMpWebm}" type="video/webm">
+							</c:if>
 							</video>
 						</div>
 						<div class="ani resize swiper-o-to" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="0s">

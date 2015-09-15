@@ -18,25 +18,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
 		
-		<%@ include file="../decorators/include/./meta.jspf"%>
-		<%@ include file="../decorators/include/./styles2.jspf"%>
-		<%@ include file="../decorators/include/./styles3.jspf"%>
-		<%@ include file="../decorators/include/./styles5.jspf"%>
-		<%@ include file="../decorators/include/./javascripts2.jspf"%>
 		<script type="text/javascript"
 			src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
 		<script type="text/javascript"
 			src="${ctxPath}/scripts/cartmatic/cart/cart.js"></script>
 		<script type="text/javascript"
 			src="${ctxPath}/scripts/jquery/plugins/validation/jquery.validate.js"></script>
-	<link rel="stylesheet"
-			href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
 		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 
 		<!-- Bootstrap -->
 		<script src="${ctxPath}/scripts/jquery/js/global_brain.js"></script>
+		<link rel="stylesheet"
+			href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
@@ -50,11 +44,29 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+							$(document).ready(function(){
+							  $(".addtolove").click(function(){
+							  $("#add_love").hide();
+							  $("#love_count").show();
+							  });
+							});
+							function changeToOne(obj){
+								if($(obj).val() == ""){
+									$(obj).val(1);
+								}
+							}
+							</script>
     <script type="text/javascript">
 		$(document).ready(function(){
+			var url =""+self.location.href;
+			var value = ("<a href='/myaccount/account.html?url="+url+"'><i class='fa fa-user'></i></a> ("+
+					"<a href='${ctxPath}/j_acegi_logout' rel='nofollow' onclick='window.location.href='${ctxPath}/j_acegi_logout''>退出</a>)&nbsp;&nbsp;");
+			$("#loginPromptHolderTemplateLogin").html(value);
+			
 			$("#error_box1").hide();
 			$("#error_box2").hide();
+			$("#error_box3").hide();
 			
 			var tag = getCookie("tag");
 			var error = getCookie("error");
@@ -66,7 +78,14 @@
 					if(error!=""&&error!=null){
 						$("#error_box1").show();
 						$("#error_box2").hide();
+						$("#error_box3").hide();
 						delCookie("error");
+				}
+					if(flag!=""&&flag!=null){
+						$("#error_box1").hide();
+						$("#error_box2").hide();
+						$("#error_box3").show();
+						delCookie("flag");
 				}
 			}
 			
@@ -324,6 +343,7 @@
 						--%>
 							<div class="error_box" id="error_box1"><fmt:message key="customer.login.fail" /></div>
 						<div class="error_box" id="error_box2"><fmt:message key="front.errorCode" /></div>
+						<div class="error_box" id="error_box3"><fmt:message key="customer.login.first" /></div>
 					<div class="w-l-yzm">
 						<div class="w-l-itemscon">
 							<a href="javascript:;" onClick="return refreshImage('login',this)"><img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=login" title="点击改变" /> </a>
@@ -788,7 +808,7 @@
 
                                <!--<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script> -->
                               <!--<a target="_blank" href ="http://webim.qiao.baidu.com//im/index?siteid=4706350&ucid=7282853"><img src="/resources/images/baidushangqiao.png"/></a>-->
-                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52&pic=51" alt="欢迎咨询" title="欢迎咨询"/></a>
+                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=c3cc32bebc6899c096fda967ed082d5ca51abca8944190c6"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=c3cc32bebc6899c096fda967ed082d5ca51abca8944190c6&pic=51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
                               <!-- WPA Button End -->
                               <a target="_blank" href="http://weibo.com/sifangstreet" class="social_link">
 									<i class="fa fa-weibo fa-lg"></i>
@@ -796,9 +816,6 @@
                                
                                <a target="_blank" href="http://www.sifangstreet.com/resources/images/weixin.jpg" class="social_link">
 									<i class="fa fa-weixin fa-lg"></i>
-							  </a>
-                               <a target="_blank" href="#" class="social_link">
-									<i class="fa fa-facebook fa-lg"></i>
 							  </a>
 
                               
@@ -815,7 +832,7 @@
 		<script src="${ctxPath}/scripts/jquery/js/swiper.animate.min.js"></script>
         <script src="${ctxPath}/scripts/jquery/js/pinterest.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
-        <style>.w-nav{height:94px;background:url(img/navbg.gif) 0 0 repeat-x}</style>
+        <style>.w-nav{height:94px;background:url(../resources/images/img/navbg.gif) 0 0 repeat-x}</style>
         
         <script>
 	var swiper = new Swiper('.swiper-container', {

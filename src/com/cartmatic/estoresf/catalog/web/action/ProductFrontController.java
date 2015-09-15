@@ -288,7 +288,7 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 	public String getImgCode(	Product product ,HttpServletRequest request){
 		String imgPath = getMessage("dimension.url")+"/"+product.getProductId()+".png";
 		StringBuffer url = request.getRequestURL();  
-		String encoderContent = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString()+product.getProductId()+".html"; 
+		String encoderContent = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString()+"product/"+product.getProductId()+".html"; 
 		QrCodeTool.getQrCodeImgUrl(encoderContent,imgPath);
 		return   (product.getProductId()+".png");
 	}

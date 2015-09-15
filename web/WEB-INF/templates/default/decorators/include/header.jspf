@@ -14,9 +14,26 @@
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
-
+			var urlpath=window.location.pathname;
+			if(urlpath=="/culturalinformation/index.html"){
+				$("#culturalinformation").html("<span class='w-menu-on'>文化资讯</span>");
+				}else if(urlpath=="/designerList.html"||urlpath=="/Designer_Service/designer_datial.html"||urlpath=="/designer/initialsSelect.html"){
+					$("#designerList").html("<span class='w-menu-on'>设计师</span>");
+					}else if(urlpath=="/customer_service/_18.html"){
+					$("#customer_service").html("<span class='w-menu-on'>关于我们</span>");
+					}else if(urlpath=="/coming.html"){
+					$("#coming").html("<span class='w-menu-on'>线下店铺</span>");
+					}
+			
+			
+			var url =""+self.location.href;
+			var value = ("<a href='/myaccount/account.html?url="+url+"'><i class='fa fa-user'></i></a> ("+
+					"<a href='${ctxPath}/j_acegi_logout' rel='nofollow' onclick='window.location.href='${ctxPath}/j_acegi_logout''>退出</a>)&nbsp;&nbsp;");
+			$("#loginPromptHolderTemplateLogin").html(value);
+			
 			$("#error_box1").hide();
 			$("#error_box2").hide();
+			$("#error_box3").hide();
 			
 			var tag = getCookie("tag");
 			var error = getCookie("error");
@@ -28,7 +45,14 @@
 					if(error!=""&&error!=null){
 						$("#error_box1").show();
 						$("#error_box2").hide();
+						$("#error_box3").hide();
 						delCookie("error");
+				}
+					if(flag!=""&&flag!=null){
+						$("#error_box1").hide();
+						$("#error_box2").hide();
+						$("#error_box3").show();
+						delCookie("flag");
 				}
 			}
 
@@ -375,12 +399,9 @@
 							</c:if>
 						</spring:bind>
 						
-						--%><c:if test="${param.error != null}">
-							<div class="error_box"><fmt:message key="customer.login.fail" /></div>
-						</c:if>
-						<c:if test="${param.errorCode != null}">
-							<div class="error_box"><fmt:message key="front.errorCode" /></div>
-						</c:if>
+						--%><div class="error_box" id="error_box1"><fmt:message key="customer.login.fail" /></div>
+						<div class="error_box" id="error_box2"><fmt:message key="front.errorCode" /></div>
+						<div class="error_box" id="error_box3"><fmt:message key="customer.login.first" /></div>
 					<div class="w-l-yzm">
 						<div class="w-l-itemscon">
 							<a href="javascript:;" onClick="return refreshImage('register',this)">
@@ -466,15 +487,15 @@
 					</div>
 					<div class="col-md-6 col-lg-7">
 						<ul class="w-menu list-unstyled">
-							<li><a href="${ctxPath}/MarketIndex.html"><span class="w-menu-on">商城</span></a>
+							<li><a href="${ctxPath}/MarketIndex.html" id="MarketIndex"><span>商城</span></a>
 							</li>
-							<li><a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span></a>
+							<li><a href="${ctxPath}/culturalinformation/index.html" id="culturalinformation"><span>文化资讯</span></a>
 							</li>
-							<li><a href="${ctxPath}/designerList.html"><span>设计师</span></a>
+							<li><a href="${ctxPath}/designerList.html" id="designerList"><span>设计师</span></a>
 							</li>
-							<li><a href="${ctxPath}/customer_service/_18.html"><span>关于我们</span></a>
+							<li><a href="${ctxPath}/customer_service/_18.html" id="customer_service"><span>关于我们</span></a>
 							</li>
-							<li><a href="${ctxPath}/coming.html"><span>线下店铺</span></a>
+							<li><a href="${ctxPath}/coming.html" id="coming"><span>线下店铺</span></a>
 							</li>
 						</ul>
 					</div>
@@ -487,7 +508,7 @@
 									class="w-menu-lrzc">注册</span> </a>
 							</li>
 							<li id="loginPromptHolderTemplateLogin">
-								<a href="javascript:void(0)"><i class="fa fa-user"></i></a> (
+								<a href="/myaccount/account.html"><i class="fa fa-user"></i></a> (
 								<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;
 							</li>
 							<li><a href="#"><span class="w-search">搜索</span> </a>

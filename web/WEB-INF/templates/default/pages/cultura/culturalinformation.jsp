@@ -12,6 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
 		<%@ include file="../../decorators/include/styles7.jspf"%>
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
 		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/snap.svg-min.js"></script>
@@ -106,19 +107,28 @@
 						  return value;
 						  }
 			}
+
+	
 			
 			function setNotMonth(json){
 				var object = json.culturalInformation;
+				var color ="";
 				if(object.type ==0){
 					$("#boxType").html("秀场");
+					color="#fbbd6a";
 					}else if(object.type ==1){
 						$("#boxType").html("访谈");
+						color="#a6d5ab";
 					}else if(object.type ==2){
 						$("#boxType").html("行业动态");
+						color="#abdce3";
 					}else if(object.type ==3){
 						$("#boxType").html("线下主题活动");
+						color="#fb6e67";
 					}
+				
 				$("#boxTitle").html(checkNull(object.title));
+				$("#boxTitle").css("color",color);
 				$("#boxBy").html("来源:"+checkNull(object.writer));
 				$("#boxTime").html((object.createTime.year+1900)+"年"+(object.createTime.month+1)+"月"+object.createTime.date+"日");
 				$("#boxRead").html("阅读数	("+checkNull(object.readNumber)+")		|");

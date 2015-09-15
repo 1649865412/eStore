@@ -127,7 +127,6 @@
 	                	</div>
 	                <product:addToCart productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
                     <a class="j3" href="#">加入购物车</a>
-                
                 <p class="li6"><div class="jiathis_style">
 							<span class="jiathis_txt">分享到</span>
 							<a href="http://www.jiathis.com/share?uid=2052677" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" 
@@ -135,26 +134,11 @@
 target="_blank"></a>
 						</div>
 			                <a href="#" class="addtolove" onclick="addToFavorite(${product.id});return false;" >
-			               		 <i class="fa fa-heart fa-lg fa_storck"></i>
-				                <div id="add_love">
+			               		 <i class="i2"></i>
 				               	 点击加入收藏
-				                </div>
 			                </a>
-			                <div id="love_count"><a href="#"  onclick="addToFavorite(${product.id});return false;" >点击加入收藏</a></div>
-			                <script type="text/javascript">
-							$(document).ready(function(){
-								alert("hello");
-							  $(".addtolove").click(function(){
-							  $("#add_love").hide();
-							  $("#love_count").show();
-							  });
-							});
-							function changeToOne(obj){
-								if($(obj).val() == ""){
-									$(obj).val(1);
-								}
-							}
-							</script>
+			                <a href="#" class="join"  onclick="addToFavorite(${product.id});return false;" ><i class="i3"></i>点击加入收藏</a>
+			                
 						</p>
             </li>
         </c:forEach>

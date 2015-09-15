@@ -55,7 +55,7 @@
 
                                <!--<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script> -->
                               <!--<a target="_blank" href ="http://webim.qiao.baidu.com//im/index?siteid=4706350&ucid=7282853"><img src="/resources/images/baidushangqiao.png"/></a>-->
-                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=3643eac2b6614f2095191848222279f192d6d2252e5eaa52&pic=51" alt="欢迎咨询" title="欢迎咨询"/></a>
+                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=c3cc32bebc6899c096fda967ed082d5ca51abca8944190c6"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=c3cc32bebc6899c096fda967ed082d5ca51abca8944190c6&pic=51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
                               <!-- WPA Button End -->
                               <a target="_blank" href="http://weibo.com/sifangstreet" class="social_link">
 									<i class="fa fa-weibo fa-lg"></i>
@@ -63,9 +63,6 @@
                                
                                <a target="_blank" href="http://www.sifangstreet.com/resources/images/weixin.jpg" class="social_link">
 									<i class="fa fa-weixin fa-lg"></i>
-							  </a>
-                               <a target="_blank" href="#" class="social_link">
-									<i class="fa fa-facebook fa-lg"></i>
 							  </a>
 
                               
