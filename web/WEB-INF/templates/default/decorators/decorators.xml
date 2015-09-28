@@ -88,11 +88,11 @@
 	</decorator>
 
 	<!-- decorator for default (login, signup, error eg.) -->
-	<decorator name="default" page="decDefault.jsp">
+	<!--<decorator name="default" page="decDefault.jsp">
 		<pattern>/*</pattern>
 	</decorator>
 	
-  <!--设计师界面装饰器 -->
+  --><!--设计师界面装饰器 -->
 	<decorator name="designer" page="designer.jsp">
 		<pattern>/designer/index.html</pattern>
 	</decorator>

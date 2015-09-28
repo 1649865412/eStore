@@ -55,10 +55,8 @@ public class CartmaticAuthenticationProcessingFilter extends OncePerRequestFilte
 					captchaService = (ImageCaptchaService) context
 							.getBean("imageCaptchaService");
                 
-					Boolean isValidationCodeCorrect = captchaService.validateResponseForID(captchaId + type, validationCode);
-					
-					boolean isCodeCorrect = isValidationCodeCorrect.booleanValue();
-					if (!isCodeCorrect) {
+					boolean isValidationCodeCorrect = captchaService.validateResponseForID(captchaId, validationCode).booleanValue();
+					if (!isValidationCodeCorrect) {
 						response.sendRedirect(request.getContextPath()
 								+ "/index.html?errorCode=true");
 						return;

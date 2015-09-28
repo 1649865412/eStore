@@ -8,206 +8,225 @@
  * Copyright 2015, Codrops
  * http://www.codrops.com
  */
-(function() {
+(function () {
 
-	var bodyEl = document.body,
+    var bodyEl = document.body,
 		docElem = window.document.documentElement,
 		support = { transitions: Modernizr.csstransitions },
 		// transition end event name
 		transEndEventNames = { 'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend' },
-		transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
-		onEndTransition = function( el, callback ) {
-			var onEndCallbackFn = function( ev ) {
-				if( support.transitions ) {
-					if( ev.target != this ) return;
-					this.removeEventListener( transEndEventName, onEndCallbackFn );
-				}
-				if( callback && typeof callback === 'function' ) { callback.call(this); }
-			};
-			if( support.transitions ) {
-				el.addEventListener( transEndEventName, onEndCallbackFn );
-			}
-			else {
-				onEndCallbackFn();
-			}
+		transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
+		onEndTransition = function (el, callback) {
+		    var onEndCallbackFn = function (ev) {
+		        if (support.transitions) {
+		            if (ev.target != this) return;
+		            this.removeEventListener(transEndEventName, onEndCallbackFn);
+		        }
+		        if (callback && typeof callback === 'function') { callback.call(this); }
+		    };
+		    if (support.transitions) {
+		        el.addEventListener(transEndEventName, onEndCallbackFn);
+		    }
+		    else {
+		        onEndCallbackFn();
+		    }
 		},
 		gridEl = document.getElementById('theGrid'),
 		sidebarEl = document.getElementById('theSidebar'),
 		gridItemsContainer = gridEl.querySelector('section.grid'),
 		contentItemsContainer = gridEl.querySelector('section.content'),
+        bookcontentItemsContainer = gridEl.querySelector('section.content1'),
 		gridItems = gridItemsContainer.querySelectorAll('.grid__item_a'),
 		contentItems = contentItemsContainer.querySelectorAll('.content__item'),
 		closeCtrl = contentItemsContainer.querySelector('.close-button-list'),
+        bookclose = bookcontentItemsContainer.querySelector('.close-button-list'),
 		current = -1,
 		lockScroll = false, xscroll, yscroll,
 		isAnimating = false,
 		menuCtrl = document.getElementById('menu-toggle'),
-		menuCloseCtrl = sidebarEl.querySelector('.close-button-list');
+		menuCloseCtrl = contentItemsContainer.querySelector('.close-button-list'),
+		menubookclose = bookcontentItemsContainer.querySelector('.close-button-list');//xuanyang
 
-	/**
+
+    /**
 	 * gets the viewport width and height
 	 * based on http://responsejs.com/labs/dimensions/
 	 */
-	function getViewport( axis ) {
-		var client, inner;
-		if( axis === 'x' ) {
-			client = docElem['clientWidth'];
-			inner = window['innerWidth'];
-		}
-		else if( axis === 'y' ) {
-			client = docElem['clientHeight'];
-			inner = window['innerHeight'];
-		}
-		
-		return client < inner ? inner : client;
-	}
-	function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
-	function scrollY() { return window.pageYOffset || docElem.scrollTop; }
+    function getViewport(axis) {
+        var client, inner;
+        if (axis === 'x') {
+            client = docElem['clientWidth'];
+            inner = window['innerWidth'];
+        }
+        else if (axis === 'y') {
+            client = docElem['clientHeight'];
+            inner = window['innerHeight'];
+        }
 
-	function init() {
-		initEvents();
-	}
+        return client < inner ? inner : client;
+    }
+    function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
+    function scrollY() { return window.pageYOffset || docElem.scrollTop; }
 
-	function initEvents() {
-		[].slice.call(gridItems).forEach(function(item, pos) {
-			// grid item click event
-			item.addEventListener('click', function(ev) {
-				ev.preventDefault();
-				if(isAnimating || current === pos) {
-					return false;
-				}
-				isAnimating = true;
-				// index of current item
-				current = pos;
-				// simulate loading time..
-				classie.add(item.parentNode, 'grid__item--loading');
-				setTimeout(function() {
-					classie.add(item, 'grid__item--animate');
-					// reveal/load content after the last element animates out (todo: wait for the last transition to finish)
-					setTimeout(function() { loadContent(item); }, 500);
-				}, 1000);
-			});
-		});
+    function init() {
+        initEvents();
+    }
+    function initEvents() {
+        [].slice.call(gridItems).forEach(function (item, pos) {
+            // grid item click event
+            item.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                if (isAnimating || current === pos) {
+                    return false;
+                }
+                isAnimating = true;
+                // index of current item
+                current = pos;
+                // simulate loading time..
+                classie.add(item.parentNode, 'grid__item--loading');
+                setTimeout(function () {
+                    classie.add(item, 'grid__item--animate');
+                    // reveal/load content after the last element animates out (todo: wait for the last transition to finish)
+                    setTimeout(function () { loadContent(item); }, 500);
+                }, 1000);
+            });
+        });
 
-		closeCtrl.addEventListener('click', function() {
-			// hide content
-			hideContent();
-		});
+        closeCtrl.addEventListener('click', function () {
+            // hide content
+            hideContent();
+        });
+        bookclose.addEventListener('click', function () {
+            // hide content
+            hideContent();
+        });
+        // keyboard esc - hide content
+        document.addEventListener('keydown', function (ev) {
+            if (!isAnimating && current !== -1) {
+                var keyCode = ev.keyCode || ev.which;
+                if (keyCode === 27) {
+                    ev.preventDefault();
+                    if ("activeElement" in document)
+                        document.activeElement.blur();
+                    hideContent();
+                }
+            }
+        });
 
-		// keyboard esc - hide content
-		document.addEventListener('keydown', function(ev) {
-			if(!isAnimating && current !== -1) {
-				var keyCode = ev.keyCode || ev.which;
-				if( keyCode === 27 ) {
-					ev.preventDefault();
-					if ("activeElement" in document)
-    					document.activeElement.blur();
-					hideContent();
-				}
-			}
-		} );
+        // hamburger menu button (mobile) and close cross
+        menuCtrl.addEventListener('click', function () {
+            if (!classie.has(sidebarEl, 'sidebar--open')) {
+                classie.add(sidebarEl, 'sidebar--open');
+            }
+        });
 
-		// hamburger menu button (mobile) and close cross
-		menuCtrl.addEventListener('click', function() {
-			if( !classie.has(sidebarEl, 'sidebar--open') ) {
-				classie.add(sidebarEl, 'sidebar--open');	
-			}
-		});
+        menuCloseCtrl.addEventListener('click', function () {
+            if (classie.has(sidebarEl, 'sidebar--open')) {
+                classie.remove(sidebarEl, 'sidebar--open');
+            }
+        });
+        menubookclose.addEventListener('click', function () {
+            if (classie.has(sidebarEl, 'sidebar--open')) {
+                classie.remove(sidebarEl, 'sidebar--open');
+            }
+        });
+    }
+    var str = "";
+    var str2 = "";
+    var str3 = "";
+    function loadContent(item) {
+        // add expanding element/placeholder 
+        var dummy = document.createElement('div');
+        dummy.className = 'placeholder';
+        str = 'section.' + $(item).attr("data-content");
+        str2 = '.' + $(item).attr("data-item");
+        str3 = '.' + $(item).attr("data-close");
+        contentItemsContainer = gridEl.querySelector(str);
+        // set the width/heigth and position
+        dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth / gridItemsContainer.offsetWidth + ',' + item.offsetHeight / getViewport('y') + ',1)';
+        dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth / gridItemsContainer.offsetWidth + ',' + item.offsetHeight / getViewport('y') + ',1)';
 
-		menuCloseCtrl.addEventListener('click', function() {
-			if( classie.has(sidebarEl, 'sidebar--open') ) {
-				classie.remove(sidebarEl, 'sidebar--open');
-			}
-		});
-	}
+        // add transition class 
+        classie.add(dummy, 'placeholder--trans-in');
 
-	function loadContent(item) {
-		// add expanding element/placeholder 
-		var dummy = document.createElement('div');
-		dummy.className = 'placeholder';
+        // insert it after all the grid items
+        gridItemsContainer.appendChild(dummy);
 
-		// set the width/heigth and position
-		dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
-		dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
+        // body overlay
+        classie.add(bodyEl, 'view-single');
 
-		// add transition class 
-		classie.add(dummy, 'placeholder--trans-in');
+        setTimeout(function () {
+            // expands the placeholder
+            dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
+            dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
+            // disallow scroll
+            window.addEventListener('scroll', noscroll);
+        }, 25);
 
-		// insert it after all the grid items
-		gridItemsContainer.appendChild(dummy);
-		
-		// body overlay
-		classie.add(bodyEl, 'view-single');
+        onEndTransition(dummy, function () {
+            // add transition class 
+            classie.remove(dummy, 'placeholder--trans-in');
+            classie.add(dummy, 'placeholder--trans-out');
+            // position the content container
+            contentItemsContainer.style.top = (scrollY() + 20) + 'px';
+            // show the main content container
+            classie.add(contentItemsContainer, 'content--show');
+            // show content item:
+            $(str2).addClass('content__item--show');
+            //classie.add(contentItems[0], 'content__item--show');
+            // show close control
+            $(str3).addClass('close-button--show');
+            //classie.add(closeCtrl, 'close-button--show');
+            // sets overflow hidden to the body and allows the switch to the content scroll
+            classie.addClass(bodyEl, 'noscroll');
 
-		setTimeout(function() {
-			// expands the placeholder
-			dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
-			dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
-			// disallow scroll
-			window.addEventListener('scroll', noscroll);
-		}, 25);
+            isAnimating = false;
+        });
+    }
 
-		onEndTransition(dummy, function() {
-			// add transition class 
-			classie.remove(dummy, 'placeholder--trans-in');
-			classie.add(dummy, 'placeholder--trans-out');
-			// position the content container
-			contentItemsContainer.style.top = (scrollY()+20) + 'px';
-			// show the main content container
-			classie.add(contentItemsContainer, 'content--show');
-			// show content item:
-			classie.add(contentItems[0], 'content__item--show');
-			// show close control
-			classie.add(closeCtrl, 'close-button--show');
-			// sets overflow hidden to the body and allows the switch to the content scroll
-			classie.addClass(bodyEl, 'noscroll');
+    function hideContent() {
+        var gridItem = gridItems[current], contentItem = contentItems[0];
+        $(str2).removeClass('.content__item--show');
+        //classie.remove(contentItem, 'content__item--show');
+        classie.remove(contentItemsContainer, 'content--show');
+        $(str3).removeClass('.close-button--show');
+        //classie.remove(closeCtrl, 'close-button--show');
+        classie.remove(bodyEl, 'view-single');
 
-			isAnimating = false;
-		});
-	}
+        setTimeout(function () {
+            var dummy = gridItemsContainer.querySelector('.placeholder');
 
-	function hideContent() {
-		var gridItem = gridItems[current], contentItem = contentItems[0];
+            classie.removeClass(bodyEl, 'noscroll');
 
-		classie.remove(contentItem, 'content__item--show');
-		classie.remove(contentItemsContainer, 'content--show');
-		classie.remove(closeCtrl, 'close-button--show');
-		classie.remove(bodyEl, 'view-single');
+            //			dummy.style.WebkitTransform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
+            //			dummy.style.transform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
+            dummy.style.WebkitTransform = '';
+            dummy.style.transform = '';
 
-		setTimeout(function() {
-			var dummy = gridItemsContainer.querySelector('.placeholder');
+            onEndTransition(dummy, function () {
+                // reset content scroll..
+                contentItem.parentNode.scrollTop = 0;
+                gridItemsContainer.removeChild(dummy);
+                classie.remove(gridItem.parentNode, 'grid__item--loading');
+                classie.remove(gridItem, 'grid__item--animate');
+                lockScroll = false;
+                window.removeEventListener('scroll', noscroll);
+            });
 
-			classie.removeClass(bodyEl, 'noscroll');
+            // reset current
+            current = -1;
+        }, 1500);
+    }
 
-//			dummy.style.WebkitTransform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
-//			dummy.style.transform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
-			dummy.style.WebkitTransform = '';
-			dummy.style.transform = '';
+    function noscroll() {
+        if (!lockScroll) {
+            lockScroll = true;
+            xscroll = scrollX();
+            yscroll = scrollY();
+        }
+        window.scrollTo(xscroll, yscroll);
+    }
 
-			onEndTransition(dummy, function() {
-				// reset content scroll..
-				contentItem.parentNode.scrollTop = 0;
-				gridItemsContainer.removeChild(dummy);
-				classie.remove(gridItem.parentNode, 'grid__item--loading');
-				classie.remove(gridItem, 'grid__item--animate');
-				lockScroll = false;
-				window.removeEventListener( 'scroll', noscroll );
-			});
-			
-			// reset current
-			current = -1;
-		}, 1500);
-	}
-
-	function noscroll() {
-		if(!lockScroll) {
-			lockScroll = true;
-			xscroll = scrollX();
-			yscroll = scrollY();
-		}
-		window.scrollTo(xscroll, yscroll);
-	}
-
-	init();
+    init();
 
 })();

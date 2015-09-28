@@ -48,17 +48,17 @@
 
 .remote_nav ul a:active {
     outline:none;
-	color:#d4bc8c;
+	color:#fdbc68;
 	font-weight:bold;
 }
 .remote_nav ul li.remote_active a{
 	outline:none;
-	color:#d4bc8c;
+	color:#fdbc68;
 	font-weight:bold;
 }
 /* when mouse enters the tab move the background image */
 .remote_nav ul a:hover {
-    color:#d4bc8c;
+    color:#fdbc68;
 	font-weight:bold;
 
 }
@@ -66,7 +66,7 @@
 /* active tab uses a class name "current". its highlight is also done by moving the background image. */
 .remote_nav ul a.current, .remote_nav ul a.current:hover, .remote_nav ul li.current a {
     background-position: -420px -62px;
-    color:#d4bc8c !important;
+    color:#fdbc68 !important;
 	font-weight:bold;
 
 }

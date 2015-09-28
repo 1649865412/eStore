@@ -1,7 +1,10 @@
 ul,li{ list-style:none;}
 *{ margin:0; padding:0;}
-
-.w-submit-order{ margin-top:60px;}
+.w-nav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #000000;
+}
+.w-submit-order{ margin-top:50px;}
 .w-submit-order-hd{ padding:45px 2%; background:#eee; text-align:center;}
 .w-submit-order-bd{ max-width:1570px; margin:0 auto; padding:0 2%;}
 .w-submit-order .row{ margin:0;}

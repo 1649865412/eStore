@@ -15,7 +15,7 @@ function pinterestInit(obj,add){
 		columns--; 
 		if(totalWidth<=768) {
 			columns--;
-			if(totalWidth<=320) {
+			if(totalWidth<=592) {
 				columns--;
 			}
 		}

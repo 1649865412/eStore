@@ -11,6 +11,11 @@
 		<pattern>*/register.html</pattern>
 		<pattern>/index_check.html</pattern>
 		<pattern>/MarketIndex.html</pattern>
+		<pattern>/marketDesignerList/index.html</pattern>
+		<pattern>/marketDesigner/initialsSelect.html</pattern>
+		<pattern>/**/*_catalog.html</pattern>
+		<pattern>/**/*_catalog_pn*.html</pattern>
+		<pattern>/product/*.html*</pattern>
 		<!--<pattern>/culturalinformation/index.html*</pattern>
 		--><!--<pattern>/culturalinformation/culturatemplate.html*</pattern>
 	--></excludes>
@@ -63,10 +68,10 @@
 
 	<!-- decorator for product(has mini cart) -->
 	<!---->
-		<decorator name="product" page="decProduct.jsp">
+		<!--<decorator name="product" page="decProduct.jsp">
 		<pattern>/product/*.html*</pattern> </decorator>
 	
-	<decorator name="checkout" page="decCheckout.jsp">
+	--><decorator name="checkout" page="decCheckout.jsp">
 		<pattern>/checkout*</pattern>
 	</decorator>
 
@@ -92,11 +97,10 @@
 	<!-- decorator for default (login, signup, error eg.) -->
 	<decorator name="default" page="decDefault.jsp">
 		<pattern>/*</pattern>
-		
-  <!--设计师界面装饰器 -->
+	</decorator>
+	
+	<!--设计师界面装饰器 -->
 	<decorator name="designer" page="designer.jsp">
 		<pattern>/designer/index.html</pattern>
-	</decorator>
-
 	</decorator>
 </decorators>

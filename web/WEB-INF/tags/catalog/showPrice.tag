@@ -111,19 +111,15 @@ viewType=3
 		--%>
 		<c:choose>
 			<c:when test="${productSku.priceViewType==2}">
-				<span class="ourPrice"><system:CurrencyForRate value="${productSku.price}" /></span>
-				<span class="price" title="<fmt:message key="productDetail.salePrice" />">
-				<system:CurrencyForRate value="${productSku.salePrice}" />
-				</span>
+				<span class="s1"><system:CurrencyForRate value="${productSku.salePrice}" /></span>
+				<span class="s2"><system:CurrencyForRate value="${productSku.price}" /></span>
 			</c:when>
 			<c:when test="${productSku.priceViewType==3}">
-				<span class="ourPrice"><system:CurrencyForRate value="${productSku.price}" /></span>
-				<span class="price" title="<fmt:message key="productDetail.discountPrice" />">
-				<system:CurrencyForRate value="${productSku.discountPrice}" />
-				</span>
+				<span class="s1"><system:CurrencyForRate value="${productSku.discountPrice}" /></span>
+				<span class="s2"><system:CurrencyForRate value="${productSku.price}" /></span>
 			</c:when>
 			<c:otherwise>
-				<span class="price" title="<fmt:message key="productDetail.ourPrice" />">
+				<span class="s1">
 				<system:CurrencyForRate value="${productSku.price}" />
 				</span>
 			</c:otherwise>

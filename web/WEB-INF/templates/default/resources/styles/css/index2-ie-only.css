@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+.height_a{
+		position:absolute; 
+		clip:rect(150px 554px 605px 0); 
+		border:0;
+		margin-top:-28.5%;
+	}
+	.height_a+.mall_right_title{
+		height: 50%;
+		margin-top: 20%;		
+	}
+	.height_b{
+		position:absolute; 
+		clip:rect(200px 554px 523px 0);
+		border:0;
+		margin-top:33%;
+	}
+	.height_b+.mall_right_title{
+		height: 20%;
+		margin-top: 95%;	
+	}

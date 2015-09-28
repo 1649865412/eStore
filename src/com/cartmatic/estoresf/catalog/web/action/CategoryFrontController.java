@@ -4,7 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,12 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cartmatic.estore.catalog.service.CategoryManager;
+import com.cartmatic.estore.catalog.service.ProductMainManager;
 import com.cartmatic.estore.catalog.service.ProductManager;
 import com.cartmatic.estore.common.helper.CatalogHelper;
 import com.cartmatic.estore.common.helper.ConfigUtil;
 import com.cartmatic.estore.common.model.catalog.Category;
 import com.cartmatic.estore.common.model.catalog.CategoryTreeItem;
 import com.cartmatic.estore.common.model.catalog.Product;
+import com.cartmatic.estore.common.model.catalog.SkuOption;
+import com.cartmatic.estore.common.model.catalog.SkuOptionValue;
 import com.cartmatic.estore.common.model.sekillproduct.SekillProduct;
 import com.cartmatic.estore.common.model.system.Store;
 import com.cartmatic.estore.common.service.SolrService;
@@ -39,6 +44,15 @@ public class CategoryFrontController extends
 
 	private ProductManager productManager = null;
 	private CategoryManager categoryManager = null;
+	private ProductMainManager productMainManager=null;
+
+	public ProductMainManager getProductMainManager() {
+		return productMainManager;
+	}
+
+	public void setProductMainManager(ProductMainManager productMainManager) {
+		this.productMainManager = productMainManager;
+	}
 
 	private SekillProductManager sekillProductManager = null;
 
@@ -194,6 +208,13 @@ public class CategoryFrontController extends
 		// category.getCategoryId(), null);
 		modelAndView.addObject("productList", productList);
 		modelAndView.addObject("facetMap", searchResult.getFacetMap());
+		Map<Integer, Map<SkuOption, List<SkuOptionValue>>> productMap = new HashMap<Integer, Map<SkuOption, List<SkuOptionValue>>>();
+		for(int i=0;i<productList.size();i++){
+			Integer productId=productList.get(i).getProductId();
+			Map<SkuOption,List<SkuOptionValue>>productSkuOptionAndValues=productMainManager.findSkuOptionsByProduct(productId);
+			productMap.put(productId, productSkuOptionAndValues);
+		}
+		request.setAttribute("productMap", productMap);
 
 		return modelAndView;
 	}

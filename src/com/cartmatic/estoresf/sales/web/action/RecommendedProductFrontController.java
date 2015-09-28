@@ -2,7 +2,9 @@
 package com.cartmatic.estoresf.sales.web.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cartmatic.estore.Constants;
+import com.cartmatic.estore.catalog.service.ProductMainManager;
 import com.cartmatic.estore.common.helper.CatalogHelper;
 import com.cartmatic.estore.common.helper.ConfigUtil;
 import com.cartmatic.estore.common.model.catalog.Category;
 import com.cartmatic.estore.common.model.catalog.CategoryTreeItem;
 import com.cartmatic.estore.common.model.catalog.Product;
+import com.cartmatic.estore.common.model.catalog.SkuOption;
+import com.cartmatic.estore.common.model.catalog.SkuOptionValue;
 import com.cartmatic.estore.common.model.sales.RecommendedProduct;
 import com.cartmatic.estore.common.model.sales.RecommendedType;
 import com.cartmatic.estore.common.model.system.Store;
@@ -39,6 +44,15 @@ public class RecommendedProductFrontController extends GenericStoreFrontControll
 	private RecommendedProductManager	recommendedProductManager;
 	private RecommendedTypeManager		recommendedTypeManager;
 	private EvalRecommendationManager	evalRecommendationManager;
+	private ProductMainManager productMainManager=null;
+
+	public ProductMainManager getProductMainManager() {
+		return productMainManager;
+	}
+
+	public void setProductMainManager(ProductMainManager productMainManager) {
+		this.productMainManager = productMainManager;
+	}
 
 	public void setRecommendedProductManager(
 			RecommendedProductManager recommendedProductManager) {
@@ -133,6 +147,15 @@ public class RecommendedProductFrontController extends GenericStoreFrontControll
 
 		request.setAttribute("recommendedType", recommendedType);
 		request.setAttribute("productList", list);
+		if(typeName.equals("hot_wholesale_products")){
+			Map<Integer, Map<SkuOption, List<SkuOptionValue>>> productMap = new HashMap<Integer, Map<SkuOption, List<SkuOptionValue>>>();
+			for(int i=0;i<list.size();i++){
+				Integer productId=list.get(i).getProductId();
+				Map<SkuOption,List<SkuOptionValue>>productSkuOptionAndValues=productMainManager.findSkuOptionsByProduct(productId);
+				productMap.put(productId, productSkuOptionAndValues);
+			}
+			request.setAttribute("productMap", productMap);
+		}
 
 		if (Constants.FLAG_TRUE.equals(recommendedType.getIsApplyToCategory())) {
 			//当指定的sourceId为1（产品根目录）时，不需要获取根目录；目前前台目录树内不存在id为1的根目录

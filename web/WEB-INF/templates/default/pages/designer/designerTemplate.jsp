@@ -23,6 +23,7 @@
       	<%@ include file="../../decorators/include/styles7.jspf"%>
 	     <script src="${ctxPath}/scripts/jquery/js/global_brain.js"></script>
 	     <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
+    		<link href="${ctxPath}/scripts/jquery/js/colorbox/colorbox.css" rel="stylesheet" />
 		
 	</head>
 	<body>
@@ -70,7 +71,8 @@
         
 
         <!--此处需要从后台传过推荐产品8个productRecommendId-->
-        <ul class="product list-unstyled c">
+        <div class="product_box">
+        <ul class="product list-unstyled col4 c sku_list" id="pinterestList">
         <c:forEach items="${recommendProductList}" var="product" begin="0" end ="7">
            <li>
             	<div class="li1"><a href="${ctxPath}/product/${product.productId}.html">
@@ -163,9 +165,10 @@
             </li>
         </c:forEach>
         </ul>
+        </div>
         
         
-        <div class="product_more"><a href="#">点击查看更多</a></div>
+        <div class="product_more"><a href="${ctxPath}/designerProductList.html?brandId=${brand.brandId}">点击查看更多</a></div>
         <div class="dialogue_box">
         	<div class="dialogue">
             	<div class="c">

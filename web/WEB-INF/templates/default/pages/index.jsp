@@ -38,6 +38,7 @@
 			
 			var tag = getCookie("tag");
 			var error = getCookie("error");
+			var errorCode = getCookie("errorCode");
 			if(tag!=""&&tag!=null){
 					$(".w-login").show();
 					$(".w-login-left").show();
@@ -54,6 +55,12 @@
 						$("#error_box2").hide();
 						$("#error_box3").show();
 						delCookie("flag");
+				}
+					if(errorCode!=""&&errorCode!=null){
+						$("#error_box1").hide();
+						$("#error_box2").show();
+						$("#error_box3").hide();
+						delCookie("errorCode");
 				}
 			}
 			
@@ -89,13 +96,10 @@
 			}
 			});
 		function fnUnlock(){
-			alert("000");
 			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
-				alert("111");
 				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
 				$("#searchForm").submit();
 			}else{
-				alert("222");
 			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
 			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
 			$("#searchForm").submit();
@@ -125,12 +129,22 @@
 		return (!loginRequired || isLogined()) && getCookie("UEMAIL") || "";
 	}
 
+	function checkLogin(){
+		if(!userName()||!passWord()||!validateMethod()){
+			return false;
+			}else{
+				return true;
+				}
+		} 
+
 	function userName() {
 		var username = getLoginUserEmail(false);
 		if ($("#j_username").val().trim().length == 0) {
 			$("#p_username").show();
+			return false;
 		}else{
 			$("#p_username").hide();
+			return true;
 		}
 	}
 
@@ -139,12 +153,15 @@
 		if (password.length == 0) {
 			$("#p_password").show();
 			$("#q_password").hide();
+			return false;
 		}else if(password.length>0 && password.length<6){
 			$("#p_password").hide();
 			$("#q_password").show();
+			return false;
 		}else{
 			$("#p_password").hide();
 			$("#q_password").hide();
+			return true;
 		}
 	}
 
@@ -152,8 +169,10 @@
 		var validatecode = $("#j_validateCode").val().trim();
 		if(validatecode.length ==0){
 			$("#p_validateCode").show();
+			return false;
 		}else{
 			$("#p_validateCode").hide();
+			return true;
 		}
 	}
 
@@ -161,30 +180,56 @@
 		var validatecode = $("#k_validateCode").val().trim();
 		if(validatecode.length ==0){
 			$("#q_validateCode").show();
+			return false;
 		}else{
 			$("#q_validateCode").hide();
+			return true;
 		}
 	}
 
 	function emailPhone() {
 		if ($("#email").val().trim().length == 0) {
 			$("#p_email").show();
+			return false;
 		}else{
 			$("#p_email").hide();
+			return true;
 		}
 	}
+
+	function telePhone() {
+		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		if ($("#telephone").val().trim().length == 0) {
+			$("#p_telephone").show();
+			return false;
+		}else if(reg.test($("#telephone").val().trim())){
+			$("#p_telephone").hide();
+			return true;
+		}
+	}
+
+	function checkRegister(){
+		if(!emailPhone()||!telePhone()||!passWord2()||!rePassWord()||!validateCode2()){
+			return false;
+			}else{
+				return true;
+				}
+		} 
 
 	function passWord2() {
 		var password = $("#password").val().trim();
 		if (password.length == 0) {
 			$("#a_password").show();
-			$("#b_password").hide();
+			$("#o_password").hide();
+			return false;
 		}else if(password.length>0 && password.length<6){
 			$("#a_password").hide();
-			$("#b_password").show();
+			$("#o_password").show();
+			return false;
 		}else{
 			$("#a_password").hide();
-			$("#b_password").hide();
+			$("#o_password").hide();
+			return true;
 		}
 	}
 
@@ -194,12 +239,15 @@
 		if (rePassword.length == 0) {
 			$("#p_rePassword").show();
 			$("#q_rePassword").hide();
+			return false;
 		}else if(rePassword !=password){
 			$("#p_rePassword").hide();
 			$("#q_rePassword").show();
+			return false;
 		}else{
 			$("#p_rePassword").hide();
 			$("#q_rePassword").hide();
+			return true;
 		}
 	}
 
@@ -254,7 +302,7 @@
 			<div class="w-login-c">
 			
 				<form method="post" name="loginForm" id="loginForm"
-					action="${ctxPath}/index_check.html" >
+					action="${ctxPath}/index_check.html" onsubmit="return checkLogin()">
 					<div class="w-login-left">
 						<div class="w-l-close">
 							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -357,7 +405,7 @@
 					</form>
 					
 					
-					<form id="customerRegisterForm" action="${ctxPath}/register.html" method="post">
+					<form id="customerRegisterForm" action="register.html" method="post" onsubmit="return checkRegister()">
 					<div class="w-login-right">
 						<div class="w-l-close">
 							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -368,13 +416,23 @@
 						<div class="w-l-items w-l-user">
 							<div class="w-l-itemscon">
 								<i class="fa fa-user"></i>
-								<input type="text" id="email" name="email" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="邮箱/手机" onblur="emailPhone();">
+								<input type="text" id="email" name="email" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="邮箱" onblur="emailPhone();">
 							</div>
 						</div>
 						<div class="mark margin-bottom-sm">
-           					<div for="email" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_email">&nbsp;&nbsp;&nbsp;&nbsp;邮箱/手机不能为空</div>
+           					<div for="email" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_email">&nbsp;&nbsp;&nbsp;&nbsp;邮箱不能为空</div>
            				</div>
-						<div class="w-l-items w-l-user">
+           				
+           				<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-user"></i>
+								<input type="text" id="telephone" name="telephone" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="手机" onblur="telePhone();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+           					<div for="telephone" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_telephone">&nbsp;&nbsp;&nbsp;&nbsp;请填写正确的联系电话</div>
+           				</div>
+           				<div class="w-l-items w-l-user">
 							<div class="w-l-itemscon">
 								<i class="fa fa-lock"></i>
 								<input type="password" name="password" id="password" size = "41" maxlength= "120" " class="form-control" placeholder="输入用户密码" onblur="passWord2();">
@@ -384,7 +442,7 @@
             				<div for="password" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="a_password">&nbsp;&nbsp;&nbsp;&nbsp;密码不能为空</div>
             			</div>
             			<div class="mark margin-bottom-sm">
-								<div for="password" generated="true" class="red"style="display: none;" id="q_password">
+								<div for="password" generated="true" class="red"style="display: none;" id="o_password">
 									&nbsp;&nbsp;&nbsp;&nbsp;密码必须最小为6位字符
 								</div>
 						</div>
@@ -439,7 +497,7 @@
 							<div class="w-l-itemscon">
 								<label>
 									<!--2015-8 蔡蔡改动-->  
-										<input type="checkbox" /> <a href="#" style="float:right; margin-top:2px; margin-left:5px;">我已阅读并接受四方街sifangstreet服务条款。</a>
+										<input type="checkbox" id="checkboxre" onclick="checkbox1()"/> <a href="#" style="float:right; margin-top:2px; margin-left:5px;">我已阅读并接受四方街sifangstreet服务条款。</a>
 		                            <!--end of 蔡蔡改动-->   
 								</label>
 
@@ -670,11 +728,11 @@
 								<figure class="w-mem-milo">
 	
 									<img src="${mediaPath}other/${brand.icon}" alt="img11" class="w-mem-imgo" />
-									<img src="${mediaPath}other/${brand.logo}" alt="img11" class="w-mem-imgt" />
+									
 									<figcaption>
 										<div class="w-mem-bg">
 										</div>
-										<p>${brand.story}</p>
+										<p><c:out value="${fn:substring(brand.story, 0, 230)}......" /></p>
 	
 									</figcaption>
 								</figure>
@@ -762,6 +820,8 @@
 		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/swiper.animate.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+		<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
+		<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/catalog/productDetail.js"></script>
 
 		<script>
 	function index_login(){

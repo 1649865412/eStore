@@ -29,14 +29,11 @@
 
 		<!-- Bootstrap -->
 		<script src="${ctxPath}/scripts/jquery/js/global_brain.js"></script>
-		<link rel="stylesheet"
-			href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
-        <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
+	    <script src="${ctxPath}/scripts/jquery/js/css_browser_selector.js"></script>
+	    <link href="${ctxPath}/scripts/jquery/js/colorbox/colorbox.css" rel="stylesheet" />
+	    <%@ include file="../decorators/include/styles7.jspf"%>
+	    <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
+	    <link href="${resPath}/styles/css/mall_nav.css" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -121,13 +118,10 @@
 			}
 			});
 		function fnUnlock(){
-			alert("000");
 			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
-				alert("111");
 				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
 				$("#searchForm").submit();
 			}else{
-				alert("222");
 			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
 			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
 			$("#searchForm").submit();
@@ -206,17 +200,31 @@
 		}
 	}
 
+	function telePhone() {
+		if ($("#telephone").val().trim().length == 0) {
+			$("#p_telephone").show();
+		}else{
+			$("#p_telephone").hide();
+		}
+		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		 if (reg.test($("#telephone").val().trim())) {
+			 $("#p_telephone").hide();
+		 }else{
+			 $("#p_telephone").show();
+		 };
+	}
+
 	function passWord2() {
 		var password = $("#password").val().trim();
 		if (password.length == 0) {
 			$("#a_password").show();
-			$("#b_password").hide();
+			$("#o_password").hide();
 		}else if(password.length>0 && password.length<6){
 			$("#a_password").hide();
-			$("#b_password").show();
+			$("#o_password").show();
 		}else{
 			$("#a_password").hide();
-			$("#b_password").hide();
+			$("#o_password").hide();
 		}
 	}
 
@@ -264,6 +272,21 @@
 		}
 		return unescape(cookieValue);
 	}
+	function checkAddProductToCart(){
+		alert("hello1");
+		var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
+		var name="";
+		skuOptions.each(function(i){
+			if($(this).find("li.tb-selected").length==0){
+				name+="."+$(this).attr("data-property");
+			}
+		});
+		if(name!=""){
+			alert("请选择 "+name);
+		}
+		return name=="";
+	}
+	
 	jQuery(document).ready(function($) {
 		$('.grid-container').gridQuote( {
 			slideshow : false,
@@ -379,7 +402,7 @@
 					</div>
 				--%></div>
 				</form>
-				<form id="customerRegisterForm" action="${ctxPath}/register.html" method="post">
+				<form id="customerRegisterForm" action="register.html" method="post">
 				<div class="w-login-right">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -388,12 +411,22 @@
 					<div class="w-l-items w-l-user">
 							<div class="w-l-itemscon">
 								<i class="fa fa-user"></i>
-								<input type="text" id="email" name="email" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="邮箱/手机" onblur="emailPhone();">
+								<input type="text" id="email" name="email" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="邮箱" onblur="emailPhone();">
 							</div>
-					</div>
-					<div class="mark margin-bottom-sm">
-           					<div for="email" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_email">&nbsp;&nbsp;&nbsp;&nbsp;邮箱/手机不能为空</div>
-           			</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+           					<div for="email" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_email">&nbsp;&nbsp;&nbsp;&nbsp;邮箱不能为空</div>
+           				</div>
+           				
+           				<div class="w-l-items w-l-user">
+							<div class="w-l-itemscon">
+								<i class="fa fa-user"></i>
+								<input type="text" id="telephone" name="telephone" value="${status.value}" size = "41" maxlength="128" class="form-control"  placeholder="手机" onblur="telePhone();">
+							</div>
+						</div>
+						<div class="mark margin-bottom-sm">
+           					<div for="telephone" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="p_telephone">&nbsp;&nbsp;&nbsp;&nbsp;请填写正确的联系电话</div>
+           				</div>
 					<div class="w-l-items w-l-user">
 							<div class="w-l-itemscon">
 								<i class="fa fa-lock"></i>
@@ -404,7 +437,7 @@
             				<div for="password" generated="true" class="red mark margin-bottom-sm" style="display: none;" id="a_password">&nbsp;&nbsp;&nbsp;&nbsp;密码不能为空</div>
             		</div>
             		<div class="mark margin-bottom-sm">
-							<div for="password" generated="true" class="red"style="display: none;" id="q_password">
+							<div for="password" generated="true" class="red"style="display: none;" id="o_password">
 									&nbsp;&nbsp;&nbsp;&nbsp;密码必须最小为6位字符
 							</div>
 					</div>
@@ -459,7 +492,7 @@
 						<div class="w-l-itemscon">
 							<label>
 									<!--2015-8 蔡蔡改动-->  
-										<input type="checkbox" /> <a href="#" style="float:right; margin-top:2px; margin-left:5px;">我已阅读并接受四方街sifangstreet服务条款。</a>
+										<input type="checkbox" id="checkboxre" onclick="checkbox1()"/> <a href="#" style="float:right; margin-top:2px; margin-left:5px;">我已阅读并接受四方街sifangstreet服务条款。</a>
 		                            <!--end of 蔡蔡改动-->   
 								</label>
 						</div>
@@ -484,7 +517,8 @@
 				</form>
 			</div>
 		</div>
-		<div class="w-nav navbar-fixed-top w-nav-s">
+		<div class="w-nav w-nav-s navbar-fixed-top">
+          <div class="nav2-bg"> <!--2015-9 和其他一级页面不同的地方--> 
 			<div class="container" style="position: relative;z-index: 1300;">
 				<div class="w-sea">
 					<div class="w-sea-list">
@@ -662,6 +696,7 @@
 					</li>
 				</ul>
 			</div>
+			</div><!--nav2-bg--><!--2015-9 和其他一级页面不同的地方--> 
 		</div>
 		<div class="index_show c">
         	<div class="index_left">
@@ -676,9 +711,9 @@
             </div><!--index_left end--> 
             	<content:showAdNew adPositionType="mainadNewMarket3" />
         </div><!--index_show end-->
-        <div class="mall c">
+        <div class="mall c" style="background:url(../resources/styles/img/authors/3.jpg) no-repeat">
         <c:if test="${not empty brand}">
-        	<div class="mall_left">
+        	<div class="mall_left" style="background-image:url(../resources/styles/img/authors/3.jpg);">
             	<div class="mrzt">
                 	<i></i>
                 	<div class="title-font">每周主打<br/>初夏清新穿搭</div>
@@ -686,13 +721,17 @@
             	<div class="mall_con">
                 	<div class="designer">
                     	<a class="designer_left" href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}"><cartmatic:img isUrlOnly="false" url="${brand.icon}" mediaType="other" width="270" height="270" ></cartmatic:img></a>
+                        <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
                         <div class="designer_right">
                         	<div class="li1 title-font">每周主打品牌设计师</div>
                             <div class="li2">${brand.designer}</div>
                             <div class="li3">${brand.brandName}</div>
                         </div>
+                        </a>
                     </div>
-                    <div class="designer_info">${brand.story}</div>
+                    <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
+                    	<div class="designer_info"><c:out value="${fn:substring(brand.story, 0, 230)}......" /></div>
+                    </a>
                     <div class="carefully_title title-font">每周主打品牌产品精选</div>
                     <ul class="carefully_list list-unstyled c">
                     	
@@ -706,6 +745,9 @@
 						</jsp:include>
                     	
                     </ul>
+                    <div class="carefully_more list-unstyled c">
+	                    <a class="li3" href="#">点击查看更多每周主打产品 >></a>
+	                </div>
                 </div>
             </div>
             </c:if>
@@ -722,28 +764,27 @@
             	
             </ul>
         </div>
+        <div class="update_new">
         <div class="news_date">
         	<h3 class="li1"><a href="#" class="title-font">${tempCatalog.weekOnNewTitle}</a></h3>
             <p class="li2">${tempCatalog.weekOnNewContent}</p>
 			<a class="li3" href="#">查看更多<i></i></a>
         </div>
-        <ul class="new_list list-unstyled c">
-        <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-							<jsp:param name="typeName" value="best_wholesale_deals" />
-							<jsp:param name="firstResult" value="0" />
-							<jsp:param name="maxResults" value="11" />
-							<jsp:param name="template" value="sales/include/recommendProduct4MainPage9" />
-							<jsp:param name="doAction" value="defaultAction" />
-							<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
-		</jsp:include>
-        	
-        </ul>
+	        <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
+								<jsp:param name="typeName" value="best_wholesale_deals" />
+								<jsp:param name="firstResult" value="0" />
+								<jsp:param name="maxResults" value="12" />
+								<jsp:param name="template" value="sales/include/recommendProduct4MainPage9" />
+								<jsp:param name="doAction" value="defaultAction" />
+								<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
+			</jsp:include>
+        </div>
         <div class="news_date">
         	<h3 class="li1 title-font">${tempCatalog.discountAreaTitle}</h3>
             <p class="li2">${tempCatalog.discountAreaContent}</p>
         </div>
         <div class="product_box">
-            <ul class="product list-unstyled col4 c" id="pinterestList">
+            <ul class="product list-unstyled col4 c sku_list" id="pinterestList">
             
             <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
 							<jsp:param name="typeName" value="hot_wholesale_products" />
@@ -756,7 +797,101 @@
             
             </ul>
         </div>
-        <div class="product_more"><a href="#">点击查看更多</a></div>
+        <div class="product_more"><a href="${ctxPath}/weekly.html">点击查看更多</a></div>
+        <!-- 加入购物车成功 -->
+	     <div style="display:none">
+	                    <div id="cart_box" class="after_addtocart">
+	                        <div class="w-cart-header">
+	                            <span><i class="fa fa-check-circle-o"></i>该产品已经成功加入您的购物车</span>
+	                            <hr class="aftercart_hr"/>
+	                        </div><!--w-cart-header-->
+	                        <div class="w-cart-body">
+	                            <div class="addcart_top">
+	                                <div class="addcart_part">
+	                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
+	                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
+	                                </div><!--addcart_part-->
+	                                <div class="addcart_sku">
+	                                  <ul class="sku_row">
+	                                    <li class="sku_list">
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p>
+	                                            <b>￥ 50.00</b>
+	                                        </div>
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p><b>￥ 50.00</b></p>
+	                                        </div>
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p><b>￥ 50.00</b></p>
+	                                        </div>
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p><b>￥ 50.00</b></p>
+	                                        </div>
+	                                    </li>
+	                                  </ul>
+	                                </div><!--addcart_sku-->
+	                            </div><!--addcart_top-->
+	                            <div class="addcart_top">
+	                                <div class="addcart_part">
+	                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
+	                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
+	                                </div><!--addcart_part-->
+	                                <div class="addcart_sku">
+	                                  <ul class="sku_row">
+	                                    <li class="sku_list">
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p>
+	                                            <b>￥ 50.00</b>
+	                                        </div>
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p><b>￥ 50.00</b></p>
+	                                        </div>
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p><b>￥ 50.00</b></p>
+	                                        </div>
+	                                        <div class="collocation-item addpro">
+	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+	                                            <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+	                                            <p><span>郑荣凯&曾思宇</span></p>
+	                                            <p><em>品牌名</em></p>
+	                                            <p><b>￥ 50.00</b></p>
+	                                        </div>
+	                                    </li>
+	                                  </ul>
+	                                </div><!--addcart_sku-->
+	                            </div><!--addcart_top-->
+	                        </div><!--w-cart-body-->
+	                    </div><!--cart_box-->
+	                </div>
+	     <!-- End 加入购物车成功 -->
 		<div class="w-footer">
 			<div class="container">
 				<div class="row">
@@ -832,8 +967,7 @@
 		<script src="${ctxPath}/scripts/jquery/js/swiper.animate.min.js"></script>
         <script src="${ctxPath}/scripts/jquery/js/pinterest.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
-        <style>.w-nav{height:94px;background:url(../resources/images/img/navbg.gif) 0 0 repeat-x}</style>
-        
+    	<script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script>
         <script>
 	var swiper = new Swiper('.swiper-container', {
 		nextButton : '.swiper-page-next',
@@ -1078,6 +1212,7 @@ $("#skuOptions").children("div.tb-prop").find("li[data-value]").click(function()
 });
 
 function checkAddProductToCart(){
+	alert("hello2");
 	var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
 	var name="";
 	skuOptions.each(function(i){
@@ -1181,25 +1316,18 @@ $("a[target='popup_larger_image']").click(function(){
 </div>
 <%--收藏夹弹出层 end --%>
 <script type="text/javascript">
-		                          function setShare(title, url) {
-		                            //  alert("titile:"+title);
-		                            //  alert("url:"+url);
-		                            //  alert("http://"+window.location.host+"/"+url);
-		                              jiathis_config.title = title;
-		                              jiathis_config.url = "http://"+window.location.host+"/"+url;
-		                          }
-		                            var jiathis_config = {}
-		                          </script>  
-		<script type="text/javascript" >
-			var jiathis_config={
-				data_track_clickback:false,
-				sm:"qzone,tsina,weixin,cqq",
-				summary:"",
-				shortUrl:true,
-				hideMore:false
-			}
-		</script>
-		<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2052677" charset="utf-8"></script>
+        $(function () {
+            $(".j3").colorbox({ inline: true, width: "50%" });
+        })
+    </script>
+     <script type="text/javascript" >
+	  var jiathis_config={
+		  summary:"",
+		  shortUrl:true,
+		  hideMore:false
+	  }
+	  </script>
+	  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 	</body>
 
 </html>

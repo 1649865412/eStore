@@ -94,7 +94,7 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 		}
 	    
 	    
-	    @RequestMapping(value={"*/register.html", "/checkout/register.html"},method=RequestMethod.POST)
+	    @RequestMapping(value={"/register.html","*/register.html", "/checkout/register.html"},method=RequestMethod.POST)
 		public ModelAndView register(@Valid Customer customer,BindingResult result,HttpServletRequest request,HttpServletResponse response) throws Exception {
 			String originalPass = "";
 	    	//检查email是否已使用
@@ -111,7 +111,6 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 			// validate validation code
 			try {
 				if (validationCode != null) {
-
 					ImageCaptchaService captchaService = null;
 
 					WebApplicationContext context = WebApplicationContextUtils
@@ -120,10 +119,8 @@ public class CustomerRegisterController extends GenericStoreFrontController<Cust
 					captchaService = (ImageCaptchaService) context
 							.getBean("imageCaptchaService");
                 
-					Boolean isValidationCodeCorrect = captchaService.validateResponseForID(captchaId + type, validationCode);
-					
-					boolean isCodeCorrect = isValidationCodeCorrect.booleanValue();
-					if (!isCodeCorrect) {
+					boolean isValidationCodeCorrect = captchaService.validateResponseForID(captchaId, validationCode).booleanValue();
+					if (!isValidationCodeCorrect) {
 						request.getRequestDispatcher("/index.html?errorCode=true").forward(request, response);
 //						response.sendRedirect(request.getContextPath()
 //								+ "/index.html?errorCode=true");

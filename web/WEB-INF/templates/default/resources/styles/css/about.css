@@ -105,7 +105,7 @@
 
 /*下方内容*/
 .about_bg{
-	background: url(../../images/img/about/table-chair-city.jpg) no-repeat center center;
+	background: url(../img/about/table-chair-city.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	min-height:300px;
@@ -113,7 +113,7 @@
 }
 
 .contact_bg{
-	background: url(../../images/img/about/IMG_3642-1300x866.jpg) no-repeat center center;
+	background: url(../img/about/IMG_3642-1300x866.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	min-height:300px;
@@ -121,7 +121,7 @@
 }
 
 .joinus_bg{
-	background: url(../../images/img/about/glass-bar-cocktail.jpg) no-repeat center center;
+	background: url(../img/about/glass-bar-cocktail.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	min-height:300px;
@@ -255,7 +255,7 @@ ul.list_icon_items li p span.pseudo-link, ul.list_icon_items li a.icon_a {
 }
 
 .weixin_QR{
-	background-image:url(../../images/img/weixin.jpg);
+	background-image:url(../img/weixin.jpg);
 	width:120px;
 	height:120px;
 	display:none;
@@ -271,7 +271,7 @@ ul.list_icon_items li p span.pseudo-link, ul.list_icon_items li a.icon_a {
 }
 
 .map_find_us{
-	background: url(../../images/img/map.jpg) no-repeat center center;
+	background: url(../img/map.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	width:100%;

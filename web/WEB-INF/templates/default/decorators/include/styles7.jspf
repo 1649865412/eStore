@@ -3,4 +3,5 @@
 		<link href="${resPath}/styles/font-awesome.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		
+		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/index.css" rel="stylesheet">

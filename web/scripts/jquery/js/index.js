@@ -22,16 +22,8 @@ function pagec() {
 	}
 	$('.index_show').height($(window).height()-300);
 	$('.mrzt,.mall_right').height($('.mall_con').height());
-	$('.product .li2 div').width($('.product .li2').width()-85);
-	$(".cutstr2").each(function(i){
-		var divH = $(this).height();
-		var $p = $("a", $(this)).eq(0);
-		$p.text($p.attr('title'));
-		while ($p.outerHeight() > divH) {
-			$p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
-		};
-	});
-	$(".cutstr3").each(function(i){
+	$('.product .li2 div').width($('.product .li2').width() - 85);
+    $(".cutstr3").each(function(i){
 		var divH = $(this).height();
 		var $p = $("div", $(this)).eq(0);
 		$p.text($p.attr('title'));
@@ -39,11 +31,12 @@ function pagec() {
 			$p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
 		};
 	});
+	
 }
 $(function() {
 
 	pagec();
-
+    $(".product .li2 .cutstr2").css("width", "80%");
 	$(window).resize(function() {
 		pagec();
 //$("#w-logot").text($(window).width());
@@ -132,12 +125,14 @@ $(function() {
 			paginationClickable :true,
 		});
 	}
-	if($('.designer_show .swiper-slide').length>1){
-		var swiper3 = new Swiper('.designer_show', {
-			autoplay: 4500,
-			pagination : '.designer_pagination',
-		});
-	}
+	if ($('.designer_show .swiper-slide').length > 1) {
+        var swiper3 = new Swiper('.designer_show', {
+            autoplay: 4500,
+            pagination: '.designer_pagination',
+            //xuanyang
+            paginationClickable: true,
+        });
+    }
 	$('.carefully_list li').click(function(){
 		var $this = $(this).index();
 		$(this).addClass('current').siblings().removeClass('current');
@@ -154,10 +149,14 @@ $(function() {
 	$('.join_box .j2 span').click(function(){
 		$(this).addClass('current').siblings().removeClass('current');
 	});
-	$('.product .li6 .join').click(function(){
+	$('.sku_list .li6 .join').click(function(){
 		$(this).hide();
 		$(this).parent().siblings('.join_box').show();
 	});
+	$('.cart_close').click(function () {
+        $(this).parent(".join_box").hide();
+        $(this).parent().parent().find('.join').show();
+    });
 	$('.product .li1').hover(function(){
 		$(this).find('.imgt').fadeIn();
 	},function(){

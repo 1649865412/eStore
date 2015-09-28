@@ -1,5 +1,5 @@
 .w-404 {
-	background: url(../../images/img/pic1.jpg) no-repeat;
+	background: url(../img/pic1.jpg) no-repeat;
 	background-size: cover;
 	background-position: 50% 50%;
 	text-align: center;
@@ -20,7 +20,7 @@
 	z-index:1;
 }
 .w-coming {
-	background: url(../../images/img/pic3.jpeg) no-repeat;
+	background: url(../img/pic3.jpeg) no-repeat;
 }
 .text_op{
 	z-index:555;

@@ -1,42 +1,35 @@
 *{ margin:0; padding:0;}
-body{ overflow-x:hidden;}
+body{height:auto;}
 a{ color:#333;}
 
-.w-shooping-list{ margin-top:60px;}
-.w-shooping-list-sort{ position:fixed; left:0; top:60px; width:290px; height:100%; background:#f2f2f2; margin-left:-230px; z-index:15;}
+.w-shooping-list{ margin-top:80px; height:auto;}
+.w-shooping-list-sort{left:0; width:290px; z-index:15; height:100%; background:#f1f1f1; position:relative;}
 .w-shooping-list-sort ul{ float:left; width:230px; margin:0;}
-.w-shooping-list-sort ul li{ padding-left:40px; margin-top:20px;}
+.w-shooping-list-sort ul li{ padding-left:40px; margin-top:10px;}
 .w-shooping-list-sort ul li .sort-tit i{ margin-left:10px;}
 .w-shooping-list-sort ul li p{ margin:0; line-height:26px;}
 .w-shooping-list-sort ul li p a:hover,.w-shooping-list-sort ul li p a.active{ color:#ffbf68;}
 .w-shooping-list-sort ul li p i{ margin-right:5px;}
 .w-shooping-list-sort ul li p i.fa-mars{ font-size:12px;}
-.sort-btn{ float:left; width:60px; text-align:center; padding-top:20px; position:relative; height:100%;}
-.sort-btn:hover{ background:#dcdcdc; cursor:pointer;}
+.sort-btn{ float:left; width:60px; text-align:center; padding-top:50px; position:relative; height:100%;}
+.sort-btn:hover{ cursor:pointer;}
 .sort-btn i{ font-size:22px;}
 .sort-btn.active p{ display:none;}
-.w-shooping-list-box{ width:100%; padding-top:30px;}
-
-.w-shooping-list-box ul{ padding:0 2%; margin:0;}
-.w-shooping-list-box ul li{ float:left; width:23%; margin:0 1% 30px 1%; line-height:22px; font-size:12px;}
-.w-shooping-list-box ul li img{ width:100%; transition-duration: .5s;}
-.w-shooping-list-box ul li a:hover img{ opacity:0.5;}
-.w-shooping-list-box ul li .bd-list-tit{ margin-top:10px;}
-.w-shooping-list-box ul li .bd-list-tit span{ float:right; color:#fbbd6a;}
-.w-shooping-list-box ul li .bd-list-tit a{ color:#313131;}
-.w-shooping-list-box ul li p{ margin:0;}
-.w-shooping-list-box ul li p a{ color:#AAA; margin-right:10px;}
-.w-shooping-list-box ul li p a:hover{ color:#666;}
-.w-shooping-list-box ul li p span{ color:#abdce3;}
-.w-shooping-list-box ul li p em{ font-style:normal; color:#AAA;}
-
+.w-shooping-list-box{height:auto;}
+.w-shooping-list-box .product_box{
+	width:98%;
+	margin: 0 2% 0 0;
+}
+.w-footer {
+	background:#fff;
+	z-index:999;
+}
 .w-shooping-list-box .w-page{ text-align:center; padding:70px 0;}
 .w-shooping-list-box .w-page a{ color:#747474; font-size:15px; padding:0 10px;}
 .w-shooping-list-box .w-page a:hover{ color:#333; text-decoration:underline;}
 .w-shooping-list-box .w-page a.prev:hover,.w-shooping-list-box .w-page a.next:hover{ text-decoration:none;}
 .w-shooping-list-box .w-page a.prev{ padding-right:20px;}
 .w-shooping-list-box .w-page a.next{ padding-left:20px;}
-
 
 .w-designer-deta{ margin-bottom:30px; text-align:center;}
 .designer-deta-img{ padding:0 2%;}
@@ -48,9 +41,19 @@ a{ color:#333;}
 .w-designer-deta dl dd p.last{ text-align:right;}
 .w-designer-deta dl dd p.last a{ color:#fbbd6a;}
 .w-designer-deta dl dd p.last a i{ margin-right:5px;}
-
+@media (max-width: 1600px){
+	.w-shooping-list-sort{width:260px;}
+	.w-shooping-list-sort ul{width:200px;}
+}
+@media (max-height: 900px){
+	.w-shooping-list-sort ul li p{ margin:0; line-height:22px;}
+}
+@media (max-height: 800px){
+	.w-shooping-list-sort ul li p{ margin:0; line-height:18px;}
+}
 @media (max-width: 992px){
-	.w-shooping-list-sort{ position:relative; width:100%; height:auto; margin-left:0; top:0;}	
+	.w-shooping-list{ margin-top:59px;}
+	.w-shooping-list-sort{ position:relative; width:100%; height:auto; margin-left:0; top:0; z-index:1031;}
 	.w-shooping-list-sort ul.row{ float:none; width:100%; height:0; overflow:hidden;}
 	.w-shooping-list-sort ul li{ float:left; width:20%; text-align:center; padding:0; font-size:12px; padding-bottom:20px;}
 	.sort-btn{ float:none; display:block; width:100%; background:#FFF; text-align:left; padding-top:10px; border-bottom:solid 1px #757575;}
@@ -61,6 +64,10 @@ a{ color:#333;}
 	.sort-btn.active i{ transform:rotate(-90deg); -webkit-transform:rotate(-90deg); -moz-transform:rotate(-90deg);  -ms-transform:rotate(-90deg);  -o-transform:rotate(-90deg);}
 	.w-designer-deta dl{ padding:0 2%; margin-top:-20px;}
 	.w-designer-deta dl dt img{ width:80px; height:80px;}
+	.submenu{ display:none;}
+	.w-shooping-list-box{ padding-top:30px;}
+	.w-shooping-list-box .w-footer .col-lg-4{ width:100%; margin:0; padding-top:15px;}
+	.w-shooping-list-box .w-footer .container{ width:100%;}
 }
 
 @media (max-width: 768px){

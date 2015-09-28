@@ -137,6 +137,7 @@ function fnVoteCallback($data){
  * @param {Object} checkBoxName
  */
 function fnGetSelectedCheckBoxValues(checkBoxName){
+	alert("aaa");
 	var accessoriesCodes=new Array();
 	var temp_checkBoxInputs=document.getElementsByName(checkBoxName);
 	if(temp_checkBoxInputs){
