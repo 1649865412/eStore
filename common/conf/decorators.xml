@@ -16,6 +16,8 @@
 		<pattern>/**/*_catalog.html</pattern>
 		<pattern>/**/*_catalog_pn*.html</pattern>
 		<pattern>/product/*.html*</pattern>
+		<pattern>/Customer_Service/**.html*</pattern>
+		<pattern>/search-prod.html*</pattern>
 		<!--<pattern>/culturalinformation/index.html*</pattern>
 		--><!--<pattern>/culturalinformation/culturatemplate.html*</pattern>
 	--></excludes>
@@ -60,7 +62,6 @@
 	<decorator name="cms" page="decCms.jsp">
 		<pattern>/Customer_Service/index.html*</pattern>
 		<pattern>/promotion*</pattern>
-		<pattern>/Customer_Service/**.html*</pattern>
 		<pattern>/contactus.html</pattern>
 		<pattern>/contactUsForm.html</pattern>
 		<pattern>/sitemap.html</pattern>

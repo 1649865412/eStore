@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
@@ -35,6 +36,7 @@ import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation
 import com.cartmatic.estore.common.model.customer.Customer;
 import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.model.system.AppUser;
+import com.cartmatic.estore.common.service.ShoppingcartService;
 import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.util.ContextUtil;
 import com.cartmatic.estore.system.service.AppUserManager;
@@ -48,6 +50,8 @@ public class MainPageController{
 	private BrandManager brandManager = null;
 	private ShoppingcartManager shoppingcartManager = null;
 	private AppUserManager	appUserManager	= null;
+	@Autowired
+	private ShoppingcartService shoppingcartService=null;
 	
 	private PasswordEncoder passwordEncoder;
 
@@ -104,7 +108,6 @@ public class MainPageController{
 	
 	
 	
-	
 	@RequestMapping("/index_check.html")
 	public void index_check(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		String url =request.getParameter("papeurl");
@@ -112,6 +115,24 @@ public class MainPageController{
 		//此处判断是不是登录成功
 		if(checkAppUser(request,response)){
 			//可继续写其它代码，例如购物车与用户cookie  
+			Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
+			Shoppingcart shoppingcart = null;
+			String sUuid = "";
+			if(cookie!=null){//进入购物车页面时，假如cookie中没有购物车uuid，则初始化一辆购物车给用户
+			    sUuid = cookie.getValue();
+//			    shoppingcart = shoppingcartManager.loadShoppingcartByUuid(sUuid);
+			    shoppingcartManager.doNotUseCoupon(sUuid);
+			    shoppingcart = shoppingcartManager.refreshCart(sUuid, request, response);
+			    if(shoppingcart==null){
+			    	Customer customer = (Customer) RequestContext.getCurrentUser();
+			    	shoppingcart = shoppingcartManager.initShoppingcart(customer);
+			    }
+			}
+			else{
+				Customer customer = (Customer) RequestContext.getCurrentUser();
+				shoppingcart = shoppingcartManager.initShoppingcart(customer);
+			}
+			request.setAttribute("shoppingcart",shoppingcart);
 				Customer appUser = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
 				RequestUtil.setUserInfoCookie(response, appUser, (request).getContextPath());
 		}else{

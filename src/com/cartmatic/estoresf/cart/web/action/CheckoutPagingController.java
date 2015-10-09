@@ -159,6 +159,7 @@ public class CheckoutPagingController extends BaseStoreFrontController {
     
 	@RequestMapping(value="/checkout/paymentProcess.html")
 	public ModelAndView paymentProcess(HttpServletRequest request,HttpServletResponse response) throws ServletException {
+	//	System.out.println("value:"+request.getParameter("doAction"));
 		setCurrentStep(request, response);
 		ModelAndView mv=check(request, response);
 		if(mv!=null){
@@ -326,7 +327,7 @@ public class CheckoutPagingController extends BaseStoreFrontController {
 			request.getSession().setAttribute(Constants.CHECKOUT_TARGET_URL,request.getRequestURL().toString());
 			//匿名Checkout的跳到登录/注册页
 			request.setAttribute("customerRegister",new CustomerRegister());
-			RequestUtil.setErrorResultCookie(response, "error", "0",(request).getContextPath());
+			//RequestUtil.setErrorResultCookie(response, "error", "0",(request).getContextPath());
 			RequestUtil.setErrorResultCookie(response, "tag", "0",(request).getContextPath());
 			mv= new ModelAndView(new RedirectView("/cart/shoppingcart.html"));
 		}

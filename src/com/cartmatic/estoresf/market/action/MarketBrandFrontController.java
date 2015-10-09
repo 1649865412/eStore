@@ -73,7 +73,7 @@ public class MarketBrandFrontController  extends GenericStoreFrontController<Bra
 		List<Brand> brandList=brandManager.findAllBrands();
 		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
 		//mv.addObject("brandList", brandList);
-		
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
 		Shoppingcart shoppingcart = null;
 		String sUuid = "";
@@ -102,6 +102,7 @@ public class MarketBrandFrontController  extends GenericStoreFrontController<Bra
 	@RequestMapping(value="/marketDesigner/initialsSelect.html")
 	public ModelAndView initialsSelect(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv=new ModelAndView("designer/marketDesignerList");
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		String initials = request.getParameter("initials");
 		List<Brand> brandList=brandManager.findByProperty("initials", initials);
 		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
@@ -121,6 +122,7 @@ public class MarketBrandFrontController  extends GenericStoreFrontController<Bra
     public ModelAndView  marketDesignerDatialAction(HttpServletRequest request, HttpServletResponse response)	 
     {
     	ModelAndView mv=new ModelAndView("catalog/marketDesigner");
+    	RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
         String brandID = request.getParameter("brandID");
         Brand  brand =  brandManager.getById(Integer.parseInt(brandID));
         mv.addObject("brand",brand);

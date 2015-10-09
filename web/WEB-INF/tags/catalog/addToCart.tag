@@ -80,8 +80,8 @@ if(!canNotAddToCart){
 		<input id="add2Cart<%=product.getId()%>" class="toggle1<c:if test="${addToCardDisabled}"> stock</c:if><c:if test="${productSku.product.productKind==2}"> no-addtocart</c:if>" title="${addToCardAlt}" type="submit" value="${addToCardAlt}" onclick="<c:if test="${not empty checkHandler}">if(!${checkHandler}())return;</c:if>$cm.addToC($('#productSkuCode').val(),fnGetSelectedCheckBoxValues('accessoriesCodes'),$('#quantity').val(),$('#selectAccessorys').val());return false;" <c:if test="${addToCardDisabled}">disabled="disabled"</c:if> />
 		 --%>
 		 <c:if test="${flag==null}">
-		 <div class="w-pro-info-btn" >
-              <a  id="add2Cart<%=product.getId()%>" name="addToCart" onclick="<c:if test="${not empty checkHandler}">if(!${checkHandler}())return;</c:if>$cm.addToC($('#productSkuCode').val(),fnGetSelectedCheckBoxValues('accessoriesCodes'),$('#quantity').val(),$('#selectAccessorys').val());return false;" <c:if test="${addToCardDisabled}">disabled="disabled"</c:if>>
+		 <div class="w-pro-info-btn addafter">
+              <a class="addcart" href="#cart_box" id="add2Cart<%=product.getId()%>" name="addToCart" onclick="<c:if test="${not empty checkHandler}">if(!${checkHandler}())return;</c:if>$cm.addToC($('#productSkuCode').val(),fnGetSelectedCheckBoxValues('accessoriesCodes'),$('#quantity').val(),$('#selectAccessorys').val());return false;" <c:if test="${addToCardDisabled}">disabled="disabled"</c:if>>
 				<fmt:message key="btn.txt.addtocart.on" />
               </a>
            </div>

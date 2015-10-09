@@ -8,6 +8,7 @@
 <%@ attribute name="productSku" required="true" type="com.cartmatic.estore.common.model.catalog.ProductSku"%>
 <%@ attribute name="imgSrc"%>
 <%@ attribute name="flag"%>
+<%@ attribute name="productSkuCode"%>
 <%@ attribute name="quantity" description="购买产品数量"%>
 <%@ attribute name="isDynaProdCode" type="java.lang.Boolean" description="是否动态指定code"%>
 <%@ attribute name="checkHandler" description="添加到购物车前的检查"%>
@@ -80,7 +81,7 @@ if(!canNotAddToCart){
 		<input id="add2Cart<%=product.getId()%>" class="toggle1<c:if test="${addToCardDisabled}"> stock</c:if><c:if test="${productSku.product.productKind==2}"> no-addtocart</c:if>" title="${addToCardAlt}" type="submit" value="${addToCardAlt}" onclick="<c:if test="${not empty checkHandler}">if(!${checkHandler}())return;</c:if>$cm.addToC($('#productSkuCode').val(),fnGetSelectedCheckBoxValues('accessoriesCodes'),$('#quantity').val(),$('#selectAccessorys').val());return false;" <c:if test="${addToCardDisabled}">disabled="disabled"</c:if> />
 		 --%>
 		 <c:if test="${flag==null}">
-		 	<a class="j3" href="#cart_box" id="add2Cart<%=product.getId()%>" name="addToCart" onclick="<c:if test="${not empty checkHandler}">if(!${checkHandler}())return;</c:if>$cm.addToC($('#productSkuCode').val(),fnGetSelectedCheckBoxValues('accessoriesCodes'),$('#quantity').val(),$('#selectAccessorys').val());return false;" <c:if test="${addToCardDisabled}">disabled="disabled"</c:if>><fmt:message key="btn.txt.addtocart.on" /></a>
+		 	<a href="#cart_box" class="j3" id="add2Cart<%=product.getId()%>" name="addToCart" onclick="<c:if test="${not empty checkHandler}">if(!${checkHandler}())return;</c:if>$cm.addToC('<%=productSkuCode%>',fnGetSelectedCheckBoxValues('accessoriesCodes'),$('#quantity').val(),$('#selectAccessorys').val());return false;" <c:if test="${addToCardDisabled}">disabled="disabled"</c:if>><fmt:message key="btn.txt.addtocart.on" /></a>
          </c:if>
            
          <c:if test="${flag!=null}">

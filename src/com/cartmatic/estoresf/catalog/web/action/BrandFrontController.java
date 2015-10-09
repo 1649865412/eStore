@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cartmatic.estore.branddynamic.service.BrandDynamicManager;
+import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.catalog.service.BrandManager;
 import com.cartmatic.estore.catalog.service.ProductMainManager;
 import com.cartmatic.estore.catalog.service.ProductManager;
@@ -25,6 +26,7 @@ import com.cartmatic.estore.common.model.catalog.SkuOptionValue;
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
+import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.extend.catalog.util.CharacterSort;
 /**
  * @TODO 暂时没有使用
@@ -39,6 +41,15 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	private CulturalInformationManager culturalInformationManager = null;
 	private BrandDynamicManager brandDynamicManager = null;
 	private ProductMainManager productMainManager=null;
+	public ShoppingcartManager getShoppingcartManager() {
+		return shoppingcartManager;
+	}
+
+	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
+		this.shoppingcartManager = shoppingcartManager;
+	}
+
+	private ShoppingcartManager shoppingcartManager = null;
 
 	
     public ProductMainManager getProductMainManager() {
@@ -75,6 +86,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	@RequestMapping(value="/designerList.html")
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv=new ModelAndView("designer/designerList");
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		List<Brand> brandList=brandManager.findAllBrands();
 		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
 		//mv.addObject("brandList", brandList);
@@ -87,6 +99,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	@RequestMapping(value="/designerProductList.html")
 	public ModelAndView designerProductList(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv=new ModelAndView("designer/designerProductList");
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		Integer brandId=Integer.parseInt(request.getParameter("brandId"));
 		Brand brand=brandManager.getById(brandId);
 		mv.addObject("brand", brand);
@@ -102,6 +115,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	@RequestMapping(value="/designer/initialsSelect.html")
 	public ModelAndView initialsSelect(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv=new ModelAndView("designer/designerList");
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		String initials = request.getParameter("initials");
 		List<Brand> brandList=brandManager.findByProperty("initials", initials);
 		mv.addObject("mapResult",CharacterSort.listBrandSort(brandList));
@@ -121,6 +135,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
     public ModelAndView designerDatialAction(HttpServletRequest request, HttpServletResponse response)	 
     {
     	ModelAndView mv = getModelAndView("designer/designerTemplate");
+    	RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		Integer brandId=Integer.parseInt(request.getParameter("brandId"));
 		if(brandId!=null){
 			Brand brand=brandManager.getById(brandId);
@@ -183,6 +198,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
     public ModelAndView searchAction(HttpServletRequest request, HttpServletResponse response,String q)	 
     {  
     	 ModelAndView mv = new ModelAndView("designer/designerList");
+    	 RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		  List<Brand>  result =  brandManager.getSearch(q);
 		  mv.addObject("mapResult",CharacterSort.listBrandSort(result));
 		  return mv;

@@ -114,6 +114,51 @@
 			<%--商品详情页底部广告--%>
 			<c:when test="${ad.advertisementId == 86}">
 				<img src="${mediaPath}a_and_d/${ad.url}" width="100%">
+				<div class="deta-bd-group3_info">
+                    	<h2>${ad.contextTitle}</h2>
+                        <p>${ad.context}</p>
+                </div><!--deta-bd-group3_info-->
+			</c:when>
+			
+			<%--商城首页左侧广告--%>
+			<c:when test="${ad.advertisementId == 87}">
+                <div class="mall_left" style="background-image:url(${mediaPath}a_and_d/${ad.url});">
+            	<div class="mrzt">
+                	<i></i>
+                	<div class="title-font">${ad.contextTitle}<br/>${ad.context}</div>
+                </div>
+            	<div class="mall_con">
+                	<div class="designer">
+                    	<a class="designer_left" href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}"><cartmatic:img isUrlOnly="false" url="${brand.icon}" mediaType="other" width="270" height="270" ></cartmatic:img></a>
+                        <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
+                        <div class="designer_right">
+                        	<div class="li1 title-font">每周主打品牌设计师</div>
+                            <div class="li2">${brand.designer}</div>
+                            <div class="li3">${brand.brandName}</div>
+                        </div>
+                        </a>
+                    </div>
+                    <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
+                    	<div class="designer_info"><c:out value="${fn:substring(brand.story, 0, 230)}......" /></div>
+                    </a>
+                    <div class="carefully_title title-font">每周主打品牌产品精选</div>
+                    <ul class="carefully_list list-unstyled c">
+                    	
+                    	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
+							<jsp:param name="typeName" value="feature_product" />
+							<jsp:param name="firstResult" value="0" />
+							<jsp:param name="maxResults" value="6" />
+							<jsp:param name="template" value="sales/include/recommendProduct4MainPage6" />
+							<jsp:param name="doAction" value="defaultAction" />
+							<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
+						</jsp:include>
+                    	
+                    </ul>
+                    <%--<div class="carefully_more list-unstyled c">
+	                    <a class="li3" href="${ctxPath}/weekly.html">点击查看更多每周主打产品 >></a>
+	                </div>
+                --%></div>
+            </div>
 			</c:when>
 			
 			<c:otherwise>

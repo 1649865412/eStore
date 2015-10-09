@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+<%@ page pageEncoding="utf-8"%>
+<%@page import="com.cartmatic.estore.common.model.catalog.ProductReview"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="com.cartmatic.estore.common.model.catalog.ProductDescription"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
-<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags/app"%>
 <html lang="zh-CN">
 	<head>
 		<meta charset="utf-8">
@@ -11,15 +17,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
 		<!-- Bootstrap -->
-		<%@ include file="../../decorators/include/styles7.jspf"%>
+		<%@ include file="../../decorators/include/javascripts.jspf"%>
+    	<%@ include file="../../decorators/include/styles7.jspf"%>
         <link href="${resPath}/styles/css/weekly.css" rel="stylesheet">
+        <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
+		<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/catalog/productDetail.js"></script>
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
           <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <script type="text/javascript">
+        <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript">
 							$(document).ready(function(){
 							  $(".addtolove").click(function(){
 							  $("#add_love").hide();
@@ -259,6 +269,7 @@
 				name+="."+$(this).attr("data-property");
 			}
 		});
+		alert("name="+name);
 		if(name!=""){
 			alert("请选择 "+name);
 		}
@@ -275,7 +286,7 @@
 	</head>
 
 	<body>
-	<div class="w-login">
+		<div class="w-login">
 			<div class="w-login-s"></div>
 			<div class="w-login-c">
 			<form method="post" name="loginForm" id="loginForm"
@@ -343,8 +354,7 @@
 						
 						--%>
 							<div class="error_box" id="error_box1"><fmt:message key="customer.login.fail" /></div>
-						<div class="error_box" id="error_box2"><fmt:message key="front.errorCode" /></div>
-						<div class="error_box" id="error_box3"><fmt:message key="customer.login.first" /></div>
+							<div class="error_box" id="error_box2"><fmt:message key="front.errorCode" /></div>
 					<div class="w-l-yzm">
 						<div class="w-l-itemscon">
 							<a href="javascript:;" onClick="return refreshImage('login',this)"><img id="imgValidationCode" src="${ctxPath}/jCaptcha.html?type=login" title="点击改变" /> </a>
@@ -380,7 +390,7 @@
 					</div>
 				--%></div>
 				</form>
-				<form id="customerRegisterForm" action="register.html" method="post">
+				<form id="customerRegisterForm" action="${ctxPath}/register.html" method="post">
 				<div class="w-login-right">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -453,12 +463,9 @@
 							</c:if>
 						</spring:bind>
 						
-						--%><c:if test="${param.error != null}">
-							<div class="error_box"><fmt:message key="customer.login.fail" /></div>
-						</c:if>
-						<c:if test="${param.errorCode != null}">
-							<div class="error_box"><fmt:message key="front.errorCode" /></div>
-						</c:if>
+						--%><div class="error_box" id="error_box1"><fmt:message key="customer.login.fail" /></div>
+						<div class="error_box" id="error_box2"><fmt:message key="front.errorCode" /></div>
+						<div class="error_box" id="error_box3"><fmt:message key="customer.login.first" /></div>
 					<div class="w-l-yzm">
 						<div class="w-l-itemscon">
 							<a href="javascript:;" onClick="return refreshImage('register',this)">
@@ -472,7 +479,7 @@
 									<!--2015-8 蔡蔡改动-->  
 										<input type="checkbox" id="checkboxre" onclick="checkbox1()"/> <a href="#" style="float:right; margin-top:2px; margin-left:5px;">我已阅读并接受四方街sifangstreet服务条款。</a>
 		                            <!--end of 蔡蔡改动-->   
-								</label>
+							</label>
 						</div>
 					</div>
 					<div class="w-l-btn">
@@ -492,11 +499,9 @@
 						</div>
 					</div>
 				</div>
-				</form>
 			</div>
 		</div>
-		<div class="w-nav w-nav-s navbar-fixed-top">
-          <div class="nav2-bg"> <!--2015-9 和其他一级页面不同的地方--> 
+		<div class="w-nav navbar-fixed-top index-nav w-nav-s">
 			<div class="container" style="position: relative;z-index: 1300;">
 				<div class="w-sea">
 					<div class="w-sea-list">
@@ -510,12 +515,13 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="w-car">
 					<div class="w-car-list">
 						<div class="w-car-sj"></div>
 						<div class="w-car-con">
 							<ul class="list-unstyled clearfix">
-							<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus" begin="0" end ="1">
+								<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus" begin="0" end ="1">
 								<c:if test="${item.isSaved==0 and empty item.parent}">
 									<li class="clearfix">
 									<div class="w-car-img">
@@ -528,18 +534,12 @@
 									</div>
 									</li>
 								</c:if>
-							</c:forEach>
+								</c:forEach>
 							</ul>
-							<div class="w-car-msg">
-								购物车里还有${shoppingcart.buyNowItemsCount <=2 || shoppingcart.buyNowItemsCount ==null?0:shoppingcart.buyNowItemsCount -2}件物品
-							</div>
+							<div class="w-car-msg">购物车里还有${shoppingcart.buyNowItemsCount <=2 || shoppingcart.buyNowItemsCount ==null?0:shoppingcart.buyNowItemsCount -2}件物品</div>
 							<div class="w-car-zj clearfix">
-								<div class="w-car-zjmc">
-									总计：
-								</div>
-								<div class="w-car-price">
-									￥ ${shoppingcart.subtotal == null?0:shoppingcart.subtotal}
-								</div>
+								<div class="w-car-zjmc">总计：</div>
+								<div class="w-car-price">￥ ${shoppingcart.subtotal == null?0:shoppingcart.subtotal}</div>
 							</div>
 							<div class="w-car-btn">
 								<a class="w-car-btn" href="/cart/shoppingcart.html">查看购物车</a>
@@ -552,43 +552,21 @@
 					</div>
 					<div class="col-md-6 col-lg-7">
 						<ul class="w-menu list-unstyled">
-							<li class="current">
-                            	<a href="${ctxPath}/MarketIndex.html"><span class="w-menu-on">商城</span></a>
-								<dl>
-                                	<dd class="current"><a href="${ctxPath}/MarketIndex.html"><i></i>首页</a></dd>
-                                    <dd>
-                                    	<a href="/marketDesignerList/index.html"><i></i>设计师</a>
-                                        <%--<div class="mem_dow">
-                                        	<i></i>
-                                            <a class="active" href="#">灯具</a>
-                                            <a href="#">户外用品</a>
-                                            <a href="#">慢教由問的行本</a>
-                                            <a href="#">創臺文的統苦</a>
-                                            <a href="#">那式根</a>
-                                            <a href="#">二度</a>
-                                            <a href="#">傳已經的然</a>
-                                        </div>
-                                    --%></dd>
-                                    <dd><a href="/man_catalog.html"><i></i>男装</a></dd>
-                                    <dd><a href="/wen_catalog.html"><i></i>女装</a></dd>
-                                    <dd><a href="/catalog_default_catalog.html"><i></i>所有产品</a></dd>
-                                </dl>
-                            </li>
-							<li><a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span></a>
+							<li><a href="${ctxPath}/MarketIndex.html" id="MarketIndex"><span>商城</span></a>
 							</li>
-							<li><a href="${ctxPath}/designerList.html"><span>设计师</span></a>
+							<li><a href="${ctxPath}/culturalinformation/index.html" id="culturalinformation"><span>文化资讯</span></a>
 							</li>
-							<li><a href="${ctxPath}/customer_service/_18.html"><span>关于我们</span></a>
+							<li><a href="${ctxPath}/designerList.html" id="designerList"><span>设计师</span></a>
 							</li>
-							<li><a href="${ctxPath}/coming.html"><span>线下店铺</span></a>
+							<li><a href="${ctxPath}/customer_service/_18.html" id="customer_service"><span>关于我们</span></a>
+							</li>
+							<li><a href="${ctxPath}/coming.html" id="coming"><span>线下店铺</span></a>
 							</li>
 						</ul>
 					</div>
 					<div class="col-md-4 col-lg-3" style="padding-bottom: 50px;">
 						<ul class="w-menu-right list-unstyled">
-							<li>
-								<a href="javascript:void(0)"><span class="w-gwc">购物车
-										(${shoppingcart.buyNowItemsCount})</span> </a>
+							<li><a href="javascript:void(0)"><span class="w-gwc">购物车 (${shoppingcart.buyNowItemsCount == null?0:shoppingcart.buyNowItemsCount})</span></a>
 							</li>
 							<li id="loginPromptHolderTemplateLogout">
 								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
@@ -598,28 +576,47 @@
 								<a href="/myaccount/account.html"><i class="fa fa-user"></i></a> (
 								<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;
 							</li>
-							<li>
-								<a href="#"><span class="w-search">搜索</span> </a>
+							<li><a href="#"><span class="w-search">搜索</span> </a>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="row visible-sm-block visible-xs-block w-menusm">
 					<div class="col-xs-4 col-sm-3 text-left">
-						<a href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+						<a href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 					</div>
 					<div class="col-xs-4 col-sm-6 w-logo text-center">
 						<a href="#">四方街</a>
 					</div>
-					<div class="col-xs-4 col-sm-3 text-right w-gwct"
-						style="padding-bottom: 50px;">
-						<a href="javascript:void(0)"><span class="w-gwc">购物车
-								(0)</span> </a>
+					<div class="col-xs-4 col-sm-3 text-right w-gwct" style="padding-bottom: 50px;">
+						<a href="javascript:void(0)"><span class="w-gwc">购物车 (0)</span></a>
 					</div>
 
 				</div>
 
 			</div>
+			<div class="w-menush visible-sm-block visible-xs-block">
+				<ul class="w-menush-items list-unstyled">
+					<li><a href="#"><span class="w-menu-on">商城</span></a>
+					</li>
+					<li><a href="list.html"><span>文化资讯</span></a>
+					</li>
+					<li><a href="#"><span>设计师</span></a>
+					</li>
+					<li><a href="#"><span>关于我们</span></a>
+					</li>
+					<li>
+						<a href="#"><span>线下店铺</span></a>
+					</li>
+					<li>
+						<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span class="w-menu-lrzc">注册</span></a>
+					</li>
+					<li>
+						<a href="#"><span>搜索</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
 
 		<div class="w-weekly">
         	<div class="w-weekly-hd">
@@ -628,6 +625,62 @@
                 </div>
             </div>
             
+            <!-----购买弹窗----->
+            <div class="w-buy-pop">
+            	<i class="fa fa-remove"></i>
+            	<div class="w-buy-pop-tit">请为本优惠套餐的产品选择尺码</div>
+                <ul class="row">
+                	<li>
+                    	<dl class="row">
+                        	<dt><img src="img/pic3.jpg" width="118" height="175"></dt>
+                            <dd>
+                            	<p>产品名称写在这里长很长很长很长很长很长很长</p>
+                                <p><span>郑荣凯&曾思宇</span></p>
+                                <p><em>品牌名</em></p>
+                                <p><b>￥ 50.00</b></p>
+                                <p><em>尺码</em></p>
+                                <p><a href="#" class="active">S</a><a href="#">XS</a><a href="#">M</a><a href="#">L</a></p>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                    	<dl class="row">
+                        	<dt><img src="img/pic3.jpg" width="118" height="175"></dt>
+                            <dd>
+                            	<p>产品名称写在这里长很长很长很长很长很长很长</p>
+                                <p><span>郑荣凯&曾思宇</span></p>
+                                <p><em>品牌名</em></p>
+                                <p><b>￥ 50.00</b></p>
+                                <p><em>尺码</em></p>
+                                <p><a href="#" class="active">S</a><a href="#">XS</a><a href="#">M</a><a href="#">L</a></p>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                    	<dl class="row">
+                        	<dt><img src="img/pic3.jpg" width="118" height="175"></dt>
+                            <dd>
+                            	<p>产品名称写在这里长很长很长很长很长很长很长</p>
+                                <p><span>郑荣凯&曾思宇</span></p>
+                                <p><em>品牌名</em></p>
+                                <p><b>￥ 50.00</b></p>
+                                <p><em>尺码</em></p>
+                                <p><a href="#" class="active">S</a><a href="#">XS</a><a href="#">M</a><a href="#">L</a></p>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+                <div class="w-buy-pop-number">
+                	<span>我要购买</span>
+                    <a href="#"><em class="fa fa-minus"></em></a>
+                    <input name="" type="text" value="1">
+                    <a href="#"><em class="fa fa-plus"></em></a>
+                    套
+                    <p><a href="#" class="buy-pop-btn">加入购物车</a></p>
+                </div>
+            </div>
+            <div class="w-buy-pop-mask"></div>
+            <!-----购买弹窗end----->
             
             <div class="w-weekly-bd">
             	<div class="bd-tit">${tempCatalog.weekOnNewTitle}</div>
@@ -647,76 +700,40 @@
                 </div>
             </div>
         </div>
-        <div class="w-footer">
+        
+		<div class="w-footer">
 			<div class="container">
 				<div class="row">
 					<div class="w-footer-con">
 						<div class="w-footer-item w-footer-links col-lg-4">
 							<span class="w-links">
-							<a href="${ctxPath}/customer_service/_18.html">关于我们 | </a>
-							<a href="${ctxPath}/coming.html">隐私保护政策 | </a>
-							<a href="${ctxPath}/coming.html">使用条款 | </a>
-							<a href="${ctxPath}/coming.html">商家入驻 | </a>
-							<a href="${ctxPath}/coming.html">友情链接 | </a>
+							<a href="#">关于我们 | </a>
+							<a href="#">隐私保护政策 | </a>
+							<a href="#">使用条款 | </a>
+							<a href="#">商家入驻 | </a>
+							<a href="#">友情链接 | </a>
+							<a href="#">优品联盟</a>
 						</span>
-                     <!--2015-8 蔡蔡改动-->
-							<span>Copyright©2013-2014 &nbsp;SifangStreet四方街版权所有&nbsp;<a href="http://www.miibeian.gov.cn/">粤ICP备13075482号-1</a></span>
-                            
-                      <!--end of 蔡蔡改动-->
-							<a href="http://www.anquan.org/s/www.sifangstreet.com" name="bIe7hLFwEsIGD6e0PKwvzqD2yXwpSzfTo6hyXQFEOOuySFBo9P" >安全联盟、百度</a>
-							 <script type="text/javascript">
-									var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-									document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5987b6886920e65d633daea3a74b6ffe' type='text/javascript'%3E%3C/script%3E"));
-							</script>
-						</div><!--w-footer-item w-footer-links col-lg-4-->
+							<span>Copyright©2013-2014 SifangStreet四方街版权所有 粤ICP备13075482号-1</span>
+							<span class="w-aqlm">安全联盟 百度统计 <img src="img/aqlm.png" /></span>
+						</div>
 						<div class="w-footer-item col-lg-4">
 							<div class="w-footer-email">
-                             <!--2015-8 蔡蔡改动---->
-								<input type="text" class="email_txt" required placeholder="输入邮箱地址订阅最新资讯"/>
-								<input type="submit" class="email_button" value="&rarr;" src="/resources/images/icon/btn_form.jpg" onclick="saveUserRss()">
-                             <!--end of 蔡蔡改动-->
-                             <script>
-								function saveUserRss(){
-									var userName = $("#userName").val();
-									var email = $("#email").val();
-									$.post(__ctxPath+"/customer/addUserRss.html",{userName:userName,email:email},function(result){
-										if(result.status==1){
-											alert("订阅成功！");
-										}else{
-										}
-									},"json");
-								}
-							</script>
+								<input type="text" name="" value="输入邮箱地址订阅最新资讯" />
+								<a>
+									<i class="fa fa-arrow-right"></i>
+								</a>
 							</div>
-						</div><!--w-footer-item col-lg-4-->
+						</div>
 						<div class="w-footer-item w-footer-con col-lg-4">
 							<span>联系我们</span>
 							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五 9:30-18:30 节假日休息</span>
-                            <!--2015-8 蔡蔡改动-->
-							<span>
-                              <!-- WPA Button Begin -->
-
-                               <!--<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAxODYxMl8yMDgwNTlfNDAwNjYxNTY3N18"></script> -->
-                              <!--<a target="_blank" href ="http://webim.qiao.baidu.com//im/index?siteid=4706350&ucid=7282853"><img src="/resources/images/baidushangqiao.png"/></a>-->
-                              <a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=c3cc32bebc6899c096fda967ed082d5ca51abca8944190c6"><img border="0"  src="http://wpa.qq.com/imgd?IDKEY=c3cc32bebc6899c096fda967ed082d5ca51abca8944190c6&pic=51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
-                              <!-- WPA Button End -->
-                              <a target="_blank" href="http://weibo.com/sifangstreet" class="social_link">
-									<i class="fa fa-weibo fa-lg"></i>
-							  </a>
-                               
-                               <a target="_blank" href="http://www.sifangstreet.com/resources/images/weixin.jpg" class="social_link">
-									<i class="fa fa-weixin fa-lg"></i>
-							  </a>
-
-                              
-							</span>
-                            <!--end of 蔡蔡改动-->
-						</div><!--w-footer-item w-footer-con col-lg-4-->
-					</div><!--w-footer-con-->
-				</div><!--row-->
-			</div><!--container-->
-		</div><!--w-footer-->
-        
+							<span><img src="img/yj.png"/></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>

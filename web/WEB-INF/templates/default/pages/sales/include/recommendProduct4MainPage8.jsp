@@ -65,7 +65,7 @@
 		            <span class="cart_close">
 						关闭
 					</span>
-		            <product:addToCartSmall productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
+		            <product:addToCartSmall  productSkuCode="${product.defaultProductSku.productSkuCode}"  productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
                     </div>
                     <p class="li6">
                         <!-- JiaThis Button BEGIN -->

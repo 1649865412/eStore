@@ -17,13 +17,7 @@
 		<script type="text/javascript"
 			src="${ctxPath}/scripts/jquery/plugins/validation/jquery.validate.js"></script>
 		<!-- Bootstrap -->
-		<link rel="stylesheet"
-			href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
+		<%@ include file="../decorators/include/styles7.jspf"%>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
@@ -206,6 +200,8 @@
 			$("#p_telephone").hide();
 			return true;
 		}
+		$("#p_telephone").show();
+		return false;
 	}
 
 	function checkRegister(){
@@ -508,9 +504,9 @@
 								<button class="btn btn-default signup" type="submit" id="button1" style="display: none;">
 									注册
 								</button>
-								<span class="btn btn-default un-signup" type="" id="button2">
-									无法注册
-								</span>
+								<button class="btn btn-default signup" type="submit" id="button2" disabled="true">
+									注册
+								</button>
 							</div>
 						</div>
 

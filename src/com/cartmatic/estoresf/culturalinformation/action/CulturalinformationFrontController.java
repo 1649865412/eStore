@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
 import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.service.SolrService;
@@ -27,6 +28,7 @@ import com.cartmatic.estore.core.view.AjaxView;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
 import com.cartmatic.estore.monthlycultural.service.MonthlyCulturalManager;
 import com.cartmatic.estore.textsearch.model.SearchResult;
+import com.cartmatic.estore.webapp.util.RequestUtil;
 
 /**
  * 文化资讯模块查询 <code>CulturalinformationFrontController.java</code>
@@ -40,9 +42,18 @@ import com.cartmatic.estore.textsearch.model.SearchResult;
 @Controller
 public class CulturalinformationFrontController extends
 		GenericStoreFrontController<CulturalInformation> {
+	public ShoppingcartManager getShoppingcartManager() {
+		return shoppingcartManager;
+	}
+
+	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
+		this.shoppingcartManager = shoppingcartManager;
+	}
+
 	private CulturalInformationManager culturalInformationManager = null;
 	private MonthlyCulturalManager monthlyCulturalManager = null;
 	private SolrService solr = null;
+	private ShoppingcartManager shoppingcartManager = null;
 
 	public MonthlyCulturalManager getMonthlyCulturalManager() {
 		return monthlyCulturalManager;
@@ -170,6 +181,7 @@ public class CulturalinformationFrontController extends
 	public ModelAndView getCulTypeResultList(HttpServletRequest request,
 			HttpServletResponse response, String type) {
 		ModelAndView mv = new ModelAndView("cultura/culturalinformation");
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
 		List<CulturalInformation> culturalinformationList = culturalInformationManager
 				.getResutlType(type);
 		mv.addObject("culturalinformationList", culturalinformationList);

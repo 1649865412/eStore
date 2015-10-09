@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 
 		<!-- Bootstrap -->
+		<%@ include file="../decorators/include/javascripts.jspf"%>
 		<script src="${ctxPath}/scripts/jquery/js/global_brain.js"></script>
 	    <script src="${ctxPath}/scripts/jquery/js/css_browser_selector.js"></script>
 	    <link href="${ctxPath}/scripts/jquery/js/colorbox/colorbox.css" rel="stylesheet" />
@@ -41,20 +42,21 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-							$(document).ready(function(){
-							  $(".addtolove").click(function(){
-							  $("#add_love").hide();
-							  $("#love_count").show();
-							  });
-							});
-							function changeToOne(obj){
-								if($(obj).val() == ""){
-									$(obj).val(1);
+    <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+			<script type="text/javascript">
+								$(document).ready(function(){
+								  $(".addtolove").click(function(){
+								  $("#add_love").hide();
+								  $("#love_count").show();
+								  });
+								});
+								function changeToOne(obj){
+									if($(obj).val() == ""){
+										$(obj).val(1);
+									}
 								}
-							}
-							</script>
-    <script type="text/javascript">
+								</script>
+	    <script type="text/javascript">
 		$(document).ready(function(){
 			var url =""+self.location.href;
 			var value = ("<a href='/myaccount/account.html?url="+url+"'><i class='fa fa-user'></i></a> ("+
@@ -67,6 +69,7 @@
 			
 			var tag = getCookie("tag");
 			var error = getCookie("error");
+			var errorCode = getCookie("errorCode");
 			if(tag!=""&&tag!=null){
 					$(".w-login").show();
 					$(".w-login-left").show();
@@ -83,6 +86,12 @@
 						$("#error_box2").hide();
 						$("#error_box3").show();
 						delCookie("flag");
+				}
+					if(errorCode!=""&&errorCode!=null){
+						$("#error_box1").hide();
+						$("#error_box2").show();
+						$("#error_box3").hide();
+						delCookie("errorCode");
 				}
 			}
 			
@@ -151,12 +160,22 @@
 		return (!loginRequired || isLogined()) && getCookie("UEMAIL") || "";
 	}
 
+	function checkLogin(){
+		if(!userName()||!passWord()||!validateMethod()){
+			return false;
+			}else{
+				return true;
+				}
+		} 
+
 	function userName() {
 		var username = getLoginUserEmail(false);
 		if ($("#j_username").val().trim().length == 0) {
 			$("#p_username").show();
+			return false;
 		}else{
 			$("#p_username").hide();
+			return true;
 		}
 	}
 
@@ -165,12 +184,15 @@
 		if (password.length == 0) {
 			$("#p_password").show();
 			$("#q_password").hide();
+			return false;
 		}else if(password.length>0 && password.length<6){
 			$("#p_password").hide();
 			$("#q_password").show();
+			return false;
 		}else{
 			$("#p_password").hide();
 			$("#q_password").hide();
+			return true;
 		}
 	}
 
@@ -178,8 +200,10 @@
 		var validatecode = $("#j_validateCode").val().trim();
 		if(validatecode.length ==0){
 			$("#p_validateCode").show();
+			return false;
 		}else{
 			$("#p_validateCode").hide();
+			return true;
 		}
 	}
 
@@ -187,44 +211,58 @@
 		var validatecode = $("#k_validateCode").val().trim();
 		if(validatecode.length ==0){
 			$("#q_validateCode").show();
+			return false;
 		}else{
 			$("#q_validateCode").hide();
+			return true;
 		}
 	}
 
 	function emailPhone() {
 		if ($("#email").val().trim().length == 0) {
 			$("#p_email").show();
+			return false;
 		}else{
 			$("#p_email").hide();
+			return true;
 		}
 	}
 
 	function telePhone() {
+		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
 		if ($("#telephone").val().trim().length == 0) {
 			$("#p_telephone").show();
-		}else{
+			return false;
+		}else if(reg.test($("#telephone").val().trim())){
 			$("#p_telephone").hide();
+			return true;
 		}
-		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-		 if (reg.test($("#telephone").val().trim())) {
-			 $("#p_telephone").hide();
-		 }else{
-			 $("#p_telephone").show();
-		 };
+		$("#p_telephone").show();
+		return false;
 	}
+
+	function checkRegister(){
+		if(!emailPhone()||!telePhone()||!passWord2()||!rePassWord()||!validateCode2()){
+			return false;
+			}else{
+				return true;
+				}
+		} 
 
 	function passWord2() {
 		var password = $("#password").val().trim();
 		if (password.length == 0) {
 			$("#a_password").show();
 			$("#o_password").hide();
+			return false;
 		}else if(password.length>0 && password.length<6){
 			$("#a_password").hide();
 			$("#o_password").show();
+			return false;
 		}else{
 			$("#a_password").hide();
 			$("#o_password").hide();
+			return true;
 		}
 	}
 
@@ -234,12 +272,15 @@
 		if (rePassword.length == 0) {
 			$("#p_rePassword").show();
 			$("#q_rePassword").hide();
+			return false;
 		}else if(rePassword !=password){
 			$("#p_rePassword").hide();
 			$("#q_rePassword").show();
+			return false;
 		}else{
 			$("#p_rePassword").hide();
 			$("#q_rePassword").hide();
+			return true;
 		}
 	}
 
@@ -272,21 +313,6 @@
 		}
 		return unescape(cookieValue);
 	}
-	function checkAddProductToCart(){
-		alert("hello1");
-		var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
-		var name="";
-		skuOptions.each(function(i){
-			if($(this).find("li.tb-selected").length==0){
-				name+="."+$(this).attr("data-property");
-			}
-		});
-		if(name!=""){
-			alert("请选择 "+name);
-		}
-		return name=="";
-	}
-	
 	jQuery(document).ready(function($) {
 		$('.grid-container').gridQuote( {
 			slideshow : false,
@@ -301,7 +327,7 @@
 			<div class="w-login-s"></div>
 			<div class="w-login-c">
 			<form method="post" name="loginForm" id="loginForm"
-					action="${ctxPath}/index_check.html" >
+					action="${ctxPath}/index_check.html" onsubmit="return checkLogin()">
 				<div class="w-login-left">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -402,7 +428,7 @@
 					</div>
 				--%></div>
 				</form>
-				<form id="customerRegisterForm" action="register.html" method="post">
+				<form id="customerRegisterForm" action="register.html" method="post" onsubmit="return checkRegister()">
 				<div class="w-login-right">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -502,9 +528,9 @@
 								<button class="btn btn-default signup" type="submit" id="button1" style="display: none;">
 									注册
 								</button>
-								<span class="btn btn-default un-signup" type="" id="button2">
-									无法注册
-								</span>
+								<button class="btn btn-default signup" type="submit" id="button2" disabled="true">
+									注册
+								</button>
 							</div>
 					</div>
 
@@ -610,7 +636,7 @@
 						<ul class="w-menu-right list-unstyled">
 							<li>
 								<a href="javascript:void(0)"><span class="w-gwc">购物车
-										(${shoppingcart.buyNowItemsCount})</span> </a>
+										(${shoppingcart.buyNowItemsCount == null || shoppingcart.buyNowItemsCount == "" ? 0 : shoppingcart.buyNowItemsCount})</span> </a>
 							</li>
 							<li id="loginPromptHolderTemplateLogout">
 								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
@@ -713,7 +739,8 @@
         </div><!--index_show end-->
         <div class="mall c" style="background:url(../resources/styles/img/authors/3.jpg) no-repeat">
         <c:if test="${not empty brand}">
-        	<div class="mall_left" style="background-image:url(../resources/styles/img/authors/3.jpg);">
+        	<content:showAdNew adPositionType="mainadNewMarketLeft" />
+        	<%--<div class="mall_left" style="background-image:url(../resources/styles/img/authors/3.jpg);">
             	<div class="mrzt">
                 	<i></i>
                 	<div class="title-font">每周主打<br/>初夏清新穿搭</div>
@@ -746,11 +773,11 @@
                     	
                     </ul>
                     <div class="carefully_more list-unstyled c">
-	                    <a class="li3" href="#">点击查看更多每周主打产品 >></a>
+	                    <a class="li3" href="${ctxPath}/weekly.html">点击查看更多每周主打产品 >></a>
 	                </div>
                 </div>
             </div>
-            </c:if>
+            --%></c:if>
             <ul class="mall_right list-unstyled">
             
             	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
@@ -768,7 +795,7 @@
         <div class="news_date">
         	<h3 class="li1"><a href="#" class="title-font">${tempCatalog.weekOnNewTitle}</a></h3>
             <p class="li2">${tempCatalog.weekOnNewContent}</p>
-			<a class="li3" href="#">查看更多<i></i></a>
+			<a class="li3" href="${ctxPath}/catalog_default_catalog.html">查看更多</a>
         </div>
 	        <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
 								<jsp:param name="typeName" value="best_wholesale_deals" />
@@ -797,100 +824,38 @@
             
             </ul>
         </div>
-        <div class="product_more"><a href="${ctxPath}/weekly.html">点击查看更多</a></div>
+        <div class="product_more"><a href="${ctxPath}/catalog_default_catalog.html">点击查看更多</a></div>
         <!-- 加入购物车成功 -->
-	     <div style="display:none">
-	                    <div id="cart_box" class="after_addtocart">
-	                        <div class="w-cart-header">
-	                            <span><i class="fa fa-check-circle-o"></i>该产品已经成功加入您的购物车</span>
-	                            <hr class="aftercart_hr"/>
-	                        </div><!--w-cart-header-->
-	                        <div class="w-cart-body">
-	                            <div class="addcart_top">
-	                                <div class="addcart_part">
-	                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
-	                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
-	                                </div><!--addcart_part-->
-	                                <div class="addcart_sku">
-	                                  <ul class="sku_row">
-	                                    <li class="sku_list">
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p>
-	                                            <b>￥ 50.00</b>
-	                                        </div>
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p><b>￥ 50.00</b></p>
-	                                        </div>
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p><b>￥ 50.00</b></p>
-	                                        </div>
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p><b>￥ 50.00</b></p>
-	                                        </div>
-	                                    </li>
-	                                  </ul>
-	                                </div><!--addcart_sku-->
-	                            </div><!--addcart_top-->
-	                            <div class="addcart_top">
-	                                <div class="addcart_part">
-	                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
-	                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
-	                                </div><!--addcart_part-->
-	                                <div class="addcart_sku">
-	                                  <ul class="sku_row">
-	                                    <li class="sku_list">
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p>
-	                                            <b>￥ 50.00</b>
-	                                        </div>
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p><b>￥ 50.00</b></p>
-	                                        </div>
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p><b>￥ 50.00</b></p>
-	                                        </div>
-	                                        <div class="collocation-item addpro">
-	                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-	                                            <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-	                                            <p><span>郑荣凯&曾思宇</span></p>
-	                                            <p><em>品牌名</em></p>
-	                                            <p><b>￥ 50.00</b></p>
-	                                        </div>
-	                                    </li>
-	                                  </ul>
-	                                </div><!--addcart_sku-->
-	                            </div><!--addcart_top-->
-	                        </div><!--w-cart-body-->
-	                    </div><!--cart_box-->
-	                </div>
+	    <div style="display:none">
+                    <div id="cart_box" class="after_addtocart">
+                        <div class="w-cart-header">
+                            <span><i class="fa fa-check-circle-o"></i>该产品已经成功加入您的购物车</span>
+                            <hr class="aftercart_hr"/>
+                        </div><!--w-cart-header-->
+                        <div class="w-cart-body">
+                            <div class="addcart_top">
+                                <div class="addcart_part">
+                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
+                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
+                                </div><!--addcart_part-->
+                                <div class="addcart_sku">
+                                  <ul class="sku_row">
+                                    <li class="sku_list">
+                                    	<jsp:include flush="true" page="/sales/recommendedProduct.html">
+								             <jsp:param name="typeName" value="also_buy" />
+								             <jsp:param name="firstResult" value="0" />
+								             <jsp:param name="maxResults" value="7" />
+								             <jsp:param name="template" value="sales/include/recommendProductContentNew2"/>
+								             <jsp:param name="doAction" value="defaultAction" />
+								             <jsp:param name="sourceId" value="${product.productId}" />
+								         </jsp:include>
+                                    </li>
+                                  </ul>
+                                </div><!--addcart_sku-->
+                            </div><!--addcart_top-->
+                        </div><!--w-cart-body-->
+                    </div><!--cart_box-->
+                </div>
 	     <!-- End 加入购物车成功 -->
 		<div class="w-footer">
 			<div class="container">

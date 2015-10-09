@@ -215,20 +215,20 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
       <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
-			<script type="text/javascript">
-								$(document).ready(function(){
-								  $(".addtolove").click(function(){
-								  $("#add_love").hide();
-								  $("#love_count").show();
-								  });
-								});
-								function changeToOne(obj){
-									if($(obj).val() == ""){
-										$(obj).val(1);
-									}
+	<script type="text/javascript">
+							$(document).ready(function(){
+							  $(".addtolove").click(function(){
+							  $("#add_love").hide();
+							  $("#love_count").show();
+							  });
+							});
+							function changeToOne(obj){
+								if($(obj).val() == ""){
+									$(obj).val(1);
 								}
-								</script>
-	    <script type="text/javascript">
+							}
+							</script>
+    <script type="text/javascript">
 		$(document).ready(function(){
 			var url =""+self.location.href;
 			var value = ("<a href='/myaccount/account.html?url="+url+"'><i class='fa fa-user'></i></a> ("+
@@ -241,7 +241,6 @@
 			
 			var tag = getCookie("tag");
 			var error = getCookie("error");
-			var errorCode = getCookie("errorCode");
 			if(tag!=""&&tag!=null){
 					$(".w-login").show();
 					$(".w-login-left").show();
@@ -258,12 +257,6 @@
 						$("#error_box2").hide();
 						$("#error_box3").show();
 						delCookie("flag");
-				}
-					if(errorCode!=""&&errorCode!=null){
-						$("#error_box1").hide();
-						$("#error_box2").show();
-						$("#error_box3").hide();
-						delCookie("errorCode");
 				}
 			}
 			
@@ -332,22 +325,12 @@
 		return (!loginRequired || isLogined()) && getCookie("UEMAIL") || "";
 	}
 
-	function checkLogin(){
-		if(!userName()||!passWord()||!validateMethod()){
-			return false;
-			}else{
-				return true;
-				}
-		} 
-
 	function userName() {
 		var username = getLoginUserEmail(false);
 		if ($("#j_username").val().trim().length == 0) {
 			$("#p_username").show();
-			return false;
 		}else{
 			$("#p_username").hide();
-			return true;
 		}
 	}
 
@@ -356,15 +339,12 @@
 		if (password.length == 0) {
 			$("#p_password").show();
 			$("#q_password").hide();
-			return false;
 		}else if(password.length>0 && password.length<6){
 			$("#p_password").hide();
 			$("#q_password").show();
-			return false;
 		}else{
 			$("#p_password").hide();
 			$("#q_password").hide();
-			return true;
 		}
 	}
 
@@ -372,10 +352,8 @@
 		var validatecode = $("#j_validateCode").val().trim();
 		if(validatecode.length ==0){
 			$("#p_validateCode").show();
-			return false;
 		}else{
 			$("#p_validateCode").hide();
-			return true;
 		}
 	}
 
@@ -383,58 +361,44 @@
 		var validatecode = $("#k_validateCode").val().trim();
 		if(validatecode.length ==0){
 			$("#q_validateCode").show();
-			return false;
 		}else{
 			$("#q_validateCode").hide();
-			return true;
 		}
 	}
 
 	function emailPhone() {
 		if ($("#email").val().trim().length == 0) {
 			$("#p_email").show();
-			return false;
 		}else{
 			$("#p_email").hide();
-			return true;
 		}
 	}
 
 	function telePhone() {
-		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
 		if ($("#telephone").val().trim().length == 0) {
 			$("#p_telephone").show();
-			return false;
-		}else if(reg.test($("#telephone").val().trim())){
+		}else{
 			$("#p_telephone").hide();
-			return true;
 		}
-		$("#p_telephone").show();
-		return false;
+		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		 if (reg.test($("#telephone").val().trim())) {
+			 $("#p_telephone").hide();
+		 }else{
+			 $("#p_telephone").show();
+		 };
 	}
-
-	function checkRegister(){
-		if(!emailPhone()||!telePhone()||!passWord2()||!rePassWord()||!validateCode2()){
-			return false;
-			}else{
-				return true;
-				}
-		} 
 
 	function passWord2() {
 		var password = $("#password").val().trim();
 		if (password.length == 0) {
 			$("#a_password").show();
 			$("#o_password").hide();
-			return false;
 		}else if(password.length>0 && password.length<6){
 			$("#a_password").hide();
 			$("#o_password").show();
-			return false;
 		}else{
 			$("#a_password").hide();
 			$("#o_password").hide();
-			return true;
 		}
 	}
 
@@ -444,15 +408,12 @@
 		if (rePassword.length == 0) {
 			$("#p_rePassword").show();
 			$("#q_rePassword").hide();
-			return false;
 		}else if(rePassword !=password){
 			$("#p_rePassword").hide();
 			$("#q_rePassword").show();
-			return false;
 		}else{
 			$("#p_rePassword").hide();
 			$("#q_rePassword").hide();
-			return true;
 		}
 	}
 
@@ -485,6 +446,20 @@
 		}
 		return unescape(cookieValue);
 	}
+	function checkAddProductToCart(){
+		var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
+		var name="";
+		skuOptions.each(function(i){
+			if($(this).find("li.tb-selected").length==0){
+				name+="."+$(this).attr("data-property");
+			}
+		});
+		if(name!=""){
+			alert("请选择 "+name);
+		}
+		return name=="";
+	}
+	
 	jQuery(document).ready(function($) {
 		$('.grid-container').gridQuote( {
 			slideshow : false,
@@ -499,7 +474,7 @@
 			<div class="w-login-s"></div>
 			<div class="w-login-c">
 			<form method="post" name="loginForm" id="loginForm"
-					action="${ctxPath}/index_check.html" onsubmit="return checkLogin()">
+					action="${ctxPath}/index_check.html" >
 				<div class="w-login-left">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -600,7 +575,7 @@
 					</div>
 				--%></div>
 				</form>
-				<form id="customerRegisterForm" action="register.html" method="post" onsubmit="return checkRegister()">
+				<form id="customerRegisterForm" action="register.html" method="post">
 				<div class="w-login-right">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -700,9 +675,9 @@
 								<button class="btn btn-default signup" type="submit" id="button1" style="display: none;">
 									注册
 								</button>
-								<button class="btn btn-default signup" type="submit" id="button2" disabled="true">
-									注册
-								</button>
+								<span class="btn btn-default un-signup" type="" id="button2">
+									无法注册
+								</span>
 							</div>
 					</div>
 
@@ -775,7 +750,7 @@
 							<li class="current">
                             	<a href="${ctxPath}/MarketIndex.html"><span class="w-menu-on">商城</span></a>
 								<dl>
-                                	<dd class="current"><a href="${ctxPath}/MarketIndex.html"><i></i>首页</a></dd>
+                                	<dd><a href="${ctxPath}/MarketIndex.html"><i></i>首页</a></dd>
                                     <dd>
                                     	<a href="/marketDesignerList/index.html"><i></i>设计师</a>
                                         <%--<div class="mem_dow">
@@ -896,11 +871,8 @@
 			</div>
 			</div><!--nav2-bg--><!--2015-9 和其他一级页面不同的地方--> 
 		</div>
-		<!--页面主内容-->
 		<div class="w-pro-deta">
-            <!--产品详情部分-->
-        	<div class="w-pro-deta-hd row"><!--2015-9 此处修改了-蔡蔡-->
-                <!--产品图片-->
+        	<div class="w-pro-deta-hd row">
             	<div class="w-pro-pic">
                     <!-- Swiper -->
                     <div class="swiper-container">
@@ -923,8 +895,6 @@
                         <div class="swiper-button-prev"></div>
                     </div>
                 </div>
-                <!--end of 产品图片-->
-                <!--产品信息-->
             	<div class="w-pro-info">
                 	<div class="w-pro-info-new">NEW</div>
                     <div class="w-pro-info-tit">${product.productName}</div>
@@ -943,7 +913,6 @@
 		           <input type="hidden" id="product_simpleName" value="<app:interceptString str="${product.productName}" length="50"></app:interceptString>" />
 		           <input type="hidden" id="productLinkUrl" value="${uri}" />
 		           <input type="hidden" id="listPrice" value="${product.defaultProductSku.listPrice}" />
-                    <!--分页tab-->
                     <div class="w-pro-info-tabs">
                     	<ul id="tabs" class="row">
                         	<li><a href="#" name="#tab1">产品信息</a></li>
@@ -1008,8 +977,6 @@
                         </div>
                         <div class="w-pro-info-btn addbefore"><a href="#">加入购物车</a></div>
                     </div>
-                    <!--end of 分页tab-->
-                    <!--选择颜色等-->
                     <div id="skuOptions" class="w-pro-car">
                     	<em class="fa fa-close"></em>
 		                 <c:forEach items="${productSkuOptionAndValues}" var="productSkuOptionAndValue">
@@ -1099,14 +1066,26 @@
 					           </li>
 		                 <product:addToCart productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
 		           	</div>
-                    <!--end of 选择颜色等-->
-                </div><!--w-pro-info-->
-                <!--end of 产品信息-->
-            </div><!--w-pro-deta-hd row-->
-            <!--end of 产品详情部分-->
-            <!--下方集合-->
-            <div class="w-pro-deta-bd">
-                <!-- 加入购物车成功 -->
+		           	
+		           	
+                </div>
+            </div>
+                <div class="deta-bd-group2">
+                	<h2>达人秀</h2>
+                	<div class="swiper2">
+                        <div class="swiper-wrapper">
+                        <c:forEach items="${product.productTalenshowValues}" var="productTalenshowValues">
+                            <div class="swiper-slide"><img src="${mediaPath}other/${productTalenshowValues.talentShow.img}"><div class="swiper2-mask"><div class="swiper2-pop"><p>${productTalenshowValues.talentShow.content}</p><p><fmt:formatDate value="${productTalenshowValues.talentShow.releaseTime}" type="date" dateStyle="long"/>上传</p></div></div></div>
+                        </c:forEach>
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next1"><a href="#"><i class="fa fa-caret-right"></i></a></div>
+                        <div class="swiper-button-prev1"><a href="#"><i class="fa fa-caret-left"></i></a></div>
+                    </div>
+                </div>
+                <div class="deta-bd-group3"><content:showAdNew adPositionType="product" /></div>
+        </div>
+		<!-- 加入购物车成功 -->
                 <div style="display:none">
                     <div id="cart_box" class="after_addtocart">
                         <div class="w-cart-header">
@@ -1122,14 +1101,76 @@
                                 <div class="addcart_sku">
                                   <ul class="sku_row">
                                     <li class="sku_list">
-                                    	<jsp:include flush="true" page="/sales/recommendedProduct.html">
-								             <jsp:param name="typeName" value="also_buy" />
-								             <jsp:param name="firstResult" value="0" />
-								             <jsp:param name="maxResults" value="7" />
-								             <jsp:param name="template" value="sales/include/recommendProductContentNew2"/>
-								             <jsp:param name="doAction" value="defaultAction" />
-								             <jsp:param name="sourceId" value="${product.productId}" />
-								         </jsp:include>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p>
+                                            <b>￥ 50.00</b>
+                                        </div>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p><b>￥ 50.00</b></p>
+                                        </div>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p><b>￥ 50.00</b></p>
+                                        </div>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p><b>￥ 50.00</b></p>
+                                        </div>
+                                    </li>
+                                  </ul>
+                                </div><!--addcart_sku-->
+                            </div><!--addcart_top-->
+                            <div class="addcart_top">
+                                <div class="addcart_part">
+                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
+                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
+                                </div><!--addcart_part-->
+                                <div class="addcart_sku">
+                                  <ul class="sku_row">
+                                    <li class="sku_list">
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p>
+                                            <b>￥ 50.00</b>
+                                        </div>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p><b>￥ 50.00</b></p>
+                                        </div>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p><b>￥ 50.00</b></p>
+                                        </div>
+                                        <div class="collocation-item addpro">
+                                            <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
+                                            <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
+                                            <p><span>郑荣凯&曾思宇</span></p>
+                                            <p><em>品牌名</em></p>
+                                            <p><b>￥ 50.00</b></p>
+                                        </div>
                                     </li>
                                   </ul>
                                 </div><!--addcart_sku-->
@@ -1138,25 +1179,6 @@
                     </div><!--cart_box-->
                 </div>
                 <!-- End 加入购物车成功 -->
-                <!--达人秀-->
-                <div class="deta-bd-group2">
-                	<h2>达人秀</h2>
-                	<div class="swiper2">
-                        <div class="swiper-wrapper">
-                        <c:forEach items="${product.productTalenshowValues}" var="productTalenshowValues">
-                            <div class="swiper-slide"><img src="${mediaPath}other/${productTalenshowValues.talentShow.img}"><div class="swiper2-mask"><div class="swiper2-pop"><p>${productTalenshowValues.talentShow.content}</p><p><fmt:formatDate value="${productTalenshowValues.talentShow.releaseTime}" type="date" dateStyle="long"/>上传</p></div></div></div>
-                        </c:forEach>
-                        </div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next1"><a href="#"><i class="fa fa-caret-right"></i></a></div>
-                        <div class="swiper-button-prev1"><a href="#"><i class="fa fa-caret-left"></i></a></div>
-                    </div>
-                </div>
-                <!--end of 达人秀-->
-                <!--站内广告-->
-                <div class="deta-bd-group3"><content:showAdNew adPositionType="product" /></div>
-            <!--end of 下方集合-->
-        </div><!--w-pro-deta-->
         <div class="w-footer">
 			<div class="container">
 				<div class="row">
@@ -1233,52 +1255,6 @@
 		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/slider.js"></script>
         <script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script> 
-        <script>
-	function index_login(){
-		  var url =""+self.location.href;
-		   $("#papeurl").val(url);
-		    //alert( $("#papeurl").val());
-		    $("#loginForm").submit();
-		}
-		
-	var swiper = new Swiper('.swiper-container', {
-		nextButton : '.swiper-page-next',
-		prevButton : '.swiper-page-prev',
-		paginationClickable : true,
-		spaceBetween : 0,
-		mousewheelControl : false,
-		//							autoplay: 5000,
-		speed : 500,
-		onInit : function(swiper) {
-			swiperAnimateCache(swiper);
-			swiperAnimate(swiper);
-		},
-		onSlideChangeEnd : function(swiper) {
-			swiperAnimate(swiper);
-		},
-		onTransitionEnd : function(swiper) {
-			swiperAnimate(swiper);
-		}
-	});
-
-	function refreshImage(type, obj) {
-		//var image=document.getElementById("imgValidationCode");
-		var image = $(obj).children()[0];
-		var url = "${ctxPath}/jCaptcha.html?type=" + type;
-		var xmlHttpReq = null;
-		if (window.ActiveXObject) {
-			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
-		} else if (window.XMLHttpRequest) {
-			xmlHttpReq = new XMLHttpRequest();
-		}
-		xmlHttpReq.open("Post", url, true);
-		xmlHttpReq.send(null);
-
-		image.src = "${ctxPath}/jCaptcha.html?rand="
-				+ parseInt(1000 * Math.random());
-		return false;
-	}
-</script>
 		<script>
 			var swiper = new Swiper('.swiper-container', {
 				pagination: '.swiper-pagination',

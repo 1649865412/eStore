@@ -97,13 +97,13 @@ ul.ztree.zTreeDragUL {margin:0; padding:0; position:absolute; width:auto; height
 }*/
 
 /*目录树定制调整*/
-.ztree li span.button.catalog_ico_open,.catalog_ico_close,.catalog_ico_docu{background-position:0 -109px;}
-.ztree li span.button.catalog_virtual_ico_open,.catalog_virtual_ico_close,.catalog_virtual_ico_docu{background-position:-34px -109px;}
-.category_ico_open,.category_ico_close,.category_ico_docu{background-position:-70px -109px;}
-.ztree li span.button.category_linked_ico_open,.category_linked_ico_close,.category_linked_ico_docu{background-position:-105px -109px;}
-.button_catalog_create{background-position:-16px -109px;}
-.button_catalog_virtual_create{background-position:-52px -109px;}
-.button_category_create{background-position:-87px -109px;}
+.ztree li span.button.catalog_ico_open,.catalog_ico_close,.catalog_ico_docu{background-position:0 -104px;}
+.ztree li span.button.catalog_virtual_ico_open,.catalog_virtual_ico_close,.catalog_virtual_ico_docu{background-position:-34px -104px;}
+.category_ico_open,.category_ico_close,.category_ico_docu{background-position:-70px -104px;}
+.ztree li span.button.category_linked_ico_open,.category_linked_ico_close,.category_linked_ico_docu{background-position:-105px -104px;}
+.button_catalog_create{background-position:-16px -104px;}
+.button_catalog_virtual_create{background-position:-52px -104px;}
+.button_category_create{background-position:-87px -104px;}
 .button_move_down{background-position:0 -132px;}
 .button_move_up{background-position:-16px -132px;}
 .button_product_add_existing{background-position:-34px -132px;}

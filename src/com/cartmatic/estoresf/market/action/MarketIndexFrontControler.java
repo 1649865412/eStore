@@ -1,6 +1,5 @@
 package com.cartmatic.estoresf.market.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,16 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cartmatic.estore.Constants;
+import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.catalog.service.BrandManager;
 import com.cartmatic.estore.catalog.service.CatalogManager;
 import com.cartmatic.estore.catalog.service.ProductManager;
-import com.cartmatic.estore.common.helper.ConfigUtil;
 import com.cartmatic.estore.common.model.catalog.Brand;
 import com.cartmatic.estore.common.model.catalog.Catalog;
 import com.cartmatic.estore.common.model.catalog.Product;
-import com.cartmatic.estore.common.model.sales.RecommendedType;
-import com.cartmatic.estore.common.model.system.Store;
 import com.cartmatic.estore.sales.service.EvalRecommendationManager;
 import com.cartmatic.estore.sales.service.RecommendedProductManager;
 import com.cartmatic.estore.sales.service.RecommendedTypeManager;
@@ -50,6 +46,7 @@ public class MarketIndexFrontControler
 	private RecommendedProductManager	recommendedProductManager = null;
 	private RecommendedTypeManager		recommendedTypeManager = null;
 	private EvalRecommendationManager	evalRecommendationManager = null;
+	private ShoppingcartManager shoppingcartManager = null;
 	
 	
 	public RecommendedProductManager getRecommendedProductManager() {
@@ -130,6 +127,7 @@ public class MarketIndexFrontControler
 	@RequestMapping("/MarketIndex.html")
 	public ModelAndView defaultAction(HttpServletRequest request,HttpServletResponse response) throws ServletException {
 		ModelAndView mav = new ModelAndView("marketindex");
+		RequestUtil.getShopCart(request,response,mav,shoppingcartManager);
 		//Store store=ConfigUtil.getInstance().getStore();
 		Catalog tempCatalog=catalogManager.getByCode("default");
 		mav.addObject("tempCatalog", tempCatalog);
@@ -141,6 +139,16 @@ public class MarketIndexFrontControler
 		return mav;
 	}
 	
+	public ShoppingcartManager getShoppingcartManager() {
+		return shoppingcartManager;
+	}
+
+
+	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
+		this.shoppingcartManager = shoppingcartManager;
+	}
+
+
 	/**
 	 * 每周主打产品列表页
 	 * @param request

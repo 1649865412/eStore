@@ -17,6 +17,11 @@ var ShoppingcartManager = function(){
  *        数量
  */
 ShoppingcartManager.addToC=function(skuCode,pSkuCodes,quantity,accessories){
+	/*alert("skuCode:"+skuCode);
+	alert("pSkuCodes"+pSkuCodes);
+	alert("quantity:"+quantity);
+	alert("accessories:"+accessories);*/
+	
 	this.$add(skuCode,pSkuCodes,quantity,1,accessories);
 }
 /**
@@ -245,7 +250,7 @@ ShoppingcartManager.alert=function(skucode,type,$obj,addToCartResult){
     	this.type = type;
     	this.$obj = $obj;
     }
-    window.location.href = '/cart/shoppingcart.html';
+    //window.location.href = '/cart/shoppingcart.html';
     /*popuw.prototype={
     	id:'shoppingcartAlertWId_',
     	skucode:'',

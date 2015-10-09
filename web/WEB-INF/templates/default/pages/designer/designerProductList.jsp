@@ -15,12 +15,15 @@
     <!-- Bootstrap -->
     <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
     <script src="${ctxPath}/scripts/jquery/js/global_brain.js"></script>
+    <%@ include file="../../decorators/include/javascripts.jspf"%>
     <%@ include file="../../decorators/include/styles7.jspf"%>
     <link href="${ctxPath}/scripts/jquery/js/colorbox/colorbox.css" rel="stylesheet" />
     
     <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
     <link href="${resPath}/styles/css/mall_nav.css" rel="stylesheet">
     <link href="${resPath}/styles/css/shooping-list.css" rel="stylesheet">
+    <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
+	<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/catalog/productDetail.js"></script>
     <!--[if IE]>  <link rel="stylesheet" type="text/css" href="index2-ie-only.css/> <![endif]-->
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -40,6 +43,7 @@
 				<meta name="description" content="<c:out value="${category.metaDescription}"/>" />
 			</c:otherwise>
 		</c:choose>
+		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
 							$(document).ready(function(){
 							  $(".addtolove").click(function(){
@@ -272,7 +276,7 @@
 		return unescape(cookieValue);
 	}
 	function checkAddProductToCart(){
-		alert("hello1");
+		//alert("hello1");
 		var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
 		var name="";
 		skuOptions.each(function(i){
@@ -280,7 +284,7 @@
 				name+="."+$(this).attr("data-property");
 			}
 		});
-		alert("name="+name);
+		//alert("name="+name);
 		if(name!=""){
 			alert("请选择 "+name);
 		}
@@ -610,7 +614,7 @@
 						<ul class="w-menu-right list-unstyled">
 							<li>
 								<a href="javascript:void(0)"><span class="w-gwc">购物车
-										(${shoppingcart.buyNowItemsCount})</span> </a>
+										(${shoppingcart.buyNowItemsCount == null || shoppingcart.buyNowItemsCount == "" ? 0 : shoppingcart.buyNowItemsCount})</span> </a>
 							</li>
 							<li id="loginPromptHolderTemplateLogout">
 								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
@@ -764,7 +768,7 @@
                         </c:if>
                         </div>
                         
-                        
+                        <input type="hidden" id="productSkuCode" value="${product.defaultProductSku.productSkuCode}" />
                         <div class="join_box">
 	                        <c:forEach items="${productMap}" var="productMapItem">
 		                    	<c:if test="${productMapItem.key == product.productId}">
@@ -807,7 +811,7 @@
 	                            关闭
 	                        </span>
 	                        <c:if test="${!empty product.defaultProductSku}">
-	                        	<product:addToCartSmall productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
+	                        	<product:addToCartSmall productSkuCode="${product.defaultProductSku.productSkuCode}" productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
 	                        </c:if>
 	                        
 	                   </div>
@@ -830,97 +834,35 @@
                 <!--/分页-->
              <!-- 加入购物车成功 -->
              <div style="display:none">
-                            <div id="cart_box" class="after_addtocart">
-                                <div class="w-cart-header">
-                                    <span><i class="fa fa-check-circle-o"></i>该产品已经成功加入您的购物车</span>
-                                    <hr class="aftercart_hr"/>
-                                </div><!--w-cart-header-->
-                                <div class="w-cart-body">
-                                    <div class="addcart_top">
-                                        <div class="addcart_part">
-                                            <span class="addcart_part_title">购买该产品的用户还买了</span>
-                                            <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
-                                        </div><!--addcart_part-->
-                                        <div class="addcart_sku">
-                                          <ul class="sku_row">
-                                            <li class="sku_list">
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p>
-                                                    <b>￥ 50.00</b>
-                                                </div>
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p><b>￥ 50.00</b></p>
-                                                </div>
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p><b>￥ 50.00</b></p>
-                                                </div>
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p><b>￥ 50.00</b></p>
-                                                </div>
-                                            </li>
-                                          </ul>
-                                        </div><!--addcart_sku-->
-                                    </div><!--addcart_top-->
-                                    <div class="addcart_top">
-                                        <div class="addcart_part">
-                                            <span class="addcart_part_title">购买该产品的用户还买了</span>
-                                            <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
-                                        </div><!--addcart_part-->
-                                        <div class="addcart_sku">
-                                          <ul class="sku_row">
-                                            <li class="sku_list">
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><span class="hot">HOT</span><a href="#">产品名称写在这里长很长很长很长很长很长</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p>
-                                                    <b>￥ 50.00</b>
-                                                </div>
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><span class="sale">SALE</span><a href="#">产品名称写在这里长很长很长很长很长很长很</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p><b>￥ 50.00</b></p>
-                                                </div>
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><span class="new">NEW</span><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p><b>￥ 50.00</b></p>
-                                                </div>
-                                                <div class="collocation-item addpro">
-                                                    <a href="#"><img src="img/pic6.jpg"><img class="imgt" src="img/authors/13.jpg"></a>
-                                                    <div class="bd-list-tit"><a href="#">产品名称写在这里长很长很长很长很长很长很长</a></div>
-                                                    <p><span>郑荣凯&曾思宇</span></p>
-                                                    <p><em>品牌名</em></p>
-                                                    <p><b>￥ 50.00</b></p>
-                                                </div>
-                                            </li>
-                                          </ul>
-                                        </div><!--addcart_sku-->
-                                    </div><!--addcart_top-->
-                                </div><!--w-cart-body-->
-                            </div><!--cart_box-->
-                        </div>
+                    <div id="cart_box" class="after_addtocart">
+                        <div class="w-cart-header">
+                            <span><i class="fa fa-check-circle-o"></i>该产品已经成功加入您的购物车</span>
+                            <hr class="aftercart_hr"/>
+                        </div><!--w-cart-header-->
+                        <div class="w-cart-body">
+                            <div class="addcart_top">
+                                <div class="addcart_part">
+                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
+                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
+                                </div><!--addcart_part-->
+                                <div class="addcart_sku">
+                                  <ul class="sku_row">
+                                    <li class="sku_list">
+                                    	<jsp:include flush="true" page="/sales/recommendedProduct.html">
+								             <jsp:param name="typeName" value="also_buy" />
+								             <jsp:param name="firstResult" value="0" />
+								             <jsp:param name="maxResults" value="7" />
+								             <jsp:param name="template" value="sales/include/recommendProductContentNew2"/>
+								             <jsp:param name="doAction" value="defaultAction" />
+								             <jsp:param name="sourceId" value="${product.productId}" />
+								         </jsp:include>
+                                    </li>
+                                  </ul>
+                                </div><!--addcart_sku-->
+                            </div><!--addcart_top-->
+                        </div><!--w-cart-body-->
+                    </div><!--cart_box-->
+                </div>
              <!-- End 加入购物车成功 -->
            </div><!--w-shooping-list-box-->
          </div><!--w-shooping-list-->

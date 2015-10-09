@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cartmatic.estore.Constants;
+import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.catalog.CatalogConstants;
 import com.cartmatic.estore.catalog.service.CategoryManager;
 import com.cartmatic.estore.catalog.service.ProductCategoryManager;
@@ -79,8 +80,17 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 	private PromoService promoService=null;
 	private ProductRateItemManager productRateItemManager=null;
 	private ProductStatManager productStatManager=null;
+	private ShoppingcartManager shoppingcartManager = null;
 	
 	
+	public ShoppingcartManager getShoppingcartManager() {
+		return shoppingcartManager;
+	}
+
+	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
+		this.shoppingcartManager = shoppingcartManager;
+	}
+
 	public void setProductStatManager(ProductStatManager productStatManager) {
 		this.productStatManager = productStatManager;
 	}
@@ -196,6 +206,7 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 		
 		
 		ModelAndView modelAndView=null;
+		
 		//激活状态下完整显示产品
 		String defaultView="catalog/productTemplate";
 		if(product.getStatus().intValue()==Constants.STATUS_ACTIVE.intValue()){
@@ -270,7 +281,7 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 		
 		//获取商品二维码
 		modelAndView.addObject("encoderContent",getImgCode(	 product , request));
-		
+		RequestUtil.getShopCart(request,response,modelAndView,shoppingcartManager);
 		modelAndView.addObject("product",product);
 		modelAndView.addObject("category",category);
 		modelAndView.addObject("navigatorCategorys",navigatorCategorys);

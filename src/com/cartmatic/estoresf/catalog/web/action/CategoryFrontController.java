@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.catalog.service.CategoryManager;
 import com.cartmatic.estore.catalog.service.ProductMainManager;
 import com.cartmatic.estore.catalog.service.ProductManager;
@@ -33,6 +34,7 @@ import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.core.view.RedirectView301;
 import com.cartmatic.estore.sekillproduct.service.SekillProductManager;
 import com.cartmatic.estore.textsearch.model.SearchResult;
+import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.estoresf.seckill.help.Constant;
 import com.cartmatic.extend.catalog.util.ComparatorMapDown;
 import com.cartmatic.extend.catalog.util.ComparatorMapNew;
@@ -45,6 +47,15 @@ public class CategoryFrontController extends
 	private ProductManager productManager = null;
 	private CategoryManager categoryManager = null;
 	private ProductMainManager productMainManager=null;
+	private ShoppingcartManager shoppingcartManager = null;
+
+	public ShoppingcartManager getShoppingcartManager() {
+		return shoppingcartManager;
+	}
+
+	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
+		this.shoppingcartManager = shoppingcartManager;
+	}
 
 	public ProductMainManager getProductMainManager() {
 		return productMainManager;
@@ -166,6 +177,7 @@ public class CategoryFrontController extends
 		String mv = this.getTemplatePath(defaultMv, category.getTemplatePath());
 
 		ModelAndView modelAndView = getModelAndView(mv);
+		RequestUtil.getShopCart(request,response,modelAndView,shoppingcartManager);
 		modelAndView.addObject("category", category);
 		modelAndView.addObject("navigatorCategorys", navigatorCategorys);
 
