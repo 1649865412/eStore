@@ -499,7 +499,7 @@
 			<div class="w-login-s"></div>
 			<div class="w-login-c">
 			<form method="post" name="loginForm" id="loginForm"
-					action="${ctxPath}/index_check.html" onsubmit="return checkLogin()">
+					action="${ctxPath}/index_check.html" >
 				<div class="w-login-left">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -600,7 +600,7 @@
 					</div>
 				--%></div>
 				</form>
-				<form id="customerRegisterForm" action="register.html" method="post" onsubmit="return checkRegister()">
+				<form id="customerRegisterForm" action="register.html" method="post">
 				<div class="w-login-right">
 					<div class="w-l-close">
 						<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -700,9 +700,9 @@
 								<button class="btn btn-default signup" type="submit" id="button1" style="display: none;">
 									注册
 								</button>
-								<button class="btn btn-default signup" type="submit" id="button2" disabled="true">
-									注册
-								</button>
+								<span class="btn btn-default un-signup" type="" id="button2">
+									无法注册
+								</span>
 							</div>
 					</div>
 
@@ -775,7 +775,7 @@
 							<li class="current">
                             	<a href="${ctxPath}/MarketIndex.html"><span class="w-menu-on">商城</span></a>
 								<dl>
-                                	<dd class="current"><a href="${ctxPath}/MarketIndex.html"><i></i>首页</a></dd>
+                                	<dd><a href="${ctxPath}/MarketIndex.html"><i></i>首页</a></dd>
                                     <dd>
                                     	<a href="/marketDesignerList/index.html"><i></i>设计师</a>
                                         <%--<div class="mem_dow">
@@ -789,8 +789,8 @@
                                             <a href="#">傳已經的然</a>
                                         </div>
                                     --%></dd>
-                                    <dd><a href="/man_catalog.html"><i></i>男装</a></dd>
-                                    <dd><a href="/wen_catalog.html"><i></i>女装</a></dd>
+                                    <dd><a href="/man_catalog.html"><i></i>男士</a></dd>
+                                    <dd><a href="/wen_catalog.html"><i></i>女士</a></dd>
                                     <dd><a href="/catalog_default_catalog.html"><i></i>所有产品</a></dd>
                                 </dl>
                             </li>
@@ -926,7 +926,6 @@
                 <!--end of 产品图片-->
                 <!--产品信息-->
             	<div class="w-pro-info">
-                	<div class="w-pro-info-new">NEW</div>
                     <div class="w-pro-info-tit">${product.productName}</div>
                     <div class="w-pro-info-price"><%@ include file="./include/productTemplate_priceArea.jspf"%></div>
                     <div class="w-pro-info-form">
@@ -989,7 +988,7 @@
                             	<div class="info2_item1">
                                     ${product.productDescription.productSizeDescription}
                                 </div>
-                                <div class="info2_item3"><p><a href="#">查看 SIZE 对照表</a></p></div>
+                                <div class="info2_item3"><p><a href="/resources/images/layout/sizechart.jpg">查看 SIZE 对照表</a></p></div>
                             </div>
                             <div id="tab3">
                             	<div class="info3_item1">
@@ -1106,6 +1105,28 @@
             <!--end of 产品详情部分-->
             <!--下方集合-->
             <div class="w-pro-deta-bd">
+            	<!--优惠搭配/推荐搭配-->
+            	<div class="deta-bd-group1">
+                	<div class="deta-bd-tit"><!--暂时没有优惠套餐不用套用--><!--<a href="#" name="#tabb1">优惠套餐</a> | --> <a href="#" name="#tabb2"  class="current">推荐搭配</a></div>
+                    <div id="deta_bd_content">
+                        <div id="tabb2">
+                        	<ul class="sku_row"><!--2015-9 此处修改了-蔡蔡--->
+                                <li class="center sku_list"><!--2015-9 此处修改了-蔡蔡-->
+                                	<jsp:include flush="true" page="/sales/recommendedProduct.html">
+				             <jsp:param name="typeName" value="similar_product" />
+				             <jsp:param name="firstResult" value="0" />
+				             <jsp:param name="maxResults" value="4" />
+				             <jsp:param name="template" value="sales/include/recommendProductContentNew3" />
+				             <jsp:param name="doAction" value="defaultAction" />
+				             <jsp:param name="sourceId" value="${product.productId}" />
+				         </jsp:include>
+                                </li>
+                            </ul>
+                        </div><!--tabb2-->
+                    </div><!--deta_bd_content-->
+                </div><!--deta-bd-group1-->
+                <!--end of 推荐优惠搭配-->
+            	
                 <!-- 加入购物车成功 -->
                 <div style="display:none">
                     <div id="cart_box" class="after_addtocart">
@@ -1139,6 +1160,7 @@
                 </div>
                 <!-- End 加入购物车成功 -->
                 <!--达人秀-->
+                <c:if  test="${fn:length(product.productTalenshowValues)!=0 }">
                 <div class="deta-bd-group2">
                 	<h2>达人秀</h2>
                 	<div class="swiper2">
@@ -1152,6 +1174,7 @@
                         <div class="swiper-button-prev1"><a href="#"><i class="fa fa-caret-left"></i></a></div>
                     </div>
                 </div>
+                </c:if>
                 <!--end of 达人秀-->
                 <!--站内广告-->
                 <div class="deta-bd-group3"><content:showAdNew adPositionType="product" /></div>
@@ -1226,6 +1249,23 @@
 				</div><!--row-->
 			</div><!--container-->
 		</div><!--w-footer-->
+		<script type="text/javascript">
+		  
+		  function addToFavorite(productId){
+      		    if(isLogined()){
+      		  	$.post("/ajaxFavorite.html?doAction=addFavorite", {
+          		  	productId : productId
+        		  	}, function(result) {
+        		  		    alert("result:"+result.msg);
+        		  		}, "json");
+          		    }else{
+	              		 alert("此操作需要登陆");
+	          		  	$(".w-login").show();
+						$(".w-login-left").show();
+						$(".w-login-right").hide();
+              		    }
+			}
+         </script>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>
@@ -1233,52 +1273,6 @@
 		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/slider.js"></script>
         <script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script> 
-        <script>
-	function index_login(){
-		  var url =""+self.location.href;
-		   $("#papeurl").val(url);
-		    //alert( $("#papeurl").val());
-		    $("#loginForm").submit();
-		}
-		
-	var swiper = new Swiper('.swiper-container', {
-		nextButton : '.swiper-page-next',
-		prevButton : '.swiper-page-prev',
-		paginationClickable : true,
-		spaceBetween : 0,
-		mousewheelControl : false,
-		//							autoplay: 5000,
-		speed : 500,
-		onInit : function(swiper) {
-			swiperAnimateCache(swiper);
-			swiperAnimate(swiper);
-		},
-		onSlideChangeEnd : function(swiper) {
-			swiperAnimate(swiper);
-		},
-		onTransitionEnd : function(swiper) {
-			swiperAnimate(swiper);
-		}
-	});
-
-	function refreshImage(type, obj) {
-		//var image=document.getElementById("imgValidationCode");
-		var image = $(obj).children()[0];
-		var url = "${ctxPath}/jCaptcha.html?type=" + type;
-		var xmlHttpReq = null;
-		if (window.ActiveXObject) {
-			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
-		} else if (window.XMLHttpRequest) {
-			xmlHttpReq = new XMLHttpRequest();
-		}
-		xmlHttpReq.open("Post", url, true);
-		xmlHttpReq.send(null);
-
-		image.src = "${ctxPath}/jCaptcha.html?rand="
-				+ parseInt(1000 * Math.random());
-		return false;
-	}
-</script>
 		<script>
 			var swiper = new Swiper('.swiper-container', {
 				pagination: '.swiper-pagination',

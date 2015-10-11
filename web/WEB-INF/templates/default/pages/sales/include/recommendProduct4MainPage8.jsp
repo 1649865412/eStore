@@ -9,9 +9,9 @@
             	
 	            	<img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}" width="100%"/>
 	            	
-	            	<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>
+	            	<%--<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>
 	            	
-	            	</a></div>
+	            	--%></a></div>
                     <div class="li2"><div class="cutstr2"><a href="${ctxPath}/product/${product.productId}.html" title="${product.productName}">${product.productName}</a></div><span>&nbsp;</span></div>
                     <p class="li3">${product.brand.designer}</p>
                 	<p class="li4">${product.brand.brandName}</p>
@@ -73,7 +73,7 @@
                                         <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a>
                                        
                                         <!-- JiaThis Button END -->
-                    <a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a>
+                    <a href="javascript:" onClick="addToFavorite(${product.productId})"><i class="fa fa-heart-o"></i> 加入收藏</a>
                                         <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
                 </p>
                 </li>

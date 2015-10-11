@@ -623,8 +623,8 @@
                                             <a href="#">傳已經的然</a>
                                         </div>
                                     --%></dd>
-                                    <dd><a href="/man_catalog.html"><i></i>男装</a></dd>
-                                    <dd class="current"><a href="/wen_catalog.html"><i></i>女装</a></dd>
+                                    <dd><a href="/man_catalog.html"><i></i>男士</a></dd>
+                                    <dd class="current"><a href="/wen_catalog.html"><i></i>女士</a></dd>
                                     <dd><a href="/catalog_default_catalog.html"><i></i>所有产品</a></dd>
                                 </dl>
                             </li>
@@ -747,7 +747,7 @@
                     
                     <li>
                         <p><a href="/catalog_default_catalog.html" class="active">所有产品</a></p> 
-                        <p><a href="/wen_catalog.html"><i class="fa fa-venus"></i>女性</a></p>
+                        <p><a href="/wen_catalog.html"><i class="fa fa-venus"></i>女士</a></p>
                     </li>
                     <li>
                         <p><div>
@@ -793,13 +793,14 @@
            </div><!--w-shooping-list-sort-->
            <div class="w-shooping-list-box">
              <div class="product_box">
+             <c:if  test="${fn:length(productList)!=0 }">
              <ul class="product list-unstyled col4 c sku_list" id="pinterestList">
              	<c:forEach items="${productList}" var="product" varStatus="varStatus">
 					<li>
 						<div class="li1">
 	                        <a href="${ctxPath}/product/${product.productId}.html">
 	                            <img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}" width="100%" />
-	                            <img class="imgt" src="${mediaPath}other/${product.brand.icon}" width="100%" />
+	                            <%--<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>--%>
 	                        </a>
 	                    </div>
 	                    <div class="li2">
@@ -869,13 +870,16 @@
 	                                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a>
 	                                           
 	                                            <!-- JiaThis Button END -->
-	                        <a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a>
+	                        <a href="javascript:" onClick="addToFavorite(${product.productId})"><i class="fa fa-heart-o"></i> 加入收藏</a>
 	                                            <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
 	                    </p>
                     </li>
 				</c:forEach>
              </ul>
-            
+            </c:if>
+            <c:if  test="${fn:length(productList)==0 }">
+            	<h2>暂无商品</h2>
+            </c:if>
           </div><!--product_box-->
                 <%@ include file="./../../decorators/include/catalogPagingTopNew.jsp"%>
                 <!--/分页-->
@@ -984,6 +988,23 @@
 				</div><!--row-->
 			</div><!--container-->
 		</div><!--w-footer-->
+		<script type="text/javascript">
+		  
+		  function addToFavorite(productId){
+      		    if(isLogined()){
+      		  	$.post("/ajaxFavorite.html?doAction=addFavorite", {
+          		  	productId : productId
+        		  	}, function(result) {
+        		  		    alert("result:"+result.msg);
+        		  		}, "json");
+          		    }else{
+	              		 alert("此操作需要登陆");
+	          		  	$(".w-login").show();
+						$(".w-login-left").show();
+						$(".w-login-right").hide();
+              		    }
+			}
+         </script>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
     <script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
     <script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>

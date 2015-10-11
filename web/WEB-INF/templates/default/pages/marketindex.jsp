@@ -617,8 +617,8 @@
                                             <a href="#">傳已經的然</a>
                                         </div>
                                     --%></dd>
-                                    <dd><a href="/man_catalog.html"><i></i>男装</a></dd>
-                                    <dd><a href="/wen_catalog.html"><i></i>女装</a></dd>
+                                    <dd><a href="/man_catalog.html"><i></i>男士</a></dd>
+                                    <dd><a href="/wen_catalog.html"><i></i>女士</a></dd>
                                     <dd><a href="/catalog_default_catalog.html"><i></i>所有产品</a></dd>
                                 </dl>
                             </li>
@@ -727,20 +727,26 @@
 		<div class="index_show c">
         	<div class="index_left">
                 <div class="swiper-wrapper">
-					<%--首页轮播图，目前数量为4，如需改动数量可在此修改 --%>
+					<%--首页轮播图，目前数量为5，如需改动数量可在此修改 --%>
 					<content:showAdNew adPositionType="mainadNewMarket1" />
 
 					<content:showAdNew adPositionType="mainadNewMarket2" />
+					
+					<content:showAdNew adPositionType="mainadNewMarket4" />
+					
+					<content:showAdNew adPositionType="mainadNewMarket5" />
+					
+					<content:showAdNew adPositionType="mainadNewMarket6" />
 
 				</div>
                 <div class="pagination"></div>
             </div><!--index_left end--> 
             	<content:showAdNew adPositionType="mainadNewMarket3" />
         </div><!--index_show end-->
-        <div class="mall c" style="background:url(../resources/styles/img/authors/3.jpg) no-repeat">
+        <content:showAdNew adPositionType="mainadNewMarketLeft" />
+        <%--<div class="mall c" style="background:url(../resources/styles/img/authors/3.jpg) no-repeat">
         <c:if test="${not empty brand}">
-        	<content:showAdNew adPositionType="mainadNewMarketLeft" />
-        	<%--<div class="mall_left" style="background-image:url(../resources/styles/img/authors/3.jpg);">
+        	<div class="mall_left" style="background-image:url(../resources/styles/img/authors/3.jpg);">
             	<div class="mrzt">
                 	<i></i>
                 	<div class="title-font">每周主打<br/>初夏清新穿搭</div>
@@ -777,7 +783,7 @@
 	                </div>
                 </div>
             </div>
-            --%></c:if>
+            </c:if>
             <ul class="mall_right list-unstyled">
             
             	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
@@ -791,11 +797,16 @@
             	
             </ul>
         </div>
-        <div class="update_new">
+        --%><div class="update_new">
         <div class="news_date">
         	<h3 class="li1"><a href="#" class="title-font">${tempCatalog.weekOnNewTitle}</a></h3>
             <p class="li2">${tempCatalog.weekOnNewContent}</p>
-			<a class="li3" href="${ctxPath}/catalog_default_catalog.html">查看更多</a>
+            <c:if test="${tempCatalog.weekOnNewUrl == null || tempCatalog.weekOnNewUrl == ''}">
+            	<a class="li3" href="${ctxPath}/index.html">查看更多</a>
+            </c:if>
+            <c:if test="${tempCatalog.weekOnNewUrl != null && tempCatalog.weekOnNewUrl != ''}">
+				<a class="li3" href="${tempCatalog.weekOnNewUrl}">查看更多</a>
+			</c:if>
         </div>
 	        <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
 								<jsp:param name="typeName" value="best_wholesale_deals" />
@@ -824,7 +835,6 @@
             
             </ul>
         </div>
-        <div class="product_more"><a href="${ctxPath}/catalog_default_catalog.html">点击查看更多</a></div>
         <!-- 加入购物车成功 -->
 	    <div style="display:none">
                     <div id="cart_box" class="after_addtocart">
@@ -926,6 +936,24 @@
 				</div><!--row-->
 			</div><!--container-->
 		</div><!--w-footer-->
+		
+		<script type="text/javascript">
+		  
+		  function addToFavorite(productId){
+      		    if(isLogined()){
+      		  	$.post("/ajaxFavorite.html?doAction=addFavorite", {
+          		  	productId : productId
+        		  	}, function(result) {
+        		  		    alert("result:"+result.msg);
+        		  		}, "json");
+          		    }else{
+	              		 alert("此操作需要登陆");
+	          		  	$(".w-login").show();
+						$(".w-login-left").show();
+						$(".w-login-right").hide();
+              		    }
+			}
+         </script>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
 		<script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>

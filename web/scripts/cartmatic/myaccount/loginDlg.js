@@ -10,6 +10,8 @@ function isLoginedAtServer() {
 }
 var globalLoginCallback = null;
 function doRequiredLoginAction(loginCallback , flag) {
+	alert("loginCallback:"+loginCallback);
+	alert("flag:"+flag);
 	if(!flag)
 		globalLoginCallback = loginCallback;
 	if (!isLoginedAtServer()) {
@@ -20,6 +22,7 @@ function doRequiredLoginAction(loginCallback , flag) {
 		globalLoginCallback = loginCallback;
 		execLoginCallback();
 	}
+	alert("goodbye");
 }
 function execLoginCallback() {
 	if (globalLoginCallback!=null) {

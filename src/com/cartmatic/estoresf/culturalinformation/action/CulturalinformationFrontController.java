@@ -128,13 +128,22 @@ public class CulturalinformationFrontController extends
 		} else {
 			map = getCulData(request, response, map);
 		}
+		try{
+			int readNumber=culturalInformation.getReadNumber()+1;
+			culturalInformation.setReadNumber(readNumber);
+			culturalInformationManager.save(culturalInformation);
+		}catch(Exception e){
+			
+		}
+
+		
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		JSONUtils.getMorpherRegistry().registerMorpher(
 				new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
 		JSONObject json = JSONObject.fromObject(map, jsonConfig);
 		String result = json.toString();
-		System.out.print(result);
+		//System.out.print(result);
 		ajaxView.setData(result);
 		return ajaxView;
 	}

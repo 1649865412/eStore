@@ -3,7 +3,7 @@
 <%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
 <%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
 
-		<c:forEach items="${productList}" var="productItem" varStatus="varStatus" >
+		<c:forEach items="${productList}" var="product" varStatus="varStatus" >
 		<div class="collocation-item addpro">
              <a href="${ctxPath}/product/${product.productId}.html">
 		         <img src="${mediaPath}product/v/${product.defaultProductSku.image}" />

@@ -542,7 +542,7 @@
 							</li>
 							<li><a href="${ctxPath}/culturalinformation/index.html" id="culturalinformation"><span>文化资讯</span></a>
 							</li>
-							<li><a href="${ctxPath}/designerList.html" id="designerList"><span class="w-menu-on">设计师</span></a>
+							<li><a href="${ctxPath}/designerList.html" id="designerList"><span>设计师</span></a>
 							</li>
 							<li><a href="${ctxPath}/customer_service/_18.html" id="customer_service"><span>关于我们</span></a>
 							</li>

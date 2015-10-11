@@ -302,7 +302,9 @@ body{
     box-flex: 1.0;
     color: #313131;
 }
-
+.designer_right a{
+	color:#000;
+}
     .designer_right .li1 {
         /*font-family:FontAwesome;*/
         padding-top: 28px;

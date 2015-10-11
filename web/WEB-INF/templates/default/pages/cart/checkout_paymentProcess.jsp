@@ -416,7 +416,6 @@
 			return unescape(cookieValue);
 		}
 		function checkAddProductToCart(){
-			alert("hello1");
 			var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
 			var name="";
 			skuOptions.each(function(i){
@@ -424,7 +423,6 @@
 					name+="."+$(this).attr("data-property");
 				}
 			});
-			alert("name="+name);
 			if(name!=""){
 				alert("请选择 "+name);
 			}
@@ -1248,7 +1246,6 @@
   	 		 tag =false;
   		 	}
   		if(tag){
-  	  		alert("come in");
   	 		$.post("/checkout/address/addAjax.html",
   	   	 			{
   							firstname:firstname,

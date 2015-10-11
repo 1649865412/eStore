@@ -310,8 +310,10 @@ function moveCartBtn(b){
 }
 
 function addToFavorite(productId){
+	alert("hello");
+//	alert("url:"+__ctxPath);
 	doRequiredLoginAction(function(){
-		$.post(__ctxPath+"/ajaxFavorite.html?doAction=addFavorite&productId="+productId,function(result){
+		$.post("/ajaxFavorite.html?doAction=addFavorite&productId="+productId,function(result){
 			var count = 0;
 			count = result.data == 0 ? "1" : result.data;
 			$("#love_count").html("<span>" + count + "</span>" + "个人喜欢");

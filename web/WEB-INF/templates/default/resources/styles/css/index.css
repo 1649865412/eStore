@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'FontYht';
+
+  src: url('../fonts/FontYht.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/FontYht.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/FontYht.otf') format('opentype'); /* Legacy iOS */
+}
 body {
 	font-family:"Microsoft YaHei", "SimHei";
 }
@@ -374,13 +381,13 @@ a:hover {
 	left: 168px;
 	width: 0;
 	height: 0;
-	border-bottom: 35px solid #ffffff;
+	border-bottom: 35px solid #f1f1f1;
 	border-left: 15px solid transparent;
 	border-right: 15px solid transparent;
 }
 .w-sea .w-sea-con {
 	position: absolute;
-	background-color: #FFFFFF;
+	background-color: #f1f1f1;
 	z-index: 102;
 	width: 280px;
 	/*width: 370px;*/
@@ -396,7 +403,7 @@ a:hover {
 	margin: 20px 15px;
 	margin-right:0px;
 	padding:0 10px;
-     
+	background:#f1f1f1;  
 }
 .search_txt:focus {
 	outline: 0;
@@ -452,13 +459,13 @@ a:hover {
 	left: 168px;
 	width: 0;
 	height: 0;
-	border-bottom: 35px solid #ffffff;
+	border-bottom: 35px solid #f1f1f1;
 	border-left: 15px solid transparent;
 	border-right: 15px solid transparent;
 }
 .w-car .w-car-con {
 	position: absolute;
-	background-color: #FFFFFF;
+	background-color: #f1f1f1;
 	z-index: 102;
 	width: 370px;
 	/*top: 80px;*/
@@ -566,6 +573,9 @@ a:hover {
 	float: left;
 	width: 33.333%;
 	padding: 30px;
+}
+.w-mem-list  a {
+	color:#000;
 }
 .w-mem-list figure {
 	position: relative;
@@ -788,7 +798,6 @@ figure.w-mem-milo img {
 .w-footer {
 	border-top: 1px #d1d1d1 solid;
 	font-size: 12px;
-	padding-top: 10px;
 	padding-bottom: 10px;
 }
 .w-footer span {
@@ -822,7 +831,7 @@ figure.w-mem-milo img {
 
 /*end of 2015-8 蔡蔡改动*/   
 .w-footer .w-footer-item {
-	padding-top: 20px;
+	padding-top: 10px;
 }
 .w-footer .w-aqlm {
 	color: #aaaaaa;

@@ -619,7 +619,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="${ctxPath}/designerList.html"><span class="w-menu-on">设计师</span> </a>
+								<a href="${ctxPath}/designerList.html"><span>设计师</span> </a>
 							</li>
 							<li>
 								<a href="${ctxPath}/customer_service/_18.html"><span>关于我们</span> </a>

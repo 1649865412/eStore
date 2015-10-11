@@ -10,6 +10,15 @@
 		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
 		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
+		
+		<style type="text/css">
+			.error_box,.warning_box,.caution_box {
+	background:#fedfdf url(../images/icon/icon_error.gif) 20px 10px no-repeat;
+	border:1px solid #bf0000;
+	color:#bf0000;
+	font-size:20px
+}
+		</style>
 		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">

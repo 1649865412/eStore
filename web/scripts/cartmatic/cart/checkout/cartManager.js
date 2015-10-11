@@ -112,7 +112,6 @@ function fnUseCoupon(couponId) {
 				fnUpdatePrice();
 			}, "json");
 	} else {
-		alert("goodbye");
 		if(checkCoupon()){
 		var dis = parseFloat($("#cart_dis_member").val());
 		$

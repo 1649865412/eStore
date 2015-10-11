@@ -11,6 +11,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="uyan_auth" content="8527913b0f" />
 		<title>四方街</title>
 		<script type="text/javascript"
 			src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
@@ -682,6 +683,8 @@
 					<content:showAdNew adPositionType="mainadNew3" />
 
 					<content:showAdNew adPositionType="mainadNew4" />
+					
+					<content:showAdNew adPositionType="mainadNew5" />
 
 				</div>
 			</div>

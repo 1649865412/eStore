@@ -862,8 +862,8 @@
 					<a href="/culturalinformation/index.html" class="w-list-btn <c:if test='${param.type == null || param.type ==""}'>on</c:if>" date-type="all" id="t1">全部</a>
 					<a href="/culturalinformation/index.html?type=0" class="w-list-btn <c:if test='${param.type == 0}'>on</c:if>" date-type="all" id="t2">时尚前沿</a>
 					<a href="/culturalinformation/index.html?type=1" class="w-list-btn <c:if test='${param.type == 1}'>on</c:if>" date-type="all" id="t3">思维对话</a>
-					<a href="/culturalinformation/index.html?type=2" class="w-list-btn <c:if test='${param.type == 2}'>on</c:if>" date-type="all" id="t4">聚焦四方</a>
-					<a href="/culturalinformation/index.html?type=3" class="w-list-btn <c:if test='${param.type == 3}'>on</c:if>" date-type="all" id="t5">线下活动</a>
+					<a href="/culturalinformation/index.html?type=2" class="w-list-btn <c:if test='${param.type == 2}'>on</c:if>" date-type="all" id="t4">品牌播报</a>
+					<a href="/culturalinformation/index.html?type=3" class="w-list-btn <c:if test='${param.type == 3}'>on</c:if>" date-type="all" id="t5">聚焦四方</a>
 					<%--<a href="/culturalinformation/index.html?type=4" class="w-list-btn <c:if test='${param.type == 4}'>on</c:if>" date-type="all" id="t6">四方志</a>
 				--%></div>
 	        </div>
@@ -887,12 +887,12 @@
 		                            <b></b>
 		                            <c:if test="${culList.type == 0}">时尚前沿</c:if>
 									<c:if test="${culList.type == 1}">思维对话</c:if>
-									<c:if test="${culList.type == 2}">聚焦四方</c:if>
-									<c:if test="${culList.type == 3}">线下活动</c:if>
+									<c:if test="${culList.type == 2}">品牌播报</c:if>
+									<c:if test="${culList.type == 3}">聚焦四方</c:if>
 									<c:if test="${culList.type == 4}">四方志</c:if>
 		                             | <fmt:formatDate value="${culList.releaseTime}" type="date" dateStyle="long"/>
 		                        </div>
-		                        <img src="${mediaPath}other/${culList.logoImg}" height="230"/>
+		                        <img src="${mediaPath}other/${culList.logoImg}"/>
 		                        <h2 class="title title--preview">${culList.title}</h2>
 		                        <p class="w-content">
 		                            ${culList.content}

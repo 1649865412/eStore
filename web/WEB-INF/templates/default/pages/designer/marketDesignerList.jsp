@@ -597,8 +597,8 @@
                                             <a href="#">傳已經的然</a>
                                         </div>
                                     --%></dd>
-                                    <dd><a href="/man_catalog.html"><i></i>男装</a></dd>
-                                    <dd><a href="/wen_catalog.html"><i></i>女装</a></dd>
+                                    <dd><a href="/man_catalog.html"><i></i>男士</a></dd>
+                                    <dd><a href="/wen_catalog.html"><i></i>女士</a></dd>
                                     <dd><a href="/catalog_default_catalog.html"><i></i>所有产品</a></dd>
                                 </dl>
                             </li>
@@ -709,7 +709,33 @@
 		<div class="w-designers">
         	<div class="w-designers-hd">
             	<div>
-                    <a href="/marketDesignerList/index.html" class="active num" catid="0">A-Z</a><a href="/marketDesigner/initialsSelect.html?initials=A">A</a><a href="/marketDesigner/initialsSelect.html?initials=B">B</a><a href="/marketDesigner/initialsSelect.html?initials=C">C</a><a href="/marketDesigner/initialsSelect.html?initials=D">D</a><a href="/marketDesigner/initialsSelect.html?initials=E">E</a><a href="/marketDesigner/initialsSelect.html?initials=F">F</a><a href="/marketDesigner/initialsSelect.html?initials=G">G</a><a href="/marketDesigner/initialsSelect.html?initials=H">H</a><a href="/marketDesigner/initialsSelect.html?initials=I">I</a><a href="/marketDesigner/initialsSelect.html?initials=J">J</a><a href="/marketDesigner/initialsSelect.html?initials=K">K</a><a href="/marketDesigner/initialsSelect.html?initials=L">L</a><a href="/marketDesigner/initialsSelect.html?initials=M">M</a><a href="/marketDesigner/initialsSelect.html?initials=N">N</a><a href="/marketDesigner/initialsSelect.html?initials=O">O</a><a href="/marketDesigner/initialsSelect.html?initials=P">P</a><a href="/marketDesigner/initialsSelect.html?initials=Q">Q</a><a href="/marketDesigner/initialsSelect.html?initials=R">R</a><a href="/marketDesigner/initialsSelect.html?initials=S">S</a><a href="/marketDesigner/initialsSelect.html?initials=T">T</a><a href="/marketDesigner/initialsSelect.html?initials=U">U</a><a href="/marketDesigner/initialsSelect.html?initials=V">V</a><a href="/marketDesigner/initialsSelect.html?initials=W">W</a><a href="/marketDesigner/initialsSelect.html?initials=X">X</a><a href="/marketDesigner/initialsSelect.html?initials=Y">Y</a><a href="/marketDesigner/initialsSelect.html?initials=Z">Z</a>
+                    <a href="/marketDesignerList/index.html" catid="0" <c:if test="${param.initials==null || param.initials==''}">class="active num"</c:if>>A-Z</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=A" <c:if test="${param.initials=='A'}">class="active num"</c:if>>A</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=B" <c:if test="${param.initials=='B'}">class="active num"</c:if>>B</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=C" <c:if test="${param.initials=='C'}">class="active num"</c:if>>C</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=D" <c:if test="${param.initials=='D'}">class="active num"</c:if>>D</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=E" <c:if test="${param.initials=='E'}">class="active num"</c:if>>E</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=F" <c:if test="${param.initials=='F'}">class="active num"</c:if>>F</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=G" <c:if test="${param.initials=='G'}">class="active num"</c:if>>G</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=H" <c:if test="${param.initials=='H'}">class="active num"</c:if>>H</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=I" <c:if test="${param.initials=='I'}">class="active num"</c:if>>I</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=J" <c:if test="${param.initials=='J'}">class="active num"</c:if>>J</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=K" <c:if test="${param.initials=='K'}">class="active num"</c:if>>K</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=L" <c:if test="${param.initials=='L'}">class="active num"</c:if>>L</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=M" <c:if test="${param.initials=='M'}">class="active num"</c:if>>M</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=N" <c:if test="${param.initials=='N'}">class="active num"</c:if>>N</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=O" <c:if test="${param.initials=='O'}">class="active num"</c:if>>O</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=P" <c:if test="${param.initials=='P'}">class="active num"</c:if>>P</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=Q" <c:if test="${param.initials=='Q'}">class="active num"</c:if>>Q</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=R" <c:if test="${param.initials=='R'}">class="active num"</c:if>>R</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=S" <c:if test="${param.initials=='S'}">class="active num"</c:if>>S</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=T" <c:if test="${param.initials=='T'}">class="active num"</c:if>>T</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=U" <c:if test="${param.initials=='U'}">class="active num"</c:if>>U</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=V" <c:if test="${param.initials=='V'}">class="active num"</c:if>>V</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=W" <c:if test="${param.initials=='W'}">class="active num"</c:if>>W</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=X" <c:if test="${param.initials=='X'}">class="active num"</c:if>>X</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=Y" <c:if test="${param.initials=='Y'}">class="active num"</c:if>>Y</a>
+                    <a href="/marketDesigner/initialsSelect.html?initials=Z" <c:if test="${param.initials=='Z'}">class="active num"</c:if>>Z</a>
                 </div>
             </div>
             <div class="w-designers-bd">

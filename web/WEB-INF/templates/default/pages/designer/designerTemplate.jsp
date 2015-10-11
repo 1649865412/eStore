@@ -651,7 +651,7 @@
 	            <div class="li1"><cartmatic:img isUrlOnly="false" url="${brand.icon}" mediaType="other" width="270" height="270" ></cartmatic:img></div>
 	            <div class="li2 title-font">${brand.brandName}</div>
 	            <div class="li3 c">
-	              <cartmatic:img isUrlOnly="false" url="${brand.logo}" mediaType="other" width="107" height="40" ></cartmatic:img>
+	              <cartmatic:img isUrlOnly="false" url="${brand.logo}" mediaType="other"></cartmatic:img>
 	              <!-- JiaThis Button BEGIN -->
 	              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a>
 	              <!-- JiaThis Button END -->
@@ -673,7 +673,7 @@
 						<div class="li1">
 	                        <a href="${ctxPath}/product/${product.productId}.html">
 	                            <img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}" width="100%" />
-	                            <img class="imgt" src="${mediaPath}other/${product.brand.icon}" width="100%" />
+	                            <%--<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>--%>
 	                        </a>
 	                    </div>
 	                    <div class="li2">
@@ -743,7 +743,7 @@
 	                                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a>
 	                                           
 	                                            <!-- JiaThis Button END -->
-	                        <a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a>
+	                        <a href="javascript:" onClick="addToFavorite(${product.productId})"><i class="fa fa-heart-o"></i> 加入收藏</a>
 	                        <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
 	                    </p>
                     </li>
@@ -769,17 +769,19 @@
                             </div>
                         </div>
                     </div><!--dialogue_left end-->
-                    <div class="dialogue_right"><cartmatic:img isUrlOnly="false" url="${culturalInformation.logoImg}" mediaType="other" id="logoImage" height="100" width="100%;"></cartmatic:img></div>
+                    <div class="dialogue_right"><cartmatic:img isUrlOnly="false" url="${culturalInformation.logoImg}" mediaType="other" id="logoImage"></cartmatic:img></div>
                     <div class="dialogue_left">
                     	<div class="dialogue_left_bottom"><i class="line"></i>
                     ${brand.quotation}</div>
-                    	<cartmatic:img isUrlOnly="false" url="${brand.pic}" mediaType="other" id="logoImage" height="100" width="100%;"></cartmatic:img>
+                    	<cartmatic:img isUrlOnly="false" url="${brand.pic}" mediaType="other" id="logoImage"></cartmatic:img>
                     </div><!--dialogue_left end-->
                	</div>
             </div>
         </div><!--dialogue_box end-->
         <!--设计师动态-->
+        <c:if  test="${fn:length(brandDynamicList)!=0 }">
         <div class="title title2"><div><span class="title-font">设计师最新动态</span></div></div>
+        </c:if>
         <ul class="designer_news list-unstyled c">
            <c:forEach items="${brandDynamicList}" var="brandDynamic" >
         	<li>
@@ -901,6 +903,23 @@
 				</div><!--row-->
 			</div><!--container-->
 		</div><!--w-footer-->
+		<script type="text/javascript">
+		  
+		  function addToFavorite(productId){
+      		    if(isLogined()){
+      		  	$.post("/ajaxFavorite.html?doAction=addFavorite", {
+          		  	productId : productId
+        		  	}, function(result) {
+        		  		    alert("result:"+result.msg);
+        		  		}, "json");
+          		    }else{
+	              		 alert("此操作需要登陆");
+	          		  	$(".w-login").show();
+						$(".w-login-left").show();
+						$(".w-login-right").hide();
+              		    }
+			}
+         </script>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 	    <script src="${ctxPath}/scripts/jquery/js/bootstrap.min.js"></script>
 	    <script src="${ctxPath}/scripts/jquery/js/swiper.min.js"></script>

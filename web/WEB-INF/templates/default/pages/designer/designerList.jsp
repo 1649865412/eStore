@@ -117,7 +117,10 @@
 			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
 				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
 				$("#searchForm").submit();
-			}else{
+			}else if(window.location.pathname=="/designerList.html" || window.location.pathname=="/Designer_Service/search.html"){
+				$("#searchForm").attr("action", "${ctxPath}/Designer_Service/search.html?q="+$("#q").val());
+				$("#searchForm").submit();
+				}else{
 			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
 			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
 			$("#searchForm").submit();
@@ -684,7 +687,33 @@
         <div class="w-designers">
             <div class="w-designers-hd">
                 <div>
-                	<a class="active num" href="/designerList.html">A-Z</a><a href="/designer/initialsSelect.html?initials=A">A</a><a href="/designer/initialsSelect.html?initials=B">B</a><a href="/designer/initialsSelect.html?initials=C">C</a><a href="/designer/initialsSelect.html?initials=D">D</a><a href="/designer/initialsSelect.html?initials=E">E</a><a href="/designer/initialsSelect.html?initials=F">F</a><a href="/designer/initialsSelect.html?initials=G">G</a><a href="/designer/initialsSelect.html?initials=H">H</a><a href="/designer/initialsSelect.html?initials=I">I</a><a href="/designer/initialsSelect.html?initials=J">J</a><a href="/designer/initialsSelect.html?initials=K">K</a><a href="/designer/initialsSelect.html?initials=L">L</a><a href="/designer/initialsSelect.html?initials=M">M</a><a href="/designer/initialsSelect.html?initials=N">N</a><a href="/designer/initialsSelect.html?initials=O">O</a><a href="/designer/initialsSelect.html?initials=P">P</a><a href="/designer/initialsSelect.html?initials=Q">Q</a><a href="/designer/initialsSelect.html?initials=R">R</a><a href="/designer/initialsSelect.html?initials=S">S</a><a href="/designer/initialsSelect.html?initials=T">T</a><a href="/designer/initialsSelect.html?initials=U">U</a><a href="/designer/initialsSelect.html?initials=V">V</a><a href="/designer/initialsSelect.html?initials=W">W</a><a href="/designer/initialsSelect.html?initials=X">X</a><a href="/designer/initialsSelect.html?initials=Y">Y</a><a href="/designer/initialsSelect.html?initials=Z">Z</a>
+                	<a href="/designerList.html" <c:if test="${param.initials==null || param.initials==''}">class="active num"</c:if>>A-Z</a>
+                	<a href="/designer/initialsSelect.html?initials=A" <c:if test="${param.initials=='A'}">class="active num"</c:if>>A</a>
+                	<a href="/designer/initialsSelect.html?initials=B" <c:if test="${param.initials=='B'}">class="active num"</c:if>>B</a>
+                	<a href="/designer/initialsSelect.html?initials=C" <c:if test="${param.initials=='C'}">class="active num"</c:if>>C</a>
+                	<a href="/designer/initialsSelect.html?initials=D" <c:if test="${param.initials=='D'}">class="active num"</c:if>>D</a>
+                	<a href="/designer/initialsSelect.html?initials=E" <c:if test="${param.initials=='E'}">class="active num"</c:if>>E</a>
+                	<a href="/designer/initialsSelect.html?initials=F" <c:if test="${param.initials=='F'}">class="active num"</c:if>>F</a>
+                	<a href="/designer/initialsSelect.html?initials=G" <c:if test="${param.initials=='G'}">class="active num"</c:if>>G</a>
+                	<a href="/designer/initialsSelect.html?initials=H" <c:if test="${param.initials=='H'}">class="active num"</c:if>>H</a>
+                	<a href="/designer/initialsSelect.html?initials=I" <c:if test="${param.initials=='I'}">class="active num"</c:if>>I</a>
+                	<a href="/designer/initialsSelect.html?initials=J" <c:if test="${param.initials=='J'}">class="active num"</c:if>>J</a>
+                	<a href="/designer/initialsSelect.html?initials=K" <c:if test="${param.initials=='K'}">class="active num"</c:if>>K</a>
+                	<a href="/designer/initialsSelect.html?initials=L" <c:if test="${param.initials=='L'}">class="active num"</c:if>>L</a>
+                	<a href="/designer/initialsSelect.html?initials=M" <c:if test="${param.initials=='M'}">class="active num"</c:if>>M</a>
+                	<a href="/designer/initialsSelect.html?initials=N" <c:if test="${param.initials=='N'}">class="active num"</c:if>>N</a>
+                	<a href="/designer/initialsSelect.html?initials=O" <c:if test="${param.initials=='O'}">class="active num"</c:if>>O</a>
+                	<a href="/designer/initialsSelect.html?initials=P" <c:if test="${param.initials=='P'}">class="active num"</c:if>>P</a>
+                	<a href="/designer/initialsSelect.html?initials=Q" <c:if test="${param.initials=='Q'}">class="active num"</c:if>>Q</a>
+                	<a href="/designer/initialsSelect.html?initials=R" <c:if test="${param.initials=='R'}">class="active num"</c:if>>R</a>
+                	<a href="/designer/initialsSelect.html?initials=S" <c:if test="${param.initials=='S'}">class="active num"</c:if>>S</a>
+                	<a href="/designer/initialsSelect.html?initials=T" <c:if test="${param.initials=='T'}">class="active num"</c:if>>T</a>
+                	<a href="/designer/initialsSelect.html?initials=U" <c:if test="${param.initials=='U'}">class="active num"</c:if>>U</a>
+                	<a href="/designer/initialsSelect.html?initials=V" <c:if test="${param.initials=='V'}">class="active num"</c:if>>V</a>
+                	<a href="/designer/initialsSelect.html?initials=W" <c:if test="${param.initials=='W'}">class="active num"</c:if>>W</a>
+                	<a href="/designer/initialsSelect.html?initials=X" <c:if test="${param.initials=='X'}">class="active num"</c:if>>X</a>
+                	<a href="/designer/initialsSelect.html?initials=Y" <c:if test="${param.initials=='Y'}">class="active num"</c:if>>Y</a>
+                	<a href="/designer/initialsSelect.html?initials=Z" <c:if test="${param.initials=='Z'}">class="active num"</c:if>>Z</a>
 	        	</div>
             </div>
             <c:if test="${empty mapResult}">
@@ -701,11 +730,11 @@
 						                <span class="w-mem-en">${brand.brandName}</span>
 						                <figure class="w-mem-milo">
 						                    <img src="${mediaPath}/other/${brand.icon}" alt="img11" class="w-mem-imgo" />
-						                    <img src="${mediaPath}/other/${brand.logo}" alt="img11" class="w-mem-imgt" />
-						                    <figcaption>
+						                    <%--<img src="${mediaPath}/other/${brand.logo}" alt="img11" class="w-mem-imgt" />
+						                    --%><figcaption>
 						                        <div class="w-mem-bg">
 						                        </div>
-						                        <p>${brand.quotation}</p>
+						                        <p><c:out value="${fn:substring(brand.story, 0, 230)}......" /></p>
 						                    </figcaption>
 						                </figure>
 						            </div>
@@ -808,15 +837,15 @@
         //改变数字锚点
         $(function () {
             if ($(window).width() > 980) {
-                $(".w-designers-hd a:first-child").html("0-9")
+                $(".w-designers-hd a:first-child").html("A-Z")
             } else {
-                $(".w-designers-hd a:first-child").html("0<br>|<br>9")
+                $(".w-designers-hd a:first-child").html("A<br>|<br>Z")
             }
             window.onresize = function () {
                 if ($(window).width() > 980) {
-                    $(".w-designers-hd a:first-child").html("0-9")
+                    $(".w-designers-hd a:first-child").html("A-Z")
                 } else {
-                    $(".w-designers-hd a:first-child").html("0<br>|<br>9")
+                    $(".w-designers-hd a:first-child").html("A<br>|<br>Z")
                 }
             }
         })

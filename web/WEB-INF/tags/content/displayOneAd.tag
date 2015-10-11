@@ -13,7 +13,7 @@
 			
 			
 			--%>
-			<%--首页轮播图一--%>
+			<%--首页中间大图一--%>
 			<c:when test="${ad.advertisementId == 78}">
 		  		<div class="w-banner-con">
 					<div class="w-b-bg" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
@@ -25,10 +25,10 @@
 					</div>
 				</div>
 			</c:when>
-			<%--首页轮播图二--%>
+			<%--首页中间大图二--%>
 			<c:when test="${ad.advertisementId == 79}">
 		  		<div class="w-banner-cont">
-					<div class="w-banner-img" style="background-image: url(${resPath}/images/img/bg3.jpg);"></div>
+					<div class="w-banner-img" style="background-image: url(${mediaPath}a_and_d/${ad.url});"></div>
 						<div class="w-bannert-txt">
 							<div class="w-bannert-k">
 							<h1>${ad.contextTitle}</h1>
@@ -41,7 +41,7 @@
 					</div>
 				</div>
 			</c:when>
-			<%--首页轮播图三--%>
+			<%--首页中间左图--%>
 			<c:when test="${ad.advertisementId == 80}">
 		  		<div class="w-lf-left">
 					<div class="w-lf-lrcon">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			</c:when>
-			<%--首页轮播图四--%>
+			<%--首页中间右图--%>
 			<c:when test="${ad.advertisementId == 81}">
 		  		<div class="w-lf-right">
 					<div class="w-lf-lrcon">
@@ -81,7 +81,7 @@
                     </div>
 			</c:when>
 			<%--商城首页轮播图二--%>
-			<c:when test="${ad.advertisementId == 83}">
+			<%--<c:when test="${ad.advertisementId == 83}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
                         <div class="w-video">
 							<video id="wvideo" autoplay>
@@ -92,7 +92,7 @@
 						</div>
                     </div>
 			</c:when>
-			<%--商城首页右上角大图--%>
+			--%><%--商城首页右上角大图--%>
 			<c:when test="${ad.advertisementId == 84}">
 				<div class="index_right" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
             	<a class="index_right_title" href="${ad.redirectUrl}">
@@ -122,43 +122,62 @@
 			
 			<%--商城首页左侧广告--%>
 			<c:when test="${ad.advertisementId == 87}">
-                <div class="mall_left" style="background-image:url(${mediaPath}a_and_d/${ad.url});">
-            	<div class="mrzt">
-                	<i></i>
-                	<div class="title-font">${ad.contextTitle}<br/>${ad.context}</div>
-                </div>
-            	<div class="mall_con">
-                	<div class="designer">
-                    	<a class="designer_left" href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}"><cartmatic:img isUrlOnly="false" url="${brand.icon}" mediaType="other" width="270" height="270" ></cartmatic:img></a>
-                        <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
-                        <div class="designer_right">
-                        	<div class="li1 title-font">每周主打品牌设计师</div>
-                            <div class="li2">${brand.designer}</div>
-                            <div class="li3">${brand.brandName}</div>
-                        </div>
-                        </a>
-                    </div>
-                    <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
-                    	<div class="designer_info"><c:out value="${fn:substring(brand.story, 0, 230)}......" /></div>
-                    </a>
-                    <div class="carefully_title title-font">每周主打品牌产品精选</div>
-                    <ul class="carefully_list list-unstyled c">
-                    	
-                    	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
-							<jsp:param name="typeName" value="feature_product" />
-							<jsp:param name="firstResult" value="0" />
-							<jsp:param name="maxResults" value="6" />
-							<jsp:param name="template" value="sales/include/recommendProduct4MainPage6" />
-							<jsp:param name="doAction" value="defaultAction" />
-							<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
-						</jsp:include>
-                    	
-                    </ul>
-                    <%--<div class="carefully_more list-unstyled c">
-	                    <a class="li3" href="${ctxPath}/weekly.html">点击查看更多每周主打产品 >></a>
-	                </div>
-                --%></div>
-            </div>
+				<div class="mall c" style="background:url(${mediaPath}a_and_d/${ad.url}) no-repeat">
+			        <c:if test="${not empty brand}">
+			        	<div class="mall_left">
+			            	<div class="mrzt">
+			                	<div class="title-font">${ad.contextTitle}<br/>${ad.context}</div>
+			                </div>
+			            	<div class="mall_con">
+			                	<div class="designer">
+			                    	<a class="designer_left" href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}"><cartmatic:img isUrlOnly="false" url="${brand.icon}" mediaType="other" width="270" height="270" ></cartmatic:img></a>
+			                        
+			                        <div class="designer_right">
+			                        <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
+			                        	<div class="li1 title-font">每周主打品牌设计师</div>
+			                            <div class="li2">${brand.designer}</div>
+			                            <div class="li3">${brand.brandName}</div>
+			                        </a>
+			                        </div>
+			                        
+			                    </div>
+			                    <a href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">
+			                    	<div class="designer_info"><c:out value="${fn:substring(brand.story, 0, 230)}......" /></div>
+			                    </a>
+			                    <div class="carefully_title title-font">每周主打品牌产品精选</div>
+			                    <ul class="carefully_list list-unstyled c">
+			                    	
+			                    	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
+										<jsp:param name="typeName" value="feature_product" />
+										<jsp:param name="firstResult" value="0" />
+										<jsp:param name="maxResults" value="6" />
+										<jsp:param name="template" value="sales/include/recommendProduct4MainPage6" />
+										<jsp:param name="doAction" value="defaultAction" />
+										<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
+									</jsp:include>
+			                    	
+			                    </ul>
+			                    <div class="carefully_more list-unstyled c">
+				                    <a class="li3" href="${ctxPath}/Designer_Service/designer_datial.html?brandId=${brand.brandId}">点击查看更多 >></a>
+				                </div>
+			                </div>
+			            </div>
+			            </c:if>
+			            <ul class="mall_right list-unstyled">
+			            
+			            	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
+										<jsp:param name="typeName" value="feature_product" />
+										<jsp:param name="firstResult" value="0" />
+										<jsp:param name="maxResults" value="6" />
+										<jsp:param name="template" value="sales/include/recommendProduct4MainPage7" />
+										<jsp:param name="doAction" value="defaultAction" />
+										<jsp:param name="sourceId" value="${appConfig.store.catalog.categoryId}" />
+							</jsp:include>
+			            	
+			            </ul>
+			        </div>
+			
+			
 			</c:when>
 			
 			<c:otherwise>
@@ -166,16 +185,16 @@
 				--%>
 					<section class="swiper-slide swiper-slide-o" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 						<div class="w-video">
-							<video autoplay="" loop="">
-							<c:if test="${ad.mediaPathMpFour !=null && ad.mediaPathMpFour !=''}">
-								<source src="${mediaPath}a_and_d/${ad.mediaPathMpFour}" type="video/mp4">
-							</c:if>
-							<c:if test="${ad.mediaPathOgv !=null && ad.mediaPathOgv !=''}">
-								<source src="${mediaPath}a_and_d/${ad.mediaPathOgv}" type="video/ogv">
-							</c:if>
-							<c:if test="${ad.mediaPathMpWebm !=null && ad.mediaPathMpWebm !=''}">
-								<source src="${mediaPath}a_and_d/${ad.mediaPathMpWebm}" type="video/webm">
-							</c:if>
+							<video id="wvideo" autoplay="autoplay" loop="loop">
+								<c:if test="${ad.mediaPathMpFour !=null && ad.mediaPathMpFour !=''}">
+									<source src="${mediaPath}a_and_d/${ad.mediaPathMpFour}" type="video/mp4">
+								</c:if>
+								<c:if test="${ad.mediaPathOgv !=null && ad.mediaPathOgv !=''}">
+									<source src="${mediaPath}a_and_d/${ad.mediaPathOgv}" type="video/ogv">
+								</c:if>
+								<c:if test="${ad.mediaPathMpWebm !=null && ad.mediaPathMpWebm !=''}">
+									<source src="${mediaPath}a_and_d/${ad.mediaPathMpWebm}" type="video/webm">
+								</c:if>
 							</video>
 						</div>
 						<div class="ani resize swiper-o-to" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="0s">
