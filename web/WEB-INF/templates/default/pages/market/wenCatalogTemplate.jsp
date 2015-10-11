@@ -995,7 +995,7 @@
       		  	$.post("/ajaxFavorite.html?doAction=addFavorite", {
           		  	productId : productId
         		  	}, function(result) {
-        		  		    alert("result:"+result.msg);
+        		  		    alert(result.msg);
         		  		}, "json");
           		    }else{
 	              		 alert("此操作需要登陆");

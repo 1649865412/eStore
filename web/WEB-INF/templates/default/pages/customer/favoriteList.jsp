@@ -775,7 +775,7 @@
 			<script type="text/javascript">
 		function fnRemoveFavorite(id){
 			if(confirm("确定要取消该商品收藏？")){
-				window.location.href=__ctxPath+"/myaccount/favorite/delete/"+id+".html"
+				window.location.href="/myaccount/favorite/delete/"+id+".html"
 			}
 		}
 	</script>
