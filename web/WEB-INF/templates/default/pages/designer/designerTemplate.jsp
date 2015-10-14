@@ -1,16 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page pageEncoding="utf-8"%>
-<%@page import="com.cartmatic.estore.common.model.catalog.ProductReview"%>
-<%@page import="org.apache.commons.lang.StringUtils"%>
-<%@page import="com.cartmatic.estore.common.model.catalog.ProductDescription"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
-<%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
-<%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
-<%@ taglib prefix="app" tagdir="/WEB-INF/tags/app"%>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
+<%@page import="com.cartmatic.estore.common.model.customer.Customer"%>
 <!--设计师详情页-->
 <html lang="en" class="no-js">
 	<head>
@@ -563,7 +559,9 @@
 					</div>
 					<div class="col-md-4 col-lg-3" style="padding-bottom: 50px;">
 						<ul class="w-menu-right list-unstyled">
-							<li><a href="javascript:void(0)"><span class="w-gwc">购物车 (${shoppingcart.buyNowItemsCount == null?0:shoppingcart.buyNowItemsCount})</span></a>
+							<li>
+								<a href="javascript:void(0)" class="w-gwc">购物车(<span id="cartNum">
+										${shoppingcart.buyNowItemsCount == null || shoppingcart.buyNowItemsCount == "" ? 0 : shoppingcart.buyNowItemsCount}</span>) </a>
 							</li>
 							<li id="loginPromptHolderTemplateLogout">
 								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
@@ -583,7 +581,7 @@
 						<a href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 					</div>
 					<div class="col-xs-4 col-sm-6 w-logo text-center">
-						<a href="#">四方街</a>
+						<a href="${ctxPath}/index.html">四方街</a>
 					</div>
 					<div class="col-xs-4 col-sm-3 text-right w-gwct" style="padding-bottom: 50px;">
 						<a href="javascript:void(0)"><span class="w-gwc">购物车 (0)</span></a>
@@ -594,22 +592,32 @@
 			</div>
 			<div class="w-menush visible-sm-block visible-xs-block">
 				<ul class="w-menush-items list-unstyled">
-					<li><a href="#"><span class="w-menu-on">商城</span></a>
-					</li>
-					<li><a href="list.html"><span>文化资讯</span></a>
-					</li>
-					<li><a href="#"><span>设计师</span></a>
-					</li>
-					<li><a href="#"><span>关于我们</span></a>
-					</li>
 					<li>
-						<a href="#"><span>线下店铺</span></a>
-					</li>
+								<a href="${ctxPath}/MarketIndex.html"><span>商城</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span>
+								</a>
+							</li>
+							<li>
+								<a href="${ctxPath}/designerList.html"><span>设计师</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/customer_service/_18.html"><span>关于我们</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/coming.html"><span>线下店铺</span> </a>
+							</li>
+					<li id="loginPromptHolderTemplateLogout">
+								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
+									class="w-menu-lrzc">注册</span> </a>
+							</li>
+							<li id="loginPromptHolderTemplateLogin">
+								<a href="/myaccount/account.html" id="myAccountUrl"><i class="fa fa-user"></i></a> (
+								<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;
+							</li>
 					<li>
-						<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span class="w-menu-lrzc">注册</span></a>
-					</li>
-					<li>
-						<a href="#"><span>搜索</span></a>
+						<a href="#"><span class="w-search">搜索</span> </a>
 					</li>
 				</ul>
 			</div>
@@ -669,6 +677,7 @@
         <div class="product_box">
         <ul class="product list-unstyled col4 c sku_list" id="pinterestList">
         <c:forEach items="${recommendProductList}" var="product" begin="0" end ="7">
+        <c:if test="${product.status ==1}">
 					<li>
 						<div class="li1">
 	                        <a href="${ctxPath}/product/${product.productId}.html">
@@ -747,6 +756,7 @@
 	                        <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
 	                    </p>
                     </li>
+                    </c:if>
 				</c:forEach>
         </ul>
         </div>
@@ -765,8 +775,8 @@
                                 <div class="li3">
                                 ${culturalInformation.content}
                                  </div>
-                                <a class="li4" href="#">点击查看详细</a>
-                            </div>
+                                <%--<a class="li4" href="#">点击查看详细</a>
+                            --%></div>
                         </div>
                     </div><!--dialogue_left end-->
                     <div class="dialogue_right"><cartmatic:img isUrlOnly="false" url="${culturalInformation.logoImg}" mediaType="other" id="logoImage"></cartmatic:img></div>
@@ -811,13 +821,6 @@
                         </div><!--w-cart-header-->
                         <div class="w-cart-body">
                             <div class="addcart_top">
-                                <div class="addcart_part">
-                                    <span class="addcart_part_title">购买该产品的用户还买了</span>
-                                    <span class="addcart_part_more"><a href="javascript:;">更多>></a></span>
-                                </div><!--addcart_part-->
-                                <div class="addcart_sku">
-                                  <ul class="sku_row">
-                                    <li class="sku_list">
                                     	<jsp:include flush="true" page="/sales/recommendedProduct.html">
 								             <jsp:param name="typeName" value="also_buy" />
 								             <jsp:param name="firstResult" value="0" />
@@ -826,9 +829,6 @@
 								             <jsp:param name="doAction" value="defaultAction" />
 								             <jsp:param name="sourceId" value="${product.productId}" />
 								         </jsp:include>
-                                    </li>
-                                  </ul>
-                                </div><!--addcart_sku-->
                             </div><!--addcart_top-->
                         </div><!--w-cart-body-->
                     </div><!--cart_box-->
@@ -878,7 +878,7 @@
 						</div><!--w-footer-item col-lg-4-->
 						<div class="w-footer-item w-footer-con col-lg-4">
 							<span>联系我们</span>
-							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五 9:30-18:30 节假日休息</span>
+							<span>邮箱：cs@sifangstreet.com 电话：4006615677 周一至周五 9:30-18:30 节假日休息</span>
                             <!--2015-8 蔡蔡改动-->
 							<span>
                               <!-- WPA Button Begin -->
@@ -928,6 +928,53 @@
 	    <script src="${ctxPath}/scripts/jquery/js/index.js"></script>
 	    <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/slider.js"></script>
 	    <script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script>
+	    <script>
+	function index_login(){
+		  var url =""+self.location.href;
+		   $("#papeurl").val(url);
+		    //alert( $("#papeurl").val());
+		    $("#loginForm").submit();
+		}
+		
+	var swiper = new Swiper('.swiper-container', {
+		nextButton : '.swiper-page-next',
+		prevButton : '.swiper-page-prev',
+		paginationClickable : true,
+		spaceBetween : 0,
+		mousewheelControl : false,
+		loop : true,
+		autoplay: 3000,
+		speed : 500,
+		onInit : function(swiper) {
+			swiperAnimateCache(swiper);
+			swiperAnimate(swiper);
+		},
+		onSlideChangeEnd : function(swiper) {
+			swiperAnimate(swiper);
+		},
+		onTransitionEnd : function(swiper) {
+			swiperAnimate(swiper);
+		}
+	});
+
+	function refreshImage(type, obj) {
+		//var image=document.getElementById("imgValidationCode");
+		var image = $(obj).children()[0];
+		var url = "${ctxPath}/jCaptcha.html?type=" + type;
+		var xmlHttpReq = null;
+		if (window.ActiveXObject) {
+			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttpReq = new XMLHttpRequest();
+		}
+		xmlHttpReq.open("Post", url, true);
+		xmlHttpReq.send(null);
+
+		image.src = "${ctxPath}/jCaptcha.html?rand="
+				+ parseInt(1000 * Math.random());
+		return false;
+	}
+</script>
 	    <script type="text/javascript">
 	        $(function () {
 	            //弹出图片和视屏

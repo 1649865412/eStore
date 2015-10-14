@@ -291,7 +291,7 @@
 							<c:if test="${fn:indexOf(productSkuOptionAndValue.key.skuOptionCode,'color') > -1}">
 								<div class="product_color">
 									<%--图片 --%>
-									<ul class="tm-clear J_TSaleProp tb-img" data-property="${productSkuOptionAndValue.key.skuOptionName}">
+									<ul class="" data-property="${productSkuOptionAndValue.key.skuOptionName}">
 										<c:forEach items="${productSkuOptionAndValue.value}" var="skuOptionValue" varStatus="status">
 											<li data-value="${productSkuOptionAndValue.key.id}:${skuOptionValue.id}" >
 													<a  id="color_${skuOptionValue.skuOptionValue }" class="imageSku"  href="#">

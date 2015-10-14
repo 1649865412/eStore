@@ -174,9 +174,9 @@ public class CategoryFrontController extends
 
 		// 没有指定模版，或指定的模版找不到的时候，使用的缺省模版
 
-		String mv = this.getTemplatePath(defaultMv, category.getTemplatePath());
+		//String mv = this.getTemplatePath(defaultMv, category.getTemplatePath());
 
-		ModelAndView modelAndView = getModelAndView(mv);
+		ModelAndView modelAndView = getModelAndView(defaultMv);
 		RequestUtil.getShopCart(request,response,modelAndView,shoppingcartManager);
 		modelAndView.addObject("category", category);
 		modelAndView.addObject("navigatorCategorys", navigatorCategorys);
@@ -186,7 +186,7 @@ public class CategoryFrontController extends
 		// 显示该目录的产品
 		List<Product> productList = new ArrayList<Product>();
 		SearchResult searchResult = solr.queryProductByCatalog(request,
-				category.getCategoryId(), store.getCategoryListPerSize());
+				category.getCategoryId(), 12);
 		// 通过搜索来查产品id
 
 		List<Integer> solrRsp = searchResult.getResultList();

@@ -643,7 +643,7 @@
 						<a href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
 					</div>
 					<div class="col-xs-4 col-sm-6 w-logo text-center">
-						<a href="#">四方街</a>
+						<a href="${ctxPath}/index.html">四方街</a>
 					</div>
 					<div class="col-xs-4 col-sm-3 text-right w-gwct"
 						style="padding-bottom: 50px;">
@@ -683,49 +683,50 @@
 		</div>
 
 <script>
-	var swiper = new Swiper('.swiper-container', {
-		nextButton : '.swiper-page-next',
-		prevButton : '.swiper-page-prev',
-		paginationClickable : true,
-		spaceBetween : 0,
-		mousewheelControl : false,
-		//							autoplay: 5000,
-		speed : 500,
-		onInit : function(swiper) {
-			swiperAnimateCache(swiper);
-			swiperAnimate(swiper);
-		},
-		onSlideChangeEnd : function(swiper) {
-			swiperAnimate(swiper);
-		},
-		onTransitionEnd : function(swiper) {
-			swiperAnimate(swiper);
-		}
-	});
-
-	function refreshImage(type, obj) {
-		//var image=document.getElementById("imgValidationCode");
-		var image = $(obj).children()[0];
-		var url = "${ctxPath}/jCaptcha.html?type=" + type;
-		var xmlHttpReq = null;
-		if (window.ActiveXObject) {
-			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
-		} else if (window.XMLHttpRequest) {
-			xmlHttpReq = new XMLHttpRequest();
-		}
-		xmlHttpReq.open("Post", url, true);
-		xmlHttpReq.send(null);
-
-		image.src = "${ctxPath}/jCaptcha.html?rand="
-				+ parseInt(1000 * Math.random());
-		return false;
+function index_login(){
+	  var url =""+self.location.href;
+	   $("#papeurl").val(url);
+	    //alert( $("#papeurl").val());
+	    $("#loginForm").submit();
 	}
+	
+var swiper = new Swiper('.swiper-container', {
+	nextButton : '.swiper-page-next',
+	prevButton : '.swiper-page-prev',
+	paginationClickable : true,
+	spaceBetween : 0,
+	mousewheelControl : false,
+	loop : true,
+	autoplay: 3000,
+	speed : 500,
+	onInit : function(swiper) {
+		swiperAnimateCache(swiper);
+		swiperAnimate(swiper);
+	},
+	onSlideChangeEnd : function(swiper) {
+		swiperAnimate(swiper);
+	},
+	onTransitionEnd : function(swiper) {
+		swiperAnimate(swiper);
+	}
+});
 
-	function index_login(){
-		  var url =""+self.location.href;
-		   $("#papeurl").val(url);
-		    //alert( $("#papeurl").val());
-		    $("#loginForm").submit();
-		}
+function refreshImage(type, obj) {
+	//var image=document.getElementById("imgValidationCode");
+	var image = $(obj).children()[0];
+	var url = "${ctxPath}/jCaptcha.html?type=" + type;
+	var xmlHttpReq = null;
+	if (window.ActiveXObject) {
+		xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+	} else if (window.XMLHttpRequest) {
+		xmlHttpReq = new XMLHttpRequest();
+	}
+	xmlHttpReq.open("Post", url, true);
+	xmlHttpReq.send(null);
+
+	image.src = "${ctxPath}/jCaptcha.html?rand="
+			+ parseInt(1000 * Math.random());
+	return false;
+}
 </script>
 

@@ -572,7 +572,7 @@
 						<a href="javascript:void(0)"><i class="fa fa-bars"></i></a>
 					</div>
 					<div class="col-xs-4 col-sm-6 w-logo text-center">
-						<a href="#">四方街</a>
+						<a href="${ctxPath}/index.html">四方街</a>
 					</div>
 					<div class="col-xs-4 col-sm-3 text-right w-gwct" style="padding-bottom: 50px;">
 						<a href="javascript:void(0)"><span class="w-gwc">购物车 (0)</span></a>
@@ -583,22 +583,32 @@
 			</div>
 			<div class="w-menush visible-sm-block visible-xs-block">
 				<ul class="w-menush-items list-unstyled">
-					<li><a href="#"><span class="w-menu-on">商城</span></a>
-					</li>
-					<li><a href="list.html"><span>文化资讯</span></a>
-					</li>
-					<li><a href="#"><span>设计师</span></a>
-					</li>
-					<li><a href="#"><span>关于我们</span></a>
-					</li>
 					<li>
-						<a href="#"><span>线下店铺</span></a>
-					</li>
+								<a href="${ctxPath}/MarketIndex.html"><span>商城</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span>
+								</a>
+							</li>
+							<li>
+								<a href="${ctxPath}/designerList.html"><span>设计师</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/customer_service/_18.html"><span>关于我们</span> </a>
+							</li>
+							<li>
+								<a href="${ctxPath}/coming.html"><span>线下店铺</span> </a>
+							</li>
+					<li id="loginPromptHolderTemplateLogout">
+								<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span
+									class="w-menu-lrzc">注册</span> </a>
+							</li>
+							<li id="loginPromptHolderTemplateLogin">
+								<a href="/myaccount/account.html" id="myAccountUrl"><i class="fa fa-user"></i></a> (
+								<a href="${ctxPath}/j_acegi_logout" rel="nofollow" onclick="window.location.href='${ctxPath}/j_acegi_logout'">退出</a>)&nbsp;&nbsp;
+							</li>
 					<li>
-						<a href="javascript:void(0)"><span class="w-menu-lr">登录/</span><span class="w-menu-lrzc">注册</span></a>
-					</li>
-					<li>
-						<a href="#"><span>搜索</span></a>
+						<a href="#"><span class="w-search">搜索</span> </a>
 					</li>
 				</ul>
 			</div>
@@ -879,7 +889,7 @@
 						</div><!--w-footer-item col-lg-4-->
 						<div class="w-footer-item w-footer-con col-lg-4">
 							<span>联系我们</span>
-							<span>邮箱：cs@sifangstreet.com 电话：4008976336 周一至周五 9:30-18:30 节假日休息</span>
+							<span>邮箱：cs@sifangstreet.com 电话：4006615677 周一至周五 9:30-18:30 节假日休息</span>
                             <!--2015-8 蔡蔡改动-->
 							<span>
                               <!-- WPA Button Begin -->

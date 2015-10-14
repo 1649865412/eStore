@@ -4,6 +4,7 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <c:forEach items="${productList}" var="product" varStatus="varStatus" begin="0" end ="8">
+<c:if test="${product.status ==1}">
 				<li>
                     <div class="li1" onmouseover="setShare('${product.productName}', 'product/${product.productId}.html');"><a href="${ctxPath}/product/${product.productId}.html">
             	
@@ -77,4 +78,5 @@
                                         <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
                 </p>
                 </li>
+                </c:if>
            </c:forEach>

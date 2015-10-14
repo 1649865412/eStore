@@ -4,5 +4,5 @@
 <%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
 
 		<c:forEach items="${productList}" var="productItem" varStatus="varStatus" >
-		<a href="#"><product:productImg product="${productItem}" size="v" width="72" height="97" category="${category}"/></a>
+		<li><a href="#"><product:productImg product="${productItem}" size="v" width="72" height="97" category="${category}"/></a></li>
 		</c:forEach>

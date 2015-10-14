@@ -22,6 +22,7 @@ ShoppingcartManager.addToC=function(skuCode,pSkuCodes,quantity,accessories){
 	alert("quantity:"+quantity);
 	alert("accessories:"+accessories);*/
 	
+	
 	this.$add(skuCode,pSkuCodes,quantity,1,accessories);
 }
 /**
@@ -41,6 +42,16 @@ ShoppingcartManager.addToF=function(skuCode,pSkuCodes,quantity){
  */
 ShoppingcartManager.submitCart=function(){
 	$("#cart_form").submit();
+}
+
+ShoppingcartManager.addCartNum=function(){
+	var quantity = $("#quantity").val()
+	var cartNum = $("#cartNum").html();
+	if(quantity == null || quantity ==""){
+		$("#cartNum").html(parseInt(cartNum)+1);
+	}else{
+		$("#cartNum").html(parseInt(cartNum)+parseInt(quantity));
+	}
 }
 
 /**
@@ -103,6 +114,7 @@ ShoppingcartManager.$add=function(skuCode,pSkuCodes,quantity,type,accessories){
 					function(data){
 						var jdata=eval("(" + data + ")");
 						var adata = jdata.message.split(":");
+						ShoppingcartManager.addCartNum();
 						if(adata[0]==__FMT.cannotMoveToC){
 							alert(adata[1]+__FMT.update_stockNotEnough);
 						}
@@ -310,7 +322,6 @@ function moveCartBtn(b){
 }
 
 function addToFavorite(productId){
-	alert("hello");
 //	alert("url:"+__ctxPath);
 	doRequiredLoginAction(function(){
 		$.post("/ajaxFavorite.html?doAction=addFavorite&productId="+productId,function(result){
@@ -333,3 +344,4 @@ function addToFavorite(productId){
 		});
 	});
 }
+

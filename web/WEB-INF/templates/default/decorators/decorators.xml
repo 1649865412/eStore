@@ -19,10 +19,10 @@
 	</decorator> 
 
 	--><!--购物车装饰器 -->
-	<decorator name="shoppingcart" page="decShoppingCart.jsp">
+	<!--<decorator name="shoppingcart" page="decShoppingCart.jsp">
 		<pattern>/cart/shoppingcart.html</pattern>
 	</decorator>
-	<!--配饰界面装饰器 -->
+	--><!--配饰界面装饰器 -->
 	<decorator name="accessories" page="accessories.jsp">
 		<pattern>/accessories_catalog.html</pattern>
 	</decorator>

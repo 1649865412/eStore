@@ -1292,6 +1292,11 @@ span.new{
 	background-color: #f9f7f7;
 	overflow: hidden;
 }
+.w-lf .w-lf-left a, .w-lf .w-lf-left a:hover,
+.w-lf .w-lf-right a, .w-lf .w-lf-right a:hover{
+	color:#fff;
+}
+
 .w-lf .w-lf-cen {
 	float: left;
 	width: 1%;

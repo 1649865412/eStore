@@ -33,7 +33,8 @@ ul,li{ list-style:none;}
 .w-car-bottom-info p{ margin:0;}
 .w-car-bottom-info p span{ display:inline-block; width:6px; height:6px; border-radius:50%; background:#bfbfbf; vertical-align:middle; margin:-2px 5px 0 0;}
 .w-car-bottom-btn{ float:right; width:30%;}
-.w-car-bottom-btn h2{ margin:0; font-size:18px; color:#757575;}
+.w-car-bottom-btn h2{ margin:0; font-size:18px; color:#757575; width:50%; float:left; padding-bottom:15px; font-weight:bold;}
+.w-car-bottom-btn h2.hui{ margin:0; font-size:15px; color:#757575; width:50%; float:left; padding-bottom:10px; font-weight:normal;}
 .w-car-bottom-btn ul li{ margin-top:20px;}
 .w-car-bottom-btn ul li input{ width:98%; padding:10px 0 10px 2%; color:#999;}
 .w-car-bottom-btn ul li select{ width:100%; padding:10px 0; color:#999;}

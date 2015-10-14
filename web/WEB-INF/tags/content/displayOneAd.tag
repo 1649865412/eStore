@@ -19,10 +19,20 @@
 					<div class="w-b-bg" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 					<!--<img src="img/bg.jpg" />-->
 					</div>
+					<a href="${ad.redirectUrl}">
 					<div class="w-banner-txt">
-						<h1>${ad.contextTitle}</h1>
-						<p>${ad.contextSubTitle}</p>
+					<c:if test="${ad.showContext ==1}">
+						<c:if test="${ad.contextBackColor ==1}">
+							<h1 style="color:black">${ad.contextTitle}</h1>
+							<p style="color:black">${ad.contextSubTitle}</p>
+						</c:if>
+						<c:if test="${ad.contextBackColor ==2}">
+							<h1>${ad.contextTitle}</h1>
+							<p>${ad.contextSubTitle}</p>
+						</c:if>
+					</c:if>
 					</div>
+					</a>
 				</div>
 			</c:when>
 			<%--首页中间大图二--%>
@@ -31,11 +41,26 @@
 					<div class="w-banner-img" style="background-image: url(${mediaPath}a_and_d/${ad.url});"></div>
 						<div class="w-bannert-txt">
 							<div class="w-bannert-k">
-							<h1>${ad.contextTitle}</h1>
-							<p>${ad.contextSubTitle}</p>
+							<c:if test="${ad.showContext ==1}">
+								<c:if test="${ad.contextBackColor ==1}">
+									<h1 style="color:black">${ad.contextTitle}</h1>
+									<p style="color:black">${ad.contextSubTitle}</p>
+								</c:if>
+								<c:if test="${ad.contextBackColor ==2}">
+									<h1>${ad.contextTitle}</h1>
+									<p>${ad.contextSubTitle}</p>
+								</c:if>
+							</c:if>
 					</div>
 						<div class="w-bannert-kt">
-						<p>${ad.context}</p>
+						<c:if test="${ad.showContext ==1}">
+							<c:if test="${ad.contextBackColor ==1}">
+								<p style="color:black">${ad.context}</p>
+							</c:if>
+							<c:if test="${ad.contextBackColor ==2}">
+								<p>${ad.context}</p>
+							</c:if>
+						</c:if>
 						<a href="${ad.redirectUrl}">点击查看</a>
 						</div>
 					</div>
@@ -44,40 +69,120 @@
 			<%--首页中间左图--%>
 			<c:when test="${ad.advertisementId == 80}">
 		  		<div class="w-lf-left">
+		  		<a href="${ad.redirectUrl}">
 					<div class="w-lf-lrcon">
 						<div class="w-lf-img" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 							<div class="w-lf-yywz">
-								<p>${ad.context}</p>
+							<c:if test="${ad.showContext ==1}">
+								<c:if test="${ad.contextBackColor ==1}">
+									<p style="color:black">${ad.context}</p>
+								</c:if>
+								<c:if test="${ad.contextBackColor ==2}">
+									<p>${ad.context}</p>
+								</c:if>
+							</c:if>
 							</div>
 						</div>
 						<div class="w-lf-txt">
-							<h1>${ad.contextTitle}</h1>
+						<c:if test="${ad.showContext ==1}">
+							<c:if test="${ad.contextBackColor ==1}">
+								<h1 style="color:black">${ad.contextTitle}</h1>
+							</c:if>
+							<c:if test="${ad.contextBackColor ==2}">
+								<h1>${ad.contextTitle}</h1>
+							</c:if>
+						</c:if>
 						</div>
 					</div>
+				</a>
 				</div>
 			</c:when>
 			<%--首页中间右图--%>
 			<c:when test="${ad.advertisementId == 81}">
 		  		<div class="w-lf-right">
+		  		<a href="${ad.redirectUrl}">
 					<div class="w-lf-lrcon">
 					<div class="w-lf-img" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 						<div class="w-lf-yywz">
-							<p>${ad.context}</p>
+						<c:if test="${ad.showContext ==1}">
+							<c:if test="${ad.contextBackColor ==1}">
+								<p style="color:black">${ad.context}</p>
+							</c:if>
+							<c:if test="${ad.contextBackColor ==2}">
+								<p>${ad.context}</p>
+							</c:if>
+						</c:if>
 						</div>
 					</div>
 					<div class="w-lf-txt">
-						<h1>${ad.contextTitle}</h1>
+					<c:if test="${ad.showContext ==1}">
+						<c:if test="${ad.contextBackColor ==1}">
+							<h1 style="color:black">${ad.contextTitle}</h1>
+						</c:if>
+						<c:if test="${ad.contextBackColor ==2}">
+							<h1>${ad.contextTitle}</h1>
+						</c:if>
+					</c:if>
 					</div>
 					</div>
+					</a>
 				</div>
 			</c:when>
 			<%--商城首页轮播图一--%>
 			<c:when test="${ad.advertisementId == 82}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
+					<a href="${ad.redirectUrl}">
                         <div class="show_title">
-                            <h3 class="li1 title-font">${ad.contextTitle}</h3>
-                            <p><span>${ad.contextSubTitle}</span></p>
+                        <c:if test="${ad.showContext ==1}">
+                        	<c:if test="${ad.contextBackColor ==1}">
+	                            <h3 class="li1 title-font" style="color:black">${ad.contextTitle}</h3>
+	                            <p><span style="color:black">${ad.contextSubTitle}</span></p>
+                            </c:if>
+                            <c:if test="${ad.contextBackColor ==2}">
+                            	<h3 class="li1 title-font">${ad.contextTitle}</h3>
+	                            <p><span>${ad.contextSubTitle}</span></p>
+                            </c:if>
+                        </c:if>
                         </div>
+                     </a>
+                    </div>
+			</c:when>
+			<%--商城首页轮播图二--%>
+			<c:when test="${ad.advertisementId == 83}">
+				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
+					<a href="${ad.redirectUrl}">
+                        <div class="show_title">
+                        <c:if test="${ad.showContext ==1}">
+                        	<c:if test="${ad.contextBackColor ==1}">
+	                            <h3 class="li1 title-font" style="color:black">${ad.contextTitle}</h3>
+	                            <p><span style="color:black">${ad.contextSubTitle}</span></p>
+                            </c:if>
+                            <c:if test="${ad.contextBackColor ==2}">
+                            	<h3 class="li1 title-font">${ad.contextTitle}</h3>
+	                            <p><span>${ad.contextSubTitle}</span></p>
+                            </c:if>
+                        </c:if>
+                        </div>
+                     </a>
+                    </div>
+			</c:when>
+			<%--商城首页轮播图三--%>
+			<c:when test="${ad.advertisementId == 88}">
+				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
+					<a href="${ad.redirectUrl}">
+                        <div class="show_title">
+                        <c:if test="${ad.showContext ==1}">
+                        	<c:if test="${ad.contextBackColor ==1}">
+	                            <h3 class="li1 title-font" style="color:black">${ad.contextTitle}</h3>
+	                            <p><span style="color:black">${ad.contextSubTitle}</span></p>
+                            </c:if>
+                            <c:if test="${ad.contextBackColor ==2}">
+                            	<h3 class="li1 title-font">${ad.contextTitle}</h3>
+	                            <p><span>${ad.contextSubTitle}</span></p>
+                            </c:if>
+                        </c:if>
+                        </div>
+                     </a>
                     </div>
 			</c:when>
 			<%--商城首页轮播图二--%>
@@ -96,9 +201,18 @@
 			<c:when test="${ad.advertisementId == 84}">
 				<div class="index_right" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
             	<a class="index_right_title" href="${ad.redirectUrl}">
-                	<h3 class="li1 title-font">${ad.contextTitle}</h3>
-                    <p class="li2">${ad.contextSubTitle}</p>
-                    <p class="li3">${ad.context}</p>
+            	<c:if test="${ad.showContext ==1}">
+            		<c:if test="${ad.contextBackColor ==1}">
+	                	<h3 class="li1 title-font" style="color:black">${ad.contextTitle}</h3>
+	                    <p class="li2" style="color:black">${ad.contextSubTitle}</p>
+	                    <p class="li3" style="color:black">${ad.context}</p>
+                    </c:if>
+                    <c:if test="${ad.contextBackColor ==2}">
+	                	<h3 class="li1 title-font">${ad.contextTitle}</h3>
+	                    <p class="li2">${ad.contextSubTitle}</p>
+	                    <p class="li3">${ad.context}</p>
+                    </c:if>
+                </c:if>
                 </a>
             </div>
 			</c:when>
@@ -113,11 +227,21 @@
 			
 			<%--商品详情页底部广告--%>
 			<c:when test="${ad.advertisementId == 86}">
+			<a href="${ad.redirectUrl}">
 				<img src="${mediaPath}a_and_d/${ad.url}" width="100%">
 				<div class="deta-bd-group3_info">
+				<c:if test="${ad.showContext ==1}">
+					<c:if test="${ad.contextBackColor ==1}">
+                    	<h2 style="color:black">${ad.contextTitle}</h2>
+                        <p style="color:black">${ad.context}</p>
+                     </c:if>
+                     <c:if test="${ad.contextBackColor ==2}">
                     	<h2>${ad.contextTitle}</h2>
                         <p>${ad.context}</p>
+                     </c:if>
+                </c:if>
                 </div><!--deta-bd-group3_info-->
+            </a>
 			</c:when>
 			
 			<%--商城首页左侧广告--%>
@@ -126,7 +250,14 @@
 			        <c:if test="${not empty brand}">
 			        	<div class="mall_left">
 			            	<div class="mrzt">
-			                	<div class="title-font">${ad.contextTitle}<br/>${ad.context}</div>
+			            	<c:if test="${ad.showContext ==1}">
+			            		<c:if test="${ad.contextBackColor ==1}">
+			                		<div class="title-font" style="color:black">${ad.contextTitle}<br/>${ad.context}</div>
+			                	</c:if>
+			                	<c:if test="${ad.contextBackColor ==2}">
+			                		<div class="title-font">${ad.contextTitle}<br/>${ad.context}</div>
+			                	</c:if>
+			                </c:if>
 			                </div>
 			            	<div class="mall_con">
 			                	<div class="designer">
@@ -197,10 +328,20 @@
 								</c:if>
 							</video>
 						</div>
+						<a href="${ad.redirectUrl}">
 						<div class="ani resize swiper-o-to" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="0s">
-							<h1>${ad.contextTitle}</h1>
-							<p>${ad.contextSubTitle}</p>
+						<c:if test="${ad.showContext ==1}">
+							<c:if test="${ad.contextBackColor ==1}">
+								<h1 style="color:black">${ad.contextTitle}</h1>
+								<p style="color:black">${ad.contextSubTitle}</p>
+							</c:if>
+							<c:if test="${ad.contextBackColor ==2}">
+								<h1>${ad.contextTitle}</h1>
+								<p>${ad.contextSubTitle}</p>
+							</c:if>
+						</c:if>
 						</div>
+						</a>
 					</section>
 			</c:otherwise>
 		</c:choose>

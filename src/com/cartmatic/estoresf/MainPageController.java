@@ -3,7 +3,9 @@ package com.cartmatic.estoresf;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
+import net.sf.json.util.JSONUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +47,7 @@ import com.cartmatic.estore.common.model.system.AppUser;
 import com.cartmatic.estore.common.service.ShoppingcartService;
 import com.cartmatic.estore.common.service.SolrService;
 import com.cartmatic.estore.core.util.ContextUtil;
+import com.cartmatic.estore.core.view.AjaxView;
 import com.cartmatic.estore.system.service.AppUserManager;
 import com.cartmatic.estore.webapp.util.RequestContext;
 import com.cartmatic.estore.webapp.util.RequestUtil;

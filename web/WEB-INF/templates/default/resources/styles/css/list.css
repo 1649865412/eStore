@@ -597,6 +597,8 @@ button:focus {
 	width: 100%;
 	pointer-events: none;
 	height: 0;
+	display:block;
+	background:#FFF;
 	/* Avoid second scroll bar in Chrome! */
 	
 	visibility: hidden;
@@ -922,7 +924,9 @@ button:focus {
 }
 .w-c-np .w-c-txt {
 	padding: 10px;
+    cursor:pointer;
 }
+
 .w-c-np .w-c-ttitle {
 	width: 270px;
 	font-size: 16px;
