@@ -124,13 +124,7 @@
                 </div>
                 <div class="w-car-bottom-btn">
                 	<h2>小计：${appConfig.defaultCurrencySymbol}<span id="subtotal">${shoppingcart.subtotal }</span></h2>
-                	<td colspan="2" class="chart_howmany"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="display:none">会员优惠：</span></td>
-             
-		              <!--会员优惠-->
-		              <td class="align_right padding_right30">
-			         
-			              <span id="cart_dis_member" style="display:none">${shoppingcart.cartDiscountAmount == null ? 0.00 : shoppingcart.cartDiscountAmount}</span>
-		              </td>
+                		<h2 class="hui" <c:if test="${shoppingcart.cartDiscountAmount == null || shoppingcart.cartDiscountAmount <1}">style="display:none"</c:if>>会员优惠：-￥<span id="cart_dis_member">${shoppingcart.cartDiscountAmount == null ? 0.00 : shoppingcart.cartDiscountAmount}</span></h2>
 		              <h id="full_cut" colspan="2" class="chart_howmany" >
 			              <td colspan="2" class="chart_howmany" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品牌满减优惠：</td>
 			              </td>
@@ -140,12 +134,11 @@
 			              </td>
 			            </h>
                     <ul>
-                    	<li><input id="couponNo_input_id" name="couponNo_input_name" 
-			                     type="text" placeholder="输入优惠劵"  title="温馨提示：“输入优惠券”后，点击“去结算”，即可看到“优惠”的金额。"
+                    	<li><input id="couponNo_input_id" name="couponNo_input_name" type="text" placeholder="输入优惠劵"
 			                      onblur="fnUseCoupon(${shoppingcart.usedCouponNo });"  value="${shoppingcart.usedCouponNo }"
 			                       autocomplete="off"  <c:if test="${shoppingcart.giftCertificateNos != null }">disabled</c:if>/>
 			                       <input  type="hidden" value ="" id="rightcoupon">
-	              <span id="cartDiscountAmount" style="display:none">0.00</span></li>
+	              		<li id="couponNo" style="display:none">已优惠：-￥<span id="cartDiscountAmount">0.00</span></li>
                         <span style="display:none"><li><input name="giftCertificateNo" id="giftCertificateNo" type="text" placeholder="输入礼品卡/礼券"  
 			                    onblur="fnUseGift('${shoppingcart.giftCertificateNos == null ? '' : fn:substringBefore(shoppingcart.giftCertificateNos,':') }',1);"  
 			                    onfocus="showGiftList();" value="${fn:substringBefore(shoppingcart.giftCertificateNos,':') }" autocomplete="off" <c:if test="${shoppingcart.usedCouponNo != null }">disabled</c:if>/>
@@ -174,8 +167,8 @@
                       <c:forEach begin="100" end="${shopPoint.total}" step="100" var="point">
 						<option value="${point}" <c:if test="${shoppingcart.shopPoint==point }">selected</c:if>>${point}</option>
 					 </c:forEach>
-                    </select>
-	              <span id="shopPointMoney" style="display:none">${shoppingcart.shopPoint == null ? '0.00' : shoppingcart.shopPoint * appConfig.shopPointUseGiftPercent }</span></li>
+                    </select></li>
+	              	<li id="pointNo" style="display:none">已优惠：-￥<span id="shopPointMoney">${shoppingcart.shopPoint == null ? '0.00' : shoppingcart.shopPoint * appConfig.shopPointUseGiftPercent }</span></li>
                     </ul>
                     <p><b>共计：${appConfig.defaultCurrencySymbol}&nbsp;<span id="cart_sum">${shoppingcart.subtotal}</span></b></p>
                     <p><a href="javascript:void(0);" onclick="javascript:window.location.href='${ctxPath}/checkout/login.html';">

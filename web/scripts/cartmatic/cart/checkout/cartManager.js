@@ -131,6 +131,7 @@ function fnUseCoupon(couponId) {
 										"#cartDiscountAmount").text());
 								$("#giftCertificateNo").attr("disabled", true);
 								 storeRightCoupon($("#couponNo_input_id").val());
+								 document.getElementById("couponNo").style.display="block";
 							} else {
 								alert(result.msg);
 								cartDiscountAmount = result.data;
@@ -217,6 +218,12 @@ function fnUpdatePrice() {
 		$("#selectbasic").attr("disabled", true);
 	} else {
 		$("#selectbasic").attr("disabled", false);
+	}
+	
+	if (giftTotal !=0 || pointTotal!= 0) {
+		$("#couponNo_input_id").attr("disabled", true);
+	} else {
+		$("#couponNo_input_id").attr("disabled", false);
 	}
 }
 
@@ -393,6 +400,11 @@ function addQuantity(obj, shoppingcartItemId, cartUuid, price, discountPrice,
 function fnSelectChangeGift(selectPoint) {
 	var shopPointUseGiftPercent = "${appConfig.shopPointUseGiftPercent}";
 	var pointDis = (shopPointUseGiftPercent * selectPoint).toFixed(2);
+	if(pointDis == 0.00){
+		document.getElementById("pointNo").style.display="none";
+	}else{
+		document.getElementById("pointNo").style.display="block";
+	}
 	$("#shopPointMoney").text(pointDis);
 	fnUpdatePrice();
 	$.post(__ctxPath + "/checkout/paymentProcess.html?doAction=doUseShopPoint",

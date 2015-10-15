@@ -105,10 +105,16 @@
 			if(window.location.pathname=="/culturalinformation/index.html" || window.location.pathname=="/Cultural_Service/search.html"){
 				$("#searchForm").attr("action", "${ctxPath}/Cultural_Service/search.html?q="+$("#q").val());
 				$("#searchForm").submit();
+			}else if(window.location.pathname=="/designerList.html" || window.location.pathname=="/Designer_Service/search.html" || window.location.pathname=="/designer/initialsSelect.html"){
+				$("#searchForm").attr("action", "${ctxPath}/Designer_Service/search.html?q="+$("#q").val());
+				$("#searchForm").submit();
+			}else if(window.location.pathname=="/marketDesignerList/index.html" || window.location.pathname=="/marketDesigner_Service/search.html" || window.location.pathname=="/marketDesigner/initialsSelect.html"){
+				$("#searchForm").attr("action", "${ctxPath}/marketDesigner_Service/search.html?q="+$("#q").val());
+				$("#searchForm").submit();
 			}else{
-			//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
-			$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
-			$("#searchForm").submit();
+				//$("#searchForm").action="${ctxPath}/search-prod.html?q="+$("#q").val();
+				$("#searchForm").attr("action", "${ctxPath}/search-prod.html?q="+$("#q").val());
+				$("#searchForm").submit();
 			}
 		}
 
