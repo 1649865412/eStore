@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ include file="/common/taglibs.jsp"%>
-<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="sales" tagdir="/WEB-INF/tags/sales"%>
+<%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
+<%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
+<%@page import="com.cartmatic.estore.common.model.customer.Customer"%>
 <!--文化资讯列表页-->
 <html lang="en" class="no-js">
 	<head>
@@ -11,12 +13,20 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
-		<%@ include file="../../decorators/include/styles7.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
+		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/monthly.css" />
 		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/book/js/modernizr.custom.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/classie.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+		<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/login.js"></script>
 	</head>
 	<body>
+	<%@ include file="../../decorators/include/headerNew.jspf"%>
 			<div id="theSidebar" class="sidebar" >
 				<div class="related">
 					<a href="/culturalinformation/index.html" class="on" id="t1">全部</a>
@@ -174,6 +184,7 @@
 					<button class="close-button-list"><i class="fa fa-close"></i><span>Close</span></button>
 			</div>
 			<!-- /container -->
+		<%@ include file="../../decorators/include/footerNew.jspf"%>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/classie.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/list.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>

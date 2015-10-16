@@ -196,6 +196,21 @@ public class CulturalinformationFrontController extends
 		mv.addObject("culturalinformationList", culturalinformationList);
 		return mv;
 	}
+	
+	/**
+	 * 单独跳转文化资讯详情页
+	 */
+	@RequestMapping(value = "/culturaTemplate.html")
+	public ModelAndView getCulView(HttpServletRequest request,
+			HttpServletResponse response, String type) {
+		ModelAndView mv = new ModelAndView("cultura/culturaTemplate");
+		String culId = request.getParameter("culId");
+		CulturalInformation culturalinformation = getCulturalInformation(request.getParameter("culId"));
+		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
+		mv.addObject("culturalinformation", culturalinformation);
+		return mv;
+	}
+
 
 	/**
 	 * 文化资讯详情页

@@ -55,16 +55,16 @@
                 <ul class="row">
                 	<li>
                         <div class="sort-tit">排序方式<i class="fa fa-caret-down"></i></div>
-                        <p><a href="?sort=new" class="active">最新上架</a></p>
-                        <p><a href="?sort=up">价格由低到高</a></p>
-                        <p><a href="?sort=down">价格由高到低</a></p>
+                        <p><a href="?sort=new&brandId=${brand.brandId}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=new')!=-1}">class='active'</c:if>>最新上架</a></p>
+                        <p><a href="?sort=up&brandId=${brand.brandId}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=up')!=-1}">class='active'</c:if>>价格由低到高</a></p>
+                        <p><a href="?sort=down&brandId=${brand.brandId}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=down')!=-1}">class='active'</c:if>>价格由高到低</a></p>
                     </li>
-                    <li>
+                    <%--<li>
                         <p><a href="/catalog_default_catalog.html" class="active">所有产品</a></p> 
                         <p><a href="/wen_catalog.html"><i class="fa fa-venus"></i>女性</a></p>
                         <p><a href="/man_catalog.html"><i class="fa fa-mars"></i>男性</a></p>
                     </li>
-                </ul>
+                --%></ul>
                 <div class="sort-btn active">
                 	<i class="fa fa-chevron-left"></i>
                     <p>分<br>类<br>筛<br>选</p>

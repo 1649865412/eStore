@@ -19,7 +19,7 @@
 					<div class="w-b-bg" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 					<!--<img src="img/bg.jpg" />-->
 					</div>
-					<a href="${ad.redirectUrl}">
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 					<div class="w-banner-txt">
 					<c:if test="${ad.showContext ==1}">
 						<c:if test="${ad.contextBackColor ==1}">
@@ -69,7 +69,7 @@
 			<%--首页中间左图--%>
 			<c:when test="${ad.advertisementId == 80}">
 		  		<div class="w-lf-left">
-		  		<a href="${ad.redirectUrl}">
+		  		<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 					<div class="w-lf-lrcon">
 						<div class="w-lf-img" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 							<div class="w-lf-yywz">
@@ -100,7 +100,7 @@
 			<%--首页中间右图--%>
 			<c:when test="${ad.advertisementId == 81}">
 		  		<div class="w-lf-right">
-		  		<a href="${ad.redirectUrl}">
+		  		<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 					<div class="w-lf-lrcon">
 					<div class="w-lf-img" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 						<div class="w-lf-yywz">
@@ -131,7 +131,7 @@
 			<%--商城首页轮播图一--%>
 			<c:when test="${ad.advertisementId == 82}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-					<a href="${ad.redirectUrl}">
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
                         <div class="show_title">
                         <c:if test="${ad.showContext ==1}">
                         	<c:if test="${ad.contextBackColor ==1}">
@@ -150,7 +150,7 @@
 			<%--商城首页轮播图二--%>
 			<c:when test="${ad.advertisementId == 83}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-					<a href="${ad.redirectUrl}">
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
                         <div class="show_title">
                         <c:if test="${ad.showContext ==1}">
                         	<c:if test="${ad.contextBackColor ==1}">
@@ -169,7 +169,7 @@
 			<%--商城首页轮播图三--%>
 			<c:when test="${ad.advertisementId == 88}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-					<a href="${ad.redirectUrl}">
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
                         <div class="show_title">
                         <c:if test="${ad.showContext ==1}">
                         	<c:if test="${ad.contextBackColor ==1}">
@@ -200,8 +200,12 @@
 			--%><%--商城首页右上角大图--%>
 			<c:when test="${ad.advertisementId == 84}">
 				<div class="index_right" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-            	<a class="index_right_title" href="${ad.redirectUrl}">
+				<c:if test="${ad.showContext ==1 && ad.contextTitle !=null && ad.contextTitle !=''}">
+					<div class="have_text"></div>
+				</c:if>
+            	<a class="index_right_title" <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
             	<c:if test="${ad.showContext ==1}">
+            		<div class="text_content">
             		<c:if test="${ad.contextBackColor ==1}">
 	                	<h3 class="li1 title-font" style="color:black">${ad.contextTitle}</h3>
 	                    <p class="li2" style="color:black">${ad.contextSubTitle}</p>
@@ -212,6 +216,7 @@
 	                    <p class="li2">${ad.contextSubTitle}</p>
 	                    <p class="li3">${ad.context}</p>
                     </c:if>
+                    </div>
                 </c:if>
                 </a>
             </div>
@@ -227,7 +232,7 @@
 			
 			<%--商品详情页底部广告--%>
 			<c:when test="${ad.advertisementId == 86}">
-			<a href="${ad.redirectUrl}">
+			<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 				<img src="${mediaPath}a_and_d/${ad.url}" width="100%">
 				<div class="deta-bd-group3_info">
 				<c:if test="${ad.showContext ==1}">
@@ -328,7 +333,7 @@
 								</c:if>
 							</video>
 						</div>
-						<a href="${ad.redirectUrl}">
+						<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 						<div class="ani resize swiper-o-to" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="0s">
 						<c:if test="${ad.showContext ==1}">
 							<c:if test="${ad.contextBackColor ==1}">

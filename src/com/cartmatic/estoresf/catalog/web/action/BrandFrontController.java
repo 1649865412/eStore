@@ -1,6 +1,7 @@
 package com.cartmatic.estoresf.catalog.web.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,9 @@ import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
 import com.cartmatic.estore.webapp.util.RequestUtil;
 import com.cartmatic.extend.catalog.util.CharacterSort;
+import com.cartmatic.extend.catalog.util.ComparatorMapDown;
+import com.cartmatic.extend.catalog.util.ComparatorMapNew;
+import com.cartmatic.extend.catalog.util.ComparatorMapUp;
 /**
  * @TODO 暂时没有使用
  * @author kedou
@@ -96,6 +100,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 	/**
 	 * 设计师产品列表页
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/designerProductList.html")
 	public ModelAndView designerProductList(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv=new ModelAndView("designer/designerProductList");
@@ -104,6 +109,19 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 		Brand brand=brandManager.getById(brandId);
 		mv.addObject("brand", brand);
 		List<Product> productList = productManager.getByBrandId(brandId);
+		ComparatorMapNew comparatorNew = new ComparatorMapNew();
+		ComparatorMapUp comparatorUp = new ComparatorMapUp();
+		ComparatorMapDown comparatorDown = new ComparatorMapDown();
+		String sort = request.getParameter("sort");
+		if (sort != null && sort != "") {
+			if (sort.equals("up")) {
+				Collections.sort(productList, comparatorUp);
+			} else if (sort.equals("down")) {
+				Collections.sort(productList, comparatorDown);
+			}else if(sort.equals("new")){
+				Collections.sort(productList, comparatorNew);
+			}
+		}
 		mv.addObject("productList", productList);
 		return mv;
 	}
