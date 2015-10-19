@@ -132,6 +132,20 @@ public class ContentFrontController extends GenericStoreFrontController<Content>
 
 		}
 	}
+	
+	/**
+	 * 帮助中心
+	 * contentId在表content中，如需增加新的导航栏可查找相应id进行添加
+	 */
+	@RequestMapping(value={"/customer_help.html"})
+	public ModelAndView getHelpBody(HttpServletRequest request,HttpServletResponse response) {
+		ModelAndView mv = getModelAndView("help");
+		String contentId = request.getParameter("contentId");
+		Content content = contentManager.getById(Integer.parseInt(contentId));
+		mv.addObject("contentBody", content.getContentBody());
+		return mv;
+	}
+	
 	/**
 	 * 内容详情页（左边列表页导航+右边说细页）
 	 */

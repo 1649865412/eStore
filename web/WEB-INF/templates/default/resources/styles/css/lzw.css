@@ -111,6 +111,9 @@ body{
 	background-position: center center;
 	background-size: cover;
 }
+.index_left .swiper-slide a{
+	width:100%;
+}
 .index_right{
 	background-position: center center;
 	background-size: cover;
@@ -120,15 +123,12 @@ body{
 	width: 37%;
 }
 .index_right_title{
-	bottom: 10%;
 	box-sizing: border-box;
 	color: #FFF!important;
-	padding: 0 5%;
-	position: absolute;
 }
 .have_text{
 	background:#000;
-	opacity:0.4;
+	opacity:0.2;
 	filter: alpha(opacity=20); 
 	width:100%;
 	height:100%;
@@ -138,6 +138,7 @@ body{
 .index_right_title .text_content{
 	z-index:999;
 	position:relative;
+	margin-left:5%;
 }
 .index_right_title .li1{
 	font-size: 30px;

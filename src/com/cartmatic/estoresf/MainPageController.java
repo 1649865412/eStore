@@ -156,6 +156,50 @@ public class MainPageController{
 	}
 	
 	
+	
+	/**
+	 * 异步判断用户是否登陆，true为登陆,false为未登录
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/ajaxCheckUser.html")
+	public ModelAndView ajaxCheckUser(HttpServletRequest request,
+			HttpServletResponse response) {
+		AppUser appUser = (AppUser) RequestContext.getCurrentUser();
+		boolean  flag =false;
+		if(appUser!=null){
+			flag =true;
+			//可继续写其它代码，例如购物车与用户cookie  
+			Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
+			Shoppingcart shoppingcart = null;
+			String sUuid = "";
+			if(cookie!=null){//进入购物车页面时，假如cookie中没有购物车uuid，则初始化一辆购物车给用户
+			    sUuid = cookie.getValue();
+//			    shoppingcart = shoppingcartManager.loadShoppingcartByUuid(sUuid);
+			    shoppingcartManager.doNotUseCoupon(sUuid);
+			    shoppingcart = shoppingcartManager.refreshCart(sUuid, request, response);
+			    if(shoppingcart==null){
+			    	Customer customer = (Customer) RequestContext.getCurrentUser();
+			    	shoppingcart = shoppingcartManager.initShoppingcart(customer);
+			    }
+			}
+			else{
+				Customer customer = (Customer) RequestContext.getCurrentUser();
+				shoppingcart = shoppingcartManager.initShoppingcart(customer);
+			}
+			request.setAttribute("shoppingcart",shoppingcart);
+				Customer appUser1 = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
+				RequestUtil.setUserInfoCookie(response, appUser1, (request).getContextPath());
+		}
+		AjaxView ajaxView = new AjaxView(response);
+		ajaxView.setData(flag);
+		return ajaxView;
+	}
+	
+	
+	
 	@RequestMapping(value="/login_Error.html")
 	public void loginError(HttpServletRequest req,HttpServletResponse resp) throws ServletException {
 		try {

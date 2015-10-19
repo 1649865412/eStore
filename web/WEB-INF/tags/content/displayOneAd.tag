@@ -15,11 +15,11 @@
 			--%>
 			<%--首页中间大图一--%>
 			<c:when test="${ad.advertisementId == 78}">
+			<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if> target="_blank">
 		  		<div class="w-banner-con">
 					<div class="w-b-bg" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
 					<!--<img src="img/bg.jpg" />-->
 					</div>
-					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 					<div class="w-banner-txt">
 					<c:if test="${ad.showContext ==1}">
 						<c:if test="${ad.contextBackColor ==1}">
@@ -32,8 +32,8 @@
 						</c:if>
 					</c:if>
 					</div>
-					</a>
 				</div>
+			</a>
 			</c:when>
 			<%--首页中间大图二--%>
 			<c:when test="${ad.advertisementId == 79}">
@@ -131,7 +131,9 @@
 			<%--商城首页轮播图一--%>
 			<c:when test="${ad.advertisementId == 82}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if> target="_blank" class="sh_link">
+						<div class="w-video">
+						</div>
                         <div class="show_title">
                         <c:if test="${ad.showContext ==1}">
                         	<c:if test="${ad.contextBackColor ==1}">
@@ -150,7 +152,9 @@
 			<%--商城首页轮播图二--%>
 			<c:when test="${ad.advertisementId == 83}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if> target="_blank" class="sh_link">
+						<div class="w-video">
+						</div>
                         <div class="show_title">
                         <c:if test="${ad.showContext ==1}">
                         	<c:if test="${ad.contextBackColor ==1}">
@@ -169,7 +173,9 @@
 			<%--商城首页轮播图三--%>
 			<c:when test="${ad.advertisementId == 88}">
 				<div class="swiper-slide" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
-					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
+					<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if> target="_blank" class="sh_link">
+						<div class="w-video">
+						</div>
                         <div class="show_title">
                         <c:if test="${ad.showContext ==1}">
                         	<c:if test="${ad.contextBackColor ==1}">
@@ -199,11 +205,11 @@
 			</c:when>
 			--%><%--商城首页右上角大图--%>
 			<c:when test="${ad.advertisementId == 84}">
+			<a class="index_right_title" <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
 				<div class="index_right" style="background-image:url(${mediaPath}a_and_d/${ad.url})">
 				<c:if test="${ad.showContext ==1 && ad.contextTitle !=null && ad.contextTitle !=''}">
 					<div class="have_text"></div>
 				</c:if>
-            	<a class="index_right_title" <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
             	<c:if test="${ad.showContext ==1}">
             		<div class="text_content">
             		<c:if test="${ad.contextBackColor ==1}">
@@ -218,8 +224,8 @@
                     </c:if>
                     </div>
                 </c:if>
-                </a>
-            </div>
+            	</div>
+            </a>
 			</c:when>
 			
 			<%--每周上新顶部大图--%>
@@ -319,8 +325,7 @@
 			<c:otherwise>
 				<%--<cartmatic:img url="${ad.url}" mediaType="a_and_d" width="${ad.adPositionType.width}" height="${ad.adPositionType.height}" alt="${ad.advertisementDetail}"></cartmatic:img>
 				--%>
-					<section class="swiper-slide swiper-slide-o" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
-						<div class="w-video">
+					<%--<div class="w-video">
 							<video id="wvideo" autoplay="autoplay" loop="loop">
 								<c:if test="${ad.mediaPathMpFour !=null && ad.mediaPathMpFour !=''}">
 									<source src="${mediaPath}a_and_d/${ad.mediaPathMpFour}" type="video/mp4">
@@ -333,7 +338,8 @@
 								</c:if>
 							</video>
 						</div>
-						<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if>>
+					--%><section class="swiper-slide swiper-slide-o" style="background-image: url(${mediaPath}a_and_d/${ad.url});">
+						<a <c:if test="${ad.redirectUrl != null && ad.redirectUrl != ''}">href="${ad.redirectUrl}"</c:if> target="_blank" class="a_link">
 						<div class="ani resize swiper-o-to" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="0s">
 						<c:if test="${ad.showContext ==1}">
 							<c:if test="${ad.contextBackColor ==1}">

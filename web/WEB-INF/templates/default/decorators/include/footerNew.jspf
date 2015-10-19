@@ -9,6 +9,7 @@
 							<a href="${ctxPath}/coming.html">使用条款 | </a>
 							<a href="${ctxPath}/coming.html">商家入驻 | </a>
 							<a href="${ctxPath}/coming.html">友情链接 | </a>
+							<a href="${ctxPath}/customer_help.html?contentId=16">帮助中心 </a>
 						</span>
                      <!--2015-8 蔡蔡改动-->
 							<span>Copyright©2013-2014 &nbsp;SifangStreet四方街版权所有&nbsp;<a href="http://www.miibeian.gov.cn/">粤ICP备13075482号-1</a></span>

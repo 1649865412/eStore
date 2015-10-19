@@ -134,9 +134,20 @@ a:hover {
 	font-weight: bold;
 }
 .w-logo a {
-	padding-top: 5px; /*2015-8 蔡蔡改动*/
+	margin-top: 5px; /*2015-8 蔡蔡改动*/
 	display: inline-block;
 }
+.logo_w{
+	background-image:url(../img/logo_w.png);
+	width:182px;
+	height:40px;
+}
+.logo_b{
+	background-image:url(../img/logo.png);
+	width:182px;
+	height:40px;
+}
+
 .jumbotron {
 	padding: 0;
 	height: 100%;
@@ -205,6 +216,12 @@ a:hover {
 	-ms-flex-align: center;
 	-webkit-align-items: center;
 	align-items: center;
+}
+.w-slide .swiper-slide a{
+	width:100%;
+}
+.w-slide .swiper-slide a:hover{
+	color:#fff;
 }
 .swiper-container .swiper-o-to {
 	bottom: 25%;
@@ -1753,6 +1770,17 @@ font-size: 15px;
 	}
 }
 @media (max-width: 468px) {
+	.col-xs-4 .logo_w,
+	.col-xs-4 .logo_b{
+		width:100px;
+		height:45px;
+	}
+	.col-xs-4 .logo_w{
+		background-image:url(../img/logo_phone_w.png);
+	}
+	.col-xs-4 .logo_b{
+		background-image:url(../img/logo_phone.png);
+	}
 	.w-lf .w-lf-yywz p {
 		font-size: 12px;margin-top: 23%;
 		width: 69%;

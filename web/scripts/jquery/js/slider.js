@@ -5,6 +5,7 @@ function pagec() {
     //	}
     if ($('.jumbotron').length > 0) {
         $(".swiper-slide").css("height", pageheight);
+        $(".a_link").css("height", pageheight);
     }
     $(".w-banner").css("height", pageheight);
     $(".w-banner-con").css("height", pageheight);
@@ -39,6 +40,11 @@ $(function () {
     $(window).resize(function () {
         pagec();
     });
+    var margin_h = $('.index_show').height()-220;
+	$(".text_content").css("margin-top", margin_h);
+	
+	$(".sh_link").height($('.index_show').height());
+	$(".sh_link").width($('.index_left').width());
     //成功加入购物车
     //$(".j3").click(function () {
     //    $(".w-cart").css("display", "block");
@@ -117,7 +123,6 @@ $(function () {
         if (!$(".index-nav").hasClass("w-nav-no")) {
             if ($(window).scrollTop() > 1) {
                 $(".w-nav").addClass("w-nav-s");
-
             } else {
                 $(".w-nav").removeClass("w-nav-s");
             }

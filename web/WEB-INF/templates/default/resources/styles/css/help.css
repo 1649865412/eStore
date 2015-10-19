@@ -1,5 +1,13 @@
 @charset "utf-8";
 /* CSS Document */
+.maincontent {
+	margin:0 auto;
+	overflow:hidden;
+	position:relative;
+	margin-top:45px;
+	border-top:#313131 1px solid;
+		
+}
 .top_about{
 	float:left;
 	width:100%;
@@ -74,6 +82,20 @@
 .bottom_about{
 	float:left;
 	width:100%;
+	margin-top:60px;
+}
+.bottom_about .remote_nav{
+	position:fixed;
+
+}
+.bottom_about .down_right{
+	float:right;
+	margin-right:15px;
+	margin-left:0px;
+	width:80%;
+}
+.bottom_about .remote_nav{
+	width:15%;
 }
 .down_right{
 	float:left;
@@ -92,4 +114,29 @@
 .down_right p{
 	color: #5D656C;
 	letter-spacing: 1px;
+}
+@media (max-width: 768px) {
+	.remote_nav ul{
+		padding:12px;
+	}
+}
+@media (max-width: 640px) {
+	.bottom_about{
+		margin-top:10px;
+	}
+	.bottom_about .remote_nav{
+		position:relative;
+		width:100%;
+	}
+	
+	.bottom_about .remote_nav ul li{
+		float:left;
+		margin-right:10px;
+	}
+	.bottom_about .down_right{
+		width:90%;
+		float:left;
+		margin:auto 12px;
+	}
+		
 }

@@ -5,6 +5,7 @@ function pagec() {
 //	}
 	if($('.jumbotron').length>0){
 		$(".swiper-slide").css("height", pageheight);
+		$(".a_link").css("height", pageheight);
 	}
 	$(".w-banner").css("height", pageheight);
 	$(".w-banner-con").css("height", pageheight);
@@ -41,6 +42,11 @@ $(function() {
 		pagec();
 //$("#w-logot").text($(window).width());
 	});
+	var margin_h = $('.index_show').height()-220;
+	$(".text_content").css("margin-top", margin_h);
+	
+	$(".sh_link").height($('.index_show').height());
+	$(".sh_link").width($('.index_left').width());
 	
 	$(".w-menu-lr").click(function() {
 		$(".w-login").show();

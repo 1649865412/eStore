@@ -271,7 +271,8 @@
 					</div>
 				</div>
 				<div class="row visible-md-block visible-lg-block">
-					<div class="col-md-2 col-lg-2 w-logo"><a href="${ctxPath}/index.html" id="w-logot">四方街</a>
+					<div class="col-md-2 col-lg-2 w-logo">
+						<a href="${ctxPath}/index.html" id="w-logot" class="logo_b change_logo"></a>
 					</div>
 					<div class="col-md-6 col-lg-7">
 						<ul class="w-menu list-unstyled">
@@ -332,7 +333,7 @@
 						<a href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
 					</div>
 					<div class="col-xs-4 col-sm-6 w-logo text-center">
-						<a href="${ctxPath}/index.html">四方街</a>
+						<a href="${ctxPath}/index.html" id="w-logot" class="logo_w change_logo"></a>
 					</div>
 					<div class="col-xs-4 col-sm-3 text-right w-gwct"
 						style="padding-bottom: 50px;">

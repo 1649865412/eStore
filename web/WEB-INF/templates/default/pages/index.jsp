@@ -134,7 +134,8 @@
 			spaceBetween : 0,
 			mousewheelControl : false,
 			loop : true,
-			autoplay: 3000,
+			autoplay: 5000,
+			preventClicks : false,
 			speed : 500,
 			onInit : function(swiper) {
 				swiperAnimateCache(swiper);
@@ -148,7 +149,26 @@
 			}
 		});
 		</script>
+       <script type="text/javascript">
+		  $(document).ready(function() {
+			  $(".change_logo").removeClass("logo_b");
+			  $(".change_logo").addClass("logo_w");
+		  });
+		  $(window).scroll(function() {
+			 
+		if (!$(".index-nav").hasClass("w-nav-no")) {
+			if ($(window).scrollTop() > 1) {
+				$(".change_logo").removeClass("logo_w");
+				$(".change_logo").addClass("logo_b");
 
+			} else {
+				$(".w-nav").removeClass("w-nav-s");
+				$(".change_logo").removeClass("logo_b");
+				$(".change_logo").addClass("logo_w");
+			}
+		}
+	})
+		</script>
 
 
 	</body>
