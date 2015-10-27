@@ -85,7 +85,7 @@
                  <c:forEach var="favorite" items="${favoriteList}" varStatus="s">
 				                 <tr>
 				                    <td class="wish_img">
-				                  	  <product:productImg product="${favorite.product}" size="e" width="110" height="110" isLazyload="true"/>
+				                    	<img src="${ctxPath}/media/product/e/${favorite.product.defaultProductSku.image}" width="110" height="110" isLazyload="true">
 				                    <td>
 										<product:productName product="${favorite.product}" />
 									</td>

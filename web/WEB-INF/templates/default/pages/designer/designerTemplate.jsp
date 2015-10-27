@@ -267,6 +267,7 @@
 	    <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/slider.js"></script>
 	    <script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script>
 	    <script type="text/javascript">
+	    
 	        $(function () {
 	            //弹出图片和视屏
 	            $(".img_box").colorbox({ rel: 'group1' , innerWidth: "90%", innerHeight: "90%"});

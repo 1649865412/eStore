@@ -7,6 +7,7 @@
 		<pattern>/view-image.html*</pattern>
 		<pattern>/google*.html</pattern>
 		<pattern>/index.html</pattern>
+		<pattern>/static/*.html</pattern>
 	</excludes>
 
 	<!-- dec 为前缀的jsp文件为装饰器专用文件。-->

@@ -2,6 +2,7 @@
 package com.cartmatic.estoresf;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,17 +10,14 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
-import net.sf.json.util.JSONUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,22 +25,22 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.WebAttributes;
-import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beantool.ShopCartValueModel;
 import com.cartmatic.estore.cart.CheckoutConstants;
 import com.cartmatic.estore.cart.service.ShoppingcartManager;
 import com.cartmatic.estore.cart.util.ShoppingCartUtil;
 import com.cartmatic.estore.catalog.service.BrandManager;
 import com.cartmatic.estore.catalog.service.ProductManager;
 import com.cartmatic.estore.common.model.cart.Shoppingcart;
+import com.cartmatic.estore.common.model.cart.ShoppingcartItem;
 import com.cartmatic.estore.common.model.catalog.Brand;
-import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
+import com.cartmatic.estore.common.model.catalog.Product;
+import com.cartmatic.estore.common.model.catalog.ProductSku;
 import com.cartmatic.estore.common.model.customer.Customer;
-import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.model.system.AppUser;
 import com.cartmatic.estore.common.service.ShoppingcartService;
 import com.cartmatic.estore.common.service.SolrService;
@@ -64,20 +62,9 @@ public class MainPageController{
 	
 	private PasswordEncoder passwordEncoder;
 
-	public AppUserManager getAppUserManager() {
-		return appUserManager;
-	}
-
-
 	public void setAppUserManager(AppUserManager appUserManager) {
 		this.appUserManager = appUserManager;
 	}
-
-
-	public PasswordEncoder getPasswordEncoder() {
-		return passwordEncoder;
-	}
-
 
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
@@ -167,37 +154,62 @@ public class MainPageController{
 	@RequestMapping(value = "/ajaxCheckUser.html")
 	public ModelAndView ajaxCheckUser(HttpServletRequest request,
 			HttpServletResponse response) {
-		AppUser appUser = (AppUser) RequestContext.getCurrentUser();
+		//AppUser appUser = (AppUser) RequestContext.getCurrentUser();
 		boolean  flag =false;
-		if(appUser!=null){
+		if(checkAppUser(request,response)){
 			flag =true;
-			//可继续写其它代码，例如购物车与用户cookie  
-			Cookie cookie = RequestUtil.getCookie(request, CheckoutConstants.SHOPPINGCART_COOKIE);
-			Shoppingcart shoppingcart = null;
-			String sUuid = "";
-			if(cookie!=null){//进入购物车页面时，假如cookie中没有购物车uuid，则初始化一辆购物车给用户
-			    sUuid = cookie.getValue();
-//			    shoppingcart = shoppingcartManager.loadShoppingcartByUuid(sUuid);
-			    shoppingcartManager.doNotUseCoupon(sUuid);
-			    shoppingcart = shoppingcartManager.refreshCart(sUuid, request, response);
-			    if(shoppingcart==null){
-			    	Customer customer = (Customer) RequestContext.getCurrentUser();
-			    	shoppingcart = shoppingcartManager.initShoppingcart(customer);
-			    }
-			}
-			else{
-				Customer customer = (Customer) RequestContext.getCurrentUser();
-				shoppingcart = shoppingcartManager.initShoppingcart(customer);
-			}
-			request.setAttribute("shoppingcart",shoppingcart);
-				Customer appUser1 = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
-				RequestUtil.setUserInfoCookie(response, appUser1, (request).getContextPath());
 		}
+		Customer customer = (Customer) appUserManager.getUserByName(request.getParameter("j_username"));
+		Shoppingcart shoppingcart = ShoppingCartUtil.getInstance().getCurrentUserShoppingcart(customer);
+		Map map = new HashMap();
+		map.put("flag", flag);
 		AjaxView ajaxView = new AjaxView(response);
-		ajaxView.setData(flag);
+		//map.put("shopCartValueModelList", shopCartValueModelList);
+	   List<ShopCartValueModel> shopCartValueModelList = ChangeShopCartValue(shoppingcart );
+	   map.put("shopCartValueModelList", shopCartValueModelList);
+		
+	   JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		JSONObject json = JSONObject.fromObject(map,jsonConfig); 
+		String result = json.toString();
+		//System.out.print(result);
+		ajaxView.setData(result);
 		return ajaxView;
 	}
 	
+	
+	public List<ShopCartValueModel> ChangeShopCartValue(Shoppingcart shoppingcart ){
+		Set<ShoppingcartItem> shoppingCartItems =shoppingcart.getCartItems();
+		List<ShopCartValueModel> shopCartValueModelList = new ArrayList<ShopCartValueModel>();
+		ShopCartValueModel shopCartValueModel =new ShopCartValueModel();
+		Integer buyNowItemsCount = shoppingcart.getBuyNowItemsCount();
+		shopCartValueModel.setBuyNowItemsCount(buyNowItemsCount);
+		BigDecimal subtotal = shoppingcart.getSubtotal();
+		shopCartValueModel.setSubtotal(subtotal);
+		shopCartValueModelList.add(shopCartValueModel);
+		for(ShoppingcartItem item : shoppingCartItems){
+			ShopCartValueModel shopCartValueModel2 =new ShopCartValueModel();
+			ProductSku productSku = item.getProductSku();
+			Short isSaved = item.getIsSaved();
+			shopCartValueModel2.setIsSaved(isSaved);
+			ShoppingcartItem parent = item.getParent();
+			Product product = productSku.getProduct();
+			String productName = product.getProductName();
+			shopCartValueModel2.setProductName(productName);
+			String brandName = product.getBrand().getBrandName();
+			shopCartValueModel2.setBrandName(brandName);
+			BigDecimal price = item.getPrice();
+			shopCartValueModel2.setPrice(price);
+			String image = productSku.getImage();
+			shopCartValueModel2.setImage(image);
+			
+			shopCartValueModelList.add(shopCartValueModel2);
+		}
+		
+		
+		return shopCartValueModelList;
+		
+	}
 	
 	
 	@RequestMapping(value="/login_Error.html")
@@ -253,10 +265,6 @@ public class MainPageController{
 			return tag;
 		}
 	
-	
-	public ShoppingcartManager getShoppingcartManager() {
-		return shoppingcartManager;
-	}
 
 	public void setShoppingcartManager(ShoppingcartManager shoppingcartManager) {
 		this.shoppingcartManager = shoppingcartManager;

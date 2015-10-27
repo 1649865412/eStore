@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+.special_topic{
+	margin-top:80px;
+}
+.special_topic img{
+	width:100%;
+}
+.whole_width{
+	width:100%;
+	margin:0;
+	padding:0;
+}
+.center_middle{
+	text-align:center;
+}
+.center_middle img{
+	width:auto;
+}
+.half_width{
+	width:50%;
+	margin:0;
+	padding:0;
+	float:left;
+}
+@media (max-width: 980px) {
+	.half_width{
+		width:100%;
+	}
+}
+@media (max-width: 640px) {
+	.center_middle img{
+		width:80%;
+     }
+}

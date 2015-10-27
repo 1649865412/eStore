@@ -9,7 +9,7 @@
 		extends="com.cartmatic.estore.common.model.system.AppUser"
 		discriminator-value="0">
 
-		<set name="customerAttrValues" table="customer_attr_value" lazy="true"
+		<set name="customerAttrValues" table="customer_attr_value" lazy="false"
 			sort="unsorted" cascade="all">
 			<key>
 				<column name="customerId" />
@@ -19,7 +19,7 @@
 		</set>
 		<set name="favorites"
 	     table="favorite"
-	     lazy="true"
+	     lazy="false"
 	     cascade="all"
 	     inverse="false"
 	     order-by="createTime desc"	>

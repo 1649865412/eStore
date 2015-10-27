@@ -389,7 +389,7 @@
 		                 	<label>选择颜色</label>
 		                 	<ul>
 		                	<!-- 该产品其他颜色 -->
-		                	<li><a href="#"><product:productImg product="${product}" size="v" width="72" height="97" category="${category}"/></a></li>
+		                	<li><a href="javascript:void(0)"><img src="${ctxPath}/media/product/v/${product.defaultProductSku.image}" width="72" height="97"></a>
 			             	<jsp:include flush="true" page="/sales/recommendedProduct.html">
 					             <jsp:param name="typeName" value="other_color" />
 					             <jsp:param name="firstResult" value="0" />
@@ -411,27 +411,6 @@
 							              <a href="javascript:;" id="add"><i class="fa fa-plus"></i></a>
 						              </div>
 					             </form>
-					              <!--product_quantity-->
-					              <script type="text/javascript">
-									$(document).ready(function(){
-									  $(".addtolove").click(function(){
-									  $("#add_love").hide();
-									  $("#love_count").show();
-									  });
-									});
-									function changeToOne(obj){
-										if($(obj).val() == ""){
-											$(obj).val(1);
-										}
-									}
-									</script>
-					             
-					             <%--
-					             <div class="product_stock">
-					               <i class="fa fa-exclamation-circle fa-lg fa_storck"></i>
-					                还剩<span>${maxOrderQuantity == null ? 0 :  maxOrderQuantity}</span>件
-					             </div><!--product_stock-->
-					            --%>  
 					           
 					           </li>
 					           </ul>
@@ -540,7 +519,8 @@
 				paginationClickable: '.swiper-pagination',
 				nextButton: '.swiper-button-next',
 				prevButton: '.swiper-button-prev',
-				spaceBetween: 30
+				spaceBetween: 30,
+				loop:true
 			});
 		</script>
         <script>
@@ -694,7 +674,17 @@
 							$(".w-pro-info-tabs").hide()
 						})
 					$(".addafter").click(function(){
+						var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
+						var name="";
+						skuOptions.each(function(i){
+							if($(this).find("li.tb-selected").length==0){
+								name+="."+$(this).attr("data-property");
+							}
+						});
+						if(name ==""){
 							$(".addcart").colorbox({ inline: true, width: "50%" });
+						}
+							
 						})
 					$(".w-pro-car em").click(function(){
 							$(".w-pro-car").hide()

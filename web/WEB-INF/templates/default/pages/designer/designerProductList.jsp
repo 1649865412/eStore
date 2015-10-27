@@ -55,9 +55,9 @@
                 <ul class="row">
                 	<li>
                         <div class="sort-tit">排序方式<i class="fa fa-caret-down"></i></div>
-                        <p><a href="?sort=new&brandId=${brand.brandId}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=new')!=-1}">class='active'</c:if>>最新上架</a></p>
-                        <p><a href="?sort=up&brandId=${brand.brandId}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=up')!=-1}">class='active'</c:if>>价格由低到高</a></p>
-                        <p><a href="?sort=down&brandId=${brand.brandId}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=down')!=-1}">class='active'</c:if>>价格由高到低</a></p>
+                        <p><a href="?sort=new&brandId=${brand.brandId}&page=${param.page}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=new')!=-1}">class='active'</c:if>>最新上架</a></p>
+                        <p><a href="?sort=up&brandId=${brand.brandId}&page=${param.page}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=up')!=-1}">class='active'</c:if>>价格由低到高</a></p>
+                        <p><a href="?sort=down&brandId=${brand.brandId}&page=${param.page}" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=down')!=-1}">class='active'</c:if>>价格由高到低</a></p>
                     </li>
                     <%--<li>
                         <p><a href="/catalog_default_catalog.html" class="active">所有产品</a></p> 
@@ -171,7 +171,7 @@
 	                                           
 	                                            <!-- JiaThis Button END -->
 	                        <a href="javascript:" onClick="addToFavorite(${product.productId})"><i class="fa fa-heart-o"></i> 加入收藏</a>
-	                        <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
+	                        <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入xc购物车</a>
 	                    </p>
                     </li>
                 </c:if>
@@ -179,7 +179,22 @@
              </ul>
             
         </div><!--product_box-->
-                <%@ include file="./../../decorators/include/catalogPagingTopNew.jsp"%>
+                <div class="w-page">
+                	<c:if test="${pageNum - 1 != 0}">
+                		<a href="/designerProductList.html?brandId=${brand.brandId}&sort=${param.sort}&page=${pageNum - 1 }"><i class="fa fa-long-arrow-left"></i></a>
+                    </c:if>
+                    <a href="javascript:;">${pageNum }</a>
+                    <c:if test="${pageNum + 1 <= totalPage}">
+                    	<a href="/designerProductList.html?brandId=${brand.brandId}&sort=${param.sort}&page=${pageNum + 1 }">${pageNum + 1 }</a>
+                    </c:if>
+                    <c:if test="${pageNum + 2 <= totalPage}">
+                    	<a href="/designerProductList.html?brandId=${brand.brandId}&sort=${param.sort}&page=${pageNum + 2 }">${pageNum + 2 }</a>
+                    </c:if>
+                    <c:if test="${pageNum + 1 <= totalPage}">
+                    	·······
+                    	<a href="/designerProductList.html?brandId=${brand.brandId}&sort=${param.sort}&page=${pageNum + 1 }"><i class="fa fa-long-arrow-right"></i></a>
+                    </c:if>
+                </div>
                 <!--/分页-->
              <!-- 加入购物车成功 -->
              <div style="display:none">

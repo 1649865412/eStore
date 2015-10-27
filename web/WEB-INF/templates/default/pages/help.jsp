@@ -6,6 +6,11 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <%@page import="com.cartmatic.estore.common.model.customer.Customer"%>
+<style type="text/css">
+a {
+color: black ! important;
+}
+</style>
 <html lang="zh-CN">
 
 	<head>

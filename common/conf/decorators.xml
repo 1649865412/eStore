@@ -18,6 +18,7 @@
 		<pattern>/product/*.html*</pattern>
 		<pattern>/Customer_Service/**.html*</pattern>
 		<pattern>/search-prod.html*</pattern>
+		<pattern>/static/*.html</pattern>
 		<!--<pattern>/culturalinformation/index.html*</pattern>
 		--><!--<pattern>/culturalinformation/culturatemplate.html*</pattern>
 	--></excludes>

@@ -211,30 +211,6 @@
 <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/catalog/productDetail.js"></script>
 <script type="text/javascript" defer>
 
-function addToFavorite(productId){
-	doRequiredLoginAction(function(){
-		$.post(__ctxPath+"/ajaxFavorite.html?doAction=addFavorite&productId="+productId,function(result){
-			alert("加入收藏夹成功");
-			var count = 0;
-			count = result.data == 0 ? "1" : result.data;
-			$("#love_count").html("<span>" + count + "</span>" + "个人喜欢");
-			var popuw = function(){}
-		    popuw.prototype={
-		    	id:'favoriteAlertWId_'+productId,
-		    	messageDlgZIndex:1000,
-				html:format_params($("#favoriteTemplate").html(),result.msg),
-				show:function(){
-					  var favoriteDlg=fnCreateSimpleDialog(this.id,'','',{});
-					  $("#_dlgContBox"+this.id).html(this.html);
-					  favoriteDlg.showDialog();
-				}
-		    }
-			var win = new popuw();
-			win.show();
-		});
-	});
-}
-
 var skuWholesalePrices = new Array();
 <c:if test="${product.status==1}">
 <%--产品价格包括批发价--%>
@@ -405,7 +381,6 @@ $("#skuOptions").children("div.tb-prop").find("li[data-value]").click(function()
 });
 
 function checkAddProductToCart(){
-	alert("hello2");
 	var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
 	var name="";
 	skuOptions.each(function(i){

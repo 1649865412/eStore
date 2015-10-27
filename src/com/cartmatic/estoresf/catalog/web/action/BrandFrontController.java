@@ -25,6 +25,7 @@ import com.cartmatic.estore.common.model.catalog.Product;
 import com.cartmatic.estore.common.model.catalog.SkuOption;
 import com.cartmatic.estore.common.model.catalog.SkuOptionValue;
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
+import com.cartmatic.estore.common.util.PageUtil;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
 import com.cartmatic.estore.webapp.util.RequestUtil;
@@ -109,6 +110,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 		Brand brand=brandManager.getById(brandId);
 		mv.addObject("brand", brand);
 		List<Product> productList = productManager.getByBrandId(brandId);
+		
 		ComparatorMapNew comparatorNew = new ComparatorMapNew();
 		ComparatorMapUp comparatorUp = new ComparatorMapUp();
 		ComparatorMapDown comparatorDown = new ComparatorMapDown();
@@ -122,7 +124,29 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 				Collections.sort(productList, comparatorNew);
 			}
 		}
-		mv.addObject("productList", productList);
+		
+		String pageStr = request.getParameter("page");
+		int currentPage = 1;
+		if (pageStr != null){
+			currentPage = Integer.parseInt(pageStr);
+		}
+		PageUtil pUtil = new PageUtil(8, productList.size(), currentPage);
+		currentPage = pUtil.getCurrentPage();
+		mv.addObject("pageNum", currentPage);
+		
+		int totalPage= productList.size()/8;
+		int remainder=productList.size()%8;
+		if(remainder>0){
+			totalPage +=1;
+		}
+		mv.addObject("totalPage", totalPage);
+		List<Product> reProductList = new ArrayList<Product>();
+		for (int i = pUtil.getFromIndex(); i < pUtil.getToIndex(); i++) {
+			Product product = (Product) productList.get(i);
+			reProductList.add(product);
+		}
+		
+		mv.addObject("productList", reProductList);
 		return mv;
 	}
 		

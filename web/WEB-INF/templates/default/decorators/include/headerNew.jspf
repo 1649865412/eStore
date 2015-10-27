@@ -2,8 +2,6 @@
 			<div class="w-login-s"></div>
 			<div class="w-login-c">
 			
-				<form method="post" name="loginForm" id="loginForm"
-					action="${ctxPath}/index_check.html" onsubmit="return checkLogin()">
 					<div class="w-login-left">
 						<div class="w-l-close">
 							<a href="javascript:void(0)"> <i class="fa fa-times"></i> </a>
@@ -14,7 +12,7 @@
 						<div class="w-l-items w-l-user">
 							<div class="w-l-itemscon">
 								<i class="fa fa-user"></i>
-								<input class="form-control" type="text" placeholder="邮箱/手机"
+								<input  class="form-control" type="text" placeholder="邮箱/手机"
 									name="j_username" size="41" maxlength="288" id="j_username"
 									onblur="userName();">
 								<input type="hidden"  name ="papeurl" id="papeurl" value=""/>
@@ -76,7 +74,7 @@
 						</div>
 						<div class="w-l-btn">
 							<div class="w-l-itemscon">
-								<button name="login" class="btn btn-default signin" type="submit" onClick="index_login()">
+								<button name="login" class="btn btn-default signin" onClick="index_login()">
 									登陆
 								</button>
 							</div>
@@ -103,7 +101,6 @@
 							</div>
 						</div>
 					--%></div>
-					</form>
 					
 					
 					<form id="customerRegisterForm" action="register.html" method="post" onsubmit="return checkRegister()">
@@ -136,7 +133,7 @@
            				<div class="w-l-items w-l-user">
 							<div class="w-l-itemscon">
 								<i class="fa fa-lock"></i>
-								<input type="password" name="password" id="password" size = "41" maxlength= "120" " class="form-control" placeholder="输入用户密码" onblur="passWord2();">
+								<input type="password" name="password" id="password" size = "41"maxlength= "120" " class="form-control" placeholder="输入用户密码" onblur="passWord2();">
 							</div>
 						</div>
 						<div class="mark margin-bottom-sm">
@@ -245,29 +242,31 @@
 						<div class="w-car-sj"></div>
 						<div class="w-car-con">
 							<ul class="list-unstyled clearfix">
-							<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus" begin="0" end ="1">
-								<c:if test="${item.isSaved==0 and empty item.parent}">
-									<li class="clearfix">
-									<div class="w-car-img">
-										<product:productImg sku="${item.productSku}" size="e" width="100" height="100"/>
-									</div>
-									<div class="w-car-info">
-										<span><product:productName product="${item.productSku.product}"/></span>
-										<span>${item.productSku.product.brand.brandName}</span>
-										<span class="w-car-price">￥<system:CurrencyForRate value="${item.price}" /></span>
-									</div>
-									</li>
-								</c:if>
-							</c:forEach>
+							<span id="shoppingCartItem">
+								<c:forEach items="${shoppingcart.cartItems}" var="item" varStatus="varStatus" begin="0" end ="1">
+									<c:if test="${item.isSaved==0 and empty item.parent}">
+										<li class="clearfix">
+										<div class="w-car-img">
+											<img src="${ctxPath}/media/product/e/${item.productSku.image}"width="100" height="100">
+										</div>
+										<div class="w-car-info">
+											<span>${item.productSku.product.productName}</span>
+											<span>${item.productSku.product.brand.brandName}</span>
+											<span class="w-car-price">￥${item.price}</span>
+										</div>
+										</li>
+									</c:if>
+								</c:forEach>
+							</span>
 							</ul>
 							<div class="w-car-msg">
-								购物车里还有${shoppingcart.buyNowItemsCount <=2 || shoppingcart.buyNowItemsCount ==null?0:shoppingcart.buyNowItemsCount -2}件物品
+								购物车里还有<span id="buyNow">${shoppingcart.buyNowItemsCount <=2 || shoppingcart.buyNowItemsCount ==null?0:shoppingcart.buyNowItemsCount -2}</span>件物品
 							</div>
 							<div class="w-car-zj clearfix">
 								<div class="w-car-zjmc">
 									总计：
 								</div>
-								<div class="w-car-price">
+								<div class="w-car-price" id="subtotalHeader">
 									￥ ${shoppingcart.subtotal == null?0:shoppingcart.subtotal}
 								</div>
 							</div>
@@ -370,50 +369,3 @@
 			</div>
 		</div>
 		
-<script>
-	function index_login(){
-		  var url =""+self.location.href;
-		   $("#papeurl").val(url);
-		    //alert( $("#papeurl").val());
-		    $("#loginForm").submit();
-		}
-		
-	/*var swiper = new Swiper('.swiper-container', {
-		nextButton : '.swiper-page-next',
-		prevButton : '.swiper-page-prev',
-		paginationClickable : true,
-		spaceBetween : 0,
-		mousewheelControl : false,
-		loop : true,
-		autoplay: 3000,
-		speed : 500,
-		onInit : function(swiper) {
-			swiperAnimateCache(swiper);
-			swiperAnimate(swiper);
-		},
-		onSlideChangeEnd : function(swiper) {
-			swiperAnimate(swiper);
-		},
-		onTransitionEnd : function(swiper) {
-			swiperAnimate(swiper);
-		}
-	});*/
-
-	function refreshImage(type, obj) {
-		//var image=document.getElementById("imgValidationCode");
-		var image = $(obj).children()[0];
-		var url = "${ctxPath}/jCaptcha.html?type=" + type;
-		var xmlHttpReq = null;
-		if (window.ActiveXObject) {
-			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
-		} else if (window.XMLHttpRequest) {
-			xmlHttpReq = new XMLHttpRequest();
-		}
-		xmlHttpReq.open("Post", url, true);
-		xmlHttpReq.send(null);
-
-		image.src = "${ctxPath}/jCaptcha.html?rand="
-				+ parseInt(1000 * Math.random());
-		return false;
-	}
-</script>

@@ -273,3 +273,95 @@ $(document).ready(function(){
 		var cartNum = $(".w-gwc").val();
 		alert(cartNum);
 	}
+	
+	function index_login(){
+		if(checkLogin()){
+			$.post("/ajaxCheckUser.html", {
+				j_username:$("#j_username").val(),
+				j_password:$("#j_password").val()
+			}, function(result) {
+				var json = eval("("+result.data+")");
+				if(json.flag){
+					//隐藏登陆框
+					$(".w-login").hide();
+					$("#loginPromptHolderTemplateLogin").show();
+					$("#loginPromptHolderTemplateLogout").hide();
+					
+					if(json.shopCartValueModelList[0] != undefined){
+						var goodsNum = json.shopCartValueModelList[0].buyNowItemsCount;
+						if(goodsNum != null && goodsNum != ""){
+							$("#cartNum").html(""+goodsNum+"");
+							if(json.shopCartValueModelList[2] == undefined){
+								if(goodsNum > 2){
+									var goodsNumShow =goodsNum-1;
+									$("#buyNow").html(goodsNumShow);
+								}
+							}else{
+								if(goodsNum > 2){
+									var goodsNumShow =goodsNum-2;
+									$("#buyNow").html(goodsNumShow);
+								}
+							}
+							
+						}
+						var total = json.shopCartValueModelList[0].subtotal;
+						if(total != null && total != ""){
+							$("#subtotalHeader").html("￥"+total+"");
+						}
+					}
+					
+					var proValue ="";
+					if(json.shopCartValueModelList[1] != undefined){
+						if(json.shopCartValueModelList[1].isSaved==0 && json.shopCartValueModelList[1].parent == null ){
+							proValue = ("<li class='clearfix'>"+
+											"<div class='w-car-img'>"+
+												"<img src='media/product/e/"+json.shopCartValueModelList[1].image+"' width='100' height='100'>"+
+											"</div>"+
+											"<div class='w-car-info'>"+
+												"<span>"+json.shopCartValueModelList[1].productName+"</span>"+
+												"<span>"+json.shopCartValueModelList[1].brandName+"</span>"+
+												"<span class='w-car-price'>￥"+json.shopCartValueModelList[1].price+"</span>"+
+											"</div>"+
+											"</li>");
+						}
+					}
+					if(json.shopCartValueModelList[2] != undefined){
+						if(json.shopCartValueModelList[2].isSaved==0 && json.shopCartValueModelList[2].parent == null){
+							proValue += ("<li class='clearfix'>"+
+											"<div class='w-car-img'>"+
+												"<img src='media/product/e/"+json.shopCartValueModelList[2].image+"' width='100' height='100'>"+
+											"</div>"+
+											"<div class='w-car-info'>"+
+												"<span>"+json.shopCartValueModelList[2].productName+"</span>"+
+												"<span>"+json.shopCartValueModelList[2].brandName+"</span>"+
+												"<span class='w-car-price'>￥"+json.shopCartValueModelList[2].price+"</span>"+
+											"</div>"+
+											"</li>");
+						}
+					}
+					$("#shoppingCartItem").html(proValue);
+				}else{
+					$("#error_box1").show();
+					$("#error_box2").hide();
+					$("#error_box3").hide();
+				}
+			}, "json");
+		}
+	}
+	function refreshImage(type, obj) {
+		//var image=document.getElementById("imgValidationCode");
+		var image = $(obj).children()[0];
+		var url = "${ctxPath}/jCaptcha.html?type=" + type;
+		var xmlHttpReq = null;
+		if (window.ActiveXObject) {
+			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttpReq = new XMLHttpRequest();
+		}
+		xmlHttpReq.open("Post", url, true);
+		xmlHttpReq.send(null);
+
+		image.src = "${ctxPath}/jCaptcha.html?rand="
+				+ parseInt(1000 * Math.random());
+		return false;
+	}

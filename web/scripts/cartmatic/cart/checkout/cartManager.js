@@ -184,7 +184,7 @@ function fnjuankongPay() {
 function fnUpdatePrice() {
 	// alert("fnUpdatePrice");
 	var cartTotal = parseFloat($("#cart_sum_prev").val());// 所有的原先总价格
-	var cart_dis_member = parseFloat($("#cart_dis_member").text());// 惠员优惠
+	var cart_dis_member = parseFloat($("#cart_dis_member").text());// 会员优惠
 	var cart_full_cut = parseFloat($("#cart_full_cut").text());// 满减优惠
 	var discount = parseFloat($("#cartDiscountAmount").text());// 优惠卷优惠
 	var giftTotal = parseFloat($("#giftPay").text());// 礼品卡礼卷
@@ -254,6 +254,12 @@ function onBodyDown(event) {
 // 购物车商品-1
 function substractQuantity(obj, shoppingcartItemId, cartUuid, price,
 		discountPrice, oldSubtotal, cartDiscountAmount) {
+	var cartNum = parseInt($("#cartNum").html());
+	cartNum -=1;
+	$("#cartNum").html(cartNum);
+	var buyNow = parseInt($("#buyNow").html());
+	buyNow -=1;
+	$("#buyNow").html(buyNow);
 	var $this = $(obj);
 	var $next = $this.next();
 	if ($("#subtotal").text().trim() != "") {
@@ -327,6 +333,12 @@ function substractQuantity(obj, shoppingcartItemId, cartUuid, price,
 // 购物车商品+1
 function addQuantity(obj, shoppingcartItemId, cartUuid, price, discountPrice,
 		oldSubtotal, cartDiscountAmount, productSkuId, quantityOnHand) {
+	var cartNum = parseInt($("#cartNum").html());
+	cartNum +=1;
+	$("#cartNum").html(cartNum);
+	var buyNow = parseInt($("#buyNow").html());
+	buyNow +=1;
+	$("#buyNow").html(buyNow);
 	var $this = $(obj);
 	var $prev = $this.prev();
 	if ($prev.val() != quantityOnHand) {

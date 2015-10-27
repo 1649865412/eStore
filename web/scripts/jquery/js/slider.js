@@ -156,6 +156,8 @@ $(function () {
             autoplay: 4500,
             pagination: '.pagination',
             paginationClickable: true,
+            loop : true,
+            preventClicks : false,
         });
     }
     if ($('.designer_show .swiper-slide').length > 1) {
@@ -182,6 +184,15 @@ $(function () {
     $('.join_box .j2 span').click(function () {
         $(this).addClass('current').siblings().removeClass('current');
     });
+    $('.pro-car-1 ul li a').click(function ()  {
+    	if($('.pro-car-1 ul li a').hasClass("active")){
+    	$('.pro-car-1 ul li a').removeClass('active');
+    	$(this).addClass("active")
+    	}else{
+    	$(this).addClass("active")
+    	}
+    	
+     });
     $('.product .li6 .join').click(function () {
         $(this).hide();
         $(this).parent().siblings('.join_box').show();
