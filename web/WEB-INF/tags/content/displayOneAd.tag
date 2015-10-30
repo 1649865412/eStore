@@ -230,11 +230,14 @@
 			
 			<%--每周上新顶部大图--%>
 			<c:when test="${ad.advertisementId == 85}">
-				<div class="hd-info">${ad.contextTitle}<a href="${ad.redirectUrl}">了解更多关于品牌设计师的理念</a><font>>></font></div>
+				<img src="${mediaPath}a_and_d/${ad.url}" width="100%">
+            	<%--<div class="weekly-hd-info">
+                	<div class="hd-info">${ad.contextTitle}<a href="${ad.redirectUrl}">了解更多关于品牌设计师的理念</a><font>>></font></div>
                     <div class="hd-info-text">
                     	${ad.context}
                     </div>
-			</c:when>
+                </div>
+			--%></c:when>
 			
 			<%--商品详情页底部广告--%>
 			<c:when test="${ad.advertisementId == 86}">

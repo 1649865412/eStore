@@ -212,12 +212,25 @@ function fnUpdatePrice() {
 	}
 
 	$("#cart_sum").text(total < 0 ? '0.00' : total);
+	
+	var shopPointTotal = parseInt($("#shopPointTotal").val());// 用户拥有的积分
+	/*var optionLength= 1;//option的初始长度为0
+	if(shopPointTotal>500){
+		shopPointTotal =500;
+	}
+	optionLength = shopPointTotal/100+1;*/
 
 	// 隐藏积分优惠下拉框触发
 	if (total < 300 || discount != 0 || giftTotal !=0) {
 		$("#selectbasic").attr("disabled", true);
 	} else {
 		$("#selectbasic").attr("disabled", false);
+		//不满800元只可使用500积分
+		/*if(total <=800){
+			var obj=document.getElementById('selectbasic'); 
+			obj.options.length=6; 
+			}
+		obj.options.length=optionLength; */
 	}
 	
 	if (giftTotal !=0 || pointTotal!= 0) {

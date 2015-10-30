@@ -159,6 +159,7 @@ public class MarketIndexFrontControler
     public ModelAndView  weekly(HttpServletRequest request, HttpServletResponse response)	 
     {
     	ModelAndView mv=new ModelAndView("market/weekly");
+    	RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
     	Catalog tempCatalog=catalogManager.getByCode("default");
 		mv.addObject("tempCatalog", tempCatalog);
         return mv;

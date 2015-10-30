@@ -132,6 +132,7 @@
 				<a class="li3" href="${tempCatalog.weekOnNewUrl}">查看更多</a>
 			</c:if>
         </div>
+        <br/><br/><br/>
 	        <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
 								<jsp:param name="typeName" value="best_wholesale_deals" />
 								<jsp:param name="firstResult" value="0" />

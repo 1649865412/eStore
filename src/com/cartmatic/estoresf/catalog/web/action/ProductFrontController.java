@@ -40,6 +40,7 @@ import com.cartmatic.estore.common.helper.CatalogHelper;
 import com.cartmatic.estore.common.helper.ConfigUtil;
 import com.cartmatic.estore.common.model.catalog.Accessory;
 import com.cartmatic.estore.common.model.catalog.AccessoryGroup;
+import com.cartmatic.estore.common.model.catalog.Brand;
 import com.cartmatic.estore.common.model.catalog.Category;
 import com.cartmatic.estore.common.model.catalog.Product;
 import com.cartmatic.estore.common.model.catalog.ProductAttGroup;
@@ -49,6 +50,7 @@ import com.cartmatic.estore.common.model.catalog.ProductMediaUp;
 import com.cartmatic.estore.common.model.catalog.ProductRateItem;
 import com.cartmatic.estore.common.model.catalog.ProductReview;
 import com.cartmatic.estore.common.model.catalog.ProductSku;
+import com.cartmatic.estore.common.model.catalog.ProductSkuOptionValue;
 import com.cartmatic.estore.common.model.catalog.ProductStat;
 import com.cartmatic.estore.common.model.catalog.SkuOption;
 import com.cartmatic.estore.common.model.catalog.SkuOptionValue;
@@ -123,6 +125,24 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 	private ModelAndView notFoundPage(HttpServletRequest request,HttpServletResponse response) {
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		return getModelAndView("catalog/categoryErrorPage");
+	}
+	
+	/**
+	 * 获取商品尺寸
+	 * @param productId
+	 * @return
+	 */
+	public List<String> findSkuOptionValueNameByProductId(Integer productId){
+		List<ProductSku> ProductSkuList = productSkuManager.findActiveProductSkusByProductId(productId);
+		List<String> skuOptionValueNames=new ArrayList();
+		for(int i = 0 ;i < ProductSkuList.size();i++){
+			Integer productSkuId=ProductSkuList.get(i).getProductSkuId();
+			ProductSkuOptionValue productSkuOptionValue = new ProductSkuOptionValue();
+			Integer skuOptionValueId=Integer.parseInt(productSkuManager.getSkuOptionValueIdByProductSkuId(productSkuId));
+			String skuOptionValueName=productSkuManager.findSkuOptionValueNameBySkuOptionValueId(skuOptionValueId);
+			skuOptionValueNames.add(skuOptionValueName);
+		}
+		return skuOptionValueNames;
 	}
 	
 	//@RequestMapping(value={"/*_p{pId}_{cId}.html","/*_p{pId}.html",})
@@ -277,8 +297,9 @@ public class ProductFrontController extends GenericStoreFrontController<Product>
 		List<Map.Entry<AccessoryGroup, List<Accessory>>> productAccessoryList=productManager.getProductAccessoryMap(product.getProductId());
 		modelAndView.addObject("productAccessoryList",productAccessoryList);
 		
-		
-		
+		//获取商品尺寸
+		List<String> skuOptionValueNames=findSkuOptionValueNameByProductId(productId);
+		modelAndView.addObject("skuOptionValueNames",skuOptionValueNames);
 		//获取商品二维码
 		modelAndView.addObject("encoderContent",getImgCode(	 product , request));
 		RequestUtil.getShopCart(request,response,modelAndView,shoppingcartManager);

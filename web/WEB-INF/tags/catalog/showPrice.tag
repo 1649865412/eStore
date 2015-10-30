@@ -125,6 +125,25 @@ viewType=3
 			</c:otherwise>
 		</c:choose>
 	</c:when>
+	<c:when test="${viewType==5}">
+		<%--
+		价格显示,有促销的显示两个价格，原价格+划线,
+		<span class="listPrice">US$ 139.99</span>&nbsp;&nbsp;<a href="#" class="price">US$ 99.99</a>
+		--%>
+		<c:choose>
+			<c:when test="${productSku.priceViewType==2}">
+				<p><b><system:CurrencyForRate value="${productSku.salePrice}" /></b></p>
+				<p class="price_old"><system:CurrencyForRate value="${productSku.price}" /></p>
+			</c:when>
+			<c:when test="${productSku.priceViewType==3}">
+				<p><b><system:CurrencyForRate value="${productSku.discountPrice}" /></b></p>
+				<p class="price_old"><system:CurrencyForRate value="${productSku.price}" /></p>
+			</c:when>
+			<c:otherwise>
+				<p><b><system:CurrencyForRate value="${productSku.price}" /></b></p>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:otherwise>
 		<%--永远只会见到两个价. ”市场价”和”售价”或”售价”和”特价”--%>
 		<c:if test="${productSku.priceViewType==1}">

@@ -34,7 +34,12 @@
 	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
-
+.w-nav ul dd a.event_highlight{
+	color:#fb6e67;
+}
+.event_highlight span{
+	color:#fbbd6a;
+}
 @media (max-width: 991px){	
 
 .w-nav{

@@ -13,177 +13,164 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>四方街</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href="${resPath}/styles/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/list.css" />
-		<link rel="stylesheet" type="text/css" href="${resPath}/styles/css/monthly.css" />
-		<link href="${resPath}/styles/css/font-awesome.css" rel="stylesheet">
-		<script src="${ctxPath}/scripts/jquery/js/book/js/modernizr.custom.js"></script>
-		<script src="${ctxPath}/scripts/jquery/js/classie.js"></script>
-		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
-		<script src="${ctxPath}/scripts/jquery/js/index.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/modernizr.custom.js"></script>
+		<script src="${ctxPath}/scripts/jquery/js/snap.svg-min.js"></script>
+		
+		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/cartmatic/cart/login.js"></script>
 	</head>
 	<body>
 	<%@ include file="../../decorators/include/headerNew.jspf"%>
+		<div class="w-container">
+			<button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
 			<div id="theSidebar" class="sidebar" >
 				<div class="related">
-					<a href="/culturalinformation/index.html" class="on" id="t1">全部</a>
-					<a href="/culturalinformation/index.html?type=0" id="t2">秀场</a>
-					<a href="/culturalinformation/index.html?type=1" id="t3">访谈</a>
-					<a href="/culturalinformation/index.html?type=2" id="t4">行业动态</a>
-					<a href="/culturalinformation/index.html?type=3" id="t5">线下主题活动</a>
-					<a href="/culturalinformation/index.html?type=4" id="t6">月刊</a>
+					<a href="/culturalinformation/index.html" class="w-list-btn <c:if test='${param.type == null || param.type ==""}'>on</c:if>" date-type="all" id="t1">全部</a>
+					<a href="/culturalinformation/index.html?type=0" class="w-list-btn <c:if test='${param.type == 0}'>on</c:if>" date-type="all" id="t2">时尚前沿</a>
+					<a href="/culturalinformation/index.html?type=1" class="w-list-btn <c:if test='${param.type == 1}'>on</c:if>" date-type="all" id="t3">思维对话</a>
+					<a href="/culturalinformation/index.html?type=2" class="w-list-btn <c:if test='${param.type == 2}'>on</c:if>" date-type="all" id="t4">品牌播报</a>
+					<a href="/culturalinformation/index.html?type=3" class="w-list-btn <c:if test='${param.type == 3}'>on</c:if>" date-type="all" id="t5">聚焦四方</a>
+					<%--<a href="/culturalinformation/index.html?type=4" class="w-list-btn <c:if test='${param.type == 4}'>on</c:if>" date-type="all" id="t6">四方志</a>--%>
 				</div>
 			</div>
 			<div id="theGrid" class="main">
-					<div class="scroll-wrap">
-							<div class="w-c-nrb">
-								<span class="category category--full">时尚前沿</span>
-								<h2 class="title title--full">${culturalInformation.title}</h2>
-								<div class="meta meta--full">
-									<span class="meta__author">来源：${culturalInformation.writer}</span>
-									<span class="meta__date"><fmt:formatDate value="${culturalInformation.createTime}" type="date" dateStyle="long"/></span>
-									<span class="meta__reading-time">阅读数 （${culturalInformation.readNumber}）| <a href="#">分享<i class="fa fa-share"></i></a></span>
-								</div>
-								<div>
-								${culturalInformation.textIntroduction}
-								</div>
-								<div class="w-c-np">
-									<a href="#">
-										<div class="w-c-prev">
-											<div class="w-c-i">
-												<i class="fa fa-angle-double-left"></i>
-											</div>
-											<div class="w-c-txt">
-												<span>上一篇</span>
-												<span class="w-c-ttitle">萬南子地報果海</span>
-											</div>
-										</div>
-									</a>
-									<a href="#">
-										<div class="w-c-next">
-
-											<div class="w-c-i">
-												<i class="fa fa-angle-double-right"></i>
-											</div>
-											<div class="w-c-txt">
-												<span>下一篇</span>
-												<span class="w-c-ttitle">也車文說能不確西裡外門看或定手庭合麼樂軍了能</span>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="w-c-links">
-								<div class="w-lin-left">
-									<b>标签：</b>
-									<a href="#">对话</a>,
-									<a href="#">时尚</a>,
-									<a href="#">时尚预测</a>,
-									<a href="#">Li EdelKoort</a>,
-									<a href="#">设计博览会</a>
-								</div>
-								<div class="w-lin-right">阅读数 （12）| <a href="#">分享<i class="fa fa-share"></i></a></div>
-							</div>
-							<div class="w-x-wz content__item w-g-h">
-								<h3>相关文章</h2>
-								<div class="w-x-items">
-									<div class="w-x-item  w-g-b">
-										<div class="w-g-header">
-											<b></b>时尚前言 | 2015年7月19日
-										</div>
-										<a href="#">
-										<div class="w-x-imgs">
-										<img src="img/list1.jpg"/>
-										</div>
-										<h2 class="title title--preview">2016春夏男装流行趋势：新简学主义</h2>
-									</a>
-										<div class="loader"></div>
-										<div class="meta meta--preview">
-											<a href="#">简学主义</a>,
-							<a href="#">男装趋势</a>,
-							<a href="#">流行趋势</a>,
-							<a href="#">T台走秀</a>,
-							<a href="#">伦敦时装周</a>,
-							<a href="#">春夏时装周</a>
-										</div>
-									</div>
-									<div class="w-x-item  w-g-y">
-										<div class="w-g-header">
-											<b></b>时尚前言 | 2015年7月19日
-										</div>
-										<a href="#">
-										<div class="w-x-imgs">
-										<img src="img/list2.jpg"/>
-										</div>
-										<h2 class="title title--preview">2016春夏男装流行趋势：新简学主义</h2>
-									</a>
-										<div class="loader"></div>
-										<div class="meta meta--preview">
-											<a href="#">简学主义</a>,
-							<a href="#">男装趋势</a>,
-							<a href="#">流行趋势</a>,
-							<a href="#">T台走秀</a>,
-							<a href="#">伦敦时装周</a>,
-							<a href="#">春夏时装周</a>
-										</div>
-									</div>
-									<div class="w-x-item  w-g-r">
-										<div class="w-g-header">
-											<b></b>时尚前言 | 2015年7月19日
-										</div>
-										<a href="#">
-										<div class="w-x-imgs">
-										<img src="img/list3.jpg"/>
-										</div>
-										<h2 class="title title--preview">2016春夏男装流行趋势：新简学主义</h2>
-									</a>
-										<div class="loader"></div>
-										<div class="meta meta--preview">
-											<a href="#">简学主义</a>,
-							<a href="#">男装趋势</a>,
-							<a href="#">流行趋势</a>,
-							<a href="#">T台走秀</a>,
-							<a href="#">伦敦时装周</a>,
-							<a href="#">春夏时装周</a>
-										</div>
-									</div>
-									<div class="w-x-item  w-g-l">
-										<div class="w-g-header">
-											<b></b>时尚前言 | 2015年7月19日
-										</div>
-										<a href="#">
-										<div class="w-x-imgs">
-										<img src="img/mem3.jpg"/>
-										</div>
-										<h2 class="title title--preview">2016春夏男装流行趋势：新简学主义</h2>
-									</a>
-										<div class="loader"></div>
-										<div class="meta meta--preview">
-											<a href="#">简学主义</a>,
-							<a href="#">男装趋势</a>,
-							<a href="#">流行趋势</a>,
-							<a href="#">T台走秀</a>,
-							<a href="#">伦敦时装周</a>,
-							<a href="#">春夏时装周</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="w-c-pl">
-								<!--jiaThis评论 UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2052677"></script>
-<!-- UY END -->
-							</div>
-
-					</div>
-
-					<button class="close-button-list"><i class="fa fa-close"></i><span>Close</span></button>
+				<div id="loader" class="pageload-overlay" data-opening="M20,15 50,30 50,30 30,30 Z;M0,0 80,0 50,30 20,45 Z;M0,0 80,0 60,45 0,60 Z;M0,0 80,0 80,60 0,60 Z" data-closing="M0,0 80,0 60,45 0,60 Z;M0,0 80,0 50,30 20,45 Z;M20,15 50,30 50,30 30,30 Z;M30,30 50,30 50,30 30,30 Z">
+	                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+	                    <path d="M30,30 50,30 50,30 30,30 Z" />
+	                </svg>
+	            </div>
+	            
+	            <section class="content contentArticle">
+                <div class="scroll-wrap">
+                    <article class="content__item w-g-h">
+                        <div class="w-c-nrb">
+                            <span class="category category--full">
+                            	<c:if test="${culturalInformation.type == 0}">时尚前沿</c:if>
+                            	<c:if test="${culturalInformation.type == 1}">思维对话</c:if>
+                            	<c:if test="${culturalInformation.type == 2}">品牌播报</c:if>
+                            	<c:if test="${culturalInformation.type == 3}">聚焦四方</c:if>
+                            	<%--<c:if test="${culturalInformation.type == 4}">四方志</c:if>--%>
+                            </span>
+                            <c:if test="${culturalInformation.type == 0}"><h2 class="title title--full" style="color:#fbbd6a"></c:if>
+                            <c:if test="${culturalInformation.type == 1}"><h2 class="title title--full" style="color:#a6d5ab"></c:if>
+                            <c:if test="${culturalInformation.type == 2}"><h2 class="title title--full" style="color:#abdce3"></c:if>
+                            <c:if test="${culturalInformation.type == 3}"><h2 class="title title--full" style="color:#fb6e67"></c:if>
+                                ${culturalInformation.title}
+                            </h2>
+                            <div class="meta meta--full">
+                                <span class="meta__author">来源：${culturalInformation.writer}</span>
+                                <span class="meta__date"><fmt:formatDate value="${culturalInformation.createTime}" type="date" dateStyle="long"/></span>
+                                <span class="meta__reading-time">
+                                 
+                                    <!-- JiaThis Button BEGIN -->
+                                   <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a>
+                                    <!-- JiaThis Button END -->
+                                  | 阅读数 （${culturalInformation.readNumber}）
+                              </span>
+                            </div>
+                            <div class="article_culture_detail">
+                              ${culturalInformation.textIntroduction}
+                          </div><!--article_culture_detail-->
+                            <div class="w-c-np">
+                            	<c:if test="${lastCultural.culturalInformationId != null && lastCultural.culturalInformationId != ''}">
+	                                <a href="/culturalinformation/culturaTemplate.html?culId=${lastCultural.culturalInformationId}">
+	                                    <div class="w-c-prev">
+	                                        <div class="w-c-i">
+	                                            <i class="fa fa-angle-double-left"></i>
+	                                        </div>
+	                                        <div class="w-c-txt">
+	                                            <span>上一篇</span>
+	                                            <span class="w-c-ttitle">${lastCultural.title}</span>
+	                                        </div>
+	                                    </div>
+	                                </a>
+                                </c:if>
+                                <c:if test="${nextCultural.culturalInformationId != null && nextCultural.culturalInformationId != ''}">
+	                                <a href="/culturalinformation/culturaTemplate.html?culId=${nextCultural.culturalInformationId}">
+	                                    <div class="w-c-next">
+	
+	                                        <div class="w-c-i">
+	                                            <i class="fa fa-angle-double-right"></i>
+	                                        </div>
+	                                        <div class="w-c-txt">
+	                                            <span>下一篇</span>
+	                                            <span class="w-c-ttitle">
+	                                                ${nextCultural.title}
+	                                            </span>
+	                                        </div>
+	                                    </div>
+	                                </a>
+                                </c:if>
+                            </div>
+                    
+                        </div>
+                        	<div class="w-c-links">
+	                            <div class="w-lin-left">
+	                                <b>标签：</b>
+	                                <a href="javascript:;">${culturalInformation.metaKeywork}</a>
+	                            </div>
+	                            <div class="w-lin-right">
+	                              <span>
+	                                <!-- JiaThis Button BEGIN -->
+	                              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a>
+	                                <!-- JiaThis Button END -->
+	                              </span> | <span>阅读数 （${culturalInformation.readNumber}）</span>
+	                             </div>
+	                        </div>
+	                        <div class="w-x-wz">
+	                            <h3>相关文章</h3>
+	                            <div class="w-x-items">
+	                            <c:forEach items="${reCommendResultsList}" var="reCommendResults"  varStatus="r">
+	                            	<c:if test="${reCommendResults.type == 0}"><div class="w-x-item w-g-h"></c:if>
+	                                <c:if test="${reCommendResults.type == 1}"><div class="w-x-item w-g-l"></c:if>
+	                                <c:if test="${reCommendResults.type == 2}"><div class="w-x-item w-g-r"></c:if>
+	                                <c:if test="${reCommendResults.type == 3}"><div class="w-x-item w-g-x"></c:if>
+	                                <c:if test="${reCommendResults.type == 4}"><div class="w-x-item w-g-s"></c:if>
+	                                    <div class="w-g-header">
+	                                        <b></b>
+	                                        <c:if test="${reCommendResults.type == 0}">时尚前沿</c:if>
+	                                        <c:if test="${reCommendResults.type == 1}">思维对话</c:if>
+	                                        <c:if test="${reCommendResults.type == 2}">品牌播报</c:if>
+	                                        <c:if test="${reCommendResults.type == 3}">聚焦四方</c:if>
+	                                        <c:if test="${reCommendResults.type == 4}">四方志</c:if>
+	                                         | <fmt:formatDate value="${reCommendResults.createTime}" type="date" dateStyle="long"/>
+	                                    </div>
+	                                    <a href="/culturalinformation/culturaTemplate.html?culId=${reCommendResults.culturalInformationId}">
+	                                        <div class="w-x-imgs">
+	                                            <img src="/StoreAdmin/media/other/${reCommendResults.logoImg}" />
+	                                        </div>
+	                                        <h2 class="title title--preview">${reCommendResults.title}</h2>
+	                                    </a>
+	                                    <div class="loader"></div>
+	                                    <div class="meta meta--preview">
+	                                        <a href="javascript:;">${reCommendResults.metaKeywork}</a>
+	                                    </div>
+	                                </div>
+	                            </c:forEach>
+	                            </div>
+	                        </div>
+	                        
+	                        <div class="w-c-pl">
+	                            <!--jiaThis评论 UY BEGIN -->
+								<div id="uyan_frame"></div>
+								<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2052677"></script>
+								<!-- UY END -->
+	                        </div>
+	                    </article>
+	
+	                </div>
+	
+	                <button class="close-button-list" id="close_button_a"><i class="fa fa-close"></i><span>Close</span></button>
+	            </section>
 			</div>
-			<!-- /container -->
+		</div>
+		<!-- /container -->
 		<%@ include file="../../decorators/include/footerNew.jspf"%>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/classie.js"></script>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/list.js"></script>

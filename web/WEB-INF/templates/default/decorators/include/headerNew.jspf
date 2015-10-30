@@ -286,7 +286,7 @@
 								<a href="${ctxPath}/MarketIndex.html"><span>商城</span> </a>
 							</li>
 							<li>
-								<a href="${ctxPath}/culturalinformation/index.html"><span <c:if test="${fn:indexOf(OriginalRequestURI,'/culturalinformation/index.html')!=-1}">class='w-menu-on'</c:if>>文化资讯</span>
+								<a href="${ctxPath}/culturalinformation/index.html"><span <c:if test="${fn:indexOf(OriginalRequestURI,'/culturalinformation')!=-1}">class='w-menu-on'</c:if>>文化资讯</span>
 								</a>
 							</li>
 							<li>

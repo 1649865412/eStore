@@ -1,11 +1,11 @@
 *{ margin:0; padding:0;}
 body{ overflow-x:hidden;}
-.w-weekly-hd{ background:url(../img/pic2.jpg) no-repeat; background-size:cover; background-position:50% 50%; position:relative;}
-.weekly-hd-info{ width:41%; background:rgba(255,255,255,0.7); position:absolute; top:50%; left:3%; padding:1.5%;}
-.hd-info{ font-size:40px;}
+.w-weekly-hd{position:relative; margin-top:80px;}
+.weekly-hd-info{ width:41%; background:rgba(255,255,255,0.7); position:absolute; top:20%; left:3%; padding:1%; height:50%; overflow:hidden;}
+.hd-info{ font-size:40px; font-family: 'FontYht';}
 .hd-info a{ text-decoration:underline; font-size:12px; color:#fbbd6a;}
 .hd-info font{ color:#fbbd6a; font-family:sans-serif; font-size:12px;}
-.hd-info-text{ line-height:24px; font-size:15px; padding-top:10px; font-family:"黑体"; color:#000;}
+.hd-info-text{ line-height:150%; font-size:15px; padding-top:10px; font-family:"黑体"; color:#000;}
 
 .bd-tit{ text-align:center; margin:60px 0 30px 0; font-size:36px; font-family: 'FontYht';}
 .bd-tit1{ text-align:center; font-family:"黑体"; font-size:18px; color:#757575; margin-bottom:60px;}
@@ -17,15 +17,20 @@ body{ overflow-x:hidden;}
 .w-weekly-recomm ul li dl dt img{ width:100%;}
 .w-weekly-recomm ul li dl dd{ float:right; width:29%;}
 .w-weekly-recomm ul li dl dd img{ display:block; width:100%; margin-bottom:6.3%;}
+.w-weekly-recomm ul li a{ display:block; position:relative;}
+.w-weekly-recomm ul li a span{ position:absolute; line-height:24px; bottom:10px; width:100%; left:0; transition-duration: .5s; opacity:0;}
+.w-weekly-recomm ul li a span p{ margin:0 10px; color:#000; font-size:12px;}
 .w-weekly-recomm ul li a img{ transition-duration: .5s;}
 .w-weekly-recomm ul li a:hover img{ opacity:0.5;}
+.w-weekly-recomm ul li a:hover span{ opacity:1}
 .w-weekly-recomm ul li a.buy_btn:hover img{ opacity:1;}
 
 .bd-list ul.row{ padding:0 2%; margin:0;}
 .bd-list ul{}
-.bd-list ul li{ float:left; width:23%; margin:0 1% 30px 1%; line-height:22px; font-size:12px;}
+.bd-list ul li{ float:left; width:23%; margin:0 1% 30px 1%; line-height:22px; font-size:12px; position:relative;}
 .bd-list ul li img{ width:100%; transition-duration: .5s;}
-.bd-list ul li a:hover img{ opacity:0.5;}
+.bd-list ul li img.imgt{ position:absolute; top:0; left:0; opacity:0; transition-duration: .5s;}
+.bd-list ul li a:hover img.imgt{ opacity:1;}
 .bd-list ul li .bd-list-tit{ margin-top:10px;}
 .bd-list ul li .bd-list-tit span{ float:right; color:#fbbd6a;}
 .bd-list ul li .bd-list-tit a{ color:#313131;}
@@ -35,7 +40,7 @@ body{ overflow-x:hidden;}
 .bd-list ul li p span{ color:#abdce3;}
 .bd-list ul li p em{ font-style:normal; color:#AAA;}
 
-.more{ text-align:center; margin-bottom:50px;}
+.more{ text-align:center; margin:30px 0 50px 0;}
 .more a{ display:inline-block; border:solid 1px #fbbd6a; font-size:18px; line-height:65px; background:#fbbd6a; padding:0 50px;}
 .more a:hover{ color:#fbbd6a; background:none;}
 
@@ -60,19 +65,26 @@ body{ overflow-x:hidden;}
 .w-buy-pop-number a{ color:#fb6e67; font-size:12px;}
 .w-buy-pop-number a.buy-pop-btn{ font-size:15px; display:inline-block; width:50%; height:58px; line-height:58px; color:#FFF; font-size:15px; background:#fbbd6a; border:solid 1px #fbbd6a; margin:15px 0;}
 .w-buy-pop-number a.buy-pop-btn:hover{ background:#FFF; color:#fbbd6a;}
-
+.price_old{text-decoration: line-through;}
+@media (max-width: 1280px){
+	.weekly-hd-info{
+		width:60%;
+		height:80%;
+		top:10%;
+	}
+}
 
 @media (max-width: 992px){
-	.weekly-hd-info{ width:94%;}
+	.weekly-hd-info{ width:94%; line-height:22px;}
 	.w-weekly-recomm ul.row{ padding:0 2%; margin:0;}
 	.w-buy-pop{ width:90%; height:80%; overflow-y:scroll; left:5%; margin-left:0;}
 	.w-buy-pop ul li{ width:100%;}
 }
 
-@media (max-width: 768px){
+@media (max-width: 800px){
 	.w-weekly-recomm ul.row li{ width:100%;}
 	.hd-info{ font-size:25px;}
-	.hd-info-text{ line-height:22px; font-size:12px;}
+	.hd-info-text{line-height: 110%; font-size:12px;}
 	.bd-tit{ font-size:25px}
 	.bd-tit1{ font-size:12px;}
 	.bd-list ul{ padding:0 2%;}
@@ -80,6 +92,24 @@ body{ overflow-x:hidden;}
 	.more a{ line-height:55px;}
 }
 
-@media (max-width: 320px){
+@media (max-width: 480px){
+	.w-weekly-hd{background:url(../img/pic2.jpg) no-repeat; background-size:cover; background-position:50% 50%; position:relative;}
+	.weekly-hd-info{
+		position:relative;
+		top:1%;
+		padding:2%;
+	}
+	.w-weekly-hd img{
+		visibility:hidden;
+	}
+	.hd-info{
+		font-size:20px;
+	}
+	.bd-tit, .bd-tit1{
+		width:95%;
+		margin-left:2.5%;
+		margin-right:2.5%;
+	}
+
 	.bd-list ul li{ width:98%;}
 }

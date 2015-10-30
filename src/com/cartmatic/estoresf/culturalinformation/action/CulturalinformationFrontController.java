@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cartmatic.estore.cart.service.ShoppingcartManager;
+import com.cartmatic.estore.common.model.catalog.Product;
 import com.cartmatic.estore.common.model.culturalinformation.CulturalInformation;
 import com.cartmatic.estore.common.model.monthlycultural.MonthlyCultural;
 import com.cartmatic.estore.common.service.SolrService;
+import com.cartmatic.estore.common.util.PageUtil;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.core.view.AjaxView;
 import com.cartmatic.estore.culturalinformation.service.CulturalInformationManager;
@@ -191,23 +193,65 @@ public class CulturalinformationFrontController extends
 			HttpServletResponse response, String type) {
 		ModelAndView mv = new ModelAndView("cultura/culturalinformation");
 		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
+		if(type ==""){
+			type = null;
+		}
 		List<CulturalInformation> culturalinformationList = culturalInformationManager
 				.getResutlType(type);
-		mv.addObject("culturalinformationList", culturalinformationList);
+		
+		String pageStr = request.getParameter("page");
+		int currentPage = 1;
+		if (pageStr != null && pageStr != ""){
+			currentPage = Integer.parseInt(pageStr);
+		}
+		PageUtil pUtil = new PageUtil(6, culturalinformationList.size(), currentPage);
+		currentPage = pUtil.getCurrentPage();
+		mv.addObject("pageNum", currentPage);
+		
+		int totalPage= culturalinformationList.size()/8;
+		int remainder=culturalinformationList.size()%8;
+		if(remainder>0){
+			totalPage +=1;
+		}
+		mv.addObject("totalPage", totalPage);
+		List<CulturalInformation> reCulturalInformationList = new ArrayList<CulturalInformation>();
+		for (int i = pUtil.getFromIndex(); i < pUtil.getToIndex(); i++) {
+			CulturalInformation culturalInformation = (CulturalInformation) culturalinformationList.get(i);
+			reCulturalInformationList.add(culturalInformation);
+		}
+		
+		mv.addObject("culturalinformationList", reCulturalInformationList);
 		return mv;
 	}
 	
 	/**
 	 * 单独跳转文化资讯详情页
 	 */
-	@RequestMapping(value = "/culturaTemplate.html")
+	@RequestMapping(value = "/culturalinformation/culturaTemplate.html")
 	public ModelAndView getCulView(HttpServletRequest request,
 			HttpServletResponse response, String type) {
 		ModelAndView mv = new ModelAndView("cultura/culturaTemplate");
-		String culId = request.getParameter("culId");
-		CulturalInformation culturalinformation = getCulturalInformation(request.getParameter("culId"));
+		CulturalInformation culturalInformation = getCulturalInformation(request
+				.getParameter("culId"));
+		try{
+			int readNumber=culturalInformation.getReadNumber()+1;
+			culturalInformation.setReadNumber(readNumber);
+			culturalInformationManager.save(culturalInformation);
+		}catch(Exception e){
+			
+		}
+		List<CulturalInformation> result = culturalInformationManager
+				.getResutlType(culturalInformation.getType() + "");
+		Map<String, CulturalInformation> last_next_map = get_last_nextID(
+				result, culturalInformation.getId());
+		// 获取推荐信息List
+		List<CulturalInformation> reCommendResultsList = culturalInformationManager
+				.getAllByIdArray(culturalInformation.getRecommendArrayId());
 		RequestUtil.getShopCart(request,response,mv,shoppingcartManager);
-		mv.addObject("culturalinformation", culturalinformation);
+		mv.addObject("culturalInformation", culturalInformation);
+		mv.addObject("reCommendResultsList", reCommendResultsList);
+		mv.addObject("lastCultural", last_next_map.get("lastId"));
+		mv.addObject("nextCultural", last_next_map.get("nextId"));
 		return mv;
 	}
 

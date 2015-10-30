@@ -167,9 +167,10 @@ public class CategoryFrontController extends
 		String defaultMv = "/market/marketList";
 		if (request.getRequestURI().indexOf("man") != -1) {
 			defaultMv = "market/manCatalogTemplate";
-		}
-		if (request.getRequestURI().indexOf("wen") != -1) {
+		}else if (request.getRequestURI().indexOf("wen") != -1) {
 			defaultMv = "market/wenCatalogTemplate";
+		}else if (request.getRequestURI().indexOf("weekYearSale") != -1) {
+			defaultMv = "market/weekYearSale";
 		}
 
 		// 没有指定模版，或指定的模版找不到的时候，使用的缺省模版

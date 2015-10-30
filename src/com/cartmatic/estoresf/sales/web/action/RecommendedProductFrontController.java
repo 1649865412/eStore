@@ -28,6 +28,7 @@ import com.cartmatic.estore.common.model.catalog.SkuOptionValue;
 import com.cartmatic.estore.common.model.sales.RecommendedProduct;
 import com.cartmatic.estore.common.model.sales.RecommendedType;
 import com.cartmatic.estore.common.model.system.Store;
+import com.cartmatic.estore.common.util.PageUtil;
 import com.cartmatic.estore.core.controller.GenericStoreFrontController;
 import com.cartmatic.estore.sales.service.EvalRecommendationManager;
 import com.cartmatic.estore.sales.service.RecommendedProductManager;
@@ -146,8 +147,34 @@ public class RecommendedProductFrontController extends GenericStoreFrontControll
 		}
 
 		request.setAttribute("recommendedType", recommendedType);
-		request.setAttribute("productList", list);
-		if(typeName.equals("hot_wholesale_products")){
+		//每周主打列表页产品分页
+		if(typeName.equals("new_arrival")){
+			String pageStr = request.getParameter("page");
+			int currentPage = 1;
+			if (pageStr != null && pageStr != ""){
+				currentPage = Integer.parseInt(pageStr);
+			}
+			PageUtil pUtil = new PageUtil(8, list.size(), currentPage);
+			currentPage = pUtil.getCurrentPage();
+			request.setAttribute("pageNum", currentPage);
+			
+			int totalPage= list.size()/8;
+			int remainder=list.size()%8;
+			if(remainder>0){
+				totalPage +=1;
+			}
+			request.setAttribute("totalPage", totalPage);
+			List<Product> reProductList = new ArrayList<Product>();
+			for (int i = pUtil.getFromIndex(); i < pUtil.getToIndex(); i++) {
+				Product product = (Product) list.get(i);
+				reProductList.add(product);
+			}
+			request.setAttribute("productList", reProductList);
+		}else{
+			request.setAttribute("productList", list);
+		}
+		
+		if(typeName.equals("hot_wholesale_products") || typeName.equals("feature_product") || typeName.equals("also_buy")){
 			Map<Integer, Map<SkuOption, List<SkuOptionValue>>> productMap = new HashMap<Integer, Map<SkuOption, List<SkuOptionValue>>>();
 			for(int i=0;i<list.size();i++){
 				Integer productId=list.get(i).getProductId();

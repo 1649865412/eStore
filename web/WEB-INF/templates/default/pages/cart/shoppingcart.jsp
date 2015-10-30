@@ -182,6 +182,7 @@
 		<input type="hidden" value="" name="selected_itemId" id="selected_itemId"/>
 		<input type="hidden" value="${referer}" name="referer" />
 		<input type="hidden" id="cart_sum_prev" value="${shoppingcart.subtotal}" />
+		<input type="hidden" id="shopPointTotal" value="${shopPoint.total}" />
 		</form>
         <%@ include file="../../decorators/include/footerNew.jspf"%>
 		<script src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>

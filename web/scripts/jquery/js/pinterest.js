@@ -4,7 +4,7 @@ var pinterest_done=0;//是否全部加载完毕
 
 function pinterestInit(obj,add){
 	pinterest_doing=1;
-	var perBlock=16;//设定每次加载块数
+	var perBlock=20;//设定每次加载块数
 	var gapWidth=36;//设定块间距
 	var containerPadding=36;//设定外边距
 	var columns=4;//设定最大列数

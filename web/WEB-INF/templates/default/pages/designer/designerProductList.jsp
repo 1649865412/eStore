@@ -190,8 +190,13 @@
                     <c:if test="${pageNum + 2 <= totalPage}">
                     	<a href="/designerProductList.html?brandId=${brand.brandId}&sort=${param.sort}&page=${pageNum + 2 }">${pageNum + 2 }</a>
                     </c:if>
-                    <c:if test="${pageNum + 1 <= totalPage}">
+                    <c:if test="${totalPage >4 && pageNum + 3 < totalPage}">
                     	·······
+                    </c:if>
+                    <c:if test="${pageNum + 3 <= totalPage}">
+			            <a href="/culturalinformation/index.html?page=${totalPage}">${totalPage }</a>
+		            </c:if>
+                    <c:if test="${pageNum + 1 <= totalPage}">
                     	<a href="/designerProductList.html?brandId=${brand.brandId}&sort=${param.sort}&page=${pageNum + 1 }"><i class="fa fa-long-arrow-right"></i></a>
                     </c:if>
                 </div>

@@ -63,7 +63,7 @@
         <div class="designer_box c">
 	        <div class="designer_con">
 	            <div class="li1"><cartmatic:img isUrlOnly="false" url="${brand.icon}" mediaType="other" width="270" height="270" ></cartmatic:img></div>
-	            <div class="li2 title-font">${brand.brandName}</div>
+	            <div class="li2 title-font">${brand.designer}</div>
 	            <div class="li3 c">
 	              <cartmatic:img isUrlOnly="false" url="${brand.logo}" mediaType="other"></cartmatic:img>
 	              <!-- JiaThis Button BEGIN -->
@@ -172,20 +172,26 @@
         <div class="dialogue_box">
         	<div class="dialogue">
             	<div class="c dialogue_part">
-                    <div class="dialogue_left">
-                        <div class="dialogue_info">
-                            <h3 class="dialogue_info_left title-font">思维对话</h3>
-                            <div class="dialogue_info_right">
-                            	<div class="li1">${culturalInformation.title}</div>
-                                <div class="li2"><a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a></div>
-                                <div class="li3">
-                                ${culturalInformation.content}
-                                 </div>
-                                <%--<a class="li4" href="#">点击查看详细</a>
-                            --%></div>
-                        </div>
-                    </div><!--dialogue_left end-->
-                    <div class="dialogue_right"><cartmatic:img isUrlOnly="false" url="${culturalInformation.logoImg}" mediaType="other" id="logoImage"></cartmatic:img></div>
+            		<c:if test="${culturalInformation.culturalInformationId != null && culturalInformation.culturalInformationId != ''}">
+	                    <div class="dialogue_left">
+	                        <div class="dialogue_info">
+	                            <h3 class="dialogue_info_left title-font">思维对话</h3>
+	                            <div class="dialogue_info_right">
+	                            	<div class="li1">${culturalInformation.title}</div>
+	                                <div class="li2"><a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"><i class="fa fa-share-alt"></i> 分享</a></div>
+	                                <div class="li3">
+	                                ${culturalInformation.content}
+	                                 </div>
+	                                 	<a class="li4" href="/culturalinformation/culturaTemplate.html?culId=${culturalInformation.culturalInformationId}">点击查看详细</a>
+	                            </div>
+	                        </div>
+	                    </div><!--dialogue_left end-->
+                    </c:if>
+                    <div class="dialogue_right">
+	                    <c:if test="${culturalInformation.logoImg != null && culturalInformation.logoImg != ''}">
+	                    	<cartmatic:img isUrlOnly="false" url="${culturalInformation.logoImg}" mediaType="other" id="logoImage"></cartmatic:img>
+	                    </c:if>
+	                </div>
                     <div class="dialogue_left">
                     	<div class="dialogue_left_bottom"><i class="line"></i>
                     ${brand.quotation}</div>

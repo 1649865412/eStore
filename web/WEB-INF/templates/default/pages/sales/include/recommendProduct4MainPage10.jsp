@@ -3,16 +3,22 @@
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/catalog"%>
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
-<c:forEach items="${productList}" var="product" varStatus="varStatus" begin="0" end ="8">
-				<li>
-                    <div class="li1" onmouseover="setShare('${product.productName}', 'product/${product.productId}.html');"><a href="${ctxPath}/product/${product.productId}.html">
-            	
-	            	<img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}" width="100%"/>
-	            	
-	            	<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>
-	            	
-	            	</a></div>
-                    <div class="li2"><div class="cutstr2"><a href="${ctxPath}/product/${product.productId}.html" title="${product.productName}">${product.productName}</a></div><span>&nbsp;</span></div>
+<div class="product_box">
+<ul class="product list-unstyled col4 c sku_list" id="pinterestList">
+<c:forEach items="${productList}" var="product" varStatus="varStatus" begin="0" end ="100">
+		<li>
+                    <div class="li1" onmouseover="setShare('${product.productName}', 'product/${product.productId}.html');">
+	                    <a href="${ctxPath}/product/${product.productId}.html">
+			            	<img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}" width="100%"/>
+			            	<%--<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>
+		            	--%></a>
+	            	</div>
+                    <div class="li2">
+	                    <div class="cutstr2">
+	                    	<a href="${ctxPath}/product/${product.productId}.html">${product.productName}</a>
+	                    </div>
+                    	<span>&nbsp;</span>
+                    </div>
                     <p class="li3">${product.brand.designer}</p>
                 	<p class="li4">${product.brand.brandName}</p>
                     <div class="li5"><product:showPrice productSku="${product.defaultProductSku}" viewType="4"/></div>
@@ -76,5 +82,31 @@
                     <a href="#"><i class="fa fa-heart-o"></i> 加入收藏</a>
                                         <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
                 </p>
-                </li>
-           </c:forEach>
+         </li>
+</c:forEach>
+</ul>
+</div><!--product_box-->
+<div class="w-shopping-list-box" style="text-align:center;">
+		          	<div class="w-page" style="width:100px;margin:0 auto;">
+	                	<c:if test="${pageNum - 1 != 0}">
+	                		<a href="/weekly.html?page=${pageNum - 1 }"><i class="fa fa-long-arrow-left"></i></a>
+	                    </c:if>
+	                    <a href="javascript:;">${pageNum }</a>
+	                    <c:if test="${pageNum + 1 <= totalPage}">
+	                    	<a href="/weekly.html?page=${pageNum + 1 }">${pageNum + 1 }</a>
+	                    </c:if>
+	                    <c:if test="${pageNum + 2 <= totalPage}">
+	                    	<a href="/weekly.html?page=${pageNum + 2 }">${pageNum + 2 }</a>
+	                    </c:if>
+	                    <c:if test="${totalPage >4 && pageNum + 3 < totalPage}">
+	                    	·······
+	                    </c:if>
+	                    <c:if test="${pageNum + 3 <= totalPage}">
+				            <a href="/weekly.html?page=${totalPage}">${totalPage }</a>
+			            </c:if>
+	                    <c:if test="${pageNum + 1 <= totalPage}">
+	                    	<a href="/weekly.html?page=${pageNum + 1 }"><i class="fa fa-long-arrow-right"></i></a>
+	                    </c:if>
+	                </div>
+                </div>
+                <!--/分页-->

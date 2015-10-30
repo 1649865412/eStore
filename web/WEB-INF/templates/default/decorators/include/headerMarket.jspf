@@ -292,11 +292,11 @@
                                             <a href="#">傳已經的然</a>
                                         </div>
                                     --%></dd>
-                                    <dd <c:if test="${fn:indexOf(OriginalRequestURI,'/year')!=-1}">class='current'</c:if>><a href="/static/year.html"><i></i> 周年庆</a></dd>
                                     <dd <c:if test="${fn:indexOf(OriginalRequestURI,'/man')!=-1 && fn:indexOf(OriginalRequestURI,'_catalog.html')!=-1}">class='current'</c:if>><a href="/man_catalog.html"><i></i>男士</a></dd>
                                     <dd <c:if test="${fn:indexOf(OriginalRequestURI,'/wen')!=-1 && fn:indexOf(OriginalRequestURI,'_catalog.html')!=-1}">class='current'</c:if>><a href="/wen_catalog.html"><i></i>女士</a></dd>
                                     <dd <c:if test="${fn:indexOf(OriginalRequestURI,'/catalog_default_catalog.html')!=-1}">class='current'</c:if>><a href="/catalog_default_catalog.html"><i></i>所有产品</a></dd>
-                                </dl>
+                                    <%--<dd <c:if test="${fn:indexOf(OriginalRequestURI,'/weekYearSale')!=-1}">class='current'</c:if>><a href="/weekYearSale_catalog.html" class="event_highlight">周年庆特惠<span>&nbsp;[三折起]</span></a></dd>
+                                --%></dl>
                             </li>
 							<li><a href="${ctxPath}/culturalinformation/index.html"><span>文化资讯</span></a>
 							</li>

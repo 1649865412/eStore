@@ -127,7 +127,7 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 		
 		String pageStr = request.getParameter("page");
 		int currentPage = 1;
-		if (pageStr != null){
+		if (pageStr != null && pageStr != ""){
 			currentPage = Integer.parseInt(pageStr);
 		}
 		PageUtil pUtil = new PageUtil(8, productList.size(), currentPage);
@@ -204,6 +204,13 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 			mv.addObject("culturalInformation",culturalInformation);
 			List<BrandDynamic> brandDynamicList=brandDynamicManager.getResutlType(brandId);
 			mv.addObject("brandDynamicList",brandDynamicList);
+			Map<Integer, Map<SkuOption, List<SkuOptionValue>>> productMap = new HashMap<Integer, Map<SkuOption, List<SkuOptionValue>>>();
+			for(int i=0;i<recommendProductList.size();i++){
+				Integer productId=recommendProductList.get(i).getProductId();
+				Map<SkuOption,List<SkuOptionValue>>productSkuOptionAndValues=productMainManager.findSkuOptionsByProduct(productId);
+				productMap.put(productId, productSkuOptionAndValues);
+			}
+			request.setAttribute("productMap", productMap);
 			
 //			Map<SkuOption,List<SkuOptionValue>>productSkuOptionAndValues=productMainManager.findSkuOptionsByProduct(productId);
 //			mv.addObject("productSkuOptionAndValues",productSkuOptionAndValues);
