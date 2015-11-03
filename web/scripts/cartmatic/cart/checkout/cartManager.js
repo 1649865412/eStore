@@ -221,7 +221,7 @@ function fnUpdatePrice() {
 	optionLength = shopPointTotal/100+1;*/
 
 	// 隐藏积分优惠下拉框触发
-	if (total < 300 || discount != 0 || giftTotal !=0) {
+	if (total < 500 || discount != 0 || giftTotal !=0) {
 		$("#selectbasic").attr("disabled", true);
 	} else {
 		$("#selectbasic").attr("disabled", false);

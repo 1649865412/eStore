@@ -335,6 +335,7 @@
                     <!--选择颜色等-->
                     <div id="skuOptions" class="w-pro-car">
                     	<em class="fa fa-close"></em>
+                    	<ul>
 		                 <c:forEach items="${productSkuOptionAndValues}" var="productSkuOptionAndValue">
 		                 	<div class="tb-prop tm-clear">
 									<c:if test="${fn:indexOf(productSkuOptionAndValue.key.skuOptionCode,'color') > -1}">
@@ -355,34 +356,29 @@
 									</c:if>
 		                                  
 									<c:if test="${fn:indexOf(productSkuOptionAndValue.key.skuOptionCode,'size') > -1}">
-									 	<div class="product_size">
-											<%--文本 --%>
+									 	<%--<div class="product_size">
+											文本 
 			                                 <ul class="size" data-property="${productSkuOptionAndValue.key.skuOptionName}">
 			                                 	<label>选择尺码</label>
-			                                 	<p>
 												<c:forEach items="${productSkuOptionAndValue.value}" var="skuOptionValue" varStatus="status">
 													<li class="pro-car-1" data-value="${productSkuOptionAndValue.key.id}:${skuOptionValue.id}">
 						                                <a href="javascript:;" >${skuOptionValue.skuOptionValueName}</a>
 						                            </li>
 						                        </c:forEach>
-						                        </p>
 											</ul>
 										</div>
-										<%--<li class="pro-car-1">
-											文本 
-			                               
+										--%>
+										<li class="pro-car-1">
 			                                 	<label>选择尺码</label>
-			                                 	<ul  data-property="${productSkuOptionAndValue.key.skuOptionName}">
+			                                 	<ul class="size" data-property="${productSkuOptionAndValue.key.skuOptionName}">
 												<c:forEach items="${productSkuOptionAndValue.value}" var="skuOptionValue" varStatus="status">
-													<li data-value="${productSkuOptionAndValue.key.id}:${skuOptionValue.id}">
-						                                <a href="#" class="active">${skuOptionValue.skuOptionValueName}</a>
-						                            </li>
+													<span  class="size2" data-value="${productSkuOptionAndValue.key.id}:${skuOptionValue.id}">
+						                                <a href="javascript:;">${skuOptionValue.skuOptionValueName}</a>
+						                            </span>
 						                        </c:forEach>
 						                        </ul>
-											
 										</li>
-										
-									--%></c:if>
+									</c:if>
 							</div>
 		                 </c:forEach>
 		                 <li class="pro-car-2">
@@ -400,7 +396,6 @@
 					         </jsp:include>
 					         </ul>
 					        </li>
-					          	<ul>
 					        <li style="clear:both"></li>
 					        <li class="pro-car-3">
 					        	<label>选择数量</label>
@@ -674,10 +669,10 @@
 							$(".w-pro-info-tabs").hide()
 						})
 					$(".addafter").click(function(){
-						var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
+						var skuOptions=$(".size[data-property]");
 						var name="";
 						skuOptions.each(function(i){
-							if($(this).find("li.tb-selected").length==0){
+							if($(this).find("span.tb-selected").length==0){
 								name+="."+$(this).attr("data-property");
 							}
 						});
@@ -739,171 +734,172 @@ skuWholesalePrices[0]=[1,"${defaultProductSkuPrice}"];
 </c:forEach>
 <c:if test="${product.productKind==2}">
 var jProduct=${jsonProduct};
-$("#skuOptions").children("div.tb-prop").find("li[data-value]").click(function(){
-	if($(this).hasClass("tb-out-of-stock")){return false;};
-	if($(this).toggleClass("tb-selected").hasClass("tb-selected")){
-		$(this).append("<i>selected</i>").siblings("li").removeClass("tb-selected").children("i").remove();
-	}else{
-		$(this).children("i").remove();
-	}
-	var selectedOptions=$("#skuOptions").children("div.tb-prop").find("li.tb-selected[data-value]");
-	var selectOptions=$("#skuOptions").children("div.tb-prop").find("li[data-value]").not(".tb-selected");
-	
-	var aOptionValueIds=",";
-	var skus=jProduct.productSkus;
-	
-	for(var i=0;i<selectOptions.length;i++){
-		var selectOption=$(selectOptions[i]);
-		var optionId=selectOption.attr("data-value").split(":")[0];
-		var optionValueId=selectOption.attr("data-value").split(":")[1];
-		var hasMatchSku=false;
-		var sku=null;
-		for (k in skus){
-			sku=skus[k];
-			var skuOptions=sku.skuOptions;
-			var hasOptionValue=false;
-			for(j in skuOptions){
-				var skuOption=skuOptions[j];
-				if(selectOption.attr("data-value")==(skuOption.id+":"+skuOption.vid)){
-					hasOptionValue=true;
-					break;
+//alert("length:"+${fn:length(productSkuOptionAndValue.value)});
+	$(".size2[data-value]").click(function(){
+		if($(this).hasClass("tb-out-of-stock")){return false;};
+		if($(this).toggleClass("tb-selected").hasClass("tb-selected")){
+			$(this).siblings("span").removeClass("tb-selected").children("a").removeClass("active");
+			$(this).children("a").attr("class","active")
+		}else{
+			$(this).children("a").removeClass("active");
+		}
+		var selectedOptions=$(".size").find("span.tb-selected[data-value]");
+		var selectOptions=$(".size").find("span[data-value]").not(".tb-selected");
+		
+		var aOptionValueIds=",";
+		var skus=jProduct.productSkus;
+		
+		for(var i=0;i<selectOptions.length;i++){
+			var selectOption=$(selectOptions[i]);
+			var optionId=selectOption.attr("data-value").split(":")[0];
+			var optionValueId=selectOption.attr("data-value").split(":")[1];
+			var hasMatchSku=false;
+			var sku=null;
+			for (k in skus){
+				sku=skus[k];
+				var skuOptions=sku.skuOptions;
+				var hasOptionValue=false;
+				for(j in skuOptions){
+					var skuOption=skuOptions[j];
+					if(selectOption.attr("data-value")==(skuOption.id+":"+skuOption.vid)){
+						hasOptionValue=true;
+						break;
+					}
 				}
-			}
-			if(hasOptionValue){
-				hasMatchSku=true;
-			}else{
-				continue;
-			}
-			for(var j=0;j<selectedOptions.length;j++){
-				var selectedOption=$(selectedOptions[j]);
-				var selectedOptionId=selectedOption.attr("data-value").split(":")[0];
-				if(optionId!=selectedOptionId){
-					hasOptionValue=false;
-					for(l in skuOptions){
-						var skuOption=skuOptions[l];
-						if(selectedOption.attr("data-value")==(skuOption.id+":"+skuOption.vid)){
-							hasOptionValue=true;
+				if(hasOptionValue){
+					hasMatchSku=true;
+				}else{
+					continue;
+				}
+				for(var j=0;j<selectedOptions.length;j++){
+					var selectedOption=$(selectedOptions[j]);
+					var selectedOptionId=selectedOption.attr("data-value").split(":")[0];
+					if(optionId!=selectedOptionId){
+						hasOptionValue=false;
+						for(l in skuOptions){
+							var skuOption=skuOptions[l];
+							if(selectedOption.attr("data-value")==(skuOption.id+":"+skuOption.vid)){
+								hasOptionValue=true;
+								break;
+							}
+						}
+						if(!hasOptionValue){
+							hasMatchSku=false;
 							break;
 						}
 					}
-					if(!hasOptionValue){
-						hasMatchSku=false;
+				}
+				if(hasMatchSku){
+					break;
+				}
+			}
+			if(hasMatchSku){
+				if(aOptionValueIds.indexOf(","+optionValueId+",")==-1){
+					aOptionValueIds+=optionValueId+",";
+				}
+			}
+		}
+			
+		for(var i=0;i<selectOptions.length;i++){
+			var option=$(selectOptions.get(i));
+			var optionV=option.attr("data-value").split(":");
+			if(aOptionValueIds.indexOf(","+optionV[1]+",")==-1){
+				option.addClass("tb-out-of-stock");
+			}else{
+				option.removeClass("tb-out-of-stock");
+			}
+		}
+			
+		var selectedSku=null;
+		for (i in skus){
+			var sku=skus[i];
+			var skuOptions=sku.skuOptions;
+			var isMatch=false;
+			for(j in skuOptions){
+				isMatch=false;
+				var skuOption=skuOptions[j];
+				for(var k=0;k<selectedOptions.length;k++){
+					if($(selectedOptions[k]).attr("data-value")==(skuOption.id+":"+skuOption.vid)){
+						isMatch=true;
 						break;
 					}
 				}
 			}
-			if(hasMatchSku){
+			if(isMatch){
+				selectedSku=sku;
 				break;
 			}
 		}
-		if(hasMatchSku){
-			if(aOptionValueIds.indexOf(","+optionValueId+",")==-1){
-				aOptionValueIds+=optionValueId+",";
+		var add2CartBtn=$("#add2Cart"+${product.id});
+		if(selectedSku){
+			//更新图片
+			$("#productImgA").find("img").attr("src",__mediaPath+"product/d/"+selectedSku.image);
+			//价格
+			var skuPrice=selectedSku.salePrice!=null?selectedSku.salePrice:selectedSku.discountPrice!=null?selectedSku.discountPrice:selectedSku.price;
+			$("#priceSpan").attr("data-value",skuPrice).html(fnFormatPrice(skuPrice));
+			$("#priceSpan").next("span[name='otherCurrency']").attr("defaultvalue",skuPrice);
+			if(selectedSku.priceViewType==2||selectedSku.priceViewType==3){
+				$("#listPriceSpan").html('<del>'+fnFormatPrice(selectedSku.price)+'</del>').show();
+				$("#discountPercent").html("("+selectedSku.discountPercent+"% OFF)");
+			}else{
+				$("#listPriceSpan,#discountCount").hide();
 			}
-		}
-	}
-		
-	for(var i=0;i<selectOptions.length;i++){
-		var option=$(selectOptions.get(i));
-		var optionV=option.attr("data-value").split(":");
-		if(aOptionValueIds.indexOf(","+optionV[1]+",")==-1){
-			option.addClass("tb-out-of-stock");
-		}else{
-			option.removeClass("tb-out-of-stock");
-		}
-	}
-		
-	var selectedSku=null;
-	for (i in skus){
-		var sku=skus[i];
-		var skuOptions=sku.skuOptions;
-		var isMatch=false;
-		for(j in skuOptions){
-			isMatch=false;
-			var skuOption=skuOptions[j];
-			for(var k=0;k<selectedOptions.length;k++){
-				if($(selectedOptions[k]).attr("data-value")==(skuOption.id+":"+skuOption.vid)){
-					isMatch=true;
-					break;
+			$("#productSkuCodeSpan").html(selectedSku.productSkuCode);
+			$("#productSkuCode").val(selectedSku.productSkuCode);
+			$("#productSkuId").val(selectedSku.productSkuId);
+			$("#productWeightSpan").attr("data-value",selectedSku.weight+"").html(selectedSku.weight);
+			if(!selectedSku.inventory){
+				$("#productStockSpan").html("有现货");
+				add2CartBtn.removeClass("stock").removeClass("no-addtocart").removeAttr("disabled").attr("title",__FMT.minicart_addToCart).val(__FMT.minicart_addToCart);
+			}else if(selectedSku.inventory.availableQuantity>0){
+				$("#productStockSpan").html(selectedSku.inventory.availableQuantity+" 件");
+				add2CartBtn.removeClass("stock").removeClass("no-addtocart").removeAttr("disabled").attr("title",__FMT.minicart_addToCart).val(__FMT.minicart_addToCart);
+			}else{
+				$("#productStockSpan").html(__FMT.outOfStock);
+				add2CartBtn.addClass("stock").attr("disabled","disabled").attr("title",__FMT.outOfStock).val(__FMT.outOfStock);
+			}
+			
+			$("#skuWholesalePriceTbl").find("tr").slice(1).remove();
+			skuWholesalePrices=selectedSku.wholesalePrices.slice(0,selectedSku.wholesalePrices.length);
+			skuWholesalePrices.unshift([1,skuPrice]);
+			$("#skuWholesalePriceTbl").append('<tr><td>1-1</td><td>'+fnFormatPrice(skuPrice)+'<span defaultvalue="'+skuPrice+'" name="otherCurrency"></span></td></tr>');
+			for(var i=1;i<skuWholesalePrices.length;i++){
+				var ws_qty=skuWholesalePrices[i][0]+"+";
+				if(i<skuWholesalePrices.length-1){
+					ws_qty=skuWholesalePrices[i][0]+"-"+(skuWholesalePrices[i+1][0]-1);
 				}
+				$("#skuWholesalePriceTbl").append('<tr><td>'+ws_qty+'</td><td>'+fnFormatPrice(skuWholesalePrices[i][1])+'<span defaultvalue="'+skuWholesalePrices[i][1]+'" name="otherCurrency"></span></td></tr>');
 			}
-			if(!isMatch){
-				break;
-			}
-		}
-		if(isMatch){
-			selectedSku=sku;
-			break;
-		}
-	}
-	var add2CartBtn=$("#add2Cart"+${product.id});
-	if(selectedSku){
-		//更新图片
-		$("#productImgA").find("img").attr("src",__mediaPath+"product/d/"+selectedSku.image);
-		//价格
-		var skuPrice=selectedSku.salePrice!=null?selectedSku.salePrice:selectedSku.discountPrice!=null?selectedSku.discountPrice:selectedSku.price;
-		$("#priceSpan").attr("data-value",skuPrice).html(fnFormatPrice(skuPrice));
-		$("#priceSpan").next("span[name='otherCurrency']").attr("defaultvalue",skuPrice);
-		if(selectedSku.priceViewType==2||selectedSku.priceViewType==3){
-			$("#listPriceSpan").html('<del>'+fnFormatPrice(selectedSku.price)+'</del>').show();
-			$("#discountPercent").html("("+selectedSku.discountPercent+"% OFF)");
+			fnChangePrice();
 		}else{
-			$("#listPriceSpan,#discountCount").hide();
-		}
-		$("#productSkuCodeSpan").html(selectedSku.productSkuCode);
-		$("#productSkuCode").val(selectedSku.productSkuCode);
-		$("#productSkuId").val(selectedSku.productSkuId);
-		$("#productWeightSpan").attr("data-value",selectedSku.weight+"").html(selectedSku.weight);
-		if(!selectedSku.inventory){
-			$("#productStockSpan").html("有现货");
-			add2CartBtn.removeClass("stock").removeClass("no-addtocart").removeAttr("disabled").attr("title",__FMT.minicart_addToCart).val(__FMT.minicart_addToCart);
-		}else if(selectedSku.inventory.availableQuantity>0){
-			$("#productStockSpan").html(selectedSku.inventory.availableQuantity+" 件");
-			add2CartBtn.removeClass("stock").removeClass("no-addtocart").removeAttr("disabled").attr("title",__FMT.minicart_addToCart).val(__FMT.minicart_addToCart);
-		}else{
-			$("#productStockSpan").html(__FMT.outOfStock);
-			add2CartBtn.addClass("stock").attr("disabled","disabled").attr("title",__FMT.outOfStock).val(__FMT.outOfStock);
+			add2CartBtn.removeClass("stock").addClass("no-addtocart").removeAttr("disabled").val(__FMT.minicart_addToCart);
 		}
 		
-		$("#skuWholesalePriceTbl").find("tr").slice(1).remove();
-		skuWholesalePrices=selectedSku.wholesalePrices.slice(0,selectedSku.wholesalePrices.length);
-		skuWholesalePrices.unshift([1,skuPrice]);
-		$("#skuWholesalePriceTbl").append('<tr><td>1-1</td><td>'+fnFormatPrice(skuPrice)+'<span defaultvalue="'+skuPrice+'" name="otherCurrency"></span></td></tr>');
-		for(var i=1;i<skuWholesalePrices.length;i++){
-			var ws_qty=skuWholesalePrices[i][0]+"+";
-			if(i<skuWholesalePrices.length-1){
-				ws_qty=skuWholesalePrices[i][0]+"-"+(skuWholesalePrices[i+1][0]-1);
+		var skuOptions=$(".size2");
+		var name="";
+		skuOptions.each(function(i){
+			if($(this).find("span").length!=0){
+				name+=$(this).find("span").text();
 			}
-			$("#skuWholesalePriceTbl").append('<tr><td>'+ws_qty+'</td><td>'+fnFormatPrice(skuWholesalePrices[i][1])+'<span defaultvalue="'+skuWholesalePrices[i][1]+'" name="otherCurrency"></span></td></tr>');
+		});
+		var msg="";
+		if(name!=""){
+			msg="已选："+name;
+			if(selectedSku&&((!selectedSku.inventory)||selectedSku.inventory.availableQuantity>0)){
+				msg+='&nbsp;&nbsp;<span class="mark_co">现在有货</span>';
+			}
 		}
-		fnChangePrice();
-	}else{
-		add2CartBtn.removeClass("stock").addClass("no-addtocart").removeAttr("disabled").val(__FMT.minicart_addToCart);
-	}
-	
-	var skuOptions=$("#skuOptions").children("div.tb-prop").find("li.tb-selected");
-	var name="";
-	skuOptions.each(function(i){
-		if($(this).find("span").length!=0){
-			name+=$(this).find("span").text();
-		}
+		$("#selectedProdMsg").html(msg);
+		return false;
 	});
-	var msg="";
-	if(name!=""){
-		msg="已选："+name;
-		if(selectedSku&&((!selectedSku.inventory)||selectedSku.inventory.availableQuantity>0)){
-			msg+='&nbsp;&nbsp;<span class="mark_co">现在有货</span>';
-		}
-	}
-	$("#selectedProdMsg").html(msg);
-	return false;
-});
+	
+
 
 function checkAddProductToCart(){
-	var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
+	var skuOptions=$(".size[data-property]");
 	var name="";
 	skuOptions.each(function(i){
-		if($(this).find("li.tb-selected").length==0){
+		if($(this).find("span.tb-selected").length==0){
 			name+="."+$(this).attr("data-property");
 		}
 	});

@@ -57,6 +57,13 @@
                         <p><a href="?sort=up" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=up')!=-1}">class='active'</c:if>>价格由低到高</a></p>
                         <p><a href="?sort=down" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=down')!=-1}">class='active'</c:if>>价格由高到低</a></p>
                     </li>
+                    
+                    <li>
+                        <p><a href="/weekYearSale_catalog.html" <c:if test="${param.tag == null || param == '' }">class="active"</c:if>>所有产品</a></p> 
+                        <p><a href="/weekYearSale/yearFuZhuang_catalog.html?tag=1" <c:if test="${param.tag == 1}">class="active"</c:if> >服装</a></p>
+                        <p><a href="/weekYearSale/yearXiePin_catalog.html?tag=2" <c:if test="${param.tag == 2}">class="active"</c:if>>鞋品</a></p>
+                        <p><a href="/weekYearSale/yearPeiJian_catalog.html?tag=3" <c:if test="${param.tag == 3}">class="active"</c:if>>配件</a></p>
+                    </li>
                 </ul>
                 <div class="sort-btn active">
                 	<i class="fa fa-chevron-left"></i>
