@@ -10,6 +10,15 @@
 <%@ taglib prefix="cartmatic" tagdir="/WEB-INF/tags/cartmatic"%>
 <%@ taglib prefix="content" tagdir="/WEB-INF/tags/content"%>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags/app"%>
+<style type="text/css">
+.w-pro-pic .swiper-slide img{
+	text-align: center; 
+	display: block;
+    vertical-align: middle;
+	max-width: 100%;
+    max-height: 100%;	
+}
+</style>
 
 <c:if test="${product.status != 1}">
 	<%response.setStatus(response.SC_GONE);%>
@@ -27,7 +36,12 @@
 		<!-- Bootstrap -->
 		<%@ include file="../../decorators/include/javascripts.jspf"%>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
-		<%@ include file="../../decorators/include/styles7.jspf"%>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href="${resPath}/styles/font-awesome.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
+		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
         <link href="${ctxPath}/scripts/jquery/js/colorbox/colorbox.css" rel="stylesheet" />
         <link href="${resPath}/styles/css/pro-deta.css" rel="stylesheet">
         <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
@@ -237,7 +251,7 @@
                         	<img src="/images/null.jpg">
                         </c:if>
                         <c:forEach items="${productMoreImages}" var="productImages">
-                            <div class="swiper-slide" ><img src="${mediaPath}productMedia/v/${productImages.mediaUrlLarge}"></div>
+                            <div class="swiper-slide"  style="background-image: url(${mediaPath}productMedia/v/${productImages.mediaUrlLarge});"><img src="${mediaPath}productMedia/v/${productImages.mediaUrlLarge}"></div>
                         </c:forEach>
                         </div>
                         <!-- Add Pagination -->
@@ -385,7 +399,7 @@
 		                 	<label>选择颜色</label>
 		                 	<ul>
 		                	<!-- 该产品其他颜色 -->
-		                	<li><a href="javascript:void(0)"><img src="${ctxPath}/media/product/v/${product.defaultProductSku.image}" width="72" height="97"></a>
+		                	<li><a href="javascript:void(0)"  class="active"><img src="${ctxPath}/media/product/v/${product.defaultProductSku.image}" width="72" height="97"></a></li>
 			             	<jsp:include flush="true" page="/sales/recommendedProduct.html">
 					             <jsp:param name="typeName" value="other_color" />
 					             <jsp:param name="firstResult" value="0" />
@@ -395,7 +409,6 @@
 					             <jsp:param name="sourceId" value="${product.productId}" />
 					         </jsp:include>
 					         </ul>
-					        </li>
 					        <li style="clear:both"></li>
 					        <li class="pro-car-3">
 					        	<label>选择数量</label>

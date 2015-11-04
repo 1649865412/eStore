@@ -64,9 +64,9 @@
                 <ul class="row">
                 	<li>
                         <div class="sort-tit">排序方式<i class="fa fa-caret-down"></i></div>
-                        <p><a href="?sort=new" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=new')!=-1}">class='active'</c:if>>最新上架</a></p>
-                        <p><a href="?sort=up" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=up')!=-1}">class='active'</c:if>>价格由低到高</a></p>
-                        <p><a href="?sort=down" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=down')!=-1}">class='active'</c:if>>价格由高到低</a></p>
+                        <p><a href="?sort=s1" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=s1')!=-1}">class='active'</c:if>>最新上架</a></p>
+                        <p><a href="?sort=s4" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=s4')!=-1}">class='active'</c:if>>价格由低到高</a></p>
+                        <p><a href="?sort=s5" <c:if test="${fn:indexOf(pageContext.request.queryString,'sort=s5')!=-1}">class='active'</c:if>>价格由高到低</a></p>
                     </li>
                     
                     <li>
