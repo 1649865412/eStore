@@ -92,7 +92,7 @@ public class MainPageController{
 			shoppingcart = shoppingcartManager.initShoppingcart(customer);
 		}
 		mav.addObject("shoppingcart", shoppingcart);
-		List<Brand> brandList=brandManager.getAllOrdered("sortOrder", true);
+		List<Brand> brandList=brandManager.getAllOrdered("sortOrder", false);
 		mav.addObject("brandList", brandList);
 /*		Cookie cookie = RequestUtil.getCookie(request, "IS_RUSH");
 		if(cookie == null){

@@ -55,6 +55,15 @@
        <!-- <link href="${resPath}/styles/global.css" rel="stylesheet" type="text/css" />->
         
          <!-- Include the story plugin: -->
+         <script type="text/javascript">
+         //判断是否存在推荐搭配，若不存在则隐藏
+	      $(document).ready(function(){
+	    	  if(document.getElementById("recProduct") == null || document.getElementById("recProduct") == "")
+	    	  {
+	    		  $("#recType").hide();
+	    	  } 
+	      });
+	      </script>  
 	  <script type="text/javascript">
       $(document).ready(function(){
           $(".designer_pic .rsp").hide();
@@ -433,7 +442,7 @@
             <div class="w-pro-deta-bd">
             	<!--优惠搭配/推荐搭配-->
             	<div class="deta-bd-group1">
-                	<div class="deta-bd-tit"><!--暂时没有优惠套餐不用套用--><!--<a href="#" name="#tabb1">优惠套餐</a> | --> <a href="#" name="#tabb2"  class="current">推荐搭配</a></div>
+                	<div class="deta-bd-tit"><!--暂时没有优惠套餐不用套用--><!--<a href="#" name="#tabb1">优惠套餐</a> | --> <a href="#" name="#tabb2"  class="current"><span id="recType">推荐搭配</span></a></div>
                     <div id="deta_bd_content">
                         <div id="tabb2">
                         	<ul class="sku_row"><!--2015-9 此处修改了-蔡蔡--->

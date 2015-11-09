@@ -173,8 +173,8 @@ public class RecommendedProductFrontController extends GenericStoreFrontControll
 		}else{
 			request.setAttribute("productList", list);
 		}
-		
-		if(typeName.equals("hot_wholesale_products") || typeName.equals("feature_product") || typeName.equals("also_buy")){
+		//所有涉及到产品列表页的地方都要在此添加typeName，否则无法显示商品尺码
+		if(typeName.equals("hot_wholesale_products") || typeName.equals("feature_product") || typeName.equals("also_buy") || typeName.equals("similar_product")){
 			Map<Integer, Map<SkuOption, List<SkuOptionValue>>> productMap = new HashMap<Integer, Map<SkuOption, List<SkuOptionValue>>>();
 			for(int i=0;i<list.size();i++){
 				Integer productId=list.get(i).getProductId();

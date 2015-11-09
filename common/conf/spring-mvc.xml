@@ -132,6 +132,7 @@
 	<bean id="loginErrorController" class="com.cartmatic.estore.core.controller.LoginErrorController" parent="baseController" autowire="byName">
 	</bean>
 	
+	
 	<bean id="uploadController"
 		class="com.cartmatic.estore.webapp.action.UploadController">
 		<property name="methodNameResolver" ref="methodNameResolver" />
@@ -142,7 +143,19 @@
 		</property>
 		<property name="uploadManager" ref="uploadManager" />
 		<property name="isUuidRename" value="true" />
+	</bean><!--
+	
+	
+	<bean id="enrollController" class="com.cartmatic.estoresf.EnrollController" parent="baseController" autowire="byName">
+		<property name="multipartResolver">
+			<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+				<property name="maxUploadSize" value="20971520" />
+			</bean>
+		</property>
 	</bean>
+	
+	--><bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
 	
 	<bean id="log4jMgrController" class="com.cartmatic.estore.core.controller.Log4jMgrController" parent="baseController" autowire="byName">
 		<property name="defaultView" value="admin/log4jMgr"/>

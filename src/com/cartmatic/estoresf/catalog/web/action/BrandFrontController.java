@@ -147,6 +147,13 @@ public class BrandFrontController  extends GenericStoreFrontController<Brand>{
 		}
 		
 		mv.addObject("productList", reProductList);
+		Map<Integer, Map<SkuOption, List<SkuOptionValue>>> productMap = new HashMap<Integer, Map<SkuOption, List<SkuOptionValue>>>();
+		for(int i=0;i<productList.size();i++){
+			Integer productId=productList.get(i).getProductId();
+			Map<SkuOption,List<SkuOptionValue>>productSkuOptionAndValues=productMainManager.findSkuOptionsByProduct(productId);
+			productMap.put(productId, productSkuOptionAndValues);
+		}
+		request.setAttribute("productMap", productMap);
 		return mv;
 	}
 		

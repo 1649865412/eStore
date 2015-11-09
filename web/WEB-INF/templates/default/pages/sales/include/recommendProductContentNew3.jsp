@@ -4,7 +4,7 @@
 <%@ taglib prefix="system" tagdir="/WEB-INF/tags/system"%>
 
 		<c:forEach items="${productList}" var="product" varStatus="varStatus" begin="0" end="3">
-			<div class="collocation-item">
+			<div class="collocation-item" id="recProduct">
                                         <a href="${ctxPath}/product/${product.productId}.html"><img class="imgo" src="${mediaPath}product/v/${product.defaultProductSku.image}"/>
 	            	
 						            	<%--<img class="imgt" src="${mediaPath}/productMedia/hd/${product.productHandDraw.mediaUrl}" width="100%"/>
@@ -18,14 +18,14 @@
                                           <div class="join_box">
                                               <input type="hidden" id="productSkuCode" value="${product.defaultProductSku.productSkuCode}" />
 									           	<product:productQuantity2 product="${product}" />
-									             <form id="myform" method="POST" action="#">
+									             <%--<form id="myform" method="POST" action="#">
 									             <div class="spinner">
 									               <a href="#" id="min"><i class="fa fa-minus"></i></a>
 									               <input type="hidden" id="quantity" name="quantity" type="text"  value="${minOrderQuantity}" onKeyUp="value=value.replace(/[^\d]/g,'');fnChangePrice()" size="3" onblur="changeToOne(this);">
 									               <a href="#" id="add"><i class="fa fa-plus"></i></a>
 									               </div>
 									             </form>
-				                    <c:forEach items="${productMap}" var="productMapItem">
+				                    --%><c:forEach items="${productMap}" var="productMapItem">
 				                    	<c:if test="${productMapItem.key == product.productId}">
 						                 <c:forEach items="${productMapItem.value}" var="productSkuOptionAndValue">
 						                 	<div class="tb-prop tm-clear">

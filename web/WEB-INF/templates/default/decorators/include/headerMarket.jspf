@@ -371,6 +371,9 @@
                         		</ul>
                         	</li>
                         	--%>
+                        	<li <c:if test="${fn:indexOf(OriginalRequestURI,'/weekYearSale')!=-1}">class='current'</c:if>>
+                        		<a href="/weekYearSale_catalog.html" class="event_highlight">周年庆特惠<span>&nbsp;[三折起]</span></a>
+                        	</li>
                         	<li>
                         		<a href="/marketDesignerList/index.html" class="w-mto-a"><div class="w-mt-nav">设计师</div></a>
                         	</li>
@@ -382,9 +385,6 @@
                         	</li>
                         	<li>
                         		<a href="/catalog_default_catalog.html" class="w-mto-a"><div class="w-mt-nav">所有产品 </div></a>
-                        	</li>
-                        	<li <c:if test="${fn:indexOf(OriginalRequestURI,'/weekYearSale')!=-1}">class='current'</c:if>>
-                        		<a href="/weekYearSale_catalog.html" class="event_highlight">周年庆特惠<span>&nbsp;[三折起]</span></a>
                         	</li>
                         </ul>
                     </li>

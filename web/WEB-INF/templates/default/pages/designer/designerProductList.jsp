@@ -171,7 +171,7 @@
 	                                           
 	                                            <!-- JiaThis Button END -->
 	                        <a href="javascript:" onClick="addToFavorite(${product.productId})"><i class="fa fa-heart-o"></i> 加入收藏</a>
-	                        <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入xc购物车</a>
+	                        <a class="join" href="javascript:;"><i class="fa fa-cart-plus i3"></i> 加入购物车</a>
 	                    </p>
                     </li>
                 </c:if>
