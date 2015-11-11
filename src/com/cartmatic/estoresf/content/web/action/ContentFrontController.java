@@ -142,7 +142,11 @@ public class ContentFrontController extends GenericStoreFrontController<Content>
 		ModelAndView mv = getModelAndView("help");
 		String contentId = request.getParameter("contentId");
 		Content content = contentManager.getById(Integer.parseInt(contentId));
-		mv.addObject("contentBody", content.getContentBody());
+		if(content.getStatus() == 1){
+			mv.addObject("contentBody", content.getContentBody());
+		}else{
+			mv.addObject("contentId", contentId);
+		}
 		return mv;
 	}
 	

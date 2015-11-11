@@ -47,7 +47,7 @@
 						                                  
 													<c:if test="${fn:indexOf(productSkuOptionAndValue.key.skuOptionCode,'size') > -1}">
 														<div class="j1">尺码</div>
-														<ul class="size" data-property="${productSkuOptionAndValue.key.skuOptionName}">
+														<ul class="size3" data-property="${productSkuOptionAndValue.key.skuOptionName}">
 							                                 <p>
 							                                 	<div class="j2">
 																	<c:forEach items="${productSkuOptionAndValue.value}" var="skuOptionValue" varStatus="status">
@@ -64,7 +64,7 @@
 						            <span class="cart_close">
 										关闭
 									</span>
-						            <product:addToCartSmall  productSkuCode="${product.defaultProductSku.productSkuCode}"  productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCart" />
+						            <product:addToCartSmall  productSkuCode="${product.defaultProductSku.productSkuCode}"  productSku="${product.defaultProductSku}" checkHandler="checkAddProductToCartSmall" />
                                           </div>
                                         </p>
                                         

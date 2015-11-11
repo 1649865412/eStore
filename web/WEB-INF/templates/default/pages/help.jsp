@@ -44,7 +44,6 @@ color: black ! important;
              <div class="remote_nav">
               <ul id="remote_nav_ul">
               <li><a href="${ctxPath}/customer_help.html?contentId=16" title="会员政策" <c:if test="${param.contentId == 16}">class="current"</c:if>>会员政策</a></li>
-              <li><a href="${ctxPath}/customer_help.html?contentId=9" title="礼品卡使用指南" <c:if test="${param.contentId == 9}">class="current"</c:if>>礼品卡使用指南</a></li>
               <li><a href="${ctxPath}/customer_help.html?contentId=7" title="尺码对照表" <c:if test="${param.contentId == 7}">class="current"</c:if>>尺码对照表</a></li>
               <li><a href="${ctxPath}/customer_help.html?contentId=6" title="支付方式 " <c:if test="${param.contentId == 6}">class="current"</c:if>>支付方式</a></li>
               <li><a href="${ctxPath}/customer_help.html?contentId=13" title="配送方式" <c:if test="${param.contentId == 13}">class="current"</c:if>>配送方式</a></li>
@@ -52,11 +51,24 @@ color: black ! important;
               <li><a href="${ctxPath}/customer_help.html?contentId=11" title="服务条款" <c:if test="${param.contentId == 11}">class="current"</c:if>>服务条款</a></li>
               <li><a href="${ctxPath}/customer_help.html?contentId=8" title="隐私政策" <c:if test="${param.contentId == 8}">class="current"</c:if>>隐私政策</a></li>
               <li><a href="${ctxPath}/customer_help.html?contentId=28" title="常见问题" <c:if test="${param.contentId == 28}">class="current"</c:if>>常见问题</a></li> 
-              <li><a href="${ctxPath}/customer_help.html?contentId=29" title="员工专场活动购物指南" <c:if test="${param.contentId == 29}">class="current"</c:if>>员工专场活动购物指南</a></li>
               </ul>
            </div><!--remote_nav-->
            <div class="down_right">
            		${contentBody}
+           		<c:if test="${contentBody == null || contentBody ==''}">
+           			</br>
+	           		</br>
+	           		</br>
+	           		<h2>暂无相关内容</h2>
+	           		</br>
+	           		</br>
+	           		</br>
+	           		</br>
+	           		</br>
+	           		</br>
+	           		</br>
+	           		</br>
+           		</c:if>
            </div><!--down_right-->
          </div><!--bottom_about-->
            

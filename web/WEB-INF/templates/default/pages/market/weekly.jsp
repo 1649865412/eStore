@@ -49,8 +49,8 @@
             	<content:showAdNew adPositionType="weeklyTitle" />
             </div>
             <div class="w-weekly-recomm">
-            	<div class="bd-tit">“魅力万圣嘉年华搭配”</div>
-                <div class="bd-tit1">Holloween Week四方街主推以下两个搭配，帅气骑士装and优雅魅力装令你在万圣节大放异彩！</div>
+            	<div class="bd-tit">“剁手入冬，叫醒你的衣橱”</div>
+                <div class="bd-tit1">入冬四方街主推以下两个搭配，优雅与大气结合的Lapeewee轻奢装备</div>
                 <ul class="row">
                 	<jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
 							<jsp:param name="typeName" value="hot_sell" />
@@ -88,8 +88,8 @@
             <!-----购买弹窗end----->
             
             <div class="w-weekly-bd">
-            	<div class="bd-tit">“万圣时尚单品”</div>
-                <div class="bd-tit1">Holloween Week还有以下各类精美单鞋和配饰等着你来淘！</div>
+            	<div class="bd-tit">“入冬必备单品”</div>
+                <div class="bd-tit1">天气一冷，配件也显得尤为重要，比如shokay的牦牛绒围巾~~</div>
 		                    <jsp:include flush="true" page="${ctxPath}/sales/recommendedProduct.html">
 									<jsp:param name="typeName" value="new_arrival" />
 									<jsp:param name="firstResult" value="0" />

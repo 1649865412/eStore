@@ -930,6 +930,20 @@ function checkAddProductToCart(){
 	}
 	return name=="";
 }
+
+function checkAddProductToCartSmall(){
+	var skuOptions=$("#skuOptions").children("div.tb-prop").find("ul[data-property]");
+	var name="";
+	skuOptions.each(function(i){
+		if($(this).find("li.tb-selected").length==0){
+			name+="."+$(this).attr("data-property");
+		}
+	});
+	if(name!=""){
+		alert("请选择 "+name);
+	}
+	return name=="";
+}
 </c:if>
 </c:if>
 

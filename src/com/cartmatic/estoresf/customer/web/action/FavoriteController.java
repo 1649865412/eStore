@@ -60,6 +60,7 @@ public class FavoriteController extends  GenericStoreFrontController<Favorite>
 		AjaxView ajaxView=new AjaxView(response);
 		if(RequestContext.isAnonymousUser()){
 			ajaxView.setStatus(new Short("-1"));
+			ajaxView.setMsg("此操作需要登陆");
 			return ajaxView;
 		}
 		String productId = request.getParameter("productId");
