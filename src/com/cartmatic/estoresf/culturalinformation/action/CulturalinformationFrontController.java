@@ -204,7 +204,7 @@ public class CulturalinformationFrontController extends
 		if (pageStr != null && pageStr != ""){
 			currentPage = Integer.parseInt(pageStr);
 		}
-		PageUtil pUtil = new PageUtil(6, culturalinformationList.size(), currentPage);
+		PageUtil pUtil = new PageUtil(8, culturalinformationList.size(), currentPage);
 		currentPage = pUtil.getCurrentPage();
 		mv.addObject("pageNum", currentPage);
 		

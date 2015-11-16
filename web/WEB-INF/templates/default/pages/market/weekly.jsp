@@ -111,6 +111,23 @@
 	    <script src="${ctxPath}/scripts/jquery/js/index.js"></script>
 	    <script type="text/javascript" src="${ctxPath}/scripts/jquery/js/slider.js"></script>
 	    <script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script>
+	    <script type="text/javascript">
+	        //2015-11-11 宣扬修改
+	        //加入购物车弹出事件
+	        $(function () {
+	            $(".j3").colorbox({ inline: true, width: "50%" });
+	            //解决图片加载好 底部出现没有加载好的现象
+	            var imgSum = $('.imgo').length;
+	            var imgSum2 = 0;
+	            $(".imgo").load(function () {
+	                imgSum2++;
+	                console.log(imgSum2)
+	                if (imgSum == imgSum2)
+	                    w_resize();
+	            });
+	        })
+	    </script>
+	    
 	    <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/myaccount/loginDlg.js"></script>
 <script type="text/javascript" src="${ctxPath}/scripts/cartmatic/catalog/productDetail.js"></script>
 	    <script type="text/javascript" defer>
