@@ -36,16 +36,22 @@
 		<!-- Bootstrap -->
 		<%@ include file="../../decorators/include/javascripts.jspf"%>
 		<script type="text/javascript" src="${ctxPath}/scripts/jquery/js/jquery-1.11.2.min.js"></script>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- 字体 -->
+	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link href="${resPath}/styles/font-awesome.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
-		<link href="${resPath}/styles/css/index.css" rel="stylesheet">
-        <link href="${ctxPath}/scripts/jquery/js/colorbox/colorbox.css" rel="stylesheet" />
-        <link href="${resPath}/styles/css/pro-deta.css" rel="stylesheet">
-        <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
-        <link href="${resPath}/styles/css/mall_nav.css" rel="stylesheet">
+	    <!-- Bootstrap -->
+	    <link href="${resPath}/styles/css/bootstrap.css" rel="stylesheet">
+	    <!-- 轮播图 -->
+	    <link href="${resPath}/styles/css/swiper.min.css" rel="stylesheet">
+	    <!-- 动画库 -->
+	    <link href="${resPath}/styles/css/animate.min.css" rel="stylesheet">
+	    <!-- 样式表 -->
+	    <link href="${resPath}/styles/css/index.css" rel="stylesheet">
+	    <link href="${resPath}/styles/css/pro-deta.css" rel="stylesheet">
+	    <link href="${resPath}/styles/css/lzw.css" rel="stylesheet">
+	    <link href="${resPath}/styles/css/mall_nav.css" rel="stylesheet">
+	    <!-- 弹出框 -->
+	    <link href="js/colorbox/colorbox.css" rel="stylesheet" />
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -448,13 +454,13 @@
                         	<ul class="sku_row"><!--2015-9 此处修改了-蔡蔡--->
                                 <li class="center sku_list"><!--2015-9 此处修改了-蔡蔡-->
                                 	<jsp:include flush="true" page="/sales/recommendedProduct.html">
-				             <jsp:param name="typeName" value="similar_product" />
-				             <jsp:param name="firstResult" value="0" />
-				             <jsp:param name="maxResults" value="4" />
-				             <jsp:param name="template" value="sales/include/recommendProductContentNew3" />
-				             <jsp:param name="doAction" value="defaultAction" />
-				             <jsp:param name="sourceId" value="${product.productId}" />
-				         </jsp:include>
+							             <jsp:param name="typeName" value="similar_product" />
+							             <jsp:param name="firstResult" value="0" />
+							             <jsp:param name="maxResults" value="4" />
+							             <jsp:param name="template" value="sales/include/recommendProductContentNew3" />
+							             <jsp:param name="doAction" value="defaultAction" />
+							             <jsp:param name="sourceId" value="${product.productId}" />
+							         </jsp:include>
                                 </li>
                             </ul>
                         </div><!--tabb2-->

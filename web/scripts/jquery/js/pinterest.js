@@ -1,10 +1,10 @@
 var pinterest_doing=0;//是否正在排列
 var pinterest_current=0;//当前排列到第几个
 var pinterest_done=0;//是否全部加载完毕
-
+//初始化列表布局
 function pinterestInit(obj,add){
 	pinterest_doing=1;
-	var perBlock=20;//设定每次加载块数
+	var perBlock=16;//设定每次加载块数
 	var gapWidth=36;//设定块间距
 	var containerPadding=36;//设定外边距
 	var columns=4;//设定最大列数
@@ -15,7 +15,7 @@ function pinterestInit(obj,add){
 		columns--; 
 		if(totalWidth<=768) {
 			columns--;
-			if(totalWidth<=592) {
+			if(totalWidth<=600) {
 				columns--;
 			}
 		}
@@ -26,7 +26,7 @@ function pinterestInit(obj,add){
 	var singleWidth=totalWidth/columns-gapWidth;
 
 	var column=new Array();
-	for(i=0;i<columns;i++){//set the columns and each top
+	for (i = 0; i < columns; i++) {//设置列和每个顶部
 		if (!column[i]) column[i]=0;
 	}
 	function findMaxHeight(){
@@ -91,7 +91,15 @@ addEvent(window, "resize", function(){
 		}
 	}, 800);
 });
-
+//2015-11-11 宣扬修改
+function w_resize() {
+    setTimeout(function () {
+        if (pinterest_doing == 0) {
+            pinterest_doing = 1;
+            pinterestInit(pinterestObj);
+        }
+    }, 800);
+}
 
 //addDOMLoadEvent( pinterestInit(pinterestObj) );
 addDOMLoadEvent( function(){

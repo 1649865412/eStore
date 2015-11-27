@@ -401,7 +401,7 @@ h3.join_us_title_down{
 
 
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 	.about_nav ul a{
 		font-size:40px;
 	}

@@ -215,22 +215,6 @@
     <script src="${ctxPath}/scripts/jquery/js/index.js"></script>
     <script src="${ctxPath}/scripts/jquery/js/colorbox/jquery.colorbox-min.js"></script>
     <!--<style>.w-nav{height:94px;background:url(img/navbg.gif) 0 0 repeat-x}</style>-->
-    <script type="text/javascript">
-	        //2015-11-11 宣扬修改
-	        //加入购物车弹出事件
-	        $(function () {
-	            $(".j3").colorbox({ inline: true, width: "50%" });
-	            //解决图片加载好 底部出现没有加载好的现象
-	            var imgSum = $('.imgo').length;
-	            var imgSum2 = 0;
-	            $(".imgo").load(function () {
-	                imgSum2++;
-	                console.log(imgSum2)
-	                if (imgSum == imgSum2)
-	                    w_resize();
-	            });
-	        })
-	    </script>
     <script>
 			var swiper = new Swiper('.swiper-container', {
 				pagination: '.swiper-pagination',
@@ -596,98 +580,124 @@
 		});
 		</script>
     <script type="text/javascript">
-        $(function () {
-            $(".j3").colorbox({ inline: true, width: "50%" });
-        })
+        var jiathis_config = {
+            summary: "",
+            shortUrl: true,
+            hideMore: false
+        }
     </script>
-     <script type="text/javascript" >
-	  var jiathis_config={
-		  summary:"",
-		  shortUrl:true,
-		  hideMore:false
-	  }
-	  </script>
-	  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-      <script type="text/javascript">
-        	$(function(){
-				
-					$(window).scroll(function(){
-							$(".index-nav").addClass("w-nav-s")
-						})
-					if($(window).width()<993){
-							$(".sort-btn p").html("分类筛选")
-						}else{
-							$(".sort-btn p").html("分<br>类<br>筛<br>选")
-							}
-				
-					var H = $(window).height()
-					$(".w-weekly-hd").height(H)
-					if($(window).width()<992){
-						$(".sort-btn p").html("分类筛选")
-					}else{
-						$(".sort-btn p").html("分<br>类<br>筛<br>选")
-						}
-					var MH = $(".weekly-hd-info").height()
-					$(".weekly-hd-info").css("margin-top",-MH/2 - 30)
-					$(".w-weekly-recomm ul li dl dd").click(function(){
-							$(".w-buy-pop").fadeIn()
-							$(".w-buy-pop-mask").fadeIn()
-						})
-					$(".w-buy-pop i").click(function(){
-							$(".w-buy-pop").fadeOut()
-							$(".w-buy-pop-mask").fadeOut()
-						})
-					
-					
-					if($(window).width()>992){
-							$(".w-shooping-list-box").css({"margin-left":"290px","width":$(window).width()-290})
-							$(".sort-btn").click(function(){
-								if($(this).hasClass("active")){
-										$(this).removeClass("active")
-										$(".sort-btn i").removeClass("fa-chevron-left")
-										$(".sort-btn i").addClass("fa-chevron-right")
-										$(".w-shooping-list-box").animate({marginLeft:"60px","width":$(window).width()-60})
-										$(".w-shooping-list-sort").animate({marginLeft:-230})
-									}else{
-										$(this).addClass("active")
-										$(".sort-btn i").addClass("fa-chevron-left")
-										$(".sort-btn i").removeClass("fa-chevron-right")
-										$(".w-shooping-list-sort").animate({marginLeft:0})
-										$(".w-shooping-list-box").animate({marginLeft:"290px","width":$(window).width()-290})
-										}
-							})
-						}else{
-								$(".sort-btn").removeClass("active")
-								$(".sort-btn").click(function(){
-										if($(this).hasClass("active")){
-												$(".w-shooping-list-sort ul").css({height:"0"})
-												$(this).removeClass("active")
-											}else{
-												$(".w-shooping-list-sort ul").css({height:"auto"})
-												$(this).addClass("active")
-												}
-									})
-							}
-					window.onresize=function(){
-							var H = $(window).height()
-							$(".w-weekly-hd").height(H)
-							if($(window).width()<992){
-								$(".sort-btn p").html("分类筛选")
-								$(".w-shooping-list-box").css({"margin-left":"0","width":"100%"})
-								$(".sort-btn").removeClass("active")
-							}else{
-								$(".sort-btn p").html("分<br>类<br>筛<br>选")
-								$(".w-shooping-list-box").css({"margin-left":"290px","width":$(window).width()-290})
-								}
-						}
-				})
-        </script>
-        
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化弹出框
+            $(".j3").colorbox({ inline: true, width: "50%" });
+            /*2015-10-28 宣扬修改*/
+            //分类筛选初始化
+            var H = $(window).height()
+            $(".w-weekly-hd").height(H)
+            if ($(window).width() < 991 || H < 800) {
+                $(".sort-btn p").html("分类筛选");
+                $(".sort-btn").css("margin-top", "-30px");
+            } else {
+                $(".sort-btn p").html("分<br>类<br>筛<br>选")
+            }
 
-
-
-
-
+            //解决图片加载好 底部出现没有加载好的现象
+            var imgSum = $('.imgo').length;
+            var imgSum2 = 0;
+            $(".imgo").load(function () {
+                imgSum2++;
+                console.log(imgSum2)
+                if (imgSum == imgSum2)
+                    w_resize();
+            });
+            $(window).scroll(function () {
+                $(".index-nav").addClass("w-nav-s")
+            })
+            var MH = $(".weekly-hd-info").height()
+            $(".weekly-hd-info").css("margin-top", -MH / 2 - 30)
+            $(".w-weekly-recomm ul li dl dd").click(function () {
+                $(".w-buy-pop").fadeIn()
+                $(".w-buy-pop-mask").fadeIn()
+            })
+            $(".w-buy-pop i").click(function () {
+                $(".w-buy-pop").fadeOut()
+                $(".w-buy-pop-mask").fadeOut()
+            })
+            //分类展开/关闭事件
+            cInit();
+            //初始化分类状态
+            oInit();
+            //窗体改变事件
+            window.onresize = function () {
+                oInit();
+                cInit();
+            }
+            function oInit() {
+                var H = $(window).height();
+                $(".w-weekly-hd").height(H)
+                var W = $(window).width() + 15;
+                if (W < 991 || H < 600) {
+                    //初始化分类筛选高度
+                    $('.sort-btn').height(31);
+                    $(".sort-btn p").html("分类筛选")
+                    $(".w-shooping-list-box").css({ "margin-left": "0", "width": "100%" })
+                    $(".sort-btn").removeClass("active")
+                    $(".sort-btn").css("margin-top", "-30px");
+                } else {
+                    //初始化分类筛选高度
+                    $('.sort-btn').height($('.w-shooping-list-sort').height());
+                    $(".sort-btn p").html("分<br>类<br>筛<br>选")
+                    $(".w-shooping-list-box").css({ "margin-left": "290px", "width": $(window).width() - 290 })
+                }
+                if (H < 600) {
+                    $(".w-shooping-list-sort ul").css({ height: "auto" })
+                    //$('.sort-btn').addClass("active")
+                }
+            }
+            //初始化分类展开/关闭事件
+            function cInit() {
+                var _width = $(window).width();
+                if (_width > 991 && H > 600) {
+                    $(".w-shooping-list-box").css({ "margin-left": "290px", "width": $(window).width() - 290 })
+                }
+                else {
+                    $(".sort-btn").removeClass("active")
+                }
+                //分类筛选点击事件
+                $(".sort-btn").unbind("click")
+                $(".sort-btn").click(function () {
+                    _width = $(window).width();
+                    if (_width > 992 && H > 600) {
+                        if ($(this).hasClass("active")) {
+                            $(this).removeClass("active")
+                            $(".sort-btn i").removeClass("fa-chevron-left")
+                            $(".sort-btn i").addClass("fa-chevron-right")
+                            $(".w-shooping-list-box").animate({ marginLeft: "60px", "width": $(window).width() - 60 })
+                            $(".w-shooping-list-sort").animate({ marginLeft: -200 })
+                        } else {
+                            $(this).addClass("active")
+                            $(".sort-btn i").addClass("fa-chevron-left")
+                            $(".sort-btn i").removeClass("fa-chevron-right")
+                            $(".w-shooping-list-sort").animate({ marginLeft: 0 })
+                            $(".w-shooping-list-box").animate({ marginLeft: "290px", "width": $(window).width() - 290 });
+                        }
+                    }
+                    else {
+                        if ($(this).hasClass("active")) {
+                            $(".w-shooping-list-sort ul").css({ height: "0" })
+                            $(this).removeClass("active")
+                        } else {
+                            $(".w-shooping-list-sort ul").css({ height: "auto" })
+                            $(this).addClass("active")
+                        }
+                    }
+                    w_resize();
+                })
+            }
+        })
+        /*END 2015-10-28 宣扬修改*/
+    </script>
 	</body>
 
 </html>

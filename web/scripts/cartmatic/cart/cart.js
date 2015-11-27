@@ -46,12 +46,12 @@ ShoppingcartManager.submitCart=function(){
 
 ShoppingcartManager.addCartNum=function(){
 	var quantity = $("#quantity").val()
-	var cartNum = $("#cartNum").html();
+	var cartNum = $(".cartNumPhone").html();
 	var buyNow = $("#buyNow").html();
 	if(quantity == null || quantity ==""){
-		$("#cartNum").html(parseInt(cartNum)+1);
+		$(".cartNumPhone").html(parseInt(cartNum)+1);
 	}else{
-		$("#cartNum").html(parseInt(cartNum)+parseInt(quantity));
+		$(".cartNumPhone").html(parseInt(cartNum)+parseInt(quantity));
 		$("#buyNow").html(parseInt(buyNow)+parseInt(quantity));
 	}
 }

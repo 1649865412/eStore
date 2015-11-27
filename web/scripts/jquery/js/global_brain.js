@@ -1,4 +1,4 @@
-//chech system
+//检查系统
 var SysIe;
 var ua = navigator.userAgent.toLowerCase();
 if (window.ActiveXObject){
@@ -18,7 +18,7 @@ for (var i = 0; i < Agents.length; i++) {
 }
 
 
-//Checks if element is defined or is string ID of element
+//检查元素是否定义或字符串标识
 function checkElement(obj) {
 	if (typeof obj == 'string') {
 		return document.getElementById(obj);
@@ -27,23 +27,23 @@ function checkElement(obj) {
 	}
 }
 
-/* DOM Loaded Event Manager */
+/* DOM加载事件管理器 */
 function addDOMLoadEvent(func) {
    if (!window.__load_events) {
       var init = function () {
-          // quit if this function has already been called
+          // 如果这个函数已经被调用了，退出
           if (arguments.callee.done) return;
       
-          // flag this function so we don't do the same thing twice
+          // 这个函数的标志，所以我们不做同样的事情两次
           arguments.callee.done = true;
       
-          // kill the timer
+          // 删除定时器
           if (window.__load_timer) {
               clearInterval(window.__load_timer);
               window.__load_timer = null;
           }
           
-          // execute each function in the stack in the order they were added
+          // 在堆栈中执行每个函数，它们被添加
           for (var i=0;i < window.__load_events.length;i++) {
               window.__load_events[i](); //in HTML5 not working
           }

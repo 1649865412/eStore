@@ -1,5 +1,6 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
+/*正文*/
 .maincontent {
 	margin:0 auto;
 	overflow:hidden;
@@ -8,6 +9,7 @@
 	border-top:#313131 1px solid;
 		
 }
+/*导航 文字介绍*/
 .top_about{
 	float:left;
 	width:100%;
@@ -115,7 +117,7 @@
 	color: #5D656C;
 	letter-spacing: 1px;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 	.remote_nav ul{
 		padding:12px;
 	}

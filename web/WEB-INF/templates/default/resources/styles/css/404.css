@@ -53,7 +53,7 @@
 	background: #FFF;
 	color: #fbbd6a;
 }
- @media (max-width: 768px) {
+ @media (max-width: 900px) {
 .w-404 h2 {
 	font-size: 60px;
 	margin-bottom: 30px;

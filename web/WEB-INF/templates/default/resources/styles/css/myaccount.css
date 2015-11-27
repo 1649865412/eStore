@@ -513,7 +513,7 @@ table tfoot tr td{
 	}
 
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 	.btn_small{
 		margin:3px;
 		padding: 5px 8px;	

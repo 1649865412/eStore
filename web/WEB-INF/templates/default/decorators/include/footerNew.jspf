@@ -5,8 +5,8 @@
 						<div class="w-footer-item w-footer-links col-lg-4">
 							<span class="w-links">
 							<a href="${ctxPath}/customer_service/_18.html">关于我们 | </a>
-							<a href="${ctxPath}/coming.html">隐私保护政策 | </a>
-							<a href="${ctxPath}/coming.html">使用条款 | </a>
+							<a href="${ctxPath}/customer_help.html?contentId=8">隐私政策 | </a>
+							<a href="${ctxPath}/customer_help.html?contentId=11">服务条款 | </a>
 							<a href="${ctxPath}/coming.html">商家入驻 | </a>
 							<a href="${ctxPath}/coming.html">友情链接 | </a>
 							<a href="${ctxPath}/customer_help.html?contentId=16">帮助中心 </a>

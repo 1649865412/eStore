@@ -1,10 +1,10 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
-
+/*2015-10-28 宣扬修改*/
 .w-nav{
 	height:80px;
 	background-color: #FFFFFF;
-	border-bottom: 0px #000000 solid;
+	border-bottom: 1px #000000 solid;
 }
 .nav2-bg{
 	height:50px;
@@ -40,7 +40,7 @@
 .event_highlight span{
 	color:#fbbd6a;
 }
-@media (max-width: 991px){	
+@media (max-width: 992px){	
 
 .w-nav{
 	height:50px;
@@ -97,4 +97,7 @@
   width: 217px;
 }
 
+}
+@media (max-width: 768px){
+    .w-nav {height: 50px;}
 }

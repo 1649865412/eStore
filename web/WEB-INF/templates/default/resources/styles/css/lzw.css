@@ -207,7 +207,7 @@ body{
     width: 45%;
 }
 .mall_right{
-	height: 1023px!important;
+	height:1023px!important;
 }
     .mrzt .title-font {
         /*font-family:FontAwesome;*/
@@ -305,9 +305,7 @@ body{
     box-flex: 1.0;
     color: #313131;
 }
-.designer_right a{
-	color:#000;
-}	
+
     .designer_right .li1 {
         /*font-family:FontAwesome;*/
         padding-top: 28px;
@@ -630,7 +628,7 @@ body{
 	.height_a+.mall_right_title .mall_right_title_box .li4,
 	.height_b+.mall_right_title .mall_right_title_box .li3, 
 	.height_b+.mall_right_title .mall_right_title_box .li4{
-		color:#fff;
+		color:#000;
 		font-weight:bold;
 		font-size:20px;
 		padding-top:15px;
@@ -1163,6 +1161,7 @@ body{
 	left: 2px;
 	right: 2px;
 }
+/*自适应*/
 @media (min-width: 992px) and (max-width: 1199px){
 	.new_list .mall_right_title .li1{
 		font-size: 20px;
@@ -1747,7 +1746,7 @@ body{
 		font-size: 30px;
 	}
 }
-@media (max-width: 767px){
+@media (max-width: 899px){
 	.index_left,.index_right{
 		width: 100%;
 	}
@@ -1789,7 +1788,6 @@ body{
 	.new_list{
 		margin:0;
 	}
-
 }
 @media (max-width: 640px){
 	

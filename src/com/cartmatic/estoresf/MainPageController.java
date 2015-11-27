@@ -165,15 +165,18 @@ public class MainPageController{
 		map.put("flag", flag);
 		AjaxView ajaxView = new AjaxView(response);
 		//map.put("shopCartValueModelList", shopCartValueModelList);
-	   List<ShopCartValueModel> shopCartValueModelList = ChangeShopCartValue(shoppingcart );
-	   map.put("shopCartValueModelList", shopCartValueModelList);
-		
-	   JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-		JSONObject json = JSONObject.fromObject(map,jsonConfig); 
-		String result = json.toString();
-		//System.out.print(result);
-		ajaxView.setData(result);
+		if(customer != null){
+			List<ShopCartValueModel> shopCartValueModelList = ChangeShopCartValue(shoppingcart );
+			map.put("shopCartValueModelList", shopCartValueModelList);
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+			JSONObject json = JSONObject.fromObject(map,jsonConfig); 
+			String result = json.toString();
+			//System.out.print(result);
+			ajaxView.setData(result);
+		}else{
+			ajaxView.setData(1);
+		}
 		return ajaxView;
 	}
 	

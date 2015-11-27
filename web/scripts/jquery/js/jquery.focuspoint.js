@@ -1,5 +1,6 @@
 /**
  * jQuery FocusPoint; version: 1.1.1
+ * ÏìÓ¦²Ã¼ô²å¼þ
  * Author: http://jonathonmenz.com
  * Source: https://github.com/jonom/jquery-focuspoint
  * Copyright (c) 2014 J. Menz; MIT License

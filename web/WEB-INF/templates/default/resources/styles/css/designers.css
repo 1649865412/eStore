@@ -8,16 +8,18 @@ ul, li {
 .w-designers {
 	margin-top: 50px;
 }
-/*xuanyang*/
+/*2015-10-28 ÐûÑïÐÞ¸Ä*/
+/*×ÖÄ¸µ¼º½*/
 .w-designers-hd {
 	position: fixed;
-	top: 80px;
+	top: 50px;
 	width: 100%;
 	left: 0;
 	background: #f1f1f1;
 	padding:30px 0;
     z-index:999;
 }
+/*END 2015-10-28 ÐûÑïÐÞ¸Ä*/
 .w-designers-hd div {
 	max-width: 1385px;
 	margin: 0 auto;
@@ -89,12 +91,7 @@ ul, li {
 .w-designers-bd ul li:last-child {
 	border-bottom: none;
 }
- @media (max-height:1500px) {
-	 .w-designers-bd{
-		 width:80%;
-		 margin:0 10%;
-	 }
- }
+/*×ÖÄ¸µ¼º½×ÔÊÊÓ¦*/
  @media (max-width: 1385px) {
 .w-designers-hd div {
 	text-align: center;

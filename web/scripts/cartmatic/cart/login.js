@@ -281,7 +281,7 @@ $(document).ready(function(){
 				j_password:$("#j_password").val()
 			}, function(result) {
 				var json = eval("("+result.data+")");
-				if(json.flag){
+				if(json.flag && json !=  1){
 					//隐藏登陆框
 					$(".w-login").hide();
 					$("#loginPromptHolderTemplateLogin").show();

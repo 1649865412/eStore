@@ -41,7 +41,7 @@ ul,li{ list-style:none;}
 .others-pay ul li input{ vertical-align:middle;}
 
 
-@media (max-width: 768px){
+@media (max-width: 900px){
 	.w-submit-order{ margin-top:50px;}
 	.w-submit-order-bd table td{ width:25%; padding:10px 1%;}
 	.w-submit-order-bd table td img{ width:100%;}

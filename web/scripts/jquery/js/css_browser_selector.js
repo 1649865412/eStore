@@ -1,5 +1,6 @@
 /*
 CSS Browser Selector v0.4.0 (Nov 02, 2010)
+检测浏览器、浏览器版本、平台、平台版本、设备、设备版本、min-width/max-width、屏幕方向等
 Rafael Lima (http://rafael.adm.br)
 http://rafael.adm.br/css_browser_selector
 License: http://creativecommons.org/licenses/by/2.5/
